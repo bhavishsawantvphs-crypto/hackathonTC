@@ -1,0 +1,1069 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mining Tourism | Jharkhand Smart Tourism</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Bitter:wght@500;700;800&family=Work+Sans:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root{
+  --color-black: #000000;
+  --color-navy: #1F3345;
+  --color-navy-dark: #13212D;
+  --color-red: #B54745;
+  --color-gold: #C78F57;
+  --color-sea-green: #85ABAB;
+  --color-beige: #F0EDE5;
+
+  /* Theme mappings */
+  --coal: var(--color-navy-dark);
+  --charcoal: var(--color-navy);
+  --surface: #283F54;
+  --surface-2: #192A38;
+  --ochre: var(--color-gold);
+  --ochre-light: #DEB17E;
+  --rust: var(--color-red);
+  --rust-light: #C9605E;
+  --forest: #4E7777;
+  --forest-light: var(--color-sea-green);
+  --sand: var(--color-beige);
+  --sand-dim: #A8C2C2;
+  --cream: var(--color-beige);
+  --line: rgba(199,143,87,0.24);
+  --radius: 8px;
+  --shadow: 0 12px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--coal);
+  color:var(--cream);
+  font-family:'Work Sans','Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Bitter','Zilla Slab',serif;margin:0;line-height:1.15;}
+.mono{font-family:'JetBrains Mono',monospace;}
+p{color:var(--sand-dim);line-height:1.6;}
+a{color:inherit;text-decoration:none;}
+button{font-family:'Work Sans','Inter',sans-serif;cursor:pointer;border:none;}
+::selection{background:var(--ochre);color:var(--coal);}
+
+/* ---------- GLOBAL NAV ---------- */
+header.global-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(31,51,69,0.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav.global-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;max-width:1200px;margin:0 auto;gap:16px;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Zilla Slab','Bitter',serif;font-weight:700;font-size:1.15rem;color:var(--cream);
+  text-decoration:none;white-space:nowrap;
+}
+.logo .mark-svg{width:26px;height:26px;flex-shrink:0;}
+.global-navlinks{display:flex;align-items:center;gap:18px;font-size:0.92rem;}
+.global-navlinks a{
+  color:var(--cream);padding:6px 12px;border-radius:4px;
+  transition:all .2s;font-weight:500;
+}
+.global-navlinks a:hover{color:var(--ochre);background:rgba(199,143,87,0.12);}
+.global-navlinks a.active{color:var(--coal);background:var(--ochre);font-weight:600;}
+@media(max-width:820px){
+  .global-navlinks{display:none;}
+}
+.global-nav-cta{
+  font-family:'JetBrains Mono',monospace;font-size:0.76rem;font-weight:600;
+  border:1px solid var(--ochre);color:var(--coal);background:var(--ochre);
+  padding:8px 15px;letter-spacing:0.04em;border-radius:4px;
+  transition:background .2s,color .2s,transform .15s;white-space:nowrap;
+}
+.global-nav-cta:hover{background:var(--cream);color:var(--coal);border-color:var(--cream);transform:translateY(-1px);}
+
+/* ---------- strata signature element ---------- */
+.strata{
+  height:6px;
+  width:100%;
+  display:flex;
+}
+.strata span{flex:1;height:100%;}
+.strata span:nth-child(1){background:var(--rust);}
+.strata span:nth-child(2){background:var(--ochre);}
+.strata span:nth-child(3){background:var(--forest);}
+.strata span:nth-child(4){background:var(--surface-2);}
+.strata span:nth-child(5){background:var(--rust-light);}
+.strata span:nth-child(6){background:var(--ochre-light);}
+.strata span:nth-child(7){background:var(--forest-light);}
+.strata span:nth-child(8){background:var(--surface-2);}
+
+/* ---------- SUB-NAV (MODULE TABS) ---------- */
+.subnav-wrap{
+  background:rgba(19,33,45,0.92);
+  border-bottom:1px solid var(--line);
+}
+.subnav-inner{
+  max-width:1200px;margin:0 auto;padding:10px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Bitter',serif;font-weight:700;font-size:0.98rem;white-space:nowrap;}
+.brand .mark{
+  width:26px;height:26px;border-radius:6px;
+  background:linear-gradient(135deg,var(--ochre),var(--rust));
+  display:flex;align-items:center;justify-content:center;font-size:13px;
+}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;}
+.nav-links button{
+  background:transparent;color:var(--sand-dim);
+  padding:7px 13px;border-radius:6px;font-size:.82rem;font-weight:500;
+  transition:all .2s;border:1px solid transparent;
+}
+.nav-links button:hover{color:var(--cream);background:var(--surface);border-color:var(--line);}
+.nav-links button.active{color:var(--coal);background:var(--ochre);font-weight:600;}
+
+.view{display:none;animation:fadein .35s ease;}
+.view.active{display:block;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+.section{padding:64px 0;}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ochre-light);font-size:.72rem;font-weight:700;margin-bottom:14px;display:inline-block;
+}
+
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 24px;border-radius:9px;font-weight:600;font-size:.92rem;
+  transition:transform .15s, box-shadow .15s, background .15s;
+}
+.btn-primary{background:var(--ochre);color:var(--coal);}
+.btn-primary:hover{background:var(--ochre-light);transform:translateY(-2px);box-shadow:var(--shadow);}
+.btn-outline{background:transparent;color:var(--cream);border:1px solid var(--line);}
+.btn-outline:hover{border-color:var(--ochre);color:var(--ochre-light);transform:translateY(-2px);}
+.btn-rust{background:var(--rust);color:var(--cream);}
+.btn-rust:hover{background:var(--rust-light);transform:translateY(-2px);}
+.btn-block{width:100%;justify-content:center;}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none !important;}
+
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;padding:90px 0 70px;
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(201,138,44,.14), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 20%, rgba(58,89,71,.18), transparent 60%),
+    var(--coal);
+  overflow:hidden;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--line);
+  padding:7px 14px;border-radius:99px;font-size:.78rem;color:var(--sand-dim);margin-bottom:24px;
+}
+.hero h1{font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:800;max-width:820px;color:var(--cream);}
+.hero h1 em{font-style:normal;color:var(--ochre-light);}
+.hero .lead{font-size:1.15rem;max-width:620px;margin-top:20px;}
+.hero .desc{max-width:640px;margin-top:14px;font-size:.95rem;}
+.hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+.hero-stats{display:flex;gap:38px;margin-top:56px;flex-wrap:wrap;}
+.hero-stats .stat b{display:block;font-family:'Bitter',serif;font-size:1.9rem;color:var(--ochre-light);}
+.hero-stats .stat span{font-size:.78rem;color:var(--sand-dim);}
+
+
+.disclaimer{
+  background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--rust);
+  border-radius:8px;padding:14px 16px;font-size:.82rem;color:var(--sand-dim);margin:20px 0;
+}
+.disclaimer b{color:var(--ochre-light);}
+
+
+/* ---------- flow diagram ---------- */
+.flow{
+  display:flex;align-items:center;flex-wrap:wrap;gap:0;background:var(--charcoal);
+  border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-top:20px;
+}
+.flow-step{
+  flex:1;min-width:120px;text-align:center;padding:10px;
+}
+.flow-step .ic{font-size:1.5rem;}
+.flow-step .lb{font-size:.78rem;margin-top:8px;color:var(--sand);font-weight:600;}
+.flow-arrow{color:var(--ochre);font-size:1.2rem;padding:0 4px;}
+
+
+/* ---------- section headers ---------- */
+.section-head{max-width:640px;margin-bottom:36px;}
+.section-head h2{font-size:clamp(1.7rem,3vw,2.4rem);color:var(--cream);}
+.section-head p{margin-top:12px;}
+
+
+/* ---------- filters ---------- */
+.filters{
+  display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px;padding:18px;
+  background:var(--charcoal);border:1px solid var(--line);border-radius:var(--radius);
+}
+.filter-group{display:flex;flex-direction:column;gap:6px;}
+.filter-group label{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--sand-dim);font-family:'JetBrains Mono',monospace;}
+.filter-group select{
+  background:var(--surface);color:var(--cream);border:1px solid var(--line);
+  border-radius:7px;padding:9px 12px;font-size:.85rem;font-family:'Inter',sans-serif;
+}
+
+
+/* ---------- site grid/cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:620px){.grid{grid-template-columns:1fr;}}
+
+
+.card{
+  background:var(--charcoal);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;transition:transform .2s, border-color .2s, box-shadow .2s;cursor:pointer;
+  display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--ochre);box-shadow:var(--shadow);}
+.card-top{
+  height:110px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;position:relative;
+}
+.card-top.coal{background:linear-gradient(135deg,#2b2620,#181510);}
+.card-top.iron{background:linear-gradient(135deg,#3a2a22,#211a15);}
+.card-top.copper{background:linear-gradient(135deg,#4a3320,#241b12);}
+.card-top.mica{background:linear-gradient(135deg,#383630,#1e1c19);}
+.card-top.bauxite{background:linear-gradient(135deg,#41331f,#211a11);}
+.card-top.uranium{background:linear-gradient(135deg,#33302a,#19180f);}
+.card-body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.card-body h3{font-size:1.05rem;color:var(--cream);}
+.card-meta{font-size:.75rem;color:var(--ochre-light);font-family:'JetBrains Mono',monospace;}
+.card-body p{font-size:.83rem;margin:0;}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{font-size:.68rem;padding:3px 9px;border-radius:99px;background:var(--surface);color:var(--sand-dim);border:1px solid var(--line);}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px;}
+.card-explore{font-size:.8rem;color:var(--ochre-light);font-weight:600;}
+
+
+.badge{
+  display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;
+  padding:5px 11px;border-radius:99px;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;
+}
+.badge.green{background:rgba(79,120,98,.18);color:#8ec4a6;border:1px solid rgba(79,120,98,.4);}
+.badge.yellow{background:rgba(201,138,44,.16);color:var(--ochre-light);border:1px solid rgba(201,138,44,.4);}
+.badge.red{background:rgba(176,73,42,.16);color:var(--rust-light);border:1px solid rgba(176,73,42,.4);}
+
+
+/* ---------- detail page ---------- */
+.detail-hero{
+  background:linear-gradient(135deg,var(--charcoal),var(--coal));
+  border:1px solid var(--line);border-radius:var(--radius);padding:40px;margin-bottom:30px;
+  display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;
+}
+.detail-hero .info-grid{display:flex;gap:34px;margin-top:22px;flex-wrap:wrap;}
+.detail-hero .info-grid div span{display:block;font-size:.7rem;color:var(--sand-dim);text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;}
+.detail-hero .info-grid div b{font-size:1rem;color:var(--cream);}
+.partner-pill{
+  align-self:flex-start;background:var(--surface);border:1px solid var(--line);padding:10px 16px;
+  border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--ochre-light);
+}
+
+
+.two-col{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;}
+@media(max-width:900px){.two-col{grid-template-columns:1fr;}}
+
+
+.panel{background:var(--charcoal);border:1px solid var(--line);border-radius:var(--radius);padding:26px;}
+.panel h3{font-size:1.1rem;margin-bottom:16px;color:var(--cream);}
+.info-row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:.87rem;}
+.info-row:last-child{border-bottom:none;}
+.info-row .k{color:var(--sand-dim);}
+.info-row .v{color:var(--cream);font-weight:600;text-align:right;}
+.note{font-size:.74rem;color:var(--sand-dim);font-style:italic;margin-top:10px;}
+
+
+/* timeline */
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:10px;}
+.tl-item{display:flex;gap:18px;position:relative;padding-bottom:26px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-num{
+  width:38px;height:38px;border-radius:50%;background:var(--surface);border:2px solid var(--ochre);
+  display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;
+  font-weight:700;color:var(--ochre-light);flex-shrink:0;font-size:.85rem;z-index:1;
+}
+.tl-item:not(:last-child)::before{
+  content:'';position:absolute;left:19px;top:38px;bottom:0;width:2px;background:var(--line);
+}
+.tl-content h4{font-size:.95rem;color:var(--cream);margin-bottom:4px;}
+.tl-content p{font-size:.83rem;margin:0;}
+
+
+/* safety score */
+.safety-box{text-align:center;padding:10px 0 6px;}
+.safety-ring{
+  width:150px;height:150px;border-radius:50%;margin:0 auto 16px;position:relative;
+  background:conic-gradient(var(--ochre) 0deg, var(--ochre) calc(var(--pct,91) * 3.6deg), var(--surface) calc(var(--pct,91) * 3.6deg));
+  display:flex;align-items:center;justify-content:center;
+  transition:background 1s ease;
+}
+.safety-ring::before{content:'';position:absolute;inset:10px;border-radius:50%;background:var(--charcoal);}
+.safety-ring .num{position:relative;z-index:1;font-family:'Bitter',serif;font-size:2rem;font-weight:800;color:var(--cream);}
+.safety-ring .num small{display:block;font-size:.6rem;font-family:'JetBrains Mono',monospace;color:var(--sand-dim);font-weight:400;}
+.safety-bar-row{margin-bottom:12px;}
+.safety-bar-row .lbl{display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:5px;}
+.safety-bar-row .lbl span:last-child{color:var(--ochre-light);font-family:'JetBrains Mono',monospace;}
+.bar-bg{height:7px;background:var(--surface);border-radius:99px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--ochre),var(--ochre-light));border-radius:99px;transition:width 1s ease;}
+
+
+/* circuits */
+.circuit-card{
+  background:var(--charcoal);border:1px solid var(--line);border-radius:var(--radius);padding:24px;
+}
+.circuit-theme{font-size:.72rem;font-family:'JetBrains Mono',monospace;color:var(--forest-light);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+.circuit-path{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:.88rem;font-weight:600;color:var(--cream);}
+.circuit-path .arw{color:var(--ochre);}
+.circuit-node{background:var(--surface);padding:6px 12px;border-radius:8px;border:1px solid var(--line);}
+
+
+/* quiz */
+.quiz-wrap{max-width:640px;margin:0 auto;}
+.quiz-progress{height:5px;background:var(--surface);border-radius:99px;overflow:hidden;margin-bottom:34px;}
+.quiz-progress-fill{height:100%;background:var(--ochre);border-radius:99px;transition:width .3s ease;}
+.q-title{font-size:1.5rem;margin-bottom:24px;color:var(--cream);}
+.q-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:560px){.q-options{grid-template-columns:1fr;}}
+.q-option{
+  background:var(--charcoal);border:1px solid var(--line);border-radius:12px;padding:18px;
+  text-align:left;font-size:.92rem;color:var(--cream);transition:all .18s;display:flex;align-items:center;gap:10px;
+}
+.q-option:hover{border-color:var(--ochre);background:var(--surface);}
+.q-option.selected{border-color:var(--ochre);background:rgba(201,138,44,.12);}
+.quiz-nav{display:flex;justify-content:space-between;margin-top:28px;}
+
+
+.result-card{background:var(--charcoal);border:1px solid var(--ochre);border-radius:var(--radius);padding:34px;text-align:center;}
+.match-score{
+  font-family:'Bitter',serif;font-size:3rem;font-weight:800;color:var(--ochre-light);margin:14px 0;
+}
+.result-reason{background:var(--surface);border-radius:10px;padding:18px;font-size:.88rem;text-align:left;margin:20px 0;color:var(--sand);}
+
+
+/* AR/VR */
+.arvr-tabs{display:flex;gap:10px;margin-bottom:24px;}
+.arvr-tab{padding:10px 18px;border-radius:9px;background:var(--charcoal);border:1px solid var(--line);color:var(--sand-dim);font-size:.85rem;font-weight:600;}
+.arvr-tab.active{background:var(--surface-2);border-color:var(--ochre);color:var(--ochre-light);}
+.viewer{
+  aspect-ratio:16/8;border-radius:var(--radius);position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(201,138,44,.18), transparent 55%),
+    repeating-linear-gradient(180deg, #2c2519 0 34px, #241f15 34px 68px);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;
+}
+.viewer .play{
+  width:78px;height:78px;border-radius:50%;background:rgba(237,227,200,.12);border:2px solid var(--ochre-light);
+  display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--ochre-light);
+  transition:transform .2s;
+}
+.viewer:hover .play{transform:scale(1.08);}
+.viewer .grid-overlay{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(237,227,200,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(237,227,200,.05) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+.viewer .tag360{position:absolute;top:16px;left:16px;background:var(--coal);padding:6px 12px;border-radius:99px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ochre-light);border:1px solid var(--line);}
+
+
+/* feedback */
+.stars{display:flex;gap:6px;}
+.star{font-size:1.5rem;color:var(--line);transition:color .15s;}
+.star.filled{color:var(--ochre-light);}
+.rate-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);}
+.rate-row:last-of-type{border-bottom:none;}
+textarea{
+  width:100%;background:var(--surface);border:1px solid var(--line);border-radius:9px;color:var(--cream);
+  padding:14px;font-family:'Inter',sans-serif;font-size:.9rem;resize:vertical;min-height:100px;margin-top:14px;
+}
+.thanks{background:rgba(79,120,98,.15);border:1px solid var(--forest-light);color:#a8d4bb;padding:14px 18px;border-radius:10px;font-size:.88rem;margin-top:16px;display:none;}
+
+
+/* dashboard */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:850px){.dash-grid{grid-template-columns:1fr;}}
+.chart-box{background:var(--charcoal);border:1px solid var(--line);border-radius:var(--radius);padding:22px;}
+.chart-box h4{font-size:.95rem;margin-bottom:14px;color:var(--cream);}
+.stat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}
+@media(max-width:700px){.stat-cards{grid-template-columns:1fr 1fr;}}
+.stat-card{background:var(--charcoal);border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center;}
+.stat-card b{display:block;font-family:'Bitter',serif;font-size:1.6rem;color:var(--ochre-light);}
+.stat-card span{font-size:.72rem;color:var(--sand-dim);}
+.ai-insight{
+  background:linear-gradient(135deg, rgba(201,138,44,.1), rgba(58,89,71,.08));
+  border:1px solid var(--ochre);border-radius:var(--radius);padding:24px;margin-top:24px;
+}
+.ai-insight .lbl{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ochre-light);margin-bottom:10px;font-weight:700;}
+.ai-insight p{color:var(--cream);font-size:.95rem;font-style:italic;}
+.demo-tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--sand-dim);margin-top:10px;display:block;}
+
+
+/* modal */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(10,9,7,.75);backdrop-filter:blur(3px);
+  display:none;align-items:center;justify-content:center;z-index:100;padding:20px;
+}
+.modal-overlay.active{display:flex;}
+.modal{
+  background:var(--charcoal);border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px;max-width:440px;width:100%;animation:fadein .25s ease;
+}
+.modal h3{margin-bottom:6px;}
+.modal .sub{font-size:.82rem;color:var(--sand-dim);margin-bottom:20px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:.78rem;color:var(--sand-dim);margin-bottom:6px;}
+.field input,.field select{
+  width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+  padding:11px 12px;color:var(--cream);font-family:'Inter',sans-serif;font-size:.88rem;
+}
+.modal-close{float:right;background:transparent;color:var(--sand-dim);font-size:1.3rem;}
+.modal-msg{display:none;background:rgba(201,138,44,.12);border:1px solid var(--ochre);color:var(--ochre-light);padding:12px 14px;border-radius:8px;font-size:.85rem;margin-top:14px;}
+
+
+/* footer / final */
+.finale{
+  text-align:center;padding:80px 24px;background:linear-gradient(180deg,var(--coal),var(--charcoal));
+  border-top:1px solid var(--line);
+}
+.finale h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:18px;}
+.finale .lines{color:var(--sand);font-size:1.05rem;line-height:1.9;margin-bottom:30px;}
+.finale .lines b{color:var(--ochre-light);font-weight:600;}
+footer.sitefoot{padding:24px;text-align:center;color:var(--sand-dim);font-size:.75rem;border-top:1px solid var(--line);}
+
+
+.section-nav-hint{display:flex;gap:8px;margin-top:30px;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+
+<!-- ================= GLOBAL NAVIGATION ================= -->
+<header class="global-header">
+  <nav class="global-nav">
+    <a href="index.html" class="logo">
+      <svg class="mark-svg" viewBox="0 0 26 26" fill="none">
+        <path d="M2 13c3-6 8-9 11-9s8 3 11 9c-3 6-8 9-11 9s-8-3-11-9z" stroke="#C78F57" stroke-width="1.6"/>
+        <circle cx="13" cy="13" r="3.2" fill="#C78F57"/>
+      </svg>
+      <span>Jharkhand <span style="color:var(--ochre);">Unexplored</span></span>
+    </a>
+    <div class="global-navlinks">
+      <a href="index.html">Home</a>
+      <a href="index.html#destinations">Explore</a>
+      <a href="mining.html" class="active">Mining Heritage</a>
+      <a href="jhar.html">Festivals</a>
+      <a href="index.html#feedback">Feedback</a>
+    </div>
+    <a href="index.html#destinations" class="global-nav-cta">EXPLORE JHARKHAND →</a>
+  </nav>
+</header>
+
+<!-- ================= MINING MODULE SUBNAV ================= -->
+<div class="subnav-wrap">
+  <div class="subnav-inner">
+    <div class="brand"><span class="mark">⛏</span> Mining Heritage Intelligence</div>
+    <div class="nav-links" id="navLinks">
+      <button data-view="home" class="active">Overview</button>
+      <button data-view="explore">Mining Sites</button>
+      <button data-view="recommend">Experience Finder</button>
+      <button data-view="arvr">AR/VR Virtual</button>
+      <button data-view="dashboard">Dept Dashboard</button>
+    </div>
+  </div>
+  <div class="strata"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+
+
+<!-- ================= HOME / HERO ================= -->
+<section id="view-home" class="view active">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-badge">🏗️ SIH 2026 Prototype · Jharkhand Tourism Policy 2021</div>
+      <h1>Where Mines <em>Meet</em> Nature</h1>
+      <p class="lead">Discover Jharkhand's mining heritage through responsible, guided and technology-enabled tourism.</p>
+      <p class="desc">Explore authorized mining experiences, connect them with nearby nature and cultural attractions, and experience restricted sites digitally through AR/VR — all through one digital intelligence layer built around the tourism the state has already begun.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary" onclick="goView('explore')">Explore Mining Sites →</button>
+        <button class="btn btn-outline" onclick="goView('recommend')">Find My Experience</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>~40%</b><span>of India's mineral resources in Jharkhand</span></div>
+        <div class="stat"><b>7</b><span>mining regions profiled in this prototype</span></div>
+        <div class="stat"><b>91<span class="mono">/100</span></b><span>demo safety index — North Urimari</span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="wrap section">
+    <div class="section-head">
+      <span class="eyebrow">The Digital Gap</span>
+      <h2>A layer of intelligence around a real initiative</h2>
+      <p>Jharkhand has already begun mining tourism — JTDC and CCL launched a guided programme at North Urimari, Ramgarh. What's still fragmented is discovery, access transparency, personalization, circuit-building and feedback intelligence. That's the layer this prototype adds.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step"><div class="ic">🔍</div><div class="lb">Discover</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="ic">🛡️</div><div class="lb">Access &amp; Safety</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="ic">🤖</div><div class="lb">AI Personalization</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="ic">🌿</div><div class="lb">Mining+Nature+Culture Circuit</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="ic">🕶️</div><div class="lb">AR/VR for Restricted Sites</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="ic">💬</div><div class="lb">Feedback</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="ic">📊</div><div class="lb">Dept. Insights</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= EXPLORE ================= -->
+<section id="view-explore" class="view">
+  <div class="wrap section">
+    <div class="section-head">
+      <span class="eyebrow">Mining Site Explorer</span>
+      <h2>Seven regions. Three access realities.</h2>
+      <p>Not every mine is a tourist destination. Each site here is classified as authorized, restricted/controlled, or a digital-only experience — never presented as freely open.</p>
+    </div>
+
+
+    <div class="disclaimer"><b>Note:</b> Access classifications shown in this prototype are indicative and must be verified with the relevant mine operator, tourism authority and current site regulations before travel.</div>
+
+
+    <div class="filters">
+      <div class="filter-group">
+        <label>Mineral</label>
+        <select id="fMineral"><option value="">All</option><option>Coal</option><option>Iron Ore</option><option>Copper</option><option>Mica</option><option>Bauxite</option><option>Uranium</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Access</label>
+        <select id="fAccess"><option value="">All</option><option value="green">Authorized</option><option value="yellow">Restricted</option><option value="red">Digital Experience</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Region</label>
+        <select id="fRegion"><option value="">All</option><option>North Jharkhand</option><option>South Jharkhand</option><option>East Jharkhand</option><option>West Jharkhand</option></select>
+      </div>
+      <div class="filter-group">
+        <label>Sort</label>
+        <select id="fSort"><option value="recommended">Recommended</option><option value="safety">Safety / Demo Score</option><option value="name">Name</option></select>
+      </div>
+    </div>
+
+
+    <div class="grid" id="siteGrid"></div>
+  </div>
+</section>
+
+
+<!-- ================= DETAIL: NORTH URIMARI ================= -->
+<section id="view-detail" class="view">
+  <div class="wrap section">
+    <button class="btn btn-outline" style="margin-bottom:24px" onclick="goView('explore')">← Back to Explorer</button>
+
+
+    <div class="detail-hero">
+      <div>
+        <span class="badge green">🟢 Authorized Tourism Experience</span>
+        <h1 style="margin-top:16px;font-size:2.4rem;">North Urimari</h1>
+        <p style="margin-top:6px;">Ramgarh, Jharkhand · Coal · Guided Open-Cast Mining Tourism</p>
+        <div class="info-grid">
+          <div><span>Operator</span><b>Central Coalfields Limited</b></div>
+          <div><span>Tourism Partner</span><b>JTDC</b></div>
+          <div><span>Group Size</span><b>~10–20 visitors</b></div>
+        </div>
+      </div>
+      <div class="partner-pill">JTDC × CCL<br><span style="color:var(--sand-dim);font-size:.75rem;">Five-year MoU, since July 2025</span></div>
+    </div>
+
+
+    <div class="two-col">
+      <div>
+        <div class="panel">
+          <h3>Pricing &amp; Circuits</h3>
+          <div class="info-row"><span class="k">Base Package</span><span class="v">From ~₹2,500 + GST</span></div>
+          <div class="info-row"><span class="k">Patratu Route</span><span class="v">~₹2,500 + GST</span></div>
+          <div class="info-row"><span class="k">Rajrappa Route</span><span class="v">~₹2,800 + GST</span></div>
+          <div class="info-row"><span class="k">Booking</span><span class="v">Advance, via JTDC</span></div>
+          <p class="note">Reported package pricing and frequency vary by circuit and season — prototype information should be verified before booking.</p>
+        </div>
+
+
+        <div class="panel" style="margin-top:20px;">
+          <h3>What You'll Experience</h3>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-num">01</div><div class="tl-content"><h4>Safety Briefing</h4><p>Visitors receive safety instructions before entering the designated tourism area.</p></div></div>
+            <div class="tl-item"><div class="tl-num">02</div><div class="tl-content"><h4>Guided Mine Visit</h4><p>Visitors follow an authorized route accompanied by a guide.</p></div></div>
+            <div class="tl-item"><div class="tl-num">03</div><div class="tl-content"><h4>Mining Operation View</h4><p>Observe mining activity from designated safe viewing areas.</p></div></div>
+            <div class="tl-item"><div class="tl-num">04</div><div class="tl-content"><h4>Processing Explanation</h4><p>Learn how coal is extracted, transported and processed.</p></div></div>
+            <div class="tl-item"><div class="tl-num">05</div><div class="tl-content"><h4>Expert Interpretation</h4><p>Understand geology, mining technology, workers and local history.</p></div></div>
+          </div>
+        </div>
+
+
+        <div class="panel" style="margin-top:20px;">
+          <h3>Complete Your Journey</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="circuit-card">
+              <div class="circuit-theme">Mining + Nature + Local Economy</div>
+              <div class="circuit-path">
+                <span class="circuit-node">North Urimari</span><span class="arw">→</span>
+                <span class="circuit-node">Patratu Valley</span><span class="arw">→</span>
+                <span class="circuit-node">Local Food</span><span class="arw">→</span>
+                <span class="circuit-node">Homestay</span>
+              </div>
+            </div>
+            <div class="circuit-card">
+              <div class="circuit-theme">Mining + Culture + Heritage</div>
+              <div class="circuit-path">
+                <span class="circuit-node">North Urimari</span><span class="arw">→</span>
+                <span class="circuit-node">Rajrappa Temple</span><span class="arw">→</span>
+                <span class="circuit-node">Local Cuisine</span><span class="arw">→</span>
+                <span class="circuit-node">Handicrafts</span>
+              </div>
+            </div>
+          </div>
+          <p class="note" style="margin-top:14px;">Prototype / sample circuits — exact travel times, prices and availability are not guaranteed.</p>
+        </div>
+      </div>
+
+
+      <div>
+        <div class="panel">
+          <h3>Demo Safety Index</h3>
+          <div class="safety-box">
+            <div class="safety-ring" id="safetyRing" style="--pct:0"><div class="num" id="safetyNum">0<small>/ 100</small></div></div>
+          </div>
+          <div class="safety-bar-row"><div class="lbl"><span>Guided Access</span><span>25/25</span></div><div class="bar-bg"><div class="bar-fill" data-w="100%" style="width:0"></div></div></div>
+          <div class="safety-bar-row"><div class="lbl"><span>Safety Briefing / PPE</span><span>23/25</span></div><div class="bar-bg"><div class="bar-fill" data-w="92%" style="width:0"></div></div></div>
+          <div class="safety-bar-row"><div class="lbl"><span>Controlled Route</span><span>22/25</span></div><div class="bar-bg"><div class="bar-fill" data-w="88%" style="width:0"></div></div></div>
+          <div class="safety-bar-row"><div class="lbl"><span>Emergency Preparedness</span><span>21/25</span></div><div class="bar-bg"><div class="bar-fill" data-w="84%" style="width:0"></div></div></div>
+          <p class="note">Sample prototype score — not an official CCL/JTDC safety certification. Demonstrates how safety information could be consolidated for tourists instead of requiring searches across sources.</p>
+        </div>
+
+
+        <button class="btn btn-primary btn-block" style="margin-top:20px;" onclick="openBooking()">Book This Experience</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= AI RECOMMENDATION ================= -->
+<section id="view-recommend" class="view">
+  <div class="wrap section">
+    <div class="section-head">
+      <span class="eyebrow">AI Recommendation</span>
+      <h2>Find your mining tourism experience</h2>
+      <p>Answer four quick questions — our rule-based engine (a stand-in for a future AI/ML recommendation service) matches you to a site and circuit.</p>
+    </div>
+
+
+    <div class="quiz-wrap" id="quizWrap">
+      <div class="quiz-progress"><div class="quiz-progress-fill" id="qProgress" style="width:25%"></div></div>
+      <div id="quizBody"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= AR / VR ================= -->
+<section id="view-arvr" class="view">
+  <div class="wrap section">
+    <div class="section-head">
+      <span class="eyebrow">Explore Beyond Physical Access</span>
+      <h2>For sites where physical tourism isn't the answer</h2>
+      <p>Some locations carry regulatory, safety or heritage-preservation constraints. Rather than encouraging unsafe or unauthorized entry, the platform converts their history and geology into a digital educational experience.</p>
+    </div>
+
+
+    <div class="arvr-tabs">
+      <button class="arvr-tab active" data-arvr="jaduguda" onclick="setArvr('jaduguda')">Jaduguda — Uranium</button>
+      <button class="arvr-tab" data-arvr="koderma" onclick="setArvr('koderma')">Koderma — Mica</button>
+    </div>
+
+
+    <div id="arvrPanel"></div>
+  </div>
+</section>
+
+
+
+
+
+<!-- ================= DASHBOARD ================= -->
+<section id="view-dashboard" class="view">
+  <div class="wrap section">
+    <div class="section-head">
+      <span class="eyebrow">Tourism Department</span>
+      <h2>Feedback &amp; Analytics Dashboard</h2>
+      <p>Aggregated visitor ratings and AI-generated insight — <b style="color:var(--rust-light)">sample / demo data</b>, not collected from real visitors.</p>
+    </div>
+
+
+    <div class="stat-cards" id="statCards"></div>
+
+
+    <div class="dash-grid">
+      <div class="chart-box"><h4>Average Ratings by Category</h4><canvas id="barChart" height="220"></canvas></div>
+      <div class="chart-box"><h4>Experience Profile</h4><canvas id="radarChart" height="220"></canvas></div>
+    </div>
+
+
+    <div class="ai-insight">
+      <div class="lbl">🤖 AI Insight</div>
+      <p id="aiInsightText">"Visitors highly value the mining machinery and guided interpretation, while facilities receive comparatively lower scores. Improving visitor facilities and interpretation could increase overall satisfaction."</p>
+      <span class="demo-tag">Prototype AI-generated insight — based on sample/demo data, not real collected reviews.</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= FINALE (shown under explore) ================= -->
+<div class="finale">
+  <span class="eyebrow">From Mine to Memory</span>
+  <h2>From Mine <em style="color:var(--ochre-light);font-style:normal;">to</em> Memory</h2>
+  <div class="lines">
+    <b>Discover</b> the industry.<br>
+    <b>Understand</b> the heritage.<br>
+    <b>Experience</b> the culture.<br>
+    <b>Protect</b> the environment.
+  </div>
+  <button class="btn btn-rust" onclick="goView('explore')">Explore Jharkhand's Mining Heritage</button>
+</div>
+
+
+<footer class="sitefoot">
+  <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <div><b>Jharkhand Unexplored</b> — Smart Mining Tourism &amp; Industrial Heritage Module</div>
+    <div style="display:flex;gap:18px;align-items:center;">
+      <a href="index.html">Home</a>
+      <a href="index.html#destinations">Explore</a>
+      <a href="mining.html" style="color:var(--ochre);font-weight:600;">Mining Heritage</a>
+      <a href="jhar.html">Festivals</a>
+      <a href="index.html#feedback">Feedback</a>
+    </div>
+    <div class="mono" style="font-size:0.72rem;color:var(--sand-dim);">SIH 2026 Prototype</div>
+  </div>
+</footer>
+
+
+<!-- ================= BOOKING MODAL ================= -->
+<div class="modal-overlay" id="bookingOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeBooking()">×</button>
+    <h3>Book This Experience</h3>
+    <div class="sub">North Urimari — Guided Mining Tourism</div>
+    <div class="field"><label>Name</label><input type="text" placeholder="Your full name"></div>
+    <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+    <div class="field"><label>Number of Visitors</label><input type="number" min="1" max="20" value="2"></div>
+    <div class="field"><label>Preferred Date</label><input type="date"></div>
+    <div class="field"><label>Preferred Circuit</label>
+      <select><option>Patratu Route</option><option>Rajrappa Route</option></select>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="submitBooking()">Request Booking</button>
+    <div class="modal-msg" id="bookingMsg">Demo Only — Booking integration coming soon.</div>
+  </div>
+</div>
+
+
+<script>
+/* ================= DATA ================= */
+const SITES = [
+  {id:'north-urimari', name:'North Urimari', district:'Ramgarh', region:'South Jharkhand', mineral:'Coal', icon:'⛏️', cls:'coal',
+   access:'green', accessLabel:'🟢 Authorized Tourism', safety:91,
+   desc:'Guided open-cast coal mining tourism operated by CCL with JTDC — Jharkhand\'s first organized mining-tourism programme.',
+   tags:['Guided','Heritage','Photography'], hasDetail:true},
+  {id:'jharia', name:'Jharia', district:'Dhanbad', region:'South Jharkhand', mineral:'Coal', icon:'🪨', cls:'coal',
+   access:'yellow', accessLabel:'🟡 Restricted / Controlled', safety:null,
+   desc:'Long-standing coal-mining identity and industrial landscape. Physical access requires operator authorization.',
+   tags:['Heritage','Geology','Industrial']},
+  {id:'ghatsila', name:'Ghatsila / Singhbhum', district:'East Singhbhum', region:'East Jharkhand', mineral:'Copper', icon:'🟠', cls:'copper',
+   access:'yellow', accessLabel:'🟡 Restricted / Controlled', safety:null,
+   desc:'Historic copper-mining region linked to Hindustan Copper Limited, with an active mining revival underway.',
+   tags:['Heritage','Geology','Culture']},
+  {id:'noamundi', name:'Noamundi / Saranda', district:'West Singhbhum', region:'West Jharkhand', mineral:'Iron Ore', icon:'⛰️', cls:'iron',
+   access:'yellow', accessLabel:'🟡 Restricted / Controlled', safety:null,
+   desc:'Iron-ore heritage paired with Saranda Forest and tribal culture — a strong eco + cultural tourism fit.',
+   tags:['Nature','Tribal Culture','Education']},
+  {id:'koderma', name:'Koderma', district:'Koderma', region:'North Jharkhand', mineral:'Mica', icon:'✨', cls:'mica',
+   access:'red', accessLabel:'🔴 Digital Experience', safety:null,
+   desc:'Historic "Mica Capital of India" — mines closed after forest-conservation restrictions. Explored digitally.',
+   tags:['History','AR/VR','Education']},
+  {id:'lohardaga', name:'Lohardaga', district:'Lohardaga', region:'West Jharkhand', mineral:'Bauxite', icon:'🧱', cls:'bauxite',
+   access:'yellow', accessLabel:'🟡 Restricted / Controlled', safety:null,
+   desc:'Major bauxite-mining area operated by Hindalco — strong potential for engineering/student education tourism.',
+   tags:['Education','Geology','Industrial']},
+  {id:'jaduguda', name:'Jaduguda', district:'East Singhbhum', region:'East Jharkhand', mineral:'Uranium', icon:'☢️', cls:'uranium',
+   access:'red', accessLabel:'🔴 Digital Experience', safety:null,
+   desc:'Historically significant to India\'s uranium-mining sector. Presented as an educational/digital site only.',
+   tags:['Education','AR/VR','History']},
+];
+
+
+/* ================= NAV ================= */
+function goView(v){
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
+  document.getElementById('view-'+v).classList.add('active');
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.toggle('active', b.dataset.view===v));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(v==='detail') animateSafety();
+  if(v==='dashboard') requestAnimationFrame(renderCharts);
+}
+document.getElementById('navLinks').addEventListener('click', e=>{
+  const b = e.target.closest('button[data-view]');
+  if(b) goView(b.dataset.view);
+});
+
+
+/* ================= EXPLORER ================= */
+function renderGrid(){
+  const mineral = document.getElementById('fMineral').value;
+  const access = document.getElementById('fAccess').value;
+  const region = document.getElementById('fRegion').value;
+  const sort = document.getElementById('fSort').value;
+
+
+  let list = SITES.filter(s =>
+    (!mineral || s.mineral===mineral) &&
+    (!access || s.access===access) &&
+    (!region || s.region===region)
+  );
+  if(sort==='safety') list = [...list].sort((a,b)=>(b.safety||0)-(a.safety||0));
+  if(sort==='name') list = [...list].sort((a,b)=>a.name.localeCompare(b.name));
+
+
+  const grid = document.getElementById('siteGrid');
+  grid.innerHTML = list.map(s=>`
+    <div class="card" onclick="openSite('${s.id}')">
+      <div class="card-top ${s.cls}">${s.icon}</div>
+      <div class="card-body">
+        <span class="badge ${s.access}">${s.accessLabel}</span>
+        <h3>${s.name}</h3>
+        <div class="card-meta">${s.district} · ${s.mineral}${s.safety?` · Safety ${s.safety}/100`:''}</div>
+        <p>${s.desc}</p>
+        <div class="card-tags">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="card-foot"><span></span><span class="card-explore">Explore →</span></div>
+      </div>
+    </div>
+  `).join('') || `<p>No sites match these filters.</p>`;
+}
+['fMineral','fAccess','fRegion','fSort'].forEach(id=>document.getElementById(id).addEventListener('change', renderGrid));
+function openSite(id){
+  if(id==='north-urimari'){ goView('detail'); }
+  else if(id==='koderma' || id==='jaduguda'){ goView('arvr'); setArvr(id); }
+  else { goView('detail'); } // flagship demo fallback: only north-urimari fully built, others reuse detail shell conceptually
+}
+renderGrid();
+
+
+/* ================= SAFETY RING ANIMATION ================= */
+function animateSafety(){
+  const ring = document.getElementById('safetyRing');
+  const num = document.getElementById('safetyNum');
+  let n = 0; const target = 91;
+  const bars = document.querySelectorAll('.bar-fill');
+  bars.forEach(b=> b.style.width = b.dataset.w);
+  const iv = setInterval(()=>{
+    n += 3; if(n>=target){n=target; clearInterval(iv);}
+    ring.style.setProperty('--pct', n);
+    num.innerHTML = n + '<small>/ 100</small>';
+  }, 20);
+}
+
+
+/* ================= QUIZ ================= */
+const QUESTIONS = [
+  {key:'interest', title:'What interests you most?', options:[
+    {v:'history',l:'🏭 Mining History'},{v:'geology',l:'🪨 Geology'},{v:'photo',l:'📸 Photography'},
+    {v:'nature',l:'🌿 Nature'},{v:'culture',l:'🧑‍🤝‍🧑 Local Culture'},{v:'education',l:'🎓 Education'}]},
+  {key:'mode', title:'What type of experience are you comfortable with?', options:[
+    {v:'physical',l:'🦺 Guided physical experience'},{v:'digital',l:'🌐 Digital / AR-VR experience'},{v:'either',l:'🔄 Either'}]},
+  {key:'group', title:'Who are you travelling with?', options:[
+    {v:'family',l:'👨‍👩‍👧 Family'},{v:'students',l:'🎓 Students'},{v:'solo',l:'👤 Solo'},{v:'friends',l:'👥 Friends / Group'}]},
+  {key:'trip', title:'What kind of trip do you prefer?', options:[
+    {v:'heritage',l:'🏭 Industrial / Heritage'},{v:'naturetrip',l:'🌿 Nature + Mining'},{v:'culturetrip',l:'🧑‍🤝‍🧑 Culture + Mining'},
+    {v:'edutrip',l:'🎓 Educational'},{v:'phototrip',l:'📸 Photography'}]},
+];
+let qIndex = 0;
+let qAnswers = {};
+function renderQuiz(){
+  const q = QUESTIONS[qIndex];
+  document.getElementById('qProgress').style.width = ((qIndex+1)/QUESTIONS.length*100)+'%';
+  document.getElementById('quizBody').innerHTML = `
+    <div class="q-title">${q.title}</div>
+    <div class="q-options">
+      ${q.options.map(o=>`<button class="q-option ${qAnswers[q.key]===o.v?'selected':''}" onclick="selectAnswer('${q.key}','${o.v}')">${o.l}</button>`).join('')}
+    </div>
+    <div class="quiz-nav">
+      <button class="btn btn-outline" ${qIndex===0?'disabled':''} onclick="qBack()">← Back</button>
+      <button class="btn btn-primary" id="qNextBtn" ${!qAnswers[q.key]?'disabled':''} onclick="qNext()">${qIndex===QUESTIONS.length-1?'See My Match →':'Next →'}</button>
+    </div>
+  `;
+}
+function selectAnswer(key,val){
+  qAnswers[key]=val;
+  renderQuiz();
+}
+function qBack(){ if(qIndex>0){qIndex--; renderQuiz();} }
+function qNext(){
+  if(qIndex < QUESTIONS.length-1){ qIndex++; renderQuiz(); }
+  else { renderResult(); }
+}
+function renderResult(){
+  // simple rule-based scoring
+  let scores = { 'North Urimari + Patratu Circuit':60, 'Noamundi / Saranda + Tribal Circuit':40, 'Jaduguda Digital Experience':30, 'Koderma Digital Heritage':30, 'North Urimari + Rajrappa Circuit':55 };
+  const a = qAnswers;
+  if(a.interest==='history') scores['North Urimari + Patratu Circuit']+=15;
+  if(a.interest==='photo') scores['North Urimari + Patratu Circuit']+=12;
+  if(a.interest==='nature') scores['Noamundi / Saranda + Tribal Circuit']+=20;
+  if(a.interest==='culture'){ scores['North Urimari + Rajrappa Circuit']+=18; scores['Noamundi / Saranda + Tribal Circuit']+=10; }
+  if(a.interest==='education'){ scores['Jaduguda Digital Experience']+=15; scores['Koderma Digital Heritage']+=15; }
+  if(a.interest==='geology'){ scores['Koderma Digital Heritage']+=12; scores['Noamundi / Saranda + Tribal Circuit']+=8; }
+  if(a.mode==='digital'){ scores['Jaduguda Digital Experience']+=25; scores['Koderma Digital Heritage']+=25; }
+  if(a.mode==='physical'){ scores['North Urimari + Patratu Circuit']+=15; scores['North Urimari + Rajrappa Circuit']+=15; scores['Noamundi / Saranda + Tribal Circuit']+=10; }
+  if(a.group==='family') scores['North Urimari + Patratu Circuit']+=10;
+  if(a.group==='students'){ scores['Jaduguda Digital Experience']+=8; scores['Koderma Digital Heritage']+=8; }
+  if(a.trip==='naturetrip') scores['Noamundi / Saranda + Tribal Circuit']+=20;
+  if(a.trip==='culturetrip') scores['North Urimari + Rajrappa Circuit']+=20;
+  if(a.trip==='edutrip'){ scores['Jaduguda Digital Experience']+=12; scores['Koderma Digital Heritage']+=12; }
+  if(a.trip==='phototrip') scores['North Urimari + Patratu Circuit']+=15;
+
+
+  let best = Object.entries(scores).sort((x,y)=>y[1]-x[1])[0];
+  let match = Math.min(97, best[1]);
+
+
+  const interestLabel = {history:'mining history',geology:'geology',photo:'photography',nature:'nature',culture:'local culture',education:'education'}[a.interest];
+  const modeLabel = {physical:'a guided physical experience',digital:'a digital / AR-VR experience',either:'either a physical or digital experience'}[a.mode];
+  const groupLabel = {family:'family',students:'a student group',solo:'yourself',friends:'a group of friends'}[a.group];
+
+
+  document.getElementById('quizBody').innerHTML = `
+    <div class="result-card">
+      <span class="eyebrow">Recommended for You</span>
+      <h3 style="font-size:1.6rem;margin-top:8px;">${best[0]}</h3>
+      <div class="match-score">${match}%</div>
+      <div class="mono" style="font-size:.78rem;color:var(--sand-dim);">Match Score</div>
+      <div class="result-reason"><b>Why this matches you:</b><br>You're interested in ${interestLabel}, prefer ${modeLabel}, and are travelling with ${groupLabel}. This experience combines the closest-fit mining site with a complementary nature or culture component.</div>
+      <span class="demo-tag">Prototype AI recommendation — rule-based demo engine.</span>
+      <div style="margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="goView('detail')">Explore This Circuit</button>
+        <button class="btn btn-outline" onclick="restartQuiz()">Retake Quiz</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('qProgress').style.width='100%';
+}
+function restartQuiz(){ qIndex=0; qAnswers={}; renderQuiz(); }
+renderQuiz();
+
+
+/* ================= AR/VR ================= */
+const ARVR = {
+  jaduguda: {
+    title:'Jaduguda', sub:'East Singhbhum · Uranium',
+    badge:'🔴 Physical Access Restricted / Not Established for General Tourism',
+    heading:'Explore Jaduguda Digitally',
+    caption:'Learn about uranium mining, geology, industrial history and the surrounding region through a digital educational experience — without implying physical tourist entry. Uranium mining carries significantly higher safety, security and regulatory considerations than other minerals.'
+  },
+  koderma: {
+    title:'Koderma', sub:'Historic / abandoned mica-mining areas',
+    badge:'🔴 Physical Tourism Access Not Established',
+    heading:'Explore Historic Mica Mining Digitally',
+    caption:'Once known as the "Mica Capital of India," Koderma\'s mica mines were closed following forest-conservation restrictions. Explore its geology, mining history and community stories through an interactive digital reconstruction rather than physical access.'
+  }
+};
+function setArvr(key){
+  document.querySelectorAll('.arvr-tab').forEach(t=>t.classList.toggle('active', t.dataset.arvr===key));
+  const d = ARVR[key];
+  document.getElementById('arvrPanel').innerHTML = `
+    <span class="badge red">${d.badge}</span>
+    <h3 style="margin-top:14px;font-size:1.5rem;">${d.heading}</h3>
+    <p style="max-width:640px;margin-top:8px;">${d.caption}</p>
+    <div class="viewer" style="margin-top:20px;">
+      <div class="grid-overlay"></div>
+      <span class="tag360">360° / AR PREVIEW · DEMO</span>
+      <div class="play">▶</div>
+      <div class="mono" style="color:var(--sand-dim);font-size:.82rem;">Enter Virtual Experience</div>
+    </div>
+  `;
+}
+setArvr('jaduguda');
+
+
+
+
+
+/* ================= DASHBOARD ================= */
+const DEMO_RATINGS = {'Mining Experience':4.6,'Guide':4.5,'Safety':4.8,'Educational Value':4.6,'Facilities':3.2,'Value for Money':3.8};
+function renderStatCards(){
+  const overall = (Object.values(DEMO_RATINGS).reduce((a,b)=>a+b,0)/Object.values(DEMO_RATINGS).length).toFixed(1);
+  document.getElementById('statCards').innerHTML = `
+    <div class="stat-card"><b>${overall}</b><span>Overall Rating (demo)</span></div>
+    <div class="stat-card"><b>247</b><span>Sample Responses Logged</span></div>
+    <div class="stat-card"><b>91%</b><span>Would Recommend (demo)</span></div>
+  `;
+}
+let barChartInst, radarChartInst;
+function renderCharts(){
+  renderStatCards();
+  const labels = Object.keys(DEMO_RATINGS);
+  const data = Object.values(DEMO_RATINGS);
+  const colors = ['#c98a2c','#e0a94f','#4f7862','#3a5947','#b0492a','#cf6440'];
+
+
+  const barCtx = document.getElementById('barChart');
+  if(barChartInst) barChartInst.destroy();
+  barChartInst = new Chart(barCtx, {
+    type:'bar',
+    data:{ labels, datasets:[{label:'Avg Rating', data, backgroundColor:colors, borderRadius:6}] },
+    options:{
+      responsive:true,
+      plugins:{legend:{display:false}},
+      scales:{
+        y:{min:0,max:5,ticks:{color:'#b9ad8e'},grid:{color:'#3d3626'}},
+        x:{ticks:{color:'#b9ad8e',font:{size:10}},grid:{display:false}}
+      }
+    }
+  });
+
+
+  const radarCtx = document.getElementById('radarChart');
+  if(radarChartInst) radarChartInst.destroy();
+  radarChartInst = new Chart(radarCtx, {
+    type:'radar',
+    data:{ labels, datasets:[{label:'Demo Avg', data, backgroundColor:'rgba(201,138,44,.22)', borderColor:'#c98a2c', pointBackgroundColor:'#e0a94f'}] },
+    options:{
+      responsive:true,
+      plugins:{legend:{display:false}},
+      scales:{ r:{ min:0,max:5, ticks:{display:false}, grid:{color:'#3d3626'}, angleLines:{color:'#3d3626'}, pointLabels:{color:'#b9ad8e',font:{size:10}} } }
+    }
+  });
+}
+
+
+/* ================= BOOKING MODAL ================= */
+function openBooking(){ document.getElementById('bookingOverlay').classList.add('active'); document.getElementById('bookingMsg').style.display='none'; }
+function closeBooking(){ document.getElementById('bookingOverlay').classList.remove('active'); }
+function submitBooking(){ document.getElementById('bookingMsg').style.display='block'; }
+document.getElementById('bookingOverlay').addEventListener('click', e=>{ if(e.target.id==='bookingOverlay') closeBooking(); });
+</script>
+</body>
+</html>
+
