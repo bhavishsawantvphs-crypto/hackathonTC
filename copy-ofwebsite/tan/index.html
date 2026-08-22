@@ -1,1 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#0F241A] scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unexplored Jharkhand — Underrated Destinations & Proximity Support</title>
+  
+  <!-- Google Fonts for Editorial Luxury Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS for Embedded In-Page Interactive Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Tailwind Configuration for Botanical Forest & Earth Luxury Palette -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forestDark: '#0F241A',
+            forestMoss: '#1B3B2B',
+            forestCard: '#183325',
+            forestBorder: '#2D5A40',
+            sandGold: '#E8C9A3',
+            sandGoldDark: '#DFB283',
+            earthClay: '#8B5A3E',
+            warmEcru: '#F3EDE2',
+            mutedSage: '#A3B8AC'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0F241A;
+      color: #F3EDE2;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    /* Smooth card overlap and hover transitions */
+    @media (min-width: 1024px) {
+      .overlapping-deck > .destination-card:not(:first-child) {
+        margin-left: -2.5rem;
+      }
+    }
+    @media (min-width: 1280px) {
+      .overlapping-deck > .destination-card:not(:first-child) {
+        margin-left: -3.5rem;
+      }
+    }
+
+    /* Subtle custom scrollbar */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(232, 201, 163, 0.05);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(232, 201, 163, 0.3);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(232, 201, 163, 0.6);
+    }
+
+    /* Leaflet Dark Botanical popup styling */
+    .leaflet-popup-content-wrapper {
+      background: #142C20 !important;
+      color: #F3EDE2 !important;
+      border: 1.5px solid #E8C9A3 !important;
+      border-radius: 14px !important;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6) !important;
+    }
+    .leaflet-popup-tip {
+      background: #142C20 !important;
+      border: 1.5px solid #E8C9A3 !important;
+    }
+    .leaflet-popup-close-button {
+      color: #E8C9A3 !important;
+    }
+
+    /* Strict 2-Color Marker Styling: GREEN (Main) & RED (Proximity) */
+    .marker-green-circle {
+      width: 26px;
+      height: 26px;
+      background: #10B981;
+      border: 2.5px solid #FFFFFF;
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.95);
+      cursor: pointer;
+      position: relative;
+    }
+    .marker-green-circle::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      opacity: 0.9;
+    }
+
+    .marker-red-circle {
+      width: 18px;
+      height: 18px;
+      background: #EF4444;
+      border: 2px solid #FFFFFF;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.85);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .marker-red-circle.active-highlight {
+      transform: scale(1.45);
+      background: #DC2626;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 1);
+      z-index: 9999 !important;
+    }
+
+    /* 3D Perspective Curved Deck Styling for Proximity Travel Section */
+    .perspective-deck-container {
+      perspective: 1400px;
+      perspective-origin: center center;
+    }
+
+    .perspective-card {
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    @media (min-width: 1024px) {
+      .perspective-card:nth-child(1) {
+        transform: rotateY(16deg) scale(0.95) translateZ(-20px);
+      }
+      .perspective-card:nth-child(2) {
+        transform: rotateY(8deg) scale(0.98) translateZ(-8px);
+      }
+      .perspective-card:nth-child(3) {
+        transform: rotateY(0deg) scale(1) translateZ(0px);
+      }
+      .perspective-card:nth-child(4) {
+        transform: rotateY(-8deg) scale(0.98) translateZ(-8px);
+      }
+      .perspective-card:nth-child(5) {
+        transform: rotateY(-16deg) scale(0.95) translateZ(-20px);
+      }
+
+      /* When container is hovered, slightly dim non-hovered siblings */
+      .perspective-deck-container:hover .perspective-card {
+        opacity: 0.65;
+        filter: brightness(0.85);
+      }
+
+      /* Hovered Card Pops Forward & Straightens */
+      .perspective-deck-container .perspective-card:hover {
+        transform: rotateY(0deg) rotateX(0deg) scale(1.08) translateZ(60px) translateY(-12px) !important;
+        opacity: 1 !important;
+        filter: brightness(1.08) !important;
+        border-color: #E8C9A3 !important;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(232, 201, 163, 0.25) !important;
+        z-index: 30 !important;
+      }
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-sandGold selection:text-forestDark">
+
+  <!-- Fixed Cinematic Tropical Leaf Background with Atmospheric Blur & Dark Overlay -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <!-- Tropical Leaf Image (scaled 1.04 to prevent edge bleed, softened with 4px blur so leaves are clearly visible) -->
+    <div class="absolute -inset-6 bg-cover bg-center bg-no-repeat filter blur-[4px] scale-[1.03] opacity-85"
+         style="background-image: url('assets/leaves-bg.jpg');"></div>
+    
+    <!-- Dark Deep-Green / Forest Vignette Overlay (Leaves visible with pristine text contrast) -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0F241A]/80 via-[#0F241A]/65 to-[#0B1A13]/85"></div>
+    <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 35%, transparent 40%, rgba(11, 26, 19, 0.78) 100%);"></div>
+
+    <!-- Soft Ambient Accent Glows -->
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-[#2D5A40]/30 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-[#E8C9A3]/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-[#8B5A3E]/15 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="relative z-40 border-b border-[#2D5A40]/60 bg-[#0F241A]/90 backdrop-blur-md sticky top-0 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#2D5A40] to-[#E8C9A3]/60 border border-[#E8C9A3]/40 flex items-center justify-center text-[#E8C9A3] text-xl shadow-md group-hover:scale-105 transition-transform duration-300">
+          🌿
+        </div>
+        <div>
+          <span class="text-xs uppercase font-bold tracking-widest text-sandGold block leading-none">Unexplored</span>
+          <span class="text-lg font-serif font-bold text-warmEcru tracking-tight">Jharkhand</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-mutedSage">
+        <a href="#destinations" class="text-sandGold font-semibold transition-colors">Destinations</a>
+        <a href="#proximity-travel" class="hover:text-warmEcru transition-colors">Proximity Travel</a>
+      </nav>
+
+      <!-- Verified Sites Indicator Badge -->
+      <div class="flex items-center space-x-3">
+        <span class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1B3B2B] border border-[#E8C9A3]/30 text-xs font-semibold text-sandGold shadow-sm">
+          <span>📍</span>
+          <span>5 Verified Sites</span>
+        </span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative z-10 pt-12 pb-6 px-6 max-w-7xl mx-auto w-full text-center md:text-left">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-sandGold mb-2.5">
+        <span>Discover The</span>
+        <span class="w-8 h-[1.5px] bg-sandGold/60"></span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-warmEcru tracking-tight leading-tight">
+        Unexplored <span class="italic text-sandGold">Jharkhand</span>
+      </h1>
+      <p class="text-sm sm:text-base text-[#D4E2D9] mt-3 font-normal leading-relaxed">
+        Hidden landscapes. Living cultures. Timeless traditions. Awaits you.
+      </p>
+      <p class="text-xs sm:text-sm text-mutedSage mt-2 font-light tracking-wide">
+        Discover lesser-known destinations with verified proximity insights, live weather and smarter trip planning.
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive Overlapping Destinations Carousel / Deck -->
+  <main id="destinations" class="relative z-10 flex-grow max-w-[1440px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+    
+    <!-- Instruction Hint -->
+    <div class="flex items-center justify-between mb-4 text-xs text-mutedSage">
+      <span class="flex items-center space-x-1.5">
+        <span class="w-2 h-2 rounded-full bg-sandGold animate-ping"></span>
+        <span class="text-warmEcru font-medium">Hover over any destination card to explore details</span>
+      </span>
+      <span class="hidden sm:inline text-[11px] text-sandGold font-semibold">5 Verified Eco &amp; Cultural Sites</span>
+    </div>
+
+    <!-- Overlapping Cards Row Container -->
+    <div class="overflow-x-auto pb-8 pt-4 custom-scrollbar">
+      <div id="cards-deck" class="overlapping-deck flex items-center justify-start lg:justify-center min-w-max px-4">
+        <!-- Cards rendered dynamically via app.js -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Proximity Travel Section: Curved / Perspective 5-Card Deck -->
+  <section id="proximity-travel" class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 border-t border-[#2D5A40]/60">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+      <div class="inline-flex items-center space-x-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-sandGold mb-2.5 px-3.5 py-1 rounded-full bg-[#1B3B2B] border border-[#E8C9A3]/30 shadow-sm">
+        <span>Plan Beyond The Destination</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-warmEcru tracking-tight leading-tight">
+        "Your trip doesn't end <span class="italic text-sandGold">at the pin."</span>
+      </h2>
+      <p class="text-xs sm:text-sm text-mutedSage mt-3.5 leading-relaxed font-light">
+        Explore useful places, services and experiences around lesser-known destinations before planning your visit.
+      </p>
+    </div>
+
+    <!-- Perspective 3D Cards Deck Container -->
+    <div class="perspective-deck-container overflow-x-auto lg:overflow-visible pb-8 pt-4 custom-scrollbar">
+      <div class="flex items-center justify-start lg:justify-center gap-3 sm:gap-4 lg:gap-5 min-w-max lg:min-w-0 px-4 py-4">
+        
+        <!-- Card 01: Verified Nearby Places -->
+        <div class="perspective-card relative w-[240px] sm:w-[260px] lg:w-[220px] xl:w-[235px] h-[340px] sm:h-[370px] rounded-3xl overflow-hidden cursor-pointer border border-[#2D5A40] bg-[#183325] shadow-2xl flex flex-col justify-between p-5 group">
+          <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80" alt="Verified Nearby Places" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F241A] via-[#0F241A]/75 to-[#0F241A]/25"></div>
+          
+          <!-- Top Number Badge -->
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="text-xs font-serif font-bold text-forestDark bg-sandGold px-2.5 py-1 rounded-xl shadow-md font-semibold">#01</span>
+            <span class="text-[10px] text-white/90 font-medium bg-black/45 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15">Places</span>
+          </div>
+
+          <!-- Bottom Text Content -->
+          <div class="relative z-10">
+            <h3 class="text-sm sm:text-base font-serif font-bold text-warmEcru group-hover:text-sandGold transition-colors leading-tight">
+              Verified Nearby Places
+            </h3>
+            <p class="text-xs text-[#D4E2D9] mt-2 leading-relaxed font-light">
+              See manually verified attractions, stays and useful places around each destination.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 02: Stay & Essentials -->
+        <div class="perspective-card relative w-[240px] sm:w-[260px] lg:w-[220px] xl:w-[235px] h-[340px] sm:h-[370px] rounded-3xl overflow-hidden cursor-pointer border border-[#2D5A40] bg-[#183325] shadow-2xl flex flex-col justify-between p-5 group">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Stay & Essentials" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F241A] via-[#0F241A]/75 to-[#0F241A]/25"></div>
+          
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="text-xs font-serif font-bold text-forestDark bg-sandGold px-2.5 py-1 rounded-xl shadow-md font-semibold">#02</span>
+            <span class="text-[10px] text-white/90 font-medium bg-black/45 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15">Stays</span>
+          </div>
+
+          <div class="relative z-10">
+            <h3 class="text-sm sm:text-base font-serif font-bold text-warmEcru group-hover:text-sandGold transition-colors leading-tight">
+              Stay &amp; Essentials
+            </h3>
+            <p class="text-xs text-[#D4E2D9] mt-2 leading-relaxed font-light">
+              Know where accommodation, food or essential support is available before travelling.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 03: Healthcare & Connectivity -->
+        <div class="perspective-card relative w-[240px] sm:w-[260px] lg:w-[220px] xl:w-[235px] h-[340px] sm:h-[370px] rounded-3xl overflow-hidden cursor-pointer border border-[#2D5A40] bg-[#183325] shadow-2xl flex flex-col justify-between p-5 group">
+          <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80" alt="Healthcare & Connectivity" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F241A] via-[#0F241A]/75 to-[#0F241A]/25"></div>
+          
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="text-xs font-serif font-bold text-forestDark bg-sandGold px-2.5 py-1 rounded-xl shadow-md font-semibold">#03</span>
+            <span class="text-[10px] text-white/90 font-medium bg-black/45 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15">Transit</span>
+          </div>
+
+          <div class="relative z-10">
+            <h3 class="text-sm sm:text-base font-serif font-bold text-warmEcru group-hover:text-sandGold transition-colors leading-tight">
+              Healthcare &amp; Connectivity
+            </h3>
+            <p class="text-xs text-[#D4E2D9] mt-2 leading-relaxed font-light">
+              Understand nearby healthcare, transport hubs and connectivity before visiting lesser-known areas.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 04: Live Weather -->
+        <div class="perspective-card relative w-[240px] sm:w-[260px] lg:w-[220px] xl:w-[235px] h-[340px] sm:h-[370px] rounded-3xl overflow-hidden cursor-pointer border border-[#2D5A40] bg-[#183325] shadow-2xl flex flex-col justify-between p-5 group">
+          <img src="https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=800&q=80" alt="Live Weather" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F241A] via-[#0F241A]/75 to-[#0F241A]/25"></div>
+          
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="text-xs font-serif font-bold text-forestDark bg-sandGold px-2.5 py-1 rounded-xl shadow-md font-semibold">#04</span>
+            <span class="text-[10px] text-white/90 font-medium bg-black/45 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15">Weather</span>
+          </div>
+
+          <div class="relative z-10">
+            <h3 class="text-sm sm:text-base font-serif font-bold text-warmEcru group-hover:text-sandGold transition-colors leading-tight">
+              Live Weather
+            </h3>
+            <p class="text-xs text-[#D4E2D9] mt-2 leading-relaxed font-light">
+              Check current weather conditions for each destination using its verified fixed location.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 05: Map & Directions -->
+        <div class="perspective-card relative w-[240px] sm:w-[260px] lg:w-[220px] xl:w-[235px] h-[340px] sm:h-[370px] rounded-3xl overflow-hidden cursor-pointer border border-[#2D5A40] bg-[#183325] shadow-2xl flex flex-col justify-between p-5 group">
+          <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" alt="Map & Directions" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F241A] via-[#0F241A]/75 to-[#0F241A]/25"></div>
+          
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="text-xs font-serif font-bold text-forestDark bg-sandGold px-2.5 py-1 rounded-xl shadow-md font-semibold">#05</span>
+            <span class="text-[10px] text-white/90 font-medium bg-black/45 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15">Route</span>
+          </div>
+
+          <div class="relative z-10">
+            <h3 class="text-sm sm:text-base font-serif font-bold text-warmEcru group-hover:text-sandGold transition-colors leading-tight">
+              Map &amp; Directions
+            </h3>
+            <p class="text-xs text-[#D4E2D9] mt-2 leading-relaxed font-light">
+              Explore destinations and nearby places on our interactive map, then continue to Google Maps for navigation.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Elegant User Journey Flow Indicator -->
+    <div class="mt-12 pt-8 border-t border-[#2D5A40]/60 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[11px] sm:text-xs text-mutedSage">
+      <span class="px-3.5 py-1.5 rounded-full bg-[#1B3B2B] border border-[#2D5A40] text-warmEcru font-medium shadow-sm">Choose Destination</span>
+      <span class="text-sandGold font-bold">→</span>
+      <span class="px-3.5 py-1.5 rounded-full bg-[#1B3B2B] border border-[#2D5A40] text-warmEcru font-medium shadow-sm">View Details</span>
+      <span class="text-sandGold font-bold">→</span>
+      <span class="px-3.5 py-1.5 rounded-full bg-[#1B3B2B] border border-[#2D5A40] text-warmEcru font-medium shadow-sm">Explore on Map</span>
+      <span class="text-sandGold font-bold">→</span>
+      <span class="px-3.5 py-1.5 rounded-full bg-[#1B3B2B] border border-[#2D5A40] text-warmEcru font-medium shadow-sm">View Nearby Places</span>
+      <span class="text-sandGold font-bold">→</span>
+      <span class="px-3.5 py-1.5 rounded-full bg-sandGold text-forestDark font-bold shadow-md shadow-sandGold/20">Get Directions</span>
+    </div>
+
+  </section>
+
+  <!-- Clean Footer -->
+  <footer id="about" class="relative z-10 border-t border-[#2D5A40]/60 bg-[#0B1A13] py-8 text-center text-xs text-mutedSage">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="text-sandGold font-serif font-bold">Unexplored Jharkhand</span>
+        <span>— Verified Eco &amp; Cultural Platform</span>
+      </div>
+      <p class="text-[11px] text-mutedSage">
+        Data verified against official government portals &amp; audited local records.
+      </p>
+    </div>
+  </footer>
+
+  <!-- View Details Modal / Drawer -->
+  <div id="destination-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-md p-4 sm:p-6 overflow-y-auto">
+    <div class="relative w-full max-w-2xl bg-[#142C20] border border-[#E8C9A3]/30 rounded-3xl overflow-hidden shadow-2xl my-8">
+      
+      <!-- Close Button -->
+      <button id="modal-close-btn" class="absolute top-4 right-4 z-30 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md text-warmEcru hover:text-sandGold border border-white/20 flex items-center justify-center transition-colors shadow-sm">
+        ✕
+      </button>
+
+      <!-- Modal Content Populated via JavaScript -->
+      <div id="modal-content"></div>
+
+    </div>
+  </div>
+
+  <!-- Interactive Leaflet Map + Proximity Modal / Overlay (Two-Column Layout) -->
+  <div id="map-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-5 md:p-6 overflow-y-auto">
+    <div class="relative w-full max-w-6xl bg-[#142C20] border border-[#E8C9A3]/30 rounded-3xl overflow-hidden shadow-2xl my-auto flex flex-col max-h-[92vh]">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-[#2D5A40] flex items-center justify-between bg-[#1B3B2B] flex-shrink-0">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-10 h-10 rounded-2xl bg-sandGold/20 border border-sandGold/40 flex items-center justify-center text-sandGold text-lg shadow-sm">
+            📍
+          </div>
+          <div>
+            <div class="flex items-center space-x-2.5 flex-wrap gap-y-1">
+              <h3 id="map-modal-title" class="text-lg sm:text-xl font-serif font-bold text-warmEcru">Destination Map</h3>
+              <span id="map-modal-category" class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-sandGold/20 text-sandGold border border-sandGold/30">Category</span>
+              <span id="map-modal-readiness" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">🟢 Visitor Ready</span>
+            </div>
+            <p id="map-modal-subtitle" class="text-xs text-sandGold font-semibold mt-0.5">📍 Location, Jharkhand</p>
+          </div>
+        </div>
+        
+        <!-- Close Button -->
+        <button id="map-modal-close-btn" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-warmEcru hover:text-sandGold border border-white/15 flex items-center justify-center transition-colors shadow-sm flex-shrink-0">
+          ✕
+        </button>
+      </div>
+
+      <!-- Two-Column Body: Map (65%) + Nearby & Trip Support (35%) -->
+      <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 p-4 bg-[#0F241A] overflow-y-auto custom-scrollbar">
+        
+        <!-- Left: Interactive Leaflet Map (~65%) -->
+        <div class="lg:col-span-8 flex flex-col h-[340px] sm:h-[420px] lg:h-[480px] rounded-2xl overflow-hidden border border-[#2D5A40] bg-[#183325] relative shadow-lg">
+          <div id="leaflet-map-container" class="w-full h-full z-10"></div>
+          
+          <!-- Subtle Minimal Map Legend Overlay -->
+          <div class="absolute bottom-3 left-3 z-[400] bg-[#142C20]/95 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-[#2D5A40] text-[11px] font-medium flex items-center space-x-3 text-warmEcru pointer-events-none shadow-md">
+            <span class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10B981]"></span>
+              <span class="text-emerald-300 font-semibold">Selected Destination</span>
+            </span>
+            <span class="text-white/20">|</span>
+            <span class="flex items-center space-x-1.5">
+              <span class="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_6px_#EF4444]"></span>
+              <span class="text-red-400 font-semibold">Nearby Places</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Nearby & Trip Support Panel (~35%) -->
+        <div class="lg:col-span-4 flex flex-col bg-[#183325] border border-[#2D5A40] rounded-2xl p-4 sm:p-5 h-auto lg:h-[480px] overflow-y-auto custom-scrollbar justify-between shadow-lg">
+          <div>
+            <!-- Panel Header -->
+            <div class="flex items-center justify-between border-b border-[#2D5A40] pb-3 mb-3">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]"></span>
+                <h4 class="text-sm font-bold text-warmEcru uppercase tracking-wider font-serif">Nearby &amp; Trip Support</h4>
+              </div>
+              <span class="text-[10px] text-mutedSage font-medium">Verified Data</span>
+            </div>
+
+            <!-- Readiness Context Box -->
+            <div id="map-readiness-card" class="p-3.5 rounded-xl bg-[#0F241A]/80 border border-[#2D5A40] mb-3.5 text-xs shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] uppercase font-bold text-mutedSage tracking-wider">Tourism Readiness</span>
+                <span id="map-readiness-tag" class="font-bold text-emerald-400 text-[11px]">Visitor Ready</span>
+              </div>
+              <p id="map-readiness-desc" class="text-[11px] text-[#D4E2D9] mt-1 leading-relaxed">
+                Basic connectivity and day-trip facilities available.
+              </p>
+            </div>
+
+            <!-- List of Nearby Support Items (with Red location dot) -->
+            <div class="space-y-2.5" id="map-nearby-support-list">
+              <!-- Dynamically populated via app.js -->
+            </div>
+
+            <!-- Honest Support Note (if limited) -->
+            <div id="map-honest-support-note" class="hidden mt-3 p-3 rounded-xl bg-[#8B5A3E]/20 border border-[#8B5A3E]/40 text-xs text-[#F3EDE2]">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Quick Tip -->
+          <div class="pt-3 mt-3 border-t border-[#2D5A40] text-[10px] text-mutedSage flex items-center space-x-1.5">
+            <span class="text-sandGold">💡</span>
+            <span>Click or hover any red item above to focus on map</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Map Modal Footer Bar -->
+      <div class="px-6 py-3.5 border-t border-[#2D5A40] bg-[#1B3B2B] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs flex-shrink-0">
+        <div class="text-[11px] text-mutedSage font-medium flex items-center space-x-2">
+          <span class="text-sandGold font-bold">●</span>
+          <span>Approx. straight-line distances shown • Road routes handled by Google Maps</span>
+        </div>
+        <a id="map-get-directions-btn"
+           href="#"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-sandGold text-forestDark font-bold hover:bg-sandGoldDark transition-all duration-200 shadow-md shadow-sandGold/20 text-xs flex-shrink-0">
+          <span>🧭</span>
+          <span>Get Directions</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- Modular Scripts -->
+  <script src="src/distance.js"></script>
+  <script src="src/data.js"></script>
+  <script src="src/weather.js"></script>
+  <script src="src/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.FootprintJH && window.FootprintJH.app) {
+        window.FootprintJH.app.init();
+      }
+    });
+  </script>
+</body>
+</html>
 
