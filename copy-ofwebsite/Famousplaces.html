@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Discover Jharkhand | Top 5 Famous Destinations & Explorer Expedition</title>
+  <meta name="description" content="Explore the authentic Top 5 famous destinations of Jharkhand — Hundru Falls, Patratu Valley, Baidyanath Dham, Parasnath Hill, Betla National Park. Unlock stamps in your Explorer Passport." />
+  <meta name="theme-color" content="#061A13" />
+
+  <!-- Google Fonts: Playfair Display (Editorial Serif) & Plus Jakarta Sans (Clean Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet CSS for Dark Interactive Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/map.css" />
+</head>
+<body>
+
+  <!-- Top Scroll Reading Progress Indicator -->
+  <div id="scroll-progress-indicator" class="scroll-progress-indicator" aria-hidden="true"></div>
+
+  <!-- Fullscreen Particle Confetti Canvas -->
+  <canvas id="unlock-confetti-canvas"></canvas>
+
+  <!-- ==========================================================================
+       MAD FEATURE: CRAZY CINEMATIC EXPEDITION VAULT GATEWAY UNLOCK
+       ========================================================================== -->
+  <div id="expedition-vault-gateway" class="expedition-vault-gateway" role="dialog" aria-modal="true" aria-label="Expedition Vault Unlock Portal">
+    <!-- Cosmic Laser Rings -->
+    <div class="gateway-portal-rings">
+      <div class="portal-ring"></div>
+      <div class="portal-ring"></div>
+      <div class="portal-ring"></div>
+    </div>
+
+    <!-- Center Interactive Vault Seal -->
+    <div class="gateway-center-vault">
+      <div class="vault-hint">✦ Ancient Realm Sealed • Touch to Reveal ✦</div>
+
+      <button id="vault-seal-btn" class="vault-seal-btn" aria-label="Click to unlock Jharkhand Expedition">
+        <span class="vault-seal-icon">🗝️</span>
+        <span class="vault-seal-text">UNLOCK</span>
+      </button>
+
+      <h1 class="vault-title">DISCOVER <span>JHARKHAND</span></h1>
+      <p class="vault-subtitle">
+        "A 2.5-billion-year-old sanctuary of waterfalls, tiger reserves and sacred summits awaits your discovery."
+      </p>
+    </div>
+  </div>
+
+  <!-- Desktop Custom Cursor Follower for Destination Cards -->
+  <div id="card-cursor-follower" class="card-cursor-follower" aria-hidden="true">EXPLORE</div>
+
+  <!-- ==========================================================================
+       STICKY NAVIGATION BAR
+       ========================================================================== -->
+  <header>
+    <nav id="navbar" class="navbar" aria-label="Main Navigation">
+      <div class="container nav-container">
+        <a href="#hero" class="brand-logo" aria-label="Jharkhand Tourism Home">
+          <div class="brand-symbol">J</div>
+          <span class="brand-text">Jharkhand<span>.</span></span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#famous-destinations" class="nav-link">Top 5 Famous Places</a></li>
+          <li><a href="#map-section" class="nav-link">Interactive Map</a></li>
+          <li><a href="#travel-themes" class="nav-link">Experiences</a></li>
+          <li><a href="#about-footer" class="nav-link">About</a></li>
+        </ul>
+
+        <!-- Navigation Actions -->
+        <div class="nav-actions">
+          <!-- 5-Stamp Collector Passport Trigger -->
+          <button id="passport-btn" class="passport-nav-btn" onclick="openPassportModal()" title="View Your Unlocked Stamps & Explorer Rank" aria-label="Explorer Passport">
+            <span>🎒 Passport</span>
+            <span id="passport-count-badge" class="passport-badge-count">0/5 Stamps</span>
+          </button>
+
+          <!-- Primary CTA Button -->
+          <a href="#famous-destinations" class="btn-primary">
+            <span>Explore Places</span>
+            <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button id="mobile-nav-toggle" class="mobile-nav-toggle" aria-label="Toggle Mobile Menu" aria-expanded="false" aria-controls="mobile-drawer">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-drawer" class="mobile-drawer" aria-label="Mobile Navigation Drawer">
+      <ul class="mobile-drawer-links">
+        <li><a href="#hero" class="mobile-drawer-link">Home</a></li>
+        <li><a href="#famous-destinations" class="mobile-drawer-link">Top 5 Famous Places</a></li>
+        <li><a href="#map-section" class="mobile-drawer-link">Interactive Map</a></li>
+        <li><a href="#travel-themes" class="mobile-drawer-link">Curated Stories</a></li>
+        <li><a href="#about-footer" class="mobile-drawer-link">About Jharkhand</a></li>
+      </ul>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <button class="passport-nav-btn" style="justify-content: center; width: 100%;" onclick="closeMobileDrawer(); openPassportModal();">
+          <span>🎒 View Explorer Passport (5 Stamps)</span>
+        </button>
+        <a href="#famous-destinations" class="btn-primary" style="justify-content: center; width: 100%;">
+          <span>Explore Top 5 Places</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION (CINEMATIC FULLSCREEN WITH AUTHENTIC HUNDRU FALLS PHOTO)
+         ========================================================================== -->
+    <section id="hero" class="hero" aria-label="Hero Introduction">
+      <!-- Ambient Glowing Orbs -->
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+
+      <div class="hero-bg-container">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Hundru_Falls%2C_Jharkhand%2C_India_4.jpg/1280px-Hundru_Falls%2C_Jharkhand%2C_India_4.jpg" 
+          alt="Majestic authentic view of Hundru Falls in Ranchi, Jharkhand" 
+          class="hero-bg-image"
+          fetchpriority="high"
+        />
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-tag">Welcome to the Land of Forests</span>
+        
+        <h1 class="hero-title">
+          DISCOVER <span>JHARKHAND</span>
+        </h1>
+        
+        <p class="hero-subtitle">Where Nature Tells A Story</p>
+        
+        <p class="hero-description">
+          Explore authentic waterfalls, primeval Sal forests, sacred mountain summits, and iconic wonders carved across a 2.5-billion-year-old plateau.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#famous-destinations" class="btn-primary">
+            <span>Explore 5 Famous Places</span>
+            <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <button onclick="openPassportModal()" class="btn-secondary">
+            <span>🎒 Open Passport (5 Stamps)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <a href="#famous-destinations" class="hero-scroll-indicator" aria-label="Scroll to explore destinations">
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+        <span>Scroll to Explore & Collect Stamps</span>
+      </a>
+    </section>
+
+    <!-- ==========================================================================
+         EDITORIAL STATS STRIP (ANIMATED NUMBER COUNTERS)
+         ========================================================================== -->
+    <section class="stats-strip" aria-label="Jharkhand Key Highlights">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item fade-up">
+            <span class="stat-number" data-target="29" data-suffix="%+">0%+</span>
+            <span class="stat-label">Forest Canopy</span>
+            <p class="stat-desc">One of India's richest biodiversity hotspots crowned in Sal and Mahua.</p>
+          </div>
+          <div class="stat-item fade-up delay-1">
+            <span class="stat-number" data-target="98" data-suffix="m">0m</span>
+            <span class="stat-label">Hundru Cascade</span>
+            <p class="stat-desc">Subarnarekha River plunging 98 meters into basalt rock pools.</p>
+          </div>
+          <div class="stat-item fade-up delay-2">
+            <span class="stat-number" data-target="1365" data-suffix="m">0m</span>
+            <span class="stat-label">Highest Mountain</span>
+            <p class="stat-desc">Parasnath Summit (Shikharji), supreme sacred Jain pilgrimage.</p>
+          </div>
+          <div class="stat-item fade-up delay-3">
+            <span class="stat-number" data-target="5" data-suffix=" Stamps">0</span>
+            <span class="stat-label">Collectible Passport</span>
+            <p class="stat-desc">Collect all 5 authentic stamps to claim your Grand Explorer Rank.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TOP 5 FAMOUS DESTINATIONS SECTION (WITH TOURIST UNLOCK ENGINE)
+         ========================================================================== -->
+    <section id="famous-destinations" class="destinations-section section-padding" aria-label="Top 5 Famous Destinations">
+      <div class="watermark-bg">JHARKHAND</div>
+
+      <div class="container">
+        <div class="section-header flex-between">
+          <div>
+            <span class="eyebrow">The 5 Iconic Wonders • Collect All Stamps</span>
+            <h2 class="section-heading">TOP 5 FAMOUS DESTINATIONS</h2>
+            <p class="section-subheading">"Hover or click each landmark to unlock its official collectible stamp."</p>
+          </div>
+
+          <!-- Category Filter Bar -->
+          <div class="filter-bar" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">
+            <button class="filter-chip active" data-category="all">All 5 Places</button>
+            <button class="filter-chip" data-category="waterfall">Waterfalls</button>
+            <button class="filter-chip" data-category="scenic">Scenic & Lakes</button>
+            <button class="filter-chip" data-category="spiritual">Spiritual & Heritage</button>
+            <button class="filter-chip" data-category="mountain">Mountain Peaks</button>
+            <button class="filter-chip" data-category="wildlife">Wildlife</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Destination Cards Grid (5 Famous Places) -->
+        <div id="famous-destinations-grid" class="destinations-grid">
+          <!-- Populated by app.js with Top 5 Places -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         "DID YOU KNOW?" EDITORIAL BREAK
+         ========================================================================== -->
+    <section class="editorial-break" aria-label="Did You Know Trivia">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow">Discovery Notes</span>
+          <h2 class="section-heading" style="font-size: 2.25rem;">DID YOU KNOW?</h2>
+          <p class="section-subheading">Fascinating historical, geological and cultural moments of the plateau.</p>
+        </div>
+
+        <div id="facts-container" class="fact-carousel-container">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTERACTIVE MAP SECTION
+         ========================================================================== -->
+    <section id="map-section" class="map-section section-padding" aria-label="Interactive Map of Jharkhand">
+      <div class="container">
+        <div class="section-header flex-between">
+          <div>
+            <span class="eyebrow">Cartographic Journey</span>
+            <h2 class="section-heading">EXPLORE THE 5 WONDERS ON MAP</h2>
+            <p class="section-subheading">"Click any pin to inspect the authentic place, collect its stamp, and zoom into coordinates."</p>
+          </div>
+
+          <button class="map-reset-btn" onclick="resetJharkhandMapView()" aria-label="Reset Map to State View">
+            <span>⟲ Reset State Overview</span>
+          </button>
+        </div>
+
+        <!-- Map Container Wrapper -->
+        <div class="map-wrapper">
+          <!-- Filter Chips overlayed on Map -->
+          <div class="map-controls-bar">
+            <button class="map-filter-btn active" data-filter="all">All 5 Places</button>
+            <button class="map-filter-btn" data-filter="waterfalls">Waterfalls</button>
+            <button class="map-filter-btn" data-filter="wildlife">Forests & Wildlife</button>
+            <button class="map-filter-btn" data-filter="spiritual">Spiritual & Shrines</button>
+            <button class="map-filter-btn" data-filter="scenic">Scenic & Lakes</button>
+          </div>
+
+          <!-- Leaflet Map Element -->
+          <div id="jharkhand-map" role="region" aria-label="Jharkhand Destinations Map"></div>
+
+          <!-- Legend Overlay -->
+          <div class="map-legend">
+            <div class="legend-item">
+              <span class="legend-dot"></span>
+              <span>Famous Destination</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRAVEL THEMES & CURATED STORIES
+         ========================================================================== -->
+    <section id="travel-themes" class="section-padding" aria-label="Travel Themes and Experiences">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="eyebrow">Curated Collections</span>
+          <h2 class="section-heading">EXPERIENCES CRAFTED BY NATURE</h2>
+          <p class="section-subheading">From thunderous roaring cascades to serene ancient spiritual sanctums, find what calls you.</p>
+        </div>
+
+        <div id="themes-grid" class="themes-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MAD FEATURE: 5-STAMP COLLECTIBLE PASSPORT MODAL
+       ========================================================================== -->
+  <div id="passport-modal-backdrop" class="passport-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="passport-user-rank">
+    <div class="passport-book">
+      <!-- Header with Rank and Emblem -->
+      <div class="passport-header-row">
+        <div class="passport-title-wrap">
+          <div class="passport-emblem">🏆</div>
+          <div>
+            <div class="passport-rank-badge">Official Tourist Explorer Passport</div>
+            <h3 id="passport-user-rank" class="passport-user-rank">Novice Tourist</h3>
+          </div>
+        </div>
+
+        <div class="passport-progress-summary">
+          <span id="passport-level-pill" class="passport-level-pill">0/5 Stamps Collected (0 XP)</span>
+          <button class="modal-close-btn" style="position: static;" onclick="closePassportModal()" aria-label="Close passport">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 5 Stamp Slots Grid -->
+      <div id="passport-stamps-grid" class="passport-stamps-grid">
+        <!-- Injected dynamically by app.js -->
+      </div>
+
+      <!-- Passport Actions Footer -->
+      <div class="passport-footer-actions">
+        <button class="btn-secondary" style="font-size: 0.75rem;" onclick="unlockAllPlacesDemo()">
+          <span>✨ Unlock All 5 Stamps (Demo Mode)</span>
+        </button>
+
+        <button class="btn-primary" onclick="closePassportModal()">
+          <span>Continue Exploring</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FULL-SCREEN IMMERSIVE DESTINATION DETAILS MODAL
+       ========================================================================== -->
+  <div id="destination-modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title-heading">
+    <div class="destination-modal">
+      <button class="modal-close-btn" onclick="closeDestinationModal()" aria-label="Close details modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Dynamic Content Injected by openDestinationModal() in app.js -->
+      <div id="destination-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       EDITORIAL FOOTER
+       ========================================================================== -->
+  <footer id="about-footer" class="footer" aria-label="Footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand Narrative -->
+        <div>
+          <a href="#hero" class="brand-logo" style="margin-bottom: 0.5rem;">
+            <div class="brand-symbol">J</div>
+            <span class="brand-text">Jharkhand<span>.</span></span>
+          </a>
+          <p class="footer-tagline">"Explore beyond the ordinary."</p>
+          <p class="footer-brand-desc">
+            A state of primeval Sal forests, roaring stepped cascades, sacred mountain sanctums, and vibrant indigenous art traditions.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="footer-col-title">Top 5 Places</h4>
+          <ul class="footer-links">
+            <li><a href="#famous-destinations" class="footer-link">Hundru Falls</a></li>
+            <li><a href="#famous-destinations" class="footer-link">Patratu Valley</a></li>
+            <li><a href="#famous-destinations" class="footer-link">Baba Baidyanath Dham</a></li>
+            <li><a href="#famous-destinations" class="footer-link">Parasnath Hill</a></li>
+            <li><a href="#famous-destinations" class="footer-link">Betla National Park</a></li>
+          </ul>
+        </div>
+
+        <!-- Regions & Districts -->
+        <div>
+          <h4 class="footer-col-title">Districts</h4>
+          <ul class="footer-links">
+            <li><a href="#map-section" class="footer-link">Ranchi (Capital)</a></li>
+            <li><a href="#map-section" class="footer-link">Ramgarh (Patratu)</a></li>
+            <li><a href="#map-section" class="footer-link">Deoghar (Sanctum)</a></li>
+            <li><a href="#map-section" class="footer-link">Giridih (Parasnath)</a></li>
+            <li><a href="#map-section" class="footer-link">Latehar (Betla)</a></li>
+          </ul>
+        </div>
+
+        <!-- Tourist Information & Helpline -->
+        <div>
+          <h4 class="footer-col-title">Visitor Helpline</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+            Jharkhand Tourism Development Corporation (JTDC)
+          </p>
+          <p style="font-size: 0.88rem; color: var(--gold-light); font-weight: 600; margin-bottom: 0.5rem;">
+            Toll-Free: 1800-345-6571
+          </p>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">
+            Tourist Information Centre, Birsa Munda Airport & Ranchi Railway Station.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Jharkhand Tourism. All rights reserved.</p>
+        <p class="made-for-explorers">"Made for explorers."</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
