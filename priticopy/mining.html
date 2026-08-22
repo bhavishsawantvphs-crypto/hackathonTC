@@ -11,21 +11,16 @@
     :root {
       /* ---- Core palette: Lake Blue + Falu Red + Sunset ---- */
       --lake-blue: #2B4C63;
-      /* primary identity — refined medium lake blue */
       --lake-blue-deep: #1E384A;
-      /* deep lake blue, for text/headings on light bg */
       --lake-blue-pale: #EAF1F4;
-      /* pale blue tint for section backgrounds */
       --falu-red: #9C3B32;
-      /* CTAs, active states, highlights */
       --falu-red-hover: #B34A3F;
       --sunset: #D98B3F;
-      /* warm accent — headings, labels, borders */
       --sunset-light: #E8AD6E;
       --white: #FFFFFF;
       --off-white: #FBFAF7;
 
-      /* Theme mappings (kept so component rules below don't need renaming) */
+      /* Theme mappings */
       --coal: var(--white);
       --charcoal: var(--white);
       --surface: var(--off-white);
@@ -122,7 +117,7 @@
       font-family: 'Zilla Slab', 'Bitter', serif;
       font-weight: 700;
       font-size: 1.15rem;
-      color: var(--cream);
+      color: var(--lake-blue-deep) !important;
       text-decoration: none;
       white-space: nowrap;
     }
@@ -161,32 +156,14 @@
 
     @media(max-width:820px) {
       .global-navlinks {
-        display: none;
+        display: flex;
+        gap: 8px;
+        font-size: 0.8rem;
+        flex-wrap: wrap;
       }
-    }
-
-    .global-nav-cta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.76rem;
-      font-weight: 600;
-      border: 1px solid var(--falu-red);
-      color: var(--white);
-      background: var(--falu-red);
-      padding: 8px 15px;
-      letter-spacing: 0.04em;
-      border-radius: 4px;
-      transition: background .2s, color .2s, transform .15s;
-      white-space: nowrap;
-    }
-
-    .global-nav-cta:hover {
-      background: var(--falu-red-hover);
-      border-color: var(--falu-red-hover);
-      transform: translateY(-1px);
-    }
-
-    .logo {
-      color: var(--lake-blue-deep) !important;
+      .global-navlinks a {
+        padding: 4px 8px;
+      }
     }
 
     /* ---------- strata signature element ---------- */
@@ -201,37 +178,14 @@
       height: 100%;
     }
 
-    .strata span:nth-child(1) {
-      background: var(--rust);
-    }
-
-    .strata span:nth-child(2) {
-      background: var(--ochre);
-    }
-
-    .strata span:nth-child(3) {
-      background: var(--forest);
-    }
-
-    .strata span:nth-child(4) {
-      background: var(--surface-2);
-    }
-
-    .strata span:nth-child(5) {
-      background: var(--rust-light);
-    }
-
-    .strata span:nth-child(6) {
-      background: var(--ochre-light);
-    }
-
-    .strata span:nth-child(7) {
-      background: var(--forest-light);
-    }
-
-    .strata span:nth-child(8) {
-      background: var(--surface-2);
-    }
+    .strata span:nth-child(1) { background: var(--rust); }
+    .strata span:nth-child(2) { background: var(--ochre); }
+    .strata span:nth-child(3) { background: var(--forest); }
+    .strata span:nth-child(4) { background: var(--surface-2); }
+    .strata span:nth-child(5) { background: var(--rust-light); }
+    .strata span:nth-child(6) { background: var(--ochre-light); }
+    .strata span:nth-child(7) { background: var(--forest-light); }
+    .strata span:nth-child(8) { background: var(--surface-2); }
 
     /* ---------- SUB-NAV (MODULE TABS) ---------- */
     .subnav-wrap {
@@ -313,15 +267,8 @@
     }
 
     @keyframes fadein {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .wrap {
@@ -641,29 +588,12 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
     }
 
-    .carousel-fallback.coal {
-      background: linear-gradient(135deg, #3A5568, #24374A);
-    }
-
-    .carousel-fallback.iron {
-      background: linear-gradient(135deg, #8A5A3A, #5E3D26);
-    }
-
-    .carousel-fallback.copper {
-      background: linear-gradient(135deg, #B3702F, #7A4A1E);
-    }
-
-    .carousel-fallback.mica {
-      background: linear-gradient(135deg, #6E7B7B, #495454);
-    }
-
-    .carousel-fallback.bauxite {
-      background: linear-gradient(135deg, #A56B37, #6E4623);
-    }
-
-    .carousel-fallback.uranium {
-      background: linear-gradient(135deg, #6E6558, #463F35);
-    }
+    .carousel-fallback.coal { background: linear-gradient(135deg, #3A5568, #24374A); }
+    .carousel-fallback.iron { background: linear-gradient(135deg, #8A5A3A, #5E3D26); }
+    .carousel-fallback.copper { background: linear-gradient(135deg, #B3702F, #7A4A1E); }
+    .carousel-fallback.mica { background: linear-gradient(135deg, #6E7B7B, #495454); }
+    .carousel-fallback.bauxite { background: linear-gradient(135deg, #A56B37, #6E4623); }
+    .carousel-fallback.uranium { background: linear-gradient(135deg, #6E6558, #463F35); }
 
     .carousel-track {
       position: absolute;
@@ -726,15 +656,11 @@
     }
 
     @media(max-width:1000px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media(max-width:620px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
+      .grid { grid-template-columns: 1fr; }
     }
 
     .card {
@@ -805,20 +731,6 @@
       border: 1px solid var(--line);
     }
 
-    .card-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: auto;
-      padding-top: 6px;
-    }
-
-    .card-explore {
-      font-size: .8rem;
-      color: var(--falu-red);
-      font-weight: 600;
-    }
-
     .badge {
       display: inline-flex;
       align-items: center;
@@ -856,7 +768,6 @@
       border: 1px solid rgba(156, 59, 50, .4);
     }
 
-    /* tinted variant for use on light panels */
     .badge.tint.green {
       background: rgba(44, 95, 78, .09);
       color: #2C5F4E;
@@ -936,9 +847,7 @@
     }
 
     @media(max-width:900px) {
-      .two-col {
-        grid-template-columns: 1fr;
-      }
+      .two-col { grid-template-columns: 1fr; }
     }
 
     .panel {
@@ -1030,7 +939,6 @@
       color: var(--sunset);
     }
 
-    /* what you'll experience cards */
     .exp-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -1039,15 +947,11 @@
     }
 
     @media(max-width:900px) {
-      .exp-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .exp-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media(max-width:480px) {
-      .exp-grid {
-        grid-template-columns: 1fr;
-      }
+      .exp-grid { grid-template-columns: 1fr; }
     }
 
     .exp-card {
@@ -1068,7 +972,6 @@
       color: var(--lake-blue-deep);
     }
 
-    /* safety / restrictions panel */
     .safety-list li::before {
       content: '✓';
       color: #2C5F4E;
@@ -1088,9 +991,7 @@
     }
 
     @media(max-width:900px) {
-      .plan-shell {
-        grid-template-columns: 1fr;
-      }
+      .plan-shell { grid-template-columns: 1fr; }
     }
 
     .plan-field {
@@ -1179,23 +1080,17 @@
       margin-top: 6px;
     }
 
-    .group-check {
-      margin-top: 10px;
-      font-size: .83rem;
-      padding: 10px 14px;
-      border-radius: 8px;
-    }
-
-    .group-check.ok {
-      background: rgba(44, 95, 78, .08);
-      color: #2C5F4E;
-      border: 1px solid rgba(44, 95, 78, .3);
-    }
-
-    .group-check.warn {
+    .plan-validation-msg {
+      display: none;
+      color: var(--falu-red);
       background: rgba(156, 59, 50, .08);
-      color: #8A3226;
       border: 1px solid rgba(156, 59, 50, .3);
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-top: 14px;
+      font-size: .86rem;
+      line-height: 1.5;
+      font-weight: 500;
     }
 
     /* ---------- circuits ---------- */
@@ -1249,9 +1144,7 @@
     }
 
     @media(max-width:700px) {
-      .responsible-grid {
-        grid-template-columns: 1fr;
-      }
+      .responsible-grid { grid-template-columns: 1fr; }
     }
 
     .responsible-item {
@@ -1307,9 +1200,7 @@
     }
 
     @media(max-width:560px) {
-      .q-options {
-        grid-template-columns: 1fr;
-      }
+      .q-options { grid-template-columns: 1fr; }
     }
 
     .q-option {
@@ -1625,6 +1516,12 @@
       padding-top: 6px;
     }
 
+    .card-explore {
+      font-size: .8rem;
+      color: var(--falu-red);
+      font-weight: 600;
+    }
+
     .btn-add-scheduler {
       display: inline-flex;
       align-items: center;
@@ -1638,6 +1535,7 @@
       font-weight: 600;
       transition: all .15s;
       white-space: nowrap;
+      cursor: pointer;
     }
 
     .btn-add-scheduler:hover {
@@ -1647,18 +1545,15 @@
     }
 
     .btn-add-scheduler.added {
-      background: rgba(44, 95, 78, .1);
+      background: rgba(44, 95, 78, .12);
       color: #2C5F4E;
-      border-color: rgba(44, 95, 78, .4);
-      cursor: default;
+      border-color: rgba(44, 95, 78, .45);
+      font-weight: 700;
     }
 
     .btn-add-scheduler.added:hover {
-      transform: none;
-    }
-
-    .btn-add-scheduler:disabled {
-      opacity: .85;
+      background: rgba(44, 95, 78, .2);
+      transform: translateY(-1px);
     }
 
     .btn-add-scheduler-sm {
@@ -1819,10 +1714,13 @@
       border-radius: 7px;
       font-size: .78rem;
       font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
     }
 
     .btn-scheduler-remove:hover {
-      background: rgba(156, 59, 50, .06);
+      background: rgba(156, 59, 50, .08);
+      border-color: var(--falu-red);
     }
 
     .btn-scheduler-view {
@@ -1931,12 +1829,9 @@
         <a href="index.html#destinations">Explore</a>
         <a href="mining.html" class="active">Mining Tourism</a>
         <a href="jhar.html">Festivals</a>
-        <a href="#" id="schedulerNavLink" class="scheduler-nav-link"
-          onclick="goView('scheduler');return false;">Scheduler <span class="scheduler-badge"
-            id="schedulerBadge">0</span></a>
+        <a href="#" id="schedulerNavLink" class="scheduler-nav-link" onclick="goView('scheduler');return false;">Scheduler <span class="scheduler-badge" id="schedulerBadge">0</span></a>
         <a href="index.html#feedback">Feedback</a>
       </div>
-      <a href="index.html#destinations" class="global-nav-cta">EXPLORE JHARKHAND →</a>
     </nav>
   </header>
 
@@ -2066,13 +1961,6 @@
             <option>West Jharkhand</option>
           </select>
         </div>
-        <div class="filter-group">
-          <label>Sort</label>
-          <select id="fSort">
-            <option value="recommended">Recommended</option>
-            <option value="name">Name</option>
-          </select>
-        </div>
       </div>
 
       <div class="grid" id="siteGrid"></div>
@@ -2085,6 +1973,7 @@
           planning ideas, not fixed itineraries with guaranteed timings.</p>
       </div>
       <div class="grid" style="grid-template-columns:repeat(3,1fr);" id="circuitGrid"></div>
+      <p class="note" style="margin-top:16px;text-align:center;">Reference note: Pricing and circuit information shown here is based on last year's available details and may have changed. Please verify current prices, routes and availability with JTDC / the relevant operator before planning your visit.</p>
 
       <!-- Responsible travel -->
       <div class="section-head" style="margin-top:70px;">
@@ -2197,7 +2086,6 @@
       <b>Experience</b> the culture.<br>
       <b>Protect</b> the environment.
     </div>
-    <button class="btn btn-rust" onclick="goView('explore')">Explore Jharkhand's Mining Heritage</button>
   </div>
 
 
@@ -2227,7 +2115,7 @@
     /* =========================================================
        DATA
        Only verified, correctly attributed images are listed here.
-       Fallback CSS gradients are preserved seamlessly in the carousel.
+       Jharia now has exactly ONE verified representative image.
        ========================================================= */
     function img(src, alt, meta) { return { src, alt, ...(meta || {}) }; }
 
@@ -2248,7 +2136,7 @@
         expCards: [
           { label: 'Mine Landscape', img: img('https://upload.wikimedia.org/wikipedia/commons/e/ef/Coal_mines_in_singrauli.jpg', 'Open-cast coal mine landscape') },
           { label: 'Mining Operations', img: img('https://upload.wikimedia.org/wikipedia/commons/7/78/Jharia_coalfield%2C_Jharkhand.jpg', 'Mining operations in opencast pit') },
-          { label: 'Mining Equipment', img: img('https://upload.wikimedia.org/wikipedia/commons/a/a7/Open_pit_mine_in_Jharia.jpg', 'Heavy mining machinery in pit') },
+          { label: 'Mining Equipment', img: null },
           { label: 'Safety Practices', img: null },
           { label: 'Industry & People', img: null }
         ],
@@ -2285,9 +2173,7 @@
         desc: 'Long-standing coal-mining identity and industrial landscape in the Jharia coalfield, one of India\'s oldest and largest coal-mining regions.',
         tags: ['Heritage', 'Geology', 'Industrial'],
         images: [
-          img('https://upload.wikimedia.org/wikipedia/commons/7/78/Jharia_coalfield%2C_Jharkhand.jpg', 'Overview of Jharia coalfield, Jharkhand', { title: 'Jharia coalfield, Jharkhand', caption: 'Overview of Jharia coal mine, Jharkhand', author: 'Rahuldcosta', license: 'CC BY-SA 4.0', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Jharia_coalfield,_Jharkhand.jpg' }),
-          img('https://upload.wikimedia.org/wikipedia/commons/a/a7/Open_pit_mine_in_Jharia.jpg', 'Open pit mine in Jharia', { title: 'Open pit mine in Jharia', caption: 'Open pit mine in Jharia', author: 'international accountability project', license: 'CC BY 2.0', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Open_pit_mine_in_Jharia.jpg' }),
-          img('https://upload.wikimedia.org/wikipedia/commons/0/03/View_inside_an_open_pit_mine_in_Jharia.jpg', 'View inside an open pit mine in Jharia with visible mine fires', { title: 'View inside an open pit mine in Jharia', caption: 'View inside an operating open pit mine in Jharia, with fires visible', author: 'international accountability project', license: 'CC BY 2.0', sourceUrl: 'https://commons.wikimedia.org/wiki/File:View_inside_an_open_pit_mine_in_Jharia.jpg' })
+          img('https://upload.wikimedia.org/wikipedia/commons/7/78/Jharia_coalfield%2C_Jharkhand.jpg', 'Overview of Jharia coalfield, Jharkhand', { title: 'Jharia coalfield, Jharkhand', caption: 'Overview of Jharia coal mine, Jharkhand', author: 'Rahuldcosta', license: 'CC BY-SA 4.0', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Jharia_coalfield,_Jharkhand.jpg' })
         ],
         placeholderText: 'Jharia Coalfield Landscape',
         about: 'Jharia, in Dhanbad district, sits at the heart of the Jharia coalfield — one of India\'s oldest and largest coal-mining regions, historically associated with over a century of coal extraction and a deep industrial identity that has shaped the surrounding towns and communities.',
@@ -2391,6 +2277,7 @@
       'restricted': { badgeClass: 'yellow', dot: '#C78F57', label: 'Restricted / Controlled' },
       'not-established': { badgeClass: 'red', dot: '#B54745', label: 'Access Not Established' }
     };
+
     function accessBadgeHTML(site, tint) {
       const m = ACCESS_META[site.accessStatus];
       const cls = tint ? `badge tint ${m.badgeClass}` : `badge ${m.badgeClass}`;
@@ -2415,11 +2302,31 @@
     ];
 
     /* =========================================================
-       SCHEDULER (TRIP-PLANNING CART)
+       CENTRAL REACTIVE SCHEDULER STORE (SINGLE SOURCE OF TRUTH)
        ========================================================= */
     const SCHEDULER_KEY = 'jharkhandTripScheduler';
 
     const SchedulerCart = {
+      _listeners: new Set(),
+
+      subscribe(fn) {
+        this._listeners.add(fn);
+        return () => this._listeners.delete(fn);
+      },
+
+      _notify(action, item) {
+        // 1. Immediately update all badge counters in navigation
+        updateSchedulerBadge();
+
+        // 2. Immediately synchronize all "Add to Scheduler" buttons across the entire document
+        syncAllSchedulerButtons();
+
+        // 3. Notify any registered view listeners (Plan view, Scheduler view, etc.)
+        this._listeners.forEach(fn => {
+          try { fn(action, item); } catch (e) { console.error(e); }
+        });
+      },
+
       load() {
         try {
           const raw = localStorage.getItem(SCHEDULER_KEY);
@@ -2432,6 +2339,7 @@
           return [];
         }
       },
+
       save(items) {
         try {
           localStorage.setItem(SCHEDULER_KEY, JSON.stringify(items));
@@ -2441,51 +2349,100 @@
           return false;
         }
       },
-      getAll() { return this.load(); },
-      has(id) { return this.load().some(it => it.id === id); },
+
+      getAll() {
+        return this.load();
+      },
+
+      has(id) {
+        if (!id) return false;
+        const cleanId = id.startsWith('mining-') ? id : 'mining-' + id;
+        const rawId = id.replace(/^mining-/, '');
+        return this.load().some(it => it.id === cleanId || it.id === rawId || it.id === id);
+      },
+
       add(item) {
         const items = this.load();
-        if (items.some(it => it.id === item.id)) return { added: false, items };
+        const cleanId = item.id.startsWith('mining-') ? item.id : 'mining-' + item.id;
+        const rawId = item.id.replace(/^mining-/, '');
+        const existing = items.find(it => it.id === cleanId || it.id === rawId);
+        
+        if (existing) {
+          if (item.date) existing.date = item.date;
+          if (item.duration) existing.duration = item.duration;
+          if (item.groupSize) existing.groupSize = item.groupSize;
+          if (item.description) existing.description = item.description;
+          if (item.location) existing.location = item.location;
+          if (item.accessStatus) existing.accessStatus = item.accessStatus;
+          if (item.name) existing.name = item.name;
+          if (item.image) existing.image = item.image;
+          this.save(items);
+          this._notify('update', existing);
+          return { added: false, updated: true, items, item: existing };
+        }
+
         const safeItem = {
-          id: item.id,
+          id: cleanId,
+          siteId: rawId,
           name: item.name || 'Untitled Experience',
-          category: item.category || 'Experience',
+          category: item.category || 'Mining Tourism',
           location: item.location || '',
           description: item.description || '',
           image: item.image || null,
           date: item.date || null,
+          duration: item.duration || null,
+          groupSize: item.groupSize || null,
           accessStatus: item.accessStatus || '',
           sourceSection: item.sourceSection || 'mining',
           addedAt: Date.now()
         };
+
         items.push(safeItem);
         this.save(items);
-        return { added: true, items };
+        this._notify('add', safeItem);
+        return { added: true, updated: false, items, item: safeItem };
       },
+
       remove(id) {
-        const items = this.load().filter(it => it.id !== id);
+        const cleanId = id.startsWith('mining-') ? id : 'mining-' + id;
+        const rawId = id.replace(/^mining-/, '');
+        const items = this.load().filter(it => it.id !== cleanId && it.id !== rawId && it.id !== id);
         this.save(items);
+        this._notify('remove', { id: cleanId, rawId: rawId });
         return items;
       },
+
       updateDate(id, date) {
+        const cleanId = id.startsWith('mining-') ? id : 'mining-' + id;
+        const rawId = id.replace(/^mining-/, '');
         const items = this.load();
-        const it = items.find(x => x.id === id);
-        if (it) { it.date = date || null; this.save(items); }
+        const it = items.find(x => x.id === cleanId || x.id === rawId || x.id === id);
+        if (it) {
+          it.date = date || null;
+          this.save(items);
+          this._notify('updateDate', it);
+        }
         return items;
       },
-      count() { return this.load().length; }
+
+      count() {
+        return this.load().length;
+      }
     };
 
     function siteToSchedulerItem(site, overrides) {
       const firstImage = (site.images && site.images[0] && site.images[0].src) || null;
       return Object.assign({
         id: 'mining-' + site.id,
+        siteId: site.id,
         name: site.name,
         category: 'Mining Tourism',
         location: site.district + ', Jharkhand',
         description: site.desc,
         image: firstImage,
         date: null,
+        duration: null,
+        groupSize: null,
         accessStatus: site.badgeText,
         sourceSection: 'mining'
       }, overrides || {});
@@ -2503,18 +2460,19 @@
       el.className = 'toast';
       el.innerHTML = message;
       stack.appendChild(el);
-      setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; }, 2200);
-      setTimeout(() => el.remove(), 2600);
+      setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; }, 2000);
+      setTimeout(() => el.remove(), 2400);
     }
 
     function schedulerButtonHTML(item, opts) {
       opts = opts || {};
-      const already = SchedulerCart.has(item.id);
+      const cleanId = item.id.startsWith('mining-') ? item.id : 'mining-' + item.id;
+      const already = SchedulerCart.has(cleanId);
       const sizeCls = opts.size === 'sm' ? ' btn-add-scheduler-sm' : '';
       const payload = encodeURIComponent(JSON.stringify(item));
       return `<button type="button"
         class="btn-add-scheduler${sizeCls}${already ? ' added' : ''}"
-        data-scheduler-id="${item.id}"
+        data-scheduler-id="${cleanId}"
         data-scheduler-item="${payload}"
         onclick="event.stopPropagation(); handleSchedulerButtonClick(this);">
         ${already ? 'Added to Scheduler ✓' : 'Add to Scheduler +'}
@@ -2522,40 +2480,26 @@
     }
 
     function handleSchedulerButtonClick(btn) {
-      const id = btn.dataset.schedulerId;
-      if (SchedulerCart.has(id)) return;
-      let item;
-      try { item = JSON.parse(decodeURIComponent(btn.dataset.schedulerItem)); }
-      catch (e) { console.warn('Scheduler: malformed item payload', e); return; }
-      const result = SchedulerCart.add(item);
-      if (result.added) {
-        btn.classList.add('added');
-        btn.textContent = 'Added to Scheduler ✓';
-        updateSchedulerBadge();
-        showToast(`<b>${item.name}</b> added to your Scheduler`);
-        document.querySelectorAll(`[data-scheduler-id="${CSS.escape(id)}"]`).forEach(b => {
-          b.classList.add('added');
-          b.textContent = 'Added to Scheduler ✓';
-        });
-        if (document.getElementById('view-scheduler').classList.contains('active')) {
-          renderSchedulerPage();
-        }
-      }
+      const id = btn.dataset.schedulerId || '';
+      const rawSiteId = id.replace(/^mining-/, '');
+      // Navigate to "Plan Your Visit" with this site selected without adding immediately
+      goToPlan(rawSiteId);
     }
 
-    function refreshSchedulerButtons(root) {
-      (root || document).querySelectorAll('.btn-add-scheduler').forEach(btn => {
+    function syncAllSchedulerButtons(root) {
+      const scope = root || document;
+      scope.querySelectorAll('.btn-add-scheduler').forEach(btn => {
         const id = btn.dataset.schedulerId;
-        const already = SchedulerCart.has(id);
-        btn.classList.toggle('added', already);
-        btn.textContent = already ? 'Added to Scheduler ✓' : 'Add to Scheduler +';
+        if (!id) return;
+        const isAdded = SchedulerCart.has(id);
+        btn.classList.toggle('added', isAdded);
+        btn.innerHTML = isAdded ? 'Added to Scheduler ✓' : 'Add to Scheduler +';
       });
     }
 
     function removeSchedulerItem(id) {
       SchedulerCart.remove(id);
-      updateSchedulerBadge();
-      renderSchedulerPage();
+      showToast('Removed from Scheduler');
     }
 
     function updateSchedulerItemDate(id, value) {
@@ -2572,78 +2516,114 @@
       const items = SchedulerCart.getAll();
       const bar = document.getElementById('schedulerSummaryBar');
       const warn = document.getElementById('schedulerAccessWarning');
-      if (!items.length) { bar.innerHTML = ''; warn.innerHTML = ''; return; }
+      if (!items.length) {
+        if (bar) bar.innerHTML = '';
+        if (warn) warn.innerHTML = '';
+        return;
+      }
 
       const locations = new Set(items.map(it => it.location).filter(Boolean));
       const dates = new Set(items.map(it => it.date).filter(Boolean));
       const restrictedCount = items.filter(it => it.sourceSection === 'mining' && it.accessStatus && !/Authorized/i.test(it.accessStatus)).length;
 
-      bar.innerHTML = `
-    <div class="scheduler-summary-bar">
-      <div>
-        <span class="eyebrow" style="margin-bottom:6px;">Your Jharkhand Trip</span>
-        <h3 style="font-size:1.3rem;">${items.length} experience${items.length === 1 ? '' : 's'} planned</h3>
-      </div>
-      <div class="scheduler-summary-stats">
-        <div class="stat"><b>${items.length}</b><span>Experiences</span></div>
-        <div class="stat"><b>${locations.size}</b><span>Locations</span></div>
-        <div class="stat"><b>${dates.size}</b><span>Dates Planned</span></div>
-      </div>
-    </div>`;
+      if (bar) {
+        bar.innerHTML = `
+          <div class="scheduler-summary-bar">
+            <div>
+              <span class="eyebrow" style="margin-bottom:6px;">Your Jharkhand Trip</span>
+              <h3 style="font-size:1.3rem;">${items.length} experience${items.length === 1 ? '' : 's'} planned</h3>
+            </div>
+            <div class="scheduler-summary-stats">
+              <div class="stat"><b>${items.length}</b><span>Experiences</span></div>
+              <div class="stat"><b>${locations.size}</b><span>Locations</span></div>
+              <div class="stat"><b>${dates.size}</b><span>Dates Planned</span></div>
+            </div>
+          </div>`;
+      }
 
-      warn.innerHTML = restrictedCount > 0 ? `
-    <div class="scheduler-access-warning"><b>Access reminder:</b> ${restrictedCount} item${restrictedCount === 1 ? '' : 's'} in your Scheduler ${restrictedCount === 1 ? 'is' : 'are'} at a mining location with restricted, controlled or not-established physical access. Adding an experience to your Scheduler does not grant access — always confirm with the relevant operator or authority before travel.</div>` : '';
+      if (warn) {
+        warn.innerHTML = restrictedCount > 0 ? `
+          <div class="scheduler-access-warning"><b>Access reminder:</b> ${restrictedCount} item${restrictedCount === 1 ? '' : 's'} in your Scheduler ${restrictedCount === 1 ? 'is' : 'are'} at a mining location with restricted, controlled or not-established physical access. Adding an experience to your Scheduler does not grant access — always confirm with the relevant operator or authority before travel.</div>` : '';
+      }
     }
 
     function renderSchedulerPage() {
       renderSchedulerSummary();
       const items = SchedulerCart.getAll();
       const content = document.getElementById('schedulerContent');
+      if (!content) return;
 
       if (!items.length) {
         content.innerHTML = `
-      <div class="scheduler-empty">
-        <h3>Your Scheduler is Empty</h3>
-        <p>Start exploring Jharkhand and add experiences you would like to include in your trip.</p>
-        <div class="hero-ctas">
-          <a href="index.html#destinations" class="btn btn-primary">Explore Jharkhand →</a>
-          <button class="btn btn-outline" onclick="goView('explore')">Explore Mining Tourism →</button>
-        </div>
-      </div>`;
+          <div class="scheduler-empty">
+            <h3>Your Scheduler is Empty</h3>
+            <p>Start exploring Jharkhand and add experiences you would like to include in your trip.</p>
+            <div class="hero-ctas">
+              <button class="btn btn-primary" onclick="goView('explore')">Explore Mining Sites →</button>
+              <button class="btn btn-outline" onclick="goView('recommend')">Find My Experience →</button>
+            </div>
+          </div>`;
         return;
       }
 
       content.innerHTML = `<div class="scheduler-list">${items.map(it => `
-    <div class="scheduler-card">
-      ${schedulerCarouselFor(it)}
-      <div class="scheduler-card-body">
-        <div class="scheduler-card-top">
-          <div>
-            <h3>${it.name}</h3>
-            <div class="scheduler-card-meta">${it.category}${it.location ? ' · ' + it.location : ''}</div>
+        <div class="scheduler-card">
+          ${schedulerCarouselFor(it)}
+          <div class="scheduler-card-body">
+            <div class="scheduler-card-top">
+              <div>
+                <h3>${it.name}</h3>
+                <div class="scheduler-card-meta">${it.category}${it.location ? ' · ' + it.location : ''}</div>
+              </div>
+              ${it.accessStatus ? `<span class="badge tint ${/Authorized/i.test(it.accessStatus) ? 'green' : (/Not Established/i.test(it.accessStatus) ? 'red' : 'yellow')}">${it.accessStatus}</span>` : ''}
+            </div>
+            <p>${it.description || ''}</p>
+            ${it.duration || it.groupSize ? `
+              <div style="display:flex;gap:14px;font-size:0.84rem;color:var(--lake-blue-deep);margin:6px 0 10px 0;flex-wrap:wrap;">
+                ${it.duration ? `<span><b>Duration:</b> ${it.duration}</span>` : ''}
+                ${it.groupSize ? `<span><b>Group:</b> ${it.groupSize} visitors</span>` : ''}
+              </div>
+            ` : ''}
+            <div class="scheduler-card-date-row">
+              <label for="schedDate-${it.id}">Preferred Date</label>
+              <input type="date" id="schedDate-${it.id}" value="${it.date || ''}" onchange="updateSchedulerItemDate('${it.id}', this.value)">
+            </div>
+            <div class="scheduler-card-actions">
+              <button class="btn-scheduler-remove" onclick="removeSchedulerItem('${it.id}')">Remove from Scheduler</button>
+              ${it.sourceSection === 'mining' ? `<button class="btn-scheduler-view" onclick="goToPlan('${it.id.replace(/^mining-/, '')}')">Plan Details →</button>` : ''}
+            </div>
           </div>
-          ${it.accessStatus ? `<span class="badge tint ${/Authorized/i.test(it.accessStatus) ? 'green' : (/Not Established/i.test(it.accessStatus) ? 'red' : 'yellow')}">${it.accessStatus}</span>` : ''}
         </div>
-        <p>${it.description || ''}</p>
-        <div class="scheduler-card-date-row">
-          <label for="schedDate-${it.id}">Preferred Date</label>
-          <input type="date" id="schedDate-${it.id}" value="${it.date || ''}" onchange="updateSchedulerItemDate('${it.id}', this.value)">
-        </div>
-        <div class="scheduler-card-actions">
-          <button class="btn-scheduler-remove" onclick="removeSchedulerItem('${it.id}')">Remove</button>
-          ${it.sourceSection === 'mining' ? `<button class="btn-scheduler-view" onclick="openSite('${it.id.replace(/^mining-/, '')}')">View / Edit Details</button>` : ''}
-        </div>
-      </div>
-    </div>
-  `).join('')}</div>`;
+      `).join('')}</div>`;
       initCarousels(content);
     }
+
+    // Subscribe Scheduler UI & active view updates to the central SchedulerCart store
+    SchedulerCart.subscribe((action, item) => {
+      if (document.getElementById('view-scheduler').classList.contains('active')) {
+        renderSchedulerPage();
+      }
+      if (document.getElementById('view-plan').classList.contains('active')) {
+        const sel = document.getElementById('planMineSelect');
+        if (sel && sel.value) {
+          const site = SITES.find(s => s.id === sel.value);
+          if (site) renderPlanSummary(site);
+        }
+      }
+    });
 
     window.addEventListener('storage', e => {
       if (e.key === SCHEDULER_KEY) {
         updateSchedulerBadge();
-        refreshSchedulerButtons(document);
+        syncAllSchedulerButtons();
         if (document.getElementById('view-scheduler').classList.contains('active')) renderSchedulerPage();
+        if (document.getElementById('view-plan').classList.contains('active')) {
+          const sel = document.getElementById('planMineSelect');
+          if (sel && sel.value) {
+            const site = SITES.find(s => s.id === sel.value);
+            if (site) renderPlanSummary(site);
+          }
+        }
       }
     });
 
@@ -2709,72 +2689,79 @@
        ========================================================= */
     function goView(v) {
       document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-      document.getElementById('view-' + v).classList.add('active');
+      const targetView = document.getElementById('view-' + v);
+      if (targetView) targetView.classList.add('active');
       document.querySelectorAll('.nav-links button').forEach(b => b.classList.toggle('active', b.dataset.view === v));
       const schedLink = document.getElementById('schedulerNavLink');
       if (schedLink) schedLink.classList.toggle('active', v === 'scheduler');
       if (v === 'scheduler') renderSchedulerPage();
+      syncAllSchedulerButtons();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
     document.getElementById('navLinks').addEventListener('click', e => {
       const b = e.target.closest('button[data-view]');
       if (b) goView(b.dataset.view);
     });
 
     /* =========================================================
-       EXPLORER GRID
+       EXPLORER GRID (WITH SORT REMOVED)
        ========================================================= */
     function renderGrid() {
       const mineral = document.getElementById('fMineral').value;
       const access = document.getElementById('fAccess').value;
       const region = document.getElementById('fRegion').value;
-      const sort = document.getElementById('fSort').value;
 
       let list = SITES.filter(s =>
         (!mineral || s.mineral === mineral) &&
         (!access || s.accessStatus === access) &&
         (!region || s.region === region)
       );
-      if (sort === 'name') list = [...list].sort((a, b) => a.name.localeCompare(b.name));
 
       const grid = document.getElementById('siteGrid');
       grid.innerHTML = list.map(s => `
-    <div class="card" onclick="openSite('${s.id}')">
-      <div style="position:relative;">
-        <div class="card-badge-float">${accessBadgeHTML(s, false)}</div>
-        ${carouselHTML(s.images, s.cls, { fallbackName: s.name, fallbackTag: s.placeholderText || s.mineral })}
-      </div>
-      <div class="card-body">
-        <h3>${s.name}</h3>
-        <div class="card-meta">${s.district} · ${s.mineral}</div>
-        <p>${s.desc}</p>
-        <div class="card-tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-        <div class="card-scheduler-actions">
-          <span class="card-explore">View Details →</span>
-          ${schedulerButtonHTML(siteToSchedulerItem(s), { size: 'sm' })}
+        <div class="card" onclick="openSite('${s.id}')">
+          <div style="position:relative;">
+            <div class="card-badge-float">${accessBadgeHTML(s, false)}</div>
+            ${carouselHTML(s.images, s.cls, { fallbackName: s.name, fallbackTag: s.placeholderText || s.mineral })}
+          </div>
+          <div class="card-body">
+            <h3>${s.name}</h3>
+            <div class="card-meta">${s.district} · ${s.mineral}</div>
+            <p>${s.desc}</p>
+            <div class="card-tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            <div class="card-scheduler-actions">
+              <span class="card-explore">View Details →</span>
+              ${schedulerButtonHTML(siteToSchedulerItem(s), { size: 'sm' })}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  `).join('') || `<p>No sites match these filters.</p>`;
-      initCarousels(grid);
-      refreshSchedulerButtons(grid);
-    }
-    ['fMineral', 'fAccess', 'fRegion', 'fSort'].forEach(id => document.getElementById(id).addEventListener('change', renderGrid));
+      `).join('') || `<p style="grid-column:1/-1;text-align:center;padding:40px;color:var(--sand-dim);">No mining regions match your selected filters.</p>`;
 
-    /* Circuits + Responsible sections (static content, general grid) */
+      initCarousels(grid);
+      syncAllSchedulerButtons(grid);
+    }
+
+    ['fMineral', 'fAccess', 'fRegion'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('change', renderGrid);
+    });
+
+    /* Circuits + Responsible sections */
     function renderCircuits() {
       document.getElementById('circuitGrid').innerHTML = CIRCUITS.map(c => `
-    <div class="circuit-card">
-      <div class="circuit-theme">${c.theme}</div>
-      <div class="circuit-path">${c.path.map((node, i) => `<span class="circuit-node">${node}</span>${i < c.path.length - 1 ? '<span class="arw">→</span>' : ''}`).join('')}</div>
-      <p class="circuit-desc">${c.desc}</p>
-    </div>
-  `).join('');
+        <div class="circuit-card">
+          <div class="circuit-theme">${c.theme}</div>
+          <div class="circuit-path">${c.path.map((node, i) => `<span class="circuit-node">${node}</span>${i < c.path.length - 1 ? '<span class="arw">→</span>' : ''}`).join('')}</div>
+          <p class="circuit-desc">${c.desc}</p>
+        </div>
+      `).join('');
     }
+
     function renderResponsible() {
       document.getElementById('responsibleGrid').innerHTML = RESPONSIBLE_GUIDELINES.map((g, i) => `
-    <div class="responsible-item"><span class="num">${String(i + 1).padStart(2, '0')}</span><span>${g}</span></div>
-  `).join('');
+        <div class="responsible-item"><span class="num">${String(i + 1).padStart(2, '0')}</span><span>${g}</span></div>
+      `).join('');
     }
 
     /* =========================================================
@@ -2793,140 +2780,148 @@
 
     function renderSiteDetail(site) {
       const el = document.getElementById('detailContent');
+      const cleanId = 'mining-' + site.id;
+      const isScheduled = SchedulerCart.has(cleanId);
 
       if (site.id === 'north-urimari') {
         el.innerHTML = `
-      <div class="detail-hero">
-        ${carouselHTML(site.images, site.cls, { fallbackName: site.name, fallbackTag: site.placeholderText || site.mineral })}
-        <div class="detail-hero-info">
-          <div>
-            ${accessBadgeHTML(site, true)}
-            <h1 style="margin-top:16px;font-size:2.4rem;">${site.name} Mining Experience</h1>
-            <p style="margin-top:6px;">${site.district}, Jharkhand · ${site.mineral} · Guided Open-Cast Mining Tourism</p>
-            <div class="info-grid">
-              <div><span>Operator</span><b>${site.operator}</b></div>
-              <div><span>Tourism Partner</span><b>${site.tourismPartner}</b></div>
-            </div>
-            <div style="margin-top:18px;">${schedulerButtonHTML(siteToSchedulerItem(site))}</div>
-          </div>
-          <div class="partner-pill">JTDC × CCL<br><span style="color:var(--sand-dim);font-size:.75rem;">Five-year MoU, since July 2025</span></div>
-        </div>
-      </div>
-
-      <div class="two-col">
-        <div>
-          <div class="panel">
-            <h3>About the Experience</h3>
-            <p>${site.about}</p>
-          </div>
-
-          <div class="panel">
-            <h3>What You'll Experience</h3>
-            <div class="exp-grid">
-              ${site.expCards.map(c => `
-                <div class="exp-card">
-                  ${carouselHTML(c.img ? [c.img] : [], site.cls, { fallbackName: '', fallbackTag: 'Site observation point' })}
-                  <div class="exp-label">${c.label}</div>
+          <div class="detail-hero">
+            ${carouselHTML(site.images, site.cls, { fallbackName: site.name, fallbackTag: site.placeholderText || site.mineral })}
+            <div class="detail-hero-info">
+              <div>
+                ${accessBadgeHTML(site, true)}
+                <h1 style="margin-top:16px;font-size:2.4rem;">${site.name} Mining Experience</h1>
+                <p style="margin-top:6px;">${site.district}, Jharkhand · ${site.mineral} · Guided Open-Cast Mining Tourism</p>
+                <div class="info-grid">
+                  <div><span>Operator</span><b>${site.operator}</b></div>
+                  <div><span>Tourism Partner</span><b>${site.tourismPartner}</b></div>
                 </div>
-              `).join('')}
-            </div>
-            <p class="note" style="margin-top:14px;">${site.experience}</p>
-          </div>
-
-          <div class="panel">
-            <h3>Pricing &amp; Circuits</h3>
-            ${site.pricing.map(p => `<div class="info-row"><span class="k">${p.k}</span><span class="v">${p.v}</span></div>`).join('')}
-            <p class="note">Package pricing and frequency may vary by circuit and season — verify current details with JTDC before travel.</p>
-          </div>
-
-          <div class="panel">
-            <h3>Complete Your Journey</h3>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-              ${site.circuits.map(c => `
-                <div class="circuit-card">
-                  <div class="circuit-theme">${c.theme}</div>
-                  <div class="circuit-path">
-                    ${c.path.map((node, i) => `<span class="circuit-node">${node}</span>${i < c.path.length - 1 ? '<span class="arw">→</span>' : ''}`).join('')}
-                  </div>
+                <div style="margin-top:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                  ${schedulerButtonHTML(siteToSchedulerItem(site))}
+                  ${isScheduled ? `<button type="button" class="btn-scheduler-remove" onclick="removeSchedulerItem('${cleanId}')">Remove from Scheduler</button>` : ''}
                 </div>
-              `).join('')}
+              </div>
+              <div class="partner-pill">JTDC × CCL<br><span style="color:var(--sand-dim);font-size:.75rem;">Five-year MoU, since July 2025</span></div>
             </div>
-            <p class="note" style="margin-top:14px;">Sample circuits for trip planning — exact travel times, prices and availability are not guaranteed.</p>
           </div>
-        </div>
 
-        <div>
-          <div class="panel">
-            <h3>Safety</h3>
-            <ul class="plain-list safety-list">${site.safety.map(s => `<li>${s}</li>`).join('')}</ul>
+          <div class="two-col">
+            <div>
+              <div class="panel">
+                <h3>About the Experience</h3>
+                <p>${site.about}</p>
+              </div>
+
+              <div class="panel">
+                <h3>What You'll Experience</h3>
+                <div class="exp-grid">
+                  ${site.expCards.map(c => `
+                    <div class="exp-card">
+                      ${carouselHTML(c.img ? [c.img] : [], site.cls, { fallbackName: '', fallbackTag: 'Observation point' })}
+                      <div class="exp-label">${c.label}</div>
+                    </div>
+                  `).join('')}
+                </div>
+                <p class="note" style="margin-top:14px;">${site.experience}</p>
+              </div>
+
+              <div class="panel">
+                <h3>Pricing &amp; Circuits</h3>
+                ${site.pricing.map(p => `<div class="info-row"><span class="k">${p.k}</span><span class="v">${p.v}</span></div>`).join('')}
+                <p class="note">Reference note: Pricing and circuit information shown here is based on last year's available details and may have changed. Please verify current prices, routes and availability with JTDC / the relevant operator before planning your visit.</p>
+              </div>
+
+              <div class="panel">
+                <h3>Complete Your Journey</h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                  ${site.circuits.map(c => `
+                    <div class="circuit-card">
+                      <div class="circuit-theme">${c.theme}</div>
+                      <div class="circuit-path">
+                        ${c.path.map((node, i) => `<span class="circuit-node">${node}</span>${i < c.path.length - 1 ? '<span class="arw">→</span>' : ''}`).join('')}
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+                <p class="note" style="margin-top:14px;">Reference note: Pricing and circuit information shown here is based on last year's available details and may have changed. Please verify current prices, routes and availability with JTDC / the relevant operator before planning your visit.</p>
+              </div>
+            </div>
+
+            <div>
+              <div class="panel">
+                <h3>Safety</h3>
+                <ul class="plain-list safety-list">${site.safety.map(s => `<li>${s}</li>`).join('')}</ul>
+              </div>
+              <div class="panel">
+                <h3>Restrictions</h3>
+                <ul class="plain-list restriction-list">${site.restrictions.map(s => `<li>${s}</li>`).join('')}</ul>
+              </div>
+              <div class="panel">
+                <h3>Group Size</h3>
+                <p style="font-size:.87rem;">${site.groupLimit}</p>
+              </div>
+              <div class="panel">
+                <h3>Plan This Visit</h3>
+                <p style="font-size:.87rem;">Choose a date, duration and group size for this experience.</p>
+                <button class="btn btn-primary btn-block" style="margin-top:10px;" onclick="goToPlan('${site.id}')">Plan Your Visit →</button>
+              </div>
+            </div>
           </div>
-          <div class="panel">
-            <h3>Restrictions</h3>
-            <ul class="plain-list restriction-list">${site.restrictions.map(s => `<li>${s}</li>`).join('')}</ul>
-          </div>
-          <div class="panel">
-            <h3>Group Size</h3>
-            <p style="font-size:.87rem;">${site.groupLimit}</p>
-          </div>
-          <div class="panel">
-            <h3>Plan This Visit</h3>
-            <p style="font-size:.87rem;">Choose a date, duration and group size for this experience.</p>
-            <button class="btn btn-primary btn-block" style="margin-top:10px;" onclick="goToPlan('${site.id}')">Plan Your Visit →</button>
-          </div>
-        </div>
-      </div>
-    `;
+        `;
         initCarousels(el);
-        refreshSchedulerButtons(el);
+        syncAllSchedulerButtons(el);
         return;
       }
 
       // Restricted / not-established informational layout
       el.innerHTML = `
-    <div class="detail-hero">
-      ${carouselHTML(site.images, site.cls, { fallbackName: site.name, fallbackTag: site.placeholderText || site.mineral })}
-      <div class="detail-hero-info">
-        <div>
-          ${accessBadgeHTML(site, true)}
-          <h1 style="margin-top:16px;font-size:2.4rem;">${site.name}</h1>
-          <p style="margin-top:6px;">${site.district}, Jharkhand · ${site.mineral}</p>
-          <div style="margin-top:18px;">${schedulerButtonHTML(siteToSchedulerItem(site))}</div>
+        <div class="detail-hero">
+          ${carouselHTML(site.images, site.cls, { fallbackName: site.name, fallbackTag: site.placeholderText || site.mineral })}
+          <div class="detail-hero-info">
+            <div>
+              ${accessBadgeHTML(site, true)}
+              <h1 style="margin-top:16px;font-size:2.4rem;">${site.name}</h1>
+              <p style="margin-top:6px;">${site.district}, Jharkhand · ${site.mineral}</p>
+              <div style="margin-top:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                ${schedulerButtonHTML(siteToSchedulerItem(site))}
+                ${isScheduled ? `<button type="button" class="btn-scheduler-remove" onclick="removeSchedulerItem('${cleanId}')">Remove from Scheduler</button>` : ''}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="panel">
-      <h4>About the Site</h4>
-      <p>${site.about}</p>
-    </div>
-    <div class="panel">
-      <h4>Why Access Is ${site.accessStatus === 'not-established' ? 'Not Established' : 'Controlled'}</h4>
-      <p>${site.why}</p>
-    </div>
-    <div class="panel">
-      <h4>Tourism Perspective</h4>
-      <p>${site.potential}</p>
-      <div class="important-box"><b>Important:</b> ${site.accessStatus === 'not-established' ? 'Do not attempt unauthorized entry. This site is presented for educational and heritage context only.' : 'Physical access is subject to permission from the relevant mine operator and authorities. This platform does not present the site as freely open to tourists.'}</div>
-    </div>
-    <div class="panel">
-      <h3>Safety</h3>
-      <ul class="plain-list safety-list">${site.safety.map(s => `<li>${s}</li>`).join('')}</ul>
-    </div>
-    <div class="panel">
-      <h3>Restrictions</h3>
-      <ul class="plain-list restriction-list">${site.restrictions.map(s => `<li>${s}</li>`).join('')}</ul>
-    </div>
-    <div class="panel">
-      <h3>Group Size</h3>
-      <p style="font-size:.87rem;">Group size requirements should be confirmed with the relevant authority, as general tourist access to this site is not currently established.</p>
-    </div>
-    <div class="panel">
-      <h3>Plan Your Visit</h3>
-      <p style="font-size:.87rem;">This site is not open for general tourist planning yet. You can still explore the site's history and significance, and check back as access status may change.</p>
-      <button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="goToPlan('${site.id}')">View in Plan Your Visit →</button>
-    </div>
-  `;
+        <div class="panel">
+          <h4>About the Site</h4>
+          <p>${site.about}</p>
+        </div>
+        <div class="panel">
+          <h4>Why Access Is ${site.accessStatus === 'not-established' ? 'Not Established' : 'Controlled'}</h4>
+          <p>${site.why}</p>
+        </div>
+        <div class="panel">
+          <h4>Tourism Perspective</h4>
+          <p>${site.potential}</p>
+          <div class="important-box"><b>Important:</b> ${site.accessStatus === 'not-established' ? 'Do not attempt unauthorized entry. This site is presented for educational and heritage context only.' : 'Physical access is subject to permission from the relevant mine operator and authorities. This platform does not present the site as freely open to tourists.'}</div>
+        </div>
+        <div class="panel">
+          <h3>Safety</h3>
+          <ul class="plain-list safety-list">${site.safety.map(s => `<li>${s}</li>`).join('')}</ul>
+        </div>
+        <div class="panel">
+          <h3>Restrictions</h3>
+          <ul class="plain-list restriction-list">${site.restrictions.map(s => `<li>${s}</li>`).join('')}</ul>
+        </div>
+        <div class="panel">
+          <h3>Group Size</h3>
+          <p style="font-size:.87rem;">Group size requirements should be confirmed with the relevant authority, as general tourist access to this site is not currently established.</p>
+        </div>
+        <div class="panel">
+          <h3>Plan Your Visit</h3>
+          <p style="font-size:.87rem;">This site is not open for general tourist planning yet. You can still explore the site's history and significance, and check back as access status may change.</p>
+          <button class="btn btn-outline btn-block" style="margin-top:10px;" onclick="goToPlan('${site.id}')">View in Plan Your Visit →</button>
+        </div>
+      `;
       initCarousels(el);
-      refreshSchedulerButtons(el);
+      syncAllSchedulerButtons(el);
     }
 
     /* =========================================================
@@ -2936,7 +2931,8 @@
 
     function goToPlan(siteId) {
       goView('plan');
-      document.getElementById('planMineSelect').value = siteId;
+      const sel = document.getElementById('planMineSelect');
+      if (sel) sel.value = siteId;
       renderPlanForSite(siteId);
     }
 
@@ -2947,8 +2943,9 @@
     }
 
     function renderPlanForSite(siteId) {
-      const site = SITES.find(s => s.id === siteId);
-      planDuration = null; planGroup = null;
+      const site = SITES.find(s => s.id === siteId) || SITES[0];
+      planDuration = null;
+      planGroup = null;
 
       document.getElementById('planSafetyList').innerHTML = site.safety.map(s => `<li>${s}</li>`).join('');
       document.getElementById('planRestrictionList').innerHTML = site.restrictions.map(s => `<li>${s}</li>`).join('');
@@ -2965,42 +2962,101 @@
       }
 
       statusEl.innerHTML = '';
-      bookableEl.innerHTML = `
-    <div class="plan-field">
-      <label>Preferred Visit Date</label>
-      <input type="date" id="planDate">
-      <span class="hint">Select a preferred date for your visit planning.</span>
-    </div>
-    <div class="plan-field">
-      <label>Visit Duration</label>
-      <div class="chip-row" id="planDurationRow">
-        ${site.durations.map(d => `<button type="button" class="chip" data-v="${d}">${d}</button>`).join('')}
-      </div>
-    </div>
-    <div class="plan-field">
-      <label>Group Size</label>
-      <div class="chip-row" id="planGroupRow">
-        ${site.groupSizes.map(g => `<button type="button" class="chip" data-v="${g}">${g}</button>`).join('')}
-      </div>
-    </div>
-    <p class="note">Visit timing and availability should be verified with JTDC / CCL before travel.</p>
-  `;
+      const cleanId = 'mining-' + site.id;
+      const existing = SchedulerCart.getAll().find(it => it.id === cleanId || it.id === site.id);
+      if (existing) {
+        planDuration = existing.duration || null;
+        planGroup = existing.groupSize || null;
+      }
 
-      document.getElementById('planDate').addEventListener('change', () => renderPlanSummary(site));
+      bookableEl.innerHTML = `
+        <div class="plan-field">
+          <label>Preferred Visit Date</label>
+          <input type="date" id="planDate" value="${existing && existing.date ? existing.date : ''}">
+          <span class="hint">Select a preferred date for your visit planning.</span>
+        </div>
+        <div class="plan-field">
+          <label>Visit Duration</label>
+          <div class="chip-row" id="planDurationRow">
+            ${site.durations.map(d => `<button type="button" class="chip${planDuration === d ? ' selected' : ''}" data-v="${d}">${d}</button>`).join('')}
+          </div>
+        </div>
+        <div class="plan-field">
+          <label>Group Size</label>
+          <div class="chip-row" id="planGroupRow">
+            ${site.groupSizes.map(g => `<button type="button" class="chip${planGroup === g ? ' selected' : ''}" data-v="${g}">${g}</button>`).join('')}
+          </div>
+        </div>
+        <p class="note">Visit timing and availability should be verified with JTDC / CCL before travel.</p>
+        <div id="planValidationMsg" class="plan-validation-msg">Please select a visit date, duration and group size before adding this plan to your Scheduler.</div>
+        <button type="button" id="btnAddPlanToScheduler" class="btn btn-primary btn-block" style="margin-top:16px;" onclick="submitPlanForm('${site.id}')">${existing ? 'Update Plan in Scheduler ✓' : 'Add Plan to Scheduler'}</button>
+      `;
+
+      const dateInput = document.getElementById('planDate');
+      dateInput.addEventListener('change', () => {
+        const valMsg = document.getElementById('planValidationMsg');
+        if (valMsg) valMsg.style.display = 'none';
+        renderPlanSummary(site);
+      });
       document.getElementById('planDurationRow').addEventListener('click', e => {
-        const b = e.target.closest('.chip'); if (!b) return;
+        const b = e.target.closest('.chip');
+        if (!b) return;
         planDuration = b.dataset.v;
         document.querySelectorAll('#planDurationRow .chip').forEach(c => c.classList.toggle('selected', c === b));
+        const valMsg = document.getElementById('planValidationMsg');
+        if (valMsg) valMsg.style.display = 'none';
         renderPlanSummary(site);
       });
       document.getElementById('planGroupRow').addEventListener('click', e => {
-        const b = e.target.closest('.chip'); if (!b) return;
+        const b = e.target.closest('.chip');
+        if (!b) return;
         planGroup = b.dataset.v;
         document.querySelectorAll('#planGroupRow .chip').forEach(c => c.classList.toggle('selected', c === b));
+        const valMsg = document.getElementById('planValidationMsg');
+        if (valMsg) valMsg.style.display = 'none';
         renderPlanSummary(site);
       });
 
       renderPlanSummary(site);
+    }
+
+    function submitPlanForm(siteId) {
+      const site = SITES.find(s => s.id === siteId);
+      if (!site || !site.planningAvailable) return;
+
+      const dateInput = document.getElementById('planDate');
+      const rawDate = dateInput ? dateInput.value.trim() : '';
+      const valMsg = document.getElementById('planValidationMsg');
+
+      if (!rawDate || !planDuration || !planGroup) {
+        if (valMsg) {
+          valMsg.textContent = 'Please select a visit date, duration and group size before adding this plan to your Scheduler.';
+          valMsg.style.display = 'block';
+        }
+        return;
+      }
+
+      if (valMsg) {
+        valMsg.style.display = 'none';
+      }
+
+      const cleanId = 'mining-' + site.id;
+      const wasScheduled = SchedulerCart.has(cleanId);
+
+      const planItem = siteToSchedulerItem(site, {
+        date: rawDate,
+        duration: planDuration,
+        groupSize: planGroup,
+        description: `Duration: ${planDuration} · Group: ${planGroup} visitors`
+      });
+
+      SchedulerCart.add(planItem);
+      showToast(wasScheduled ? `<b>${site.name}</b> visit plan updated in your Scheduler` : `<b>${site.name}</b> plan added to your Scheduler`);
+      renderPlanSummary(site);
+      const mainBtn = document.getElementById('btnAddPlanToScheduler');
+      if (mainBtn) {
+        mainBtn.textContent = 'Update Plan in Scheduler ✓';
+      }
     }
 
     function formatPlanDate(v) {
@@ -3011,45 +3067,48 @@
 
     function renderPlanSummary(site) {
       const summaryEl = document.getElementById('planSummary');
+      const cleanId = 'mining-' + site.id;
+      const isScheduled = SchedulerCart.has(cleanId);
+
       if (!site.planningAvailable) {
         summaryEl.innerHTML = `
-      <h3>Your Visit Plan</h3>
-      <div class="info-row"><span class="k">Site</span><span class="v">${site.name}</span></div>
-      <div class="info-row"><span class="k">Access</span><span class="v">${ACCESS_META[site.accessStatus].label}</span></div>
-      <p class="note" style="margin-top:14px;">${site.restrictions[0]}</p>
-      <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
-        ${schedulerButtonHTML(siteToSchedulerItem(site))}
-        <button class="btn btn-outline" onclick="openSite('${site.id}')">View Site Information →</button>
-      </div>
-    `;
-        refreshSchedulerButtons(summaryEl);
+          <h3>Your Visit Plan</h3>
+          <div class="info-row"><span class="k">Site</span><span class="v">${site.name}</span></div>
+          <div class="info-row"><span class="k">Access</span><span class="v">${ACCESS_META[site.accessStatus].label}</span></div>
+          <p class="note" style="margin-top:14px;">${site.restrictions[0]}</p>
+          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            ${isScheduled ? `<button type="button" class="btn btn-scheduler-remove" onclick="removeSchedulerItem('${cleanId}')">Remove from Scheduler</button>` : ''}
+            <button class="btn btn-outline" onclick="openSite('${site.id}')">View Site Information →</button>
+          </div>
+        `;
         return;
       }
-      const dateInput = document.getElementById('planDate');
-      const dateVal = dateInput ? formatPlanDate(dateInput.value) : null;
-      const rawDate = dateInput ? dateInput.value : null;
 
-      const planItem = siteToSchedulerItem(site, {
-        description: [planDuration ? `Duration: ${planDuration}` : null, planGroup ? `Group: ${planGroup} visitors` : null].filter(Boolean).join(' · ') || undefined,
-        date: rawDate || null
-      });
+      const dateInput = document.getElementById('planDate');
+      const dateVal = dateInput && dateInput.value ? formatPlanDate(dateInput.value) : null;
 
       summaryEl.innerHTML = `
-    <h3>Your Visit Plan</h3>
-    <div class="info-row"><span class="k">Mining Experience</span><span class="v">${site.name}</span></div>
-    <div class="info-row"><span class="k">Location</span><span class="v">${site.district}, Jharkhand</span></div>
-    <div class="info-row"><span class="k">Preferred Date</span><span class="v">${dateVal || 'Not selected'}</span></div>
-    <div class="info-row"><span class="k">Duration</span><span class="v">${planDuration || 'Not selected'}</span></div>
-    <div class="info-row"><span class="k">Group</span><span class="v">${planGroup ? planGroup + ' Visitors' : 'Not selected'}</span></div>
-    <div style="margin-top:16px;">${accessBadgeHTML(site, true)}</div>
-    <p class="note" style="margin-top:10px;">${site.groupLimit || ''}</p>
-    <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
-      ${schedulerButtonHTML(planItem)}
-      <button class="btn btn-outline" onclick="openSite('${site.id}')">View Full Details →</button>
-    </div>
-    <p class="note" style="margin-top:14px;">Adding to your Scheduler saves this plan for later — it does not book or reserve a visit.</p>
-  `;
-      refreshSchedulerButtons(summaryEl);
+        <h3>Your Visit Plan</h3>
+        <div class="info-row"><span class="k">Mining Experience</span><span class="v">${site.name}</span></div>
+        <div class="info-row"><span class="k">Location</span><span class="v">${site.district}, Jharkhand</span></div>
+        <div class="info-row"><span class="k">Preferred Date</span><span class="v">${dateVal || 'Not selected'}</span></div>
+        <div class="info-row"><span class="k">Duration</span><span class="v">${planDuration || 'Not selected'}</span></div>
+        <div class="info-row"><span class="k">Group</span><span class="v">${planGroup ? planGroup + ' Visitors' : 'Not selected'}</span></div>
+        <div style="margin-top:16px;">${accessBadgeHTML(site, true)}</div>
+        <p class="note" style="margin-top:10px;">${site.groupLimit || ''}</p>
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <button type="button" class="btn btn-primary" onclick="submitPlanForm('${site.id}')">${isScheduled ? 'Update Plan in Scheduler ✓' : 'Add Plan to Scheduler'}</button>
+          ${isScheduled ? `<button type="button" class="btn btn-scheduler-remove" onclick="removeSchedulerItem('${cleanId}')">Remove from Scheduler</button>` : ''}
+          ${isScheduled ? `<button type="button" class="btn btn-rust" onclick="goView('scheduler')">Open Scheduler →</button>` : ''}
+          <button class="btn btn-outline" onclick="openSite('${site.id}')">View Full Details →</button>
+        </div>
+        <p class="note" style="margin-top:14px;">Adding to your Scheduler saves this plan for later — it does not book or reserve a visit.</p>
+      `;
+
+      const mainBtn = document.getElementById('btnAddPlanToScheduler');
+      if (mainBtn) {
+        mainBtn.textContent = isScheduled ? 'Update Plan in Scheduler ✓' : 'Add Plan to Scheduler';
+      }
     }
 
     /* =========================================================
@@ -3077,20 +3136,22 @@
     ];
     let qIndex = 0;
     let qAnswers = {};
+
     function renderQuiz() {
       const q = QUESTIONS[qIndex];
       document.getElementById('qProgress').style.width = ((qIndex + 1) / QUESTIONS.length * 100) + '%';
       document.getElementById('quizBody').innerHTML = `
-    <div class="q-title">${q.title}</div>
-    <div class="q-options">
-      ${q.options.map(o => `<button class="q-option ${qAnswers[q.key] === o.v ? 'selected' : ''}" onclick="selectAnswer('${q.key}','${o.v}')">${o.l}</button>`).join('')}
-    </div>
-    <div class="quiz-nav">
-      <button class="btn btn-outline" ${qIndex === 0 ? 'disabled' : ''} onclick="qBack()">← Back</button>
-      <button class="btn btn-primary" id="qNextBtn" ${!qAnswers[q.key] ? 'disabled' : ''} onclick="qNext()">${qIndex === QUESTIONS.length - 1 ? 'See My Match →' : 'Next →'}</button>
-    </div>
-  `;
+        <div class="q-title">${q.title}</div>
+        <div class="q-options">
+          ${q.options.map(o => `<button class="q-option ${qAnswers[q.key] === o.v ? 'selected' : ''}" onclick="selectAnswer('${q.key}','${o.v}')">${o.l}</button>`).join('')}
+        </div>
+        <div class="quiz-nav">
+          <button class="btn btn-outline" ${qIndex === 0 ? 'disabled' : ''} onclick="qBack()">← Back</button>
+          <button class="btn btn-primary" id="qNextBtn" ${!qAnswers[q.key] ? 'disabled' : ''} onclick="qNext()">${qIndex === QUESTIONS.length - 1 ? 'See My Match →' : 'Next →'}</button>
+        </div>
+      `;
     }
+
     function selectAnswer(key, val) { qAnswers[key] = val; renderQuiz(); }
     function qBack() { if (qIndex > 0) { qIndex--; renderQuiz(); } }
     function qNext() {
@@ -3160,69 +3221,70 @@
       }
 
       document.getElementById('quizBody').innerHTML = `
-    <div class="result-card" style="text-align:left;">
-      <span class="eyebrow">Mining Tourism Experience Match</span>
-      <h3 style="font-size:1.6rem;margin-top:10px;">${best.site.name}</h3>
-      <div class="match-score" style="margin:8px 0;">${best.score}% Match</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ochre-light);margin-bottom:4px;">${categoryLabel}</div>
-      <div class="result-reason">${reasonText}</div>
-      ${accessBadgeHTML(best.site, true)}
-      <p style="font-size:.85rem;margin-top:10px;">${accessStatusNote(best.site)}</p>
-      <div>
-        <div class="answer-recap" style="margin-top:10px;">Based on your answers:</div>
-        <ul class="answer-list">
-          <li>Interest: <b>${interestLabel}</b></li>
-          <li>Experience preference: <b>${modeLabel}</b></li>
-          <li>Travel group: <b>${groupLabel}</b></li>
-          <li>Trip style: <b>${tripLabel}</b></li>
-        </ul>
-      </div>
-      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn btn-outline" onclick="openSite('${best.site.id}')">Explore Details →</button>
-        ${schedulerButtonHTML(siteToSchedulerItem(best.site, { description: `${best.score}% match from the Smart Experience Finder — ${categoryLabel}.` }))}
-      </div>
-      <span class="mono" style="font-size:.68rem;color:var(--sand-dim);display:block;margin-top:14px;">Generated by the Smart Experience Finder, a rule-based questionnaire — not an official government, CCL or JTDC score.</span>
-    </div>
+        <div class="result-card" style="text-align:left;">
+          <span class="eyebrow">Mining Tourism Experience Match</span>
+          <h3 style="font-size:1.6rem;margin-top:10px;">${best.site.name}</h3>
+          <div class="match-score" style="margin:8px 0;">${best.score}% Match</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ochre-light);margin-bottom:4px;">${categoryLabel}</div>
+          <div class="result-reason">${reasonText}</div>
+          ${accessBadgeHTML(best.site, true)}
+          <p style="font-size:.85rem;margin-top:10px;">${accessStatusNote(best.site)}</p>
+          <div>
+            <div class="answer-recap" style="margin-top:10px;">Based on your answers:</div>
+            <ul class="answer-list">
+              <li>Interest: <b>${interestLabel}</b></li>
+              <li>Experience preference: <b>${modeLabel}</b></li>
+              <li>Travel group: <b>${groupLabel}</b></li>
+              <li>Trip style: <b>${tripLabel}</b></li>
+            </ul>
+          </div>
+          <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-outline" onclick="openSite('${best.site.id}')">Explore Details →</button>
+            ${schedulerButtonHTML(siteToSchedulerItem(best.site, { description: `${best.score}% match from the Smart Experience Finder — ${categoryLabel}.` }))}
+          </div>
+          <span class="mono" style="font-size:.68rem;color:var(--sand-dim);display:block;margin-top:14px;">Generated by the Smart Experience Finder, a rule-based questionnaire — not an official government, CCL or JTDC score.</span>
+        </div>
 
-    <div class="result-divider"></div>
+        <div class="result-divider"></div>
 
-    <div class="visit-card">
-      <span class="eyebrow">${secondCard.mode === 'featured' ? 'Featured Mining Experience' : 'Also Worth Exploring'}</span>
-      <div style="margin-top:12px;">${accessBadgeHTML(secondCard.site, true)}</div>
-      <h3 style="margin-top:12px;">${secondCard.site.name}</h3>
-      <div class="sub">${secondCard.site.district}, Jharkhand · ${secondCard.site.mineral}${secondCard.mode === 'alt' ? ` · ${secondCard.score}% Match` : ' · Guided Open-Cast Mining Tourism'}</div>
-      <p class="body">${secondCard.mode === 'featured'
-          ? 'North Urimari is currently the established guided mining-tourism experience on this platform. Visitors can join an authorized guided experience through designated tourism areas and safe viewing points, with interpretation of coal mining, geology, mining technology and local history.'
-          : accessStatusNote(secondCard.site)}</p>
-      ${secondCard.mode === 'featured' ? `
-      <h4 style="margin-top:20px;font-size:.9rem;color:var(--ochre-light);">Why North Urimari?</h4>
-      <ul class="why-list">
-        <li>Established guided tourism pathway</li>
-        <li>CCL × JTDC partnership</li>
-        <li>Designated visitor route</li>
-        <li>Safety briefing and guided access</li>
-        <li>Mining + nature + culture circuit possibilities</li>
-      </ul>` : ''}
-      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn btn-outline" onclick="openSite('${secondCard.site.id}')">Explore Details →</button>
-        ${schedulerButtonHTML(siteToSchedulerItem(secondCard.site))}
-      </div>
-    </div>
+        <div class="visit-card">
+          <span class="eyebrow">${secondCard.mode === 'featured' ? 'Featured Mining Experience' : 'Also Worth Exploring'}</span>
+          <div style="margin-top:12px;">${accessBadgeHTML(secondCard.site, true)}</div>
+          <h3 style="margin-top:12px;">${secondCard.site.name}</h3>
+          <div class="sub">${secondCard.site.district}, Jharkhand · ${secondCard.site.mineral}${secondCard.mode === 'alt' ? ` · ${secondCard.score}% Match` : ' · Guided Open-Cast Mining Tourism'}</div>
+          <p class="body">${secondCard.mode === 'featured'
+              ? 'North Urimari is currently the established guided mining-tourism experience on this platform. Visitors can join an authorized guided experience through designated tourism areas and safe viewing points, with interpretation of coal mining, geology, mining technology and local history.'
+              : accessStatusNote(secondCard.site)}</p>
+          ${secondCard.mode === 'featured' ? `
+          <h4 style="margin-top:20px;font-size:.9rem;color:var(--ochre-light);">Why North Urimari?</h4>
+          <ul class="why-list">
+            <li>Established guided tourism pathway</li>
+            <li>CCL × JTDC partnership</li>
+            <li>Designated visitor route</li>
+            <li>Safety briefing and guided access</li>
+            <li>Mining + nature + culture circuit possibilities</li>
+          </ul>` : ''}
+          <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-outline" onclick="openSite('${secondCard.site.id}')">Explore Details →</button>
+            ${schedulerButtonHTML(siteToSchedulerItem(secondCard.site))}
+          </div>
+        </div>
 
-    <div class="access-reality">
-      <h4>Access Reality</h4>
-      <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'north-urimari'), false)}<span class="desc"><b style="color:var(--cream);">North Urimari</b> — Established guided tourism pathway</span></div>
-      <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'jharia'), false)}<span class="desc"><b style="color:var(--cream);">Other mining regions</b> (Jharia, Ghatsila, Noamundi, Koderma, Lohardaga) — Restricted / Controlled, informational / educational mining heritage only</span></div>
-      <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'jaduguda'), false)}<span class="desc"><b style="color:var(--cream);">Jaduguda</b> — Physical access not established for general tourism</span></div>
-    </div>
+        <div class="access-reality">
+          <h4>Access Reality</h4>
+          <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'north-urimari'), false)}<span class="desc"><b style="color:var(--cream);">North Urimari</b> — Established guided tourism pathway</span></div>
+          <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'jharia'), false)}<span class="desc"><b style="color:var(--cream);">Other mining regions</b> (Jharia, Ghatsila, Noamundi, Koderma, Lohardaga) — Restricted / Controlled, informational / educational mining heritage only</span></div>
+          <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'jaduguda'), false)}<span class="desc"><b style="color:var(--cream);">Jaduguda</b> — Physical access not established for general tourism</span></div>
+        </div>
 
-    <div style="margin-top:24px;text-align:center;">
-      <button class="btn btn-outline" onclick="restartQuiz()">Retake Quiz</button>
-    </div>
-  `;
+        <div style="margin-top:24px;text-align:center;">
+          <button class="btn btn-outline" onclick="restartQuiz()">Retake Quiz</button>
+        </div>
+      `;
       document.getElementById('qProgress').style.width = '100%';
-      refreshSchedulerButtons(document.getElementById('quizBody'));
+      syncAllSchedulerButtons(document.getElementById('quizBody'));
     }
+
     function restartQuiz() { qIndex = 0; qAnswers = {}; renderQuiz(); }
 
     /* =========================================================
@@ -3244,6 +3306,7 @@
         <li><b>${r.site}</b> — "${r.title || r.alt}" by ${r.author || 'Unknown'}, ${r.license || 'license unknown'}${r.sourceUrl ? ` — <a href="${r.sourceUrl}" target="_blank" rel="noopener">source</a>` : ''}</li>
       `).join('');
     }
+
     document.getElementById('creditsToggle').addEventListener('click', () => {
       document.getElementById('creditsPanel').classList.toggle('open');
     });
@@ -3259,6 +3322,7 @@
     renderQuiz();
     renderCredits();
     updateSchedulerBadge();
+    syncAllSchedulerButtons();
     if (window.location.hash === '#scheduler') goView('scheduler');
   </script>
 </body>
