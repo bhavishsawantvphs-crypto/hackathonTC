@@ -6,37 +6,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mining Tourism | Jharkhand Smart Tourism</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Bitter:wght@500;700;800&family=Work+Sans:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
     :root {
-      /* ---- Core palette: Lake Blue + Falu Red + Sunset ---- */
-      --lake-blue: #2B4C63;
-      --lake-blue-deep: #1E384A;
-      --lake-blue-pale: #EAF1F4;
-      --falu-red: #9C3B32;
-      --falu-red-hover: #B34A3F;
-      --sunset: #D98B3F;
-      --sunset-light: #E8AD6E;
+      /* ---- Nature & Eco-Tourism Palette ---- */
+      --bg: #F2F7ED;                      /* Main Background: Soft pale sage / cream */
+      --bg-secondary: #E7F1E3;            /* Secondary Background: Pale sage green */
+      --bg-card: #F8FAF4;                 /* Light Cards / Surfaces */
+      --surface-cream: #F7F1E5;           /* Warm Cream for contrast */
       --white: #FFFFFF;
-      --off-white: #FBFAF7;
+      --off-white: #F2F7ED;
 
-      /* Theme mappings */
+      --lake-blue: #163B27;               /* Deep Forest Green */
+      --lake-blue-deep: #163B27;          /* Deep Forest Typography */
+      --lake-blue-pale: #E7F1E3;          /* Soft Sage Tone */
+      
+      --falu-red: #4C9A45;                /* Leaf Green for CTAs & Highlights */
+      --falu-red-hover: #2F6B3C;          /* Forest Green on Hover */
+      --sunset: #2F6B3C;                  /* Forest Accent */
+      --sunset-light: #4C9A45;            /* Leaf Green Accent */
+      
       --coal: var(--white);
       --charcoal: var(--white);
-      --surface: var(--off-white);
-      --surface-2: var(--lake-blue-pale);
-      --ochre: var(--sunset);
-      --ochre-light: var(--sunset-light);
-      --rust: var(--falu-red);
-      --rust-light: var(--falu-red-hover);
-      --forest: #4E7777;
-      --forest-light: #6E9797;
-      --sand: var(--lake-blue-deep);
-      --sand-dim: #5C7688;
-      --cream: var(--lake-blue-deep);
-      --line: rgba(43, 76, 99, 0.14);
-      --radius: 10px;
-      --shadow: 0 12px 28px rgba(30, 56, 74, .12);
+      --surface: var(--bg-card);
+      --surface-2: var(--bg-secondary);
+      --ochre: #2F6B3C;
+      --ochre-light: #4C9A45;
+      --rust: #4C9A45;
+      --rust-light: #2F6B3C;
+      --forest: #2F6B3C;
+      --forest-light: #4C9A45;
+      --sand: #163B27;
+      --sand-dim: #6E846F;                /* Muted Green for Body & Metadata */
+      --cream: #163B27;
+      --line: rgba(47, 107, 60, 0.18);    /* Soft Natural Border */
+      
+      --radius: 12px;
+      --shadow: 0 8px 24px -6px rgba(22, 59, 39, 0.08);
+      --shadow-hover: 0 14px 32px -6px rgba(22, 59, 39, 0.14);
     }
 
     * {
@@ -49,19 +56,21 @@
 
     body {
       margin: 0;
-      background: var(--off-white);
+      background: var(--bg);
       color: var(--lake-blue-deep);
-      font-family: 'Work Sans', 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
     }
 
     h1,
     h2,
     h3,
     h4 {
-      font-family: 'Bitter', 'Zilla Slab', serif;
+      font-family: 'Playfair Display', Georgia, serif;
       margin: 0;
-      line-height: 1.15;
+      line-height: 1.2;
       color: var(--lake-blue-deep);
     }
 
@@ -71,7 +80,7 @@
 
     p {
       color: var(--sand-dim);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     a {
@@ -80,23 +89,139 @@
     }
 
     button {
-      font-family: 'Work Sans', 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       cursor: pointer;
       border: none;
     }
 
     ::selection {
-      background: var(--sunset);
-      color: var(--white);
+      background: rgba(76, 154, 69, 0.3);
+      color: var(--lake-blue-deep);
+    }
+
+    /* ---------- BOTANICAL SIDE VINES & FALLING LEAF PARTICLES ---------- */
+    .ambient-forest-wrapper {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 99;
+      overflow: hidden;
+    }
+
+    .ambient-mist {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.6;
+    }
+
+    .mist-top-right {
+      top: -8%;
+      right: -5%;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(76, 154, 69, 0.08) 0%, transparent 70%);
+    }
+
+    .mist-mid-left {
+      top: 35%;
+      left: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(47, 107, 60, 0.07) 0%, transparent 65%);
+    }
+
+    .side-vine-container {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 95px;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.85;
+    }
+
+    .vine-left {
+      left: 0;
+      transform-origin: top left;
+      animation: vineSwayLeft 7s ease-in-out infinite alternate;
+    }
+
+    .vine-right {
+      right: 0;
+      transform-origin: top right;
+      animation: vineSwayRight 7.5s ease-in-out infinite alternate;
+    }
+
+    .botanical-vine-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 4px 12px rgba(22, 59, 39, 0.08));
+    }
+
+    @keyframes vineSwayLeft {
+      0% { transform: rotate(0deg) translateX(0); }
+      100% { transform: rotate(1.2deg) translateX(4px); }
+    }
+
+    @keyframes vineSwayRight {
+      0% { transform: rotate(0deg) translateX(0); }
+      100% { transform: rotate(-1.2deg) translateX(-4px); }
+    }
+
+    .falling-leaves-viewport {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 98;
+      overflow: hidden;
+    }
+
+    .falling-leaf-track {
+      position: absolute;
+      top: -40px;
+      animation: leafFallDown linear infinite;
+    }
+
+    .falling-leaf-sway {
+      animation: leafSwayAndRotate ease-in-out infinite alternate;
+      filter: drop-shadow(0 2px 4px rgba(22, 59, 39, 0.08));
+    }
+
+    @keyframes leafFallDown {
+      0% { top: -40px; transform: translateY(0); }
+      100% { top: 100vh; transform: translateY(40px); }
+    }
+
+    @keyframes leafSwayAndRotate {
+      0% { transform: translateX(-24px) rotate(-20deg) rotateY(0deg); }
+      50% { transform: translateX(18px) rotate(15deg) rotateY(180deg); }
+      100% { transform: translateX(-16px) rotate(-10deg) rotateY(360deg); }
+    }
+
+    @media (max-width: 1100px) {
+      .side-vine-container { width: 60px; opacity: 0.65; }
+    }
+
+    @media (max-width: 768px) {
+      .side-vine-container { width: 32px; opacity: 0.35; }
+      .falling-leaf-track:nth-child(even) { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .vine-left, .vine-right, .falling-leaf-track, .falling-leaf-sway {
+        animation: none !important;
+      }
     }
 
     /* ---------- GLOBAL NAV ---------- */
     header.global-header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(10px);
+      z-index: 90;
+      background: rgba(248, 250, 244, 0.95);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
 
@@ -114,7 +239,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: 'Zilla Slab', 'Bitter', serif;
+      font-family: 'Playfair Display', serif;
       font-weight: 700;
       font-size: 1.15rem;
       color: var(--lake-blue-deep) !important;
@@ -137,20 +262,20 @@
 
     .global-navlinks a {
       color: var(--lake-blue-deep);
-      padding: 6px 12px;
-      border-radius: 4px;
+      padding: 6px 14px;
+      border-radius: 8px;
       transition: all .2s;
       font-weight: 500;
     }
 
     .global-navlinks a:hover {
-      color: var(--sunset);
-      background: rgba(217, 139, 63, 0.1);
+      color: var(--falu-red);
+      background: rgba(76, 154, 69, 0.1);
     }
 
     .global-navlinks a.active {
       color: var(--white);
-      background: var(--lake-blue);
+      background: var(--falu-red);
       font-weight: 600;
     }
 
@@ -168,7 +293,7 @@
 
     /* ---------- strata signature element ---------- */
     .strata {
-      height: 6px;
+      height: 4px;
       width: 100%;
       display: flex;
     }
@@ -178,18 +303,18 @@
       height: 100%;
     }
 
-    .strata span:nth-child(1) { background: var(--rust); }
-    .strata span:nth-child(2) { background: var(--ochre); }
-    .strata span:nth-child(3) { background: var(--forest); }
-    .strata span:nth-child(4) { background: var(--surface-2); }
-    .strata span:nth-child(5) { background: var(--rust-light); }
-    .strata span:nth-child(6) { background: var(--ochre-light); }
-    .strata span:nth-child(7) { background: var(--forest-light); }
-    .strata span:nth-child(8) { background: var(--surface-2); }
+    .strata span:nth-child(1) { background: #163B27; }
+    .strata span:nth-child(2) { background: #2F6B3C; }
+    .strata span:nth-child(3) { background: #4C9A45; }
+    .strata span:nth-child(4) { background: #8EDB68; }
+    .strata span:nth-child(5) { background: #2FAF82; }
+    .strata span:nth-child(6) { background: #2F6B3C; }
+    .strata span:nth-child(7) { background: #4C9A45; }
+    .strata span:nth-child(8) { background: #163B27; }
 
     /* ---------- SUB-NAV (MODULE TABS) ---------- */
     .subnav-wrap {
-      background: var(--lake-blue-pale);
+      background: var(--bg-secondary);
       border-bottom: 1px solid var(--line);
     }
 
@@ -208,7 +333,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: 'Bitter', serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
       font-size: 0.98rem;
       white-space: nowrap;
@@ -219,7 +344,7 @@
       width: 26px;
       height: 26px;
       border-radius: 6px;
-      background: linear-gradient(135deg, var(--sunset), var(--falu-red));
+      background: linear-gradient(135deg, #2F6B3C, #4C9A45);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -230,16 +355,16 @@
 
     .nav-links {
       display: flex;
-      gap: 4px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .nav-links button {
       background: transparent;
       color: var(--sand-dim);
-      padding: 7px 13px;
-      border-radius: 6px;
-      font-size: .82rem;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: .84rem;
       font-weight: 500;
       transition: all .2s;
       border: 1px solid transparent;
@@ -247,13 +372,13 @@
 
     .nav-links button:hover {
       color: var(--lake-blue-deep);
-      background: var(--white);
+      background: var(--bg-card);
       border-color: var(--line);
     }
 
     .nav-links button.active {
       color: var(--white);
-      background: var(--lake-blue);
+      background: var(--falu-red);
       font-weight: 600;
     }
 
@@ -289,7 +414,7 @@
       font-family: 'JetBrains Mono', monospace;
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: var(--ochre-light);
+      color: var(--accent);
       font-size: .72rem;
       font-weight: 700;
       margin-bottom: 14px;
@@ -301,8 +426,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 13px 24px;
-      border-radius: 9px;
+      padding: 12px 24px;
+      border-radius: 8px;
       font-weight: 600;
       font-size: .92rem;
       transition: transform .15s, box-shadow .15s, background .15s;
@@ -311,24 +436,25 @@
     .btn-primary {
       background: var(--falu-red);
       color: var(--white);
+      box-shadow: 0 4px 14px rgba(76, 154, 69, 0.25);
     }
 
     .btn-primary:hover {
       background: var(--falu-red-hover);
       transform: translateY(-2px);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-hover);
     }
 
     .btn-outline {
-      background: transparent;
+      background: var(--bg-card);
       color: var(--lake-blue-deep);
-      border: 1px solid var(--lake-blue);
+      border: 1px solid var(--line);
     }
 
     .btn-outline:hover {
-      border-color: var(--sunset);
-      color: var(--sunset);
-      background: var(--lake-blue-pale);
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--white);
       transform: translateY(-2px);
     }
 
@@ -354,18 +480,18 @@
     }
 
     .btn-sm {
-      padding: 9px 16px;
+      padding: 8px 16px;
       font-size: .8rem;
     }
 
     /* ---------- hero ---------- */
     .hero {
       position: relative;
-      padding: 90px 0 70px;
+      padding: 80px 0 60px;
       background:
-        radial-gradient(ellipse 80% 60% at 25% 0%, rgba(217, 139, 63, .10), transparent 60%),
-        radial-gradient(ellipse 60% 50% at 95% 10%, rgba(43, 76, 99, .10), transparent 60%),
-        var(--off-white);
+        radial-gradient(ellipse 80% 60% at 25% 0%, rgba(76, 154, 69, .10), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 95% 10%, rgba(47, 107, 60, .08), transparent 60%),
+        var(--bg);
       overflow: hidden;
       border-bottom: 1px solid var(--line);
     }
@@ -374,39 +500,43 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
-      padding: 7px 14px;
+      padding: 6px 14px;
       border-radius: 99px;
       font-size: .78rem;
-      color: var(--sand-dim);
+      color: var(--accent);
+      font-weight: 600;
       margin-bottom: 24px;
+      box-shadow: 0 2px 6px rgba(22, 59, 39, 0.04);
     }
 
     .hero h1 {
-      font-size: clamp(2.3rem, 5vw, 3.8rem);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
       font-weight: 800;
       max-width: 820px;
       color: var(--lake-blue-deep);
-      letter-spacing: .005em;
+      letter-spacing: -.02em;
     }
 
     .hero h1 em {
       font-style: normal;
-      color: var(--sunset);
+      color: var(--falu-red);
     }
 
     .hero .lead {
-      font-size: 1.15rem;
-      max-width: 620px;
+      font-size: 1.18rem;
+      max-width: 680px;
       margin-top: 20px;
-      color: var(--sand-dim);
+      color: var(--lake-blue-deep);
+      line-height: 1.6;
     }
 
     .hero .desc {
-      max-width: 640px;
+      max-width: 680px;
       margin-top: 14px;
       font-size: .95rem;
+      color: var(--sand-dim);
     }
 
     .hero-ctas {
@@ -425,29 +555,31 @@
 
     .hero-stats .stat b {
       display: block;
-      font-family: 'Bitter', serif;
-      font-size: 1.9rem;
-      color: var(--lake-blue);
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      color: var(--lake-blue-deep);
     }
 
     .hero-stats .stat span {
-      font-size: .78rem;
+      font-size: .8rem;
       color: var(--sand-dim);
+      font-weight: 500;
     }
 
     .disclaimer {
-      background: var(--lake-blue-pale);
+      background: var(--bg-card);
       border: 1px solid var(--line);
-      border-left: 3px solid var(--falu-red);
+      border-left: 4px solid var(--accent);
       border-radius: 8px;
-      padding: 14px 16px;
-      font-size: .82rem;
+      padding: 14px 18px;
+      font-size: .84rem;
       color: var(--sand-dim);
       margin: 20px 0;
+      box-shadow: var(--shadow);
     }
 
     .disclaimer b {
-      color: var(--falu-red);
+      color: var(--lake-blue-deep);
     }
 
     /* ---------- flow diagram ---------- */
@@ -456,7 +588,7 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 0;
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 26px;
@@ -472,30 +604,30 @@
     }
 
     .flow-step .ic {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: var(--lake-blue-pale);
-      border: 1px solid var(--sunset);
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--falu-red);
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto;
       font-family: 'JetBrains Mono', monospace;
-      font-size: .75rem;
+      font-size: .78rem;
       color: var(--falu-red);
       font-weight: 700;
     }
 
     .flow-step .lb {
-      font-size: .78rem;
+      font-size: .8rem;
       margin-top: 8px;
       color: var(--lake-blue-deep);
       font-weight: 600;
     }
 
     .flow-arrow {
-      color: var(--sunset);
+      color: var(--falu-red);
       font-size: 1.2rem;
       padding: 0 4px;
     }
@@ -507,8 +639,8 @@
     }
 
     .section-head h2 {
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      color: var(--cream);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: var(--lake-blue-deep);
     }
 
     .section-head p {
@@ -522,9 +654,10 @@
       flex-wrap: wrap;
       margin-bottom: 30px;
       padding: 16px 18px;
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
     .filter-group {
@@ -534,28 +667,29 @@
     }
 
     .filter-group label {
-      font-size: .68rem;
+      font-size: .7rem;
       text-transform: uppercase;
       letter-spacing: .08em;
       color: var(--sand-dim);
       font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
     }
 
     .filter-group select {
-      background: var(--off-white);
+      background: var(--white);
       color: var(--lake-blue-deep);
       border: 1px solid var(--line);
-      border-radius: 7px;
+      border-radius: 8px;
       padding: 9px 12px;
-      font-size: .85rem;
-      font-family: 'Inter', sans-serif;
+      font-size: .88rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     /* ---------- CAROUSEL (shared) ---------- */
     .carousel {
       position: relative;
       overflow: hidden;
-      background: var(--lake-blue-pale);
+      background: var(--bg-secondary);
     }
 
     .carousel-fallback {
@@ -572,28 +706,28 @@
     }
 
     .carousel-fallback .fb-name {
-      font-family: 'Bitter', serif;
+      font-family: 'Playfair Display', serif;
       font-weight: 700;
       color: var(--white);
-      font-size: 1rem;
+      font-size: 1.05rem;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
     }
 
     .carousel-fallback .fb-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: .68rem;
-      color: rgba(255, 255, 255, .9);
+      color: rgba(255, 255, 255, .95);
       text-transform: uppercase;
       letter-spacing: .08em;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
     }
 
-    .carousel-fallback.coal { background: linear-gradient(135deg, #3A5568, #24374A); }
-    .carousel-fallback.iron { background: linear-gradient(135deg, #8A5A3A, #5E3D26); }
-    .carousel-fallback.copper { background: linear-gradient(135deg, #B3702F, #7A4A1E); }
-    .carousel-fallback.mica { background: linear-gradient(135deg, #6E7B7B, #495454); }
-    .carousel-fallback.bauxite { background: linear-gradient(135deg, #A56B37, #6E4623); }
-    .carousel-fallback.uranium { background: linear-gradient(135deg, #6E6558, #463F35); }
+    .carousel-fallback.coal { background: linear-gradient(135deg, #163B27, #2F6B3C); }
+    .carousel-fallback.iron { background: linear-gradient(135deg, #2F6B3C, #4C9A45); }
+    .carousel-fallback.copper { background: linear-gradient(135deg, #1D4333, #2F6B3C); }
+    .carousel-fallback.mica { background: linear-gradient(135deg, #4C9A45, #163B27); }
+    .carousel-fallback.bauxite { background: linear-gradient(135deg, #2FAF82, #163B27); }
+    .carousel-fallback.uranium { background: linear-gradient(135deg, #163B27, #1D4333); }
 
     .carousel-track {
       position: absolute;
@@ -620,7 +754,7 @@
       inset: 0;
       z-index: 2;
       pointer-events: none;
-      background: linear-gradient(180deg, rgba(30, 56, 74, .25) 0%, rgba(30, 56, 74, 0) 40%, rgba(30, 56, 74, .75) 100%);
+      background: linear-gradient(180deg, rgba(22, 59, 39, .2) 0%, transparent 40%, rgba(22, 59, 39, .8) 100%);
     }
 
     .carousel-dots {
@@ -643,7 +777,7 @@
     }
 
     .carousel-dots .dot.active {
-      background: var(--sunset-light);
+      background: var(--white);
       width: 16px;
       border-radius: 3px;
     }
@@ -652,7 +786,7 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 22px;
     }
 
     @media(max-width:1000px) {
@@ -664,20 +798,21 @@
     }
 
     .card {
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow: hidden;
-      transition: transform .2s, border-color .2s, box-shadow .2s;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
       cursor: pointer;
       display: flex;
       flex-direction: column;
+      box-shadow: var(--shadow);
     }
 
     .card:hover {
       transform: translateY(-4px);
-      border-color: var(--sunset);
-      box-shadow: var(--shadow);
+      border-color: var(--falu-red);
+      box-shadow: var(--shadow-hover);
     }
 
     .card .carousel {
@@ -701,18 +836,19 @@
     }
 
     .card-body h3 {
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       color: var(--lake-blue-deep);
     }
 
     .card-meta {
-      font-size: .75rem;
-      color: var(--falu-red);
+      font-size: .78rem;
+      color: var(--accent);
       font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
     }
 
     .card-body p {
-      font-size: .83rem;
+      font-size: .86rem;
       margin: 0;
     }
 
@@ -723,21 +859,22 @@
     }
 
     .tag {
-      font-size: .68rem;
-      padding: 3px 9px;
+      font-size: .7rem;
+      padding: 3px 10px;
       border-radius: 99px;
-      background: var(--lake-blue-pale);
-      color: var(--lake-blue);
+      background: var(--bg-secondary);
+      color: var(--accent);
       border: 1px solid var(--line);
+      font-weight: 500;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: .7rem;
+      font-size: .72rem;
       font-weight: 700;
-      padding: 5px 11px;
+      padding: 5px 12px;
       border-radius: 99px;
       font-family: 'JetBrains Mono', monospace;
       letter-spacing: .02em;
@@ -751,44 +888,44 @@
     }
 
     .badge.green {
-      background: rgba(255, 255, 255, .94);
-      color: #2C5F4E;
-      border: 1px solid rgba(44, 95, 78, .35);
+      background: rgba(248, 250, 244, .95);
+      color: #163B27;
+      border: 1px solid rgba(76, 154, 69, .45);
     }
 
     .badge.yellow {
-      background: rgba(255, 255, 255, .94);
-      color: #8A5A1E;
-      border: 1px solid rgba(217, 139, 63, .45);
+      background: rgba(248, 250, 244, .95);
+      color: #78350F;
+      border: 1px solid rgba(229, 167, 47, .5);
     }
 
     .badge.red {
-      background: rgba(255, 255, 255, .94);
-      color: #8A3226;
-      border: 1px solid rgba(156, 59, 50, .4);
+      background: rgba(248, 250, 244, .95);
+      color: #991B1B;
+      border: 1px solid rgba(217, 87, 87, .5);
     }
 
     .badge.tint.green {
-      background: rgba(44, 95, 78, .09);
-      color: #2C5F4E;
-      border: 1px solid rgba(44, 95, 78, .3);
+      background: rgba(76, 154, 69, .12);
+      color: #163B27;
+      border: 1px solid rgba(76, 154, 69, .35);
     }
 
     .badge.tint.yellow {
-      background: rgba(217, 139, 63, .12);
-      color: #8A5A1E;
-      border: 1px solid rgba(217, 139, 63, .4);
+      background: rgba(229, 167, 47, .14);
+      color: #78350F;
+      border: 1px solid rgba(229, 167, 47, .4);
     }
 
     .badge.tint.red {
-      background: rgba(156, 59, 50, .1);
-      color: #8A3226;
-      border: 1px solid rgba(156, 59, 50, .35);
+      background: rgba(217, 87, 87, .12);
+      color: #991B1B;
+      border: 1px solid rgba(217, 87, 87, .35);
     }
 
     /* ---------- detail page ---------- */
     .detail-hero {
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow: hidden;
@@ -825,19 +962,20 @@
     }
 
     .detail-hero .info-grid div b {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--lake-blue-deep);
     }
 
     .partner-pill {
       align-self: flex-start;
-      background: var(--lake-blue-pale);
+      background: var(--bg-secondary);
       border: 1px solid var(--line);
-      padding: 10px 16px;
+      padding: 10px 18px;
       border-radius: 10px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: .82rem;
-      color: var(--lake-blue);
+      font-size: .84rem;
+      color: var(--accent);
+      font-weight: 600;
     }
 
     .two-col {
@@ -851,21 +989,22 @@
     }
 
     .panel {
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 26px;
+      box-shadow: var(--shadow);
     }
 
     .panel h3 {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       margin-bottom: 16px;
       color: var(--lake-blue-deep);
     }
 
     .panel h4 {
-      font-size: .95rem;
-      color: var(--falu-red);
+      font-size: 1rem;
+      color: var(--accent);
       margin-bottom: 8px;
     }
 
@@ -876,9 +1015,9 @@
     .info-row {
       display: flex;
       justify-content: space-between;
-      padding: 11px 0;
+      padding: 12px 0;
       border-bottom: 1px solid var(--line);
-      font-size: .87rem;
+      font-size: .88rem;
     }
 
     .info-row:last-child {
@@ -896,24 +1035,24 @@
     }
 
     .note {
-      font-size: .74rem;
+      font-size: .78rem;
       color: var(--sand-dim);
       font-style: italic;
       margin-top: 10px;
     }
 
     .important-box {
-      background: rgba(156, 59, 50, .06);
-      border: 1px solid rgba(156, 59, 50, .3);
+      background: rgba(229, 167, 47, .12);
+      border: 1px solid var(--warning);
       border-radius: 8px;
-      padding: 14px 16px;
-      font-size: .83rem;
-      color: var(--lake-blue-deep);
+      padding: 14px 18px;
+      font-size: .85rem;
+      color: #78350F;
       margin-top: 16px;
     }
 
     .important-box b {
-      color: var(--falu-red);
+      color: #78350F;
     }
 
     ul.plain-list {
@@ -926,7 +1065,7 @@
     }
 
     ul.plain-list li {
-      font-size: .87rem;
+      font-size: .88rem;
       color: var(--lake-blue-deep);
       padding-left: 18px;
       position: relative;
@@ -936,7 +1075,7 @@
       content: '—';
       position: absolute;
       left: 0;
-      color: var(--sunset);
+      color: var(--falu-red);
     }
 
     .exp-grid {
@@ -955,7 +1094,7 @@
     }
 
     .exp-card {
-      background: var(--lake-blue-pale);
+      background: var(--bg-secondary);
       border: 1px solid var(--line);
       border-radius: 10px;
       overflow: hidden;
@@ -974,12 +1113,13 @@
 
     .safety-list li::before {
       content: '✓';
-      color: #2C5F4E;
+      color: var(--falu-red);
+      font-weight: 700;
     }
 
     .restriction-list li::before {
       content: '!';
-      color: var(--falu-red);
+      color: var(--danger);
       font-weight: 700;
     }
 
@@ -1002,11 +1142,12 @@
     }
 
     .plan-field label {
-      font-size: .72rem;
+      font-size: .74rem;
       text-transform: uppercase;
       letter-spacing: .07em;
       color: var(--sand-dim);
       font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
     }
 
     .plan-field select,
@@ -1016,12 +1157,12 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 12px 14px;
-      font-size: .9rem;
-      font-family: 'Inter', sans-serif;
+      font-size: .92rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     .plan-field .hint {
-      font-size: .72rem;
+      font-size: .74rem;
       color: var(--sand-dim);
     }
 
@@ -1035,10 +1176,11 @@
       background: var(--white);
       border: 1px solid var(--line);
       color: var(--lake-blue-deep);
-      padding: 9px 14px;
+      padding: 9px 16px;
       border-radius: 99px;
-      font-size: .83rem;
+      font-size: .85rem;
       transition: all .15s;
+      font-weight: 500;
     }
 
     .chip.selected {
@@ -1046,45 +1188,47 @@
       color: var(--white);
       border-color: var(--falu-red);
       font-weight: 600;
+      box-shadow: 0 2px 8px rgba(76, 154, 69, 0.25);
     }
 
     .plan-summary {
-      background: var(--lake-blue-pale);
-      border: 1px solid var(--lake-blue);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 26px;
+      box-shadow: var(--shadow);
     }
 
     .plan-summary h3 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin-bottom: 18px;
     }
 
     .restricted-msg {
-      background: rgba(217, 139, 63, .1);
-      border: 1px solid rgba(217, 139, 63, .4);
+      background: rgba(229, 167, 47, .12);
+      border: 1px solid rgba(229, 167, 47, .4);
       border-radius: 10px;
       padding: 16px 18px;
-      font-size: .87rem;
-      color: var(--lake-blue-deep);
+      font-size: .88rem;
+      color: #78350F;
       margin-top: 6px;
     }
 
     .not-established-msg {
-      background: rgba(156, 59, 50, .08);
-      border: 1px solid rgba(156, 59, 50, .35);
+      background: rgba(217, 87, 87, .1);
+      border: 1px solid rgba(217, 87, 87, .35);
       border-radius: 10px;
       padding: 16px 18px;
-      font-size: .87rem;
-      color: var(--lake-blue-deep);
+      font-size: .88rem;
+      color: #991B1B;
       margin-top: 6px;
     }
 
     .plan-validation-msg {
       display: none;
-      color: var(--falu-red);
-      background: rgba(156, 59, 50, .08);
-      border: 1px solid rgba(156, 59, 50, .3);
+      color: var(--danger);
+      background: rgba(217, 87, 87, .1);
+      border: 1px solid rgba(217, 87, 87, .3);
       padding: 12px 14px;
       border-radius: 8px;
       margin-top: 14px;
@@ -1095,19 +1239,21 @@
 
     /* ---------- circuits ---------- */
     .circuit-card {
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 24px;
+      box-shadow: var(--shadow);
     }
 
     .circuit-theme {
-      font-size: .72rem;
+      font-size: .74rem;
       font-family: 'JetBrains Mono', monospace;
-      color: var(--forest);
+      color: var(--accent);
       text-transform: uppercase;
       letter-spacing: .06em;
       margin-bottom: 14px;
+      font-weight: 700;
     }
 
     .circuit-path {
@@ -1115,17 +1261,17 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 8px;
-      font-size: .88rem;
+      font-size: .9rem;
       font-weight: 600;
       color: var(--lake-blue-deep);
     }
 
     .circuit-path .arw {
-      color: var(--sunset);
+      color: var(--falu-red);
     }
 
     .circuit-node {
-      background: var(--lake-blue-pale);
+      background: var(--bg-secondary);
       padding: 6px 12px;
       border-radius: 8px;
       border: 1px solid var(--line);
@@ -1133,14 +1279,14 @@
 
     .circuit-desc {
       margin-top: 12px;
-      font-size: .83rem;
+      font-size: .85rem;
     }
 
     /* ---------- responsible travel ---------- */
     .responsible-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 14px;
     }
 
     @media(max-width:700px) {
@@ -1148,21 +1294,23 @@
     }
 
     .responsible-item {
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: 10px;
-      padding: 16px 18px;
-      font-size: .86rem;
+      padding: 18px 20px;
+      font-size: .88rem;
       color: var(--lake-blue-deep);
       display: flex;
-      gap: 12px;
+      gap: 14px;
       align-items: flex-start;
+      box-shadow: var(--shadow);
     }
 
     .responsible-item .num {
       font-family: 'JetBrains Mono', monospace;
       color: var(--falu-red);
       font-weight: 700;
+      font-size: 1.1rem;
       flex-shrink: 0;
     }
 
@@ -1173,8 +1321,8 @@
     }
 
     .quiz-progress {
-      height: 5px;
-      background: var(--lake-blue-pale);
+      height: 6px;
+      background: var(--bg-secondary);
       border-radius: 99px;
       overflow: hidden;
       margin-bottom: 34px;
@@ -1188,7 +1336,7 @@
     }
 
     .q-title {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       margin-bottom: 24px;
       color: var(--lake-blue-deep);
     }
@@ -1204,27 +1352,32 @@
     }
 
     .q-option {
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 18px;
       text-align: left;
-      font-size: .92rem;
+      font-size: .94rem;
       color: var(--lake-blue-deep);
       transition: all .18s;
       display: flex;
       align-items: center;
       gap: 10px;
+      font-weight: 500;
+      box-shadow: var(--shadow);
     }
 
     .q-option:hover {
-      border-color: var(--sunset);
-      background: var(--lake-blue-pale);
+      border-color: var(--falu-red);
+      background: var(--white);
+      transform: translateY(-2px);
     }
 
     .q-option.selected {
       border-color: var(--falu-red);
-      background: rgba(156, 59, 50, .06);
+      background: rgba(76, 154, 69, .12);
+      color: var(--lake-blue-deep);
+      font-weight: 600;
     }
 
     .quiz-nav {
@@ -1234,8 +1387,8 @@
     }
 
     .result-card {
-      background: var(--white);
-      border: 1px solid var(--sunset);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 34px;
       text-align: center;
@@ -1243,7 +1396,7 @@
     }
 
     .match-score {
-      font-family: 'Bitter', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 3rem;
       font-weight: 800;
       color: var(--falu-red);
@@ -1251,20 +1404,21 @@
     }
 
     .result-reason {
-      background: var(--lake-blue-pale);
+      background: var(--bg-secondary);
       border-radius: 10px;
       padding: 18px;
-      font-size: .88rem;
+      font-size: .9rem;
       text-align: left;
       margin: 20px 0;
       color: var(--lake-blue-deep);
     }
 
     .answer-recap {
-      font-size: .78rem;
-      color: var(--sunset);
+      font-size: .8rem;
+      color: var(--accent);
       font-family: 'JetBrains Mono', monospace;
       margin-top: 10px;
+      font-weight: 600;
     }
 
     .answer-list {
@@ -1278,7 +1432,7 @@
     }
 
     .answer-list li {
-      font-size: .84rem;
+      font-size: .86rem;
       color: var(--lake-blue-deep);
       padding-left: 18px;
       position: relative;
@@ -1288,7 +1442,7 @@
       content: '•';
       position: absolute;
       left: 0;
-      color: var(--sunset);
+      color: var(--falu-red);
     }
 
     .answer-list li b {
@@ -1303,8 +1457,8 @@
     }
 
     .visit-card {
-      background: var(--white);
-      border: 1px solid rgba(44, 95, 78, .35);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 30px;
       text-align: left;
@@ -1316,19 +1470,19 @@
     }
 
     .visit-card h3 {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       color: var(--lake-blue-deep);
     }
 
     .visit-card .sub {
-      font-size: .85rem;
+      font-size: .88rem;
       color: var(--sand-dim);
       margin-top: 4px;
     }
 
     .visit-card p.body {
       margin-top: 16px;
-      font-size: .88rem;
+      font-size: .9rem;
     }
 
     .why-list {
@@ -1341,7 +1495,7 @@
     }
 
     .why-list li {
-      font-size: .85rem;
+      font-size: .88rem;
       color: var(--lake-blue-deep);
       padding-left: 18px;
       position: relative;
@@ -1351,12 +1505,12 @@
       content: '✓';
       position: absolute;
       left: 0;
-      color: #2C5F4E;
+      color: var(--falu-red);
       font-weight: 700;
     }
 
     .access-reality {
-      background: var(--lake-blue-pale);
+      background: var(--bg-secondary);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 22px;
@@ -1365,7 +1519,7 @@
     }
 
     .access-reality h4 {
-      font-size: .95rem;
+      font-size: 1rem;
       color: var(--lake-blue-deep);
       margin-bottom: 14px;
     }
@@ -1375,7 +1529,7 @@
       gap: 12px;
       align-items: flex-start;
       padding: 8px 0;
-      font-size: .85rem;
+      font-size: .88rem;
     }
 
     .access-row .badge {
@@ -1390,7 +1544,8 @@
     .finale {
       text-align: center;
       padding: 80px 24px;
-      background: var(--lake-blue);
+      background: var(--lake-blue-deep);
+      color: var(--surface-cream);
       border-top: 1px solid var(--line);
     }
 
@@ -1401,40 +1556,40 @@
     }
 
     .finale .eyebrow {
-      color: var(--sunset-light);
+      color: var(--surface-cream);
     }
 
     .finale .lines {
-      color: rgba(255, 255, 255, .85);
-      font-size: 1.05rem;
+      color: rgba(247, 241, 229, .88);
+      font-size: 1.1rem;
       line-height: 1.9;
       margin-bottom: 30px;
     }
 
     .finale .lines b {
-      color: var(--sunset-light);
-      font-weight: 600;
+      color: var(--falu-red);
+      font-weight: 700;
     }
 
     footer.sitefoot {
-      padding: 24px;
+      padding: 28px 24px;
       text-align: center;
       color: var(--sand-dim);
-      font-size: .75rem;
+      font-size: .8rem;
       border-top: 1px solid var(--line);
-      background: var(--off-white);
+      background: var(--bg);
     }
 
     /* ---------- image credits (footer add-on) ---------- */
     .credits-link {
       background: transparent;
       color: var(--sand-dim);
-      font-size: .75rem;
+      font-size: .78rem;
       text-decoration: underline;
       text-underline-offset: 2px;
       cursor: pointer;
       padding: 0;
-      font-family: 'Work Sans', 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     .credits-link:hover {
@@ -1454,7 +1609,7 @@
     }
 
     .credits-panel h5 {
-      font-size: .8rem;
+      font-size: .85rem;
       color: var(--lake-blue-deep);
       margin-bottom: 10px;
     }
@@ -1469,7 +1624,7 @@
     }
 
     .credits-panel li {
-      font-size: .72rem;
+      font-size: .75rem;
       color: var(--sand-dim);
       line-height: 1.6;
     }
@@ -1490,14 +1645,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 18px;
-      height: 18px;
-      padding: 0 5px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
       border-radius: 99px;
       background: var(--falu-red);
       color: var(--white);
       font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem;
+      font-size: .72rem;
       font-weight: 700;
       line-height: 1;
     }
@@ -1513,11 +1668,11 @@
       justify-content: space-between;
       gap: 10px;
       margin-top: auto;
-      padding-top: 6px;
+      padding-top: 8px;
     }
 
     .card-explore {
-      font-size: .8rem;
+      font-size: .84rem;
       color: var(--falu-red);
       font-weight: 600;
     }
@@ -1529,9 +1684,9 @@
       background: var(--falu-red);
       color: var(--white);
       border: 1px solid var(--falu-red);
-      padding: 8px 14px;
-      border-radius: 7px;
-      font-size: .78rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: .8rem;
       font-weight: 600;
       transition: all .15s;
       white-space: nowrap;
@@ -1545,34 +1700,35 @@
     }
 
     .btn-add-scheduler.added {
-      background: rgba(44, 95, 78, .12);
-      color: #2C5F4E;
-      border-color: rgba(44, 95, 78, .45);
+      background: rgba(76, 154, 69, .14);
+      color: var(--falu-red-hover);
+      border-color: rgba(76, 154, 69, .45);
       font-weight: 700;
     }
 
     .btn-add-scheduler.added:hover {
-      background: rgba(44, 95, 78, .2);
+      background: rgba(76, 154, 69, .22);
       transform: translateY(-1px);
     }
 
     .btn-add-scheduler-sm {
-      padding: 6px 11px;
-      font-size: .72rem;
+      padding: 6px 12px;
+      font-size: .75rem;
       border-radius: 6px;
     }
 
     .scheduler-summary-bar {
-      background: var(--lake-blue-pale);
-      border: 1px solid var(--lake-blue);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 22px 26px;
+      padding: 24px 28px;
       margin-bottom: 30px;
       display: flex;
       flex-wrap: wrap;
       gap: 26px;
       align-items: center;
       justify-content: space-between;
+      box-shadow: var(--shadow);
     }
 
     .scheduler-summary-stats {
@@ -1583,13 +1739,13 @@
 
     .scheduler-summary-stats .stat b {
       display: block;
-      font-family: 'Bitter', serif;
-      font-size: 1.6rem;
-      color: var(--lake-blue);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--lake-blue-deep);
     }
 
     .scheduler-summary-stats .stat span {
-      font-size: .74rem;
+      font-size: .76rem;
       color: var(--sand-dim);
       font-family: 'JetBrains Mono', monospace;
       text-transform: uppercase;
@@ -1597,14 +1753,15 @@
     }
 
     .scheduler-notbooking {
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
-      border-left: 3px solid var(--falu-red);
+      border-left: 4px solid var(--falu-red);
       border-radius: 8px;
-      padding: 14px 16px;
-      font-size: .83rem;
+      padding: 14px 18px;
+      font-size: .86rem;
       color: var(--sand-dim);
       margin-bottom: 24px;
+      box-shadow: var(--shadow);
     }
 
     .scheduler-notbooking b {
@@ -1612,12 +1769,12 @@
     }
 
     .scheduler-access-warning {
-      background: rgba(217, 139, 63, .1);
-      border: 1px solid rgba(217, 139, 63, .4);
+      background: rgba(229, 167, 47, .12);
+      border: 1px solid var(--warning);
       border-radius: 10px;
-      padding: 14px 16px;
-      font-size: .84rem;
-      color: var(--lake-blue-deep);
+      padding: 14px 18px;
+      font-size: .86rem;
+      color: #78350F;
       margin-bottom: 24px;
     }
 
@@ -1628,13 +1785,14 @@
     }
 
     .scheduler-card {
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow: hidden;
       display: grid;
-      grid-template-columns: 180px 1fr;
+      grid-template-columns: 200px 1fr;
       gap: 0;
+      box-shadow: var(--shadow);
     }
 
     @media(max-width:700px) {
@@ -1649,11 +1807,11 @@
 
     .scheduler-card .carousel {
       height: 100%;
-      min-height: 140px;
+      min-height: 150px;
     }
 
     .scheduler-card-body {
-      padding: 20px 22px;
+      padding: 22px 24px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -1668,9 +1826,10 @@
     }
 
     .scheduler-card-meta {
-      font-size: .75rem;
-      color: var(--falu-red);
+      font-size: .78rem;
+      color: var(--accent);
       font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
     }
 
     .scheduler-card-date-row {
@@ -1682,21 +1841,22 @@
     }
 
     .scheduler-card-date-row label {
-      font-size: .7rem;
+      font-size: .74rem;
       text-transform: uppercase;
       letter-spacing: .06em;
       color: var(--sand-dim);
       font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
     }
 
     .scheduler-card-date-row input[type=date] {
-      background: var(--off-white);
+      background: var(--white);
       color: var(--lake-blue-deep);
       border: 1px solid var(--line);
-      border-radius: 7px;
-      padding: 7px 10px;
-      font-size: .82rem;
-      font-family: 'Inter', sans-serif;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: .86rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     .scheduler-card-actions {
@@ -1708,51 +1868,53 @@
 
     .btn-scheduler-remove {
       background: transparent;
-      color: var(--falu-red);
-      border: 1px solid rgba(156, 59, 50, .35);
-      padding: 8px 14px;
-      border-radius: 7px;
-      font-size: .78rem;
+      color: var(--danger);
+      border: 1px solid rgba(217, 87, 87, .35);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: .8rem;
       font-weight: 600;
       cursor: pointer;
       transition: all .15s;
     }
 
     .btn-scheduler-remove:hover {
-      background: rgba(156, 59, 50, .08);
-      border-color: var(--falu-red);
+      background: rgba(217, 87, 87, .08);
+      border-color: var(--danger);
     }
 
     .btn-scheduler-view {
       background: transparent;
       color: var(--lake-blue-deep);
       border: 1px solid var(--line);
-      padding: 8px 14px;
-      border-radius: 7px;
-      font-size: .78rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: .8rem;
       font-weight: 600;
     }
 
     .btn-scheduler-view:hover {
-      border-color: var(--sunset);
-      color: var(--sunset);
+      border-color: var(--falu-red);
+      color: var(--falu-red);
+      background: var(--white);
     }
 
     .scheduler-empty {
       text-align: center;
       padding: 70px 24px;
-      background: var(--white);
+      background: var(--bg-card);
       border: 1px dashed var(--line);
       border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
     .scheduler-empty h3 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       margin-bottom: 12px;
     }
 
     .scheduler-empty p {
-      max-width: 420px;
+      max-width: 440px;
       margin: 0 auto 26px;
     }
 
@@ -1776,10 +1938,10 @@
     .toast {
       background: var(--lake-blue-deep);
       color: var(--white);
-      padding: 13px 18px;
-      border-radius: 9px;
-      font-size: .84rem;
-      box-shadow: var(--shadow);
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: .88rem;
+      box-shadow: var(--shadow-hover);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -1787,19 +1949,12 @@
     }
 
     .toast b {
-      color: var(--sunset-light);
+      color: var(--falu-red);
     }
 
     @keyframes toastin {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media(max-width:480px) {
@@ -1814,15 +1969,71 @@
 
 <body>
 
+  <!-- ================= BOTANICAL SIDE VINES & FALLING LEAF PARTICLES ================= -->
+  <div class="ambient-forest-wrapper" aria-hidden="true">
+    <div class="ambient-mist mist-top-right"></div>
+    <div class="ambient-mist mist-mid-left"></div>
+
+    <!-- LEFT VINE -->
+    <div class="side-vine-container vine-left">
+      <svg viewBox="0 0 120 1000" preserveAspectRatio="none" className="botanical-vine-svg">
+        <path d="M 20,0 Q 45,150 25,300 T 40,600 T 20,900 L 25,1000" fill="none" stroke="#2F6B3C" stroke-width="2.5" stroke-linecap="round" opacity="0.65" />
+        <g fill="#4C9A45" opacity="0.75">
+          <path d="M 28,80 C 45,70 65,85 70,105 C 50,105 35,95 28,80 Z" />
+          <path d="M 33,130 C 55,120 75,140 80,165 C 60,160 42,150 33,130 Z" />
+          <path d="M 25,230 C 48,220 70,240 76,268 C 55,260 36,250 25,230 Z" />
+          <path d="M 28,290 C 52,280 75,302 82,330 C 60,325 40,312 28,290 Z" />
+          <path d="M 34,390 C 58,380 80,402 88,432 C 65,425 45,410 34,390 Z" />
+          <path d="M 36,460 C 62,450 85,475 92,505 C 70,498 48,482 36,460 Z" />
+          <path d="M 38,560 C 65,550 88,575 95,605 C 72,598 50,582 38,560 Z" />
+          <path d="M 30,640 C 55,630 78,655 85,685 C 62,678 42,662 30,640 Z" />
+          <path d="M 24,740 C 48,730 70,755 78,785 C 55,778 35,762 24,740 Z" />
+          <path d="M 22,830 C 45,820 68,845 74,875 C 52,868 32,852 22,830 Z" />
+          <path d="M 24,920 C 48,910 70,935 76,965 C 54,958 35,942 24,920 Z" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- RIGHT VINE -->
+    <div class="side-vine-container vine-right">
+      <svg viewBox="0 0 120 1000" preserveAspectRatio="none" className="botanical-vine-svg">
+        <path d="M 100,0 Q 75,150 95,300 T 80,600 T 100,900 L 95,1000" fill="none" stroke="#2F6B3C" stroke-width="2.5" stroke-linecap="round" opacity="0.65" />
+        <g fill="#4C9A45" opacity="0.75">
+          <path d="M 92,80 C 75,70 55,85 50,105 C 70,105 85,95 92,80 Z" />
+          <path d="M 87,130 C 65,120 45,140 40,165 C 60,160 78,150 87,130 Z" />
+          <path d="M 95,230 C 72,220 50,240 44,268 C 65,260 84,250 95,230 Z" />
+          <path d="M 92,290 C 68,280 45,302 38,330 C 60,325 80,312 92,290 Z" />
+          <path d="M 86,390 C 62,380 40,402 32,432 C 55,425 75,410 86,390 Z" />
+          <path d="M 84,460 C 58,450 35,475 28,505 C 50,498 72,482 84,460 Z" />
+          <path d="M 82,560 C 55,550 32,575 25,605 C 48,598 70,582 82,560 Z" />
+          <path d="M 90,640 C 65,630 42,655 35,685 C 58,678 78,662 90,640 Z" />
+          <path d="M 96,740 C 72,730 50,755 42,785 C 65,778 85,762 96,740 Z" />
+          <path d="M 98,830 C 75,820 52,845 46,875 C 68,868 88,852 98,830 Z" />
+          <path d="M 96,920 C 72,910 50,935 44,965 C 66,958 85,942 96,920 Z" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- DRIFTING LEAF PARTICLES -->
+    <div class="falling-leaves-viewport">
+      <div class="falling-leaf-track" style="left:8%; animation-duration:14s; animation-delay:0s;"><div class="falling-leaf-sway" style="animation-duration:4s; opacity:0.55;"><svg width="16" height="22" viewBox="0 0 20 26"><path d="M 10,0 C 18,6 20,18 10,26 C 0,18 2,6 10,0 Z" fill="#4C9A45" /></svg></div></div>
+      <div class="falling-leaf-track" style="left:22%; animation-duration:18s; animation-delay:2.5s;"><div class="falling-leaf-sway" style="animation-duration:5s; opacity:0.45;"><svg width="14" height="18" viewBox="0 0 20 26"><path d="M 10,0 C 19,8 17,20 10,26 C 3,20 1,8 10,0 Z" fill="#2F6B3C" /></svg></div></div>
+      <div class="falling-leaf-track" style="left:38%; animation-duration:12s; animation-delay:5s;"><div class="falling-leaf-sway" style="animation-duration:3.8s; opacity:0.6;"><svg width="18" height="24" viewBox="0 0 20 26"><path d="M 10,0 C 16,5 18,16 8,24 C 2,16 4,6 10,0 Z" fill="#6E846F" /></svg></div></div>
+      <div class="falling-leaf-track" style="left:55%; animation-duration:16s; animation-delay:1.2s;"><div class="falling-leaf-sway" style="animation-duration:4.5s; opacity:0.4;"><svg width="13" height="18" viewBox="0 0 20 26"><path d="M 10,0 C 18,6 20,18 10,26 C 0,18 2,6 10,0 Z" fill="#4C9A45" /></svg></div></div>
+      <div class="falling-leaf-track" style="left:72%; animation-duration:13s; animation-delay:3.8s;"><div class="falling-leaf-sway" style="animation-duration:4.2s; opacity:0.55;"><svg width="16" height="22" viewBox="0 0 20 26"><path d="M 10,0 C 19,8 17,20 10,26 C 3,20 1,8 10,0 Z" fill="#2F6B3C" /></svg></div></div>
+      <div class="falling-leaf-track" style="left:88%; animation-duration:19s; animation-delay:7s;"><div class="falling-leaf-sway" style="animation-duration:5.2s; opacity:0.45;"><svg width="15" height="20" viewBox="0 0 20 26"><path d="M 10,0 C 16,5 18,16 8,24 C 2,16 4,6 10,0 Z" fill="#6E846F" /></svg></div></div>
+    </div>
+  </div>
+
   <!-- ================= GLOBAL NAVIGATION ================= -->
   <header class="global-header">
     <nav class="global-nav">
       <a href="index.html" class="logo">
         <svg class="mark-svg" viewBox="0 0 26 26" fill="none">
-          <path d="M2 13c3-6 8-9 11-9s8 3 11 9c-3 6-8 9-11 9s-8-3-11-9z" stroke="#C78F57" stroke-width="1.6" />
-          <circle cx="13" cy="13" r="3.2" fill="#C78F57" />
+          <path d="M2 13c3-6 8-9 11-9s8 3 11 9c-3 6-8 9-11 9s-8-3-11-9z" stroke="#4C9A45" stroke-width="1.6" />
+          <circle cx="13" cy="13" r="3.2" fill="#2F6B3C" />
         </svg>
-        <span>Jharkhand <span style="color:var(--ochre);">Unexplored</span></span>
+        <span>Jharkhand <span style="color:var(--falu-red);">Unexplored</span></span>
       </a>
       <div class="global-navlinks">
         <a href="index.html">Home</a>
@@ -1858,11 +2069,8 @@
       <div class="wrap">
         <div class="hero-badge">Jharkhand Tourism Policy 2021 · Mining Heritage Module</div>
         <h1>Where Mines <em>Meet</em> Nature</h1>
-        <p class="lead">Discover Jharkhand's mining heritage, industrial landscapes and responsible mining-tourism
-          experiences.</p>
-        <p class="desc">Explore mining regions across the state, understand what is actually open to visitors versus
-          restricted or controlled, find the experience that suits you, and plan a visit around real safety and access
-          information — all in one place.</p>
+        <p class="lead">Discover Jharkhand's mining heritage, industrial landscapes and responsible mining-tourism experiences.</p>
+        <p class="desc">Explore mining regions across the state, understand what is actually open to visitors versus restricted or controlled, find the experience that suits you, and plan a visit around real safety and access information — all in one place.</p>
         <div class="hero-ctas">
           <button class="btn btn-primary" onclick="goView('explore')">Explore Mining Experiences →</button>
           <button class="btn btn-outline" onclick="goView('recommend')">Find My Experience</button>
@@ -1879,9 +2087,7 @@
       <div class="section-head">
         <span class="eyebrow">Why This Exists</span>
         <h2>A clear digital layer around a real initiative</h2>
-        <p>Jharkhand has already begun mining tourism — JTDC and CCL launched a guided programme at North Urimari,
-          Ramgarh. This platform brings together discovery, access transparency, personalized recommendations, visit
-          planning and responsible-travel guidance in one place.</p>
+        <p>Jharkhand has already begun mining tourism — JTDC and CCL launched a guided programme at North Urimari, Ramgarh. This platform brings together discovery, access transparency, personalized recommendations, visit planning and responsible-travel guidance in one place.</p>
       </div>
       <div class="flow">
         <div class="flow-step">
@@ -1920,14 +2126,10 @@
       <div class="section-head">
         <span class="eyebrow">Mining Heritage of Jharkhand</span>
         <h2>Seven regions. Three access realities.</h2>
-        <p>Not every mining region is a general tourist destination. Each site here is classified by its real access
-          status — visitable, restricted/controlled, or not established — so it is never presented as freely open unless
-          it genuinely has an established tourism pathway. North Urimari, the one established guided experience, appears
-          as the first card below.</p>
+        <p>Not every mining region is a general tourist destination. Each site here is classified by its real access status — visitable, restricted/controlled, or not established — so it is never presented as freely open unless it genuinely has an established tourism pathway. North Urimari, the one established guided experience, appears as the first card below.</p>
       </div>
 
-      <div class="disclaimer"><b>Note:</b> Access classifications shown here are indicative and should be verified with
-        the relevant mine operator, tourism authority and current site regulations before travel.</div>
+      <div class="disclaimer"><b>Note:</b> Access classifications shown here are indicative and should be verified with the relevant mine operator, tourism authority and current site regulations before travel.</div>
 
       <div class="filters">
         <div class="filter-group">
@@ -1969,8 +2171,7 @@
       <div class="section-head" style="margin-top:70px;">
         <span class="eyebrow">Trip Planning</span>
         <h2>Explore a Mining Tourism Circuit</h2>
-        <p>Suggested ways to combine mining heritage with the nature and culture around it. These are informational
-          planning ideas, not fixed itineraries with guaranteed timings.</p>
+        <p>Suggested ways to combine mining heritage with the nature and culture around it. These are informational planning ideas, not fixed itineraries with guaranteed timings.</p>
       </div>
       <div class="grid" style="grid-template-columns:repeat(3,1fr);" id="circuitGrid"></div>
       <p class="note" style="margin-top:16px;text-align:center;">Reference note: Pricing and circuit information shown here is based on last year's available details and may have changed. Please verify current prices, routes and availability with JTDC / the relevant operator before planning your visit.</p>
@@ -1979,8 +2180,7 @@
       <div class="section-head" style="margin-top:70px;">
         <span class="eyebrow">Travel Responsibly</span>
         <h2>Respecting the people, land and industry</h2>
-        <p>Mining tourism takes place around active industrial environments and working communities. A few principles to
-          keep every visit safe and respectful.</p>
+        <p>Mining tourism takes place around active industrial environments and working communities. A few principles to keep every visit safe and respectful.</p>
       </div>
       <div class="responsible-grid" id="responsibleGrid"></div>
 
@@ -1991,8 +2191,7 @@
   <!-- ================= DETAIL (DATA-DRIVEN) ================= -->
   <section id="view-detail" class="view">
     <div class="wrap section">
-      <button class="btn btn-outline" style="margin-bottom:24px" onclick="goView('explore')">← Back to Mining
-        Sites</button>
+      <button class="btn btn-outline" style="margin-bottom:24px" onclick="goView('explore')">← Back to Mining Sites</button>
       <div id="detailContent"></div>
     </div>
   </section>
@@ -2004,8 +2203,7 @@
       <div class="section-head">
         <span class="eyebrow">Trip Planning — Not a Booking System</span>
         <h2>Plan Your Visit</h2>
-        <p>Select a mining experience and outline how you'd like to visit. This helps you understand access, safety and
-          restrictions before you travel — it does not reserve or purchase anything.</p>
+        <p>Select a mining experience and outline how you'd like to visit. This helps you understand access, safety and restrictions before you travel — it does not reserve or purchase anything.</p>
       </div>
 
       <div class="plan-shell">
@@ -2042,8 +2240,7 @@
       <div class="section-head">
         <span class="eyebrow">Smart Experience Finder</span>
         <h2>Find your mining tourism experience</h2>
-        <p>Answer a few quick questions and this questionnaire-based finder matches you with a suitable mining-tourism
-          experience based on your interests and travel style.</p>
+        <p>Answer a few quick questions and this questionnaire-based finder matches you with a suitable mining-tourism experience based on your interests and travel style.</p>
       </div>
 
       <div class="quiz-wrap" id="quizWrap">
@@ -2062,12 +2259,10 @@
       <div class="section-head">
         <span class="eyebrow">Your Trip Cart</span>
         <h2>Scheduler</h2>
-        <p>Everything you've added from Mining Tourism, the Experience Finder and Plan Your Visit, gathered in one
-          place — like a cart for your Jharkhand trip.</p>
+        <p>Everything you've added from Mining Tourism, the Experience Finder and Plan Your Visit, gathered in one place — like a cart for your Jharkhand trip.</p>
       </div>
 
-      <div class="scheduler-notbooking"><b>Please note:</b> The Scheduler is a trip-planning tool, not a booking
-        system. Availability and access must be confirmed with the relevant operator or authority before travel.</div>
+      <div class="scheduler-notbooking"><b>Please note:</b> The Scheduler is a trip-planning tool, not a booking system. Availability and access must be confirmed with the relevant operator or authority before travel.</div>
 
       <div id="schedulerSummaryBar"></div>
       <div id="schedulerAccessWarning"></div>
@@ -2079,7 +2274,7 @@
   <!-- ================= FINALE ================= -->
   <div class="finale">
     <span class="eyebrow">From Mine to Memory</span>
-    <h2>From Mine <em style="color:var(--ochre-light);font-style:normal;">to</em> Memory</h2>
+    <h2>From Mine <em style="color:var(--falu-red);font-style:normal;">to</em> Memory</h2>
     <div class="lines">
       <b>Discover</b> the industry.<br>
       <b>Understand</b> the heritage.<br>
@@ -2090,18 +2285,17 @@
 
 
   <footer class="sitefoot">
-    <div
-      style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
       <div><b>Jharkhand Unexplored</b> — Smart Mining Tourism &amp; Industrial Heritage Module</div>
       <div style="display:flex;gap:18px;align-items:center;">
         <a href="index.html">Home</a>
         <a href="index.html#destinations">Explore</a>
-        <a href="mining.html" style="color:var(--ochre);font-weight:600;">Mining Tourism</a>
+        <a href="mining.html" style="color:var(--falu-red);font-weight:600;">Mining Tourism</a>
         <a href="jhar.html">Festivals</a>
         <a href="index.html#feedback">Feedback</a>
         <button class="credits-link" id="creditsToggle" type="button">Image Credits</button>
       </div>
-      <div class="mono" style="font-size:0.72rem;color:var(--sand-dim);">Jharkhand Smart Tourism</div>
+      <div class="mono" style="font-size:0.75rem;color:var(--sand-dim);">Jharkhand Smart Tourism</div>
     </div>
   </footer>
   <div class="credits-panel" id="creditsPanel">
@@ -2113,9 +2307,7 @@
 
   <script>
     /* =========================================================
-       DATA
-       Only verified, correctly attributed images are listed here.
-       Jharia now has exactly ONE verified representative image.
+       DATA (100% UNCHANGED LOGIC)
        ========================================================= */
     function img(src, alt, meta) { return { src, alt, ...(meta || {}) }; }
 
@@ -2273,9 +2465,9 @@
     ];
 
     const ACCESS_META = {
-      'authorized': { badgeClass: 'green', dot: '#4E7777', label: 'Authorized Tourism' },
-      'restricted': { badgeClass: 'yellow', dot: '#C78F57', label: 'Restricted / Controlled' },
-      'not-established': { badgeClass: 'red', dot: '#B54745', label: 'Access Not Established' }
+      'authorized': { badgeClass: 'green', dot: '#4C9A45', label: 'Authorized Tourism' },
+      'restricted': { badgeClass: 'yellow', dot: '#E5A72F', label: 'Restricted / Controlled' },
+      'not-established': { badgeClass: 'red', dot: '#D95757', label: 'Access Not Established' }
     };
 
     function accessBadgeHTML(site, tint) {
@@ -2302,7 +2494,7 @@
     ];
 
     /* =========================================================
-       CENTRAL REACTIVE SCHEDULER STORE (SINGLE SOURCE OF TRUTH)
+       CENTRAL REACTIVE SCHEDULER STORE
        ========================================================= */
     const SCHEDULER_KEY = 'jharkhandTripScheduler';
 
@@ -2315,13 +2507,8 @@
       },
 
       _notify(action, item) {
-        // 1. Immediately update all badge counters in navigation
         updateSchedulerBadge();
-
-        // 2. Immediately synchronize all "Add to Scheduler" buttons across the entire document
         syncAllSchedulerButtons();
-
-        // 3. Notify any registered view listeners (Plan view, Scheduler view, etc.)
         this._listeners.forEach(fn => {
           try { fn(action, item); } catch (e) { console.error(e); }
         });
@@ -2482,7 +2669,6 @@
     function handleSchedulerButtonClick(btn) {
       const id = btn.dataset.schedulerId || '';
       const rawSiteId = id.replace(/^mining-/, '');
-      // Navigate to "Plan Your Visit" with this site selected without adding immediately
       goToPlan(rawSiteId);
     }
 
@@ -2598,7 +2784,6 @@
       initCarousels(content);
     }
 
-    // Subscribe Scheduler UI & active view updates to the central SchedulerCart store
     SchedulerCart.subscribe((action, item) => {
       if (document.getElementById('view-scheduler').classList.contains('active')) {
         renderSchedulerPage();
@@ -2705,7 +2890,7 @@
     });
 
     /* =========================================================
-       EXPLORER GRID (WITH SORT REMOVED)
+       EXPLORER GRID
        ========================================================= */
     function renderGrid() {
       const mineral = document.getElementById('fMineral').value;
@@ -2873,7 +3058,6 @@
         return;
       }
 
-      // Restricted / not-established informational layout
       el.innerHTML = `
         <div class="detail-hero">
           ${carouselHTML(site.images, site.cls, { fallbackName: site.name, fallbackTag: site.placeholderText || site.mineral })}
@@ -3225,10 +3409,10 @@
           <span class="eyebrow">Mining Tourism Experience Match</span>
           <h3 style="font-size:1.6rem;margin-top:10px;">${best.site.name}</h3>
           <div class="match-score" style="margin:8px 0;">${best.score}% Match</div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ochre-light);margin-bottom:4px;">${categoryLabel}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent);margin-bottom:4px;font-weight:700;">${categoryLabel}</div>
           <div class="result-reason">${reasonText}</div>
           ${accessBadgeHTML(best.site, true)}
-          <p style="font-size:.85rem;margin-top:10px;">${accessStatusNote(best.site)}</p>
+          <p style="font-size:.88rem;margin-top:10px;">${accessStatusNote(best.site)}</p>
           <div>
             <div class="answer-recap" style="margin-top:10px;">Based on your answers:</div>
             <ul class="answer-list">
@@ -3242,7 +3426,7 @@
             <button class="btn btn-outline" onclick="openSite('${best.site.id}')">Explore Details →</button>
             ${schedulerButtonHTML(siteToSchedulerItem(best.site, { description: `${best.score}% match from the Smart Experience Finder — ${categoryLabel}.` }))}
           </div>
-          <span class="mono" style="font-size:.68rem;color:var(--sand-dim);display:block;margin-top:14px;">Generated by the Smart Experience Finder, a rule-based questionnaire — not an official government, CCL or JTDC score.</span>
+          <span class="mono" style="font-size:.7rem;color:var(--sand-dim);display:block;margin-top:14px;">Generated by the Smart Experience Finder, a rule-based questionnaire — not an official government, CCL or JTDC score.</span>
         </div>
 
         <div class="result-divider"></div>
@@ -3256,7 +3440,7 @@
               ? 'North Urimari is currently the established guided mining-tourism experience on this platform. Visitors can join an authorized guided experience through designated tourism areas and safe viewing points, with interpretation of coal mining, geology, mining technology and local history.'
               : accessStatusNote(secondCard.site)}</p>
           ${secondCard.mode === 'featured' ? `
-          <h4 style="margin-top:20px;font-size:.9rem;color:var(--ochre-light);">Why North Urimari?</h4>
+          <h4 style="margin-top:20px;font-size:1rem;color:var(--accent);">Why North Urimari?</h4>
           <ul class="why-list">
             <li>Established guided tourism pathway</li>
             <li>CCL × JTDC partnership</li>
@@ -3272,9 +3456,9 @@
 
         <div class="access-reality">
           <h4>Access Reality</h4>
-          <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'north-urimari'), false)}<span class="desc"><b style="color:var(--cream);">North Urimari</b> — Established guided tourism pathway</span></div>
-          <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'jharia'), false)}<span class="desc"><b style="color:var(--cream);">Other mining regions</b> (Jharia, Ghatsila, Noamundi, Koderma, Lohardaga) — Restricted / Controlled, informational / educational mining heritage only</span></div>
-          <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'jaduguda'), false)}<span class="desc"><b style="color:var(--cream);">Jaduguda</b> — Physical access not established for general tourism</span></div>
+          <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'north-urimari'), false)}<span class="desc"><b style="color:var(--lake-blue-deep);">North Urimari</b> — Established guided tourism pathway</span></div>
+          <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'jharia'), false)}<span class="desc"><b style="color:var(--lake-blue-deep);">Other mining regions</b> (Jharia, Ghatsila, Noamundi, Koderma, Lohardaga) — Restricted / Controlled, informational / educational mining heritage only</span></div>
+          <div class="access-row">${accessBadgeHTML(SITES.find(s => s.id === 'jaduguda'), false)}<span class="desc"><b style="color:var(--lake-blue-deep);">Jaduguda</b> — Physical access not established for general tourism</span></div>
         </div>
 
         <div style="margin-top:24px;text-align:center;">
