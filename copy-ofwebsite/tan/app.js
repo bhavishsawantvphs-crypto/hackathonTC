@@ -411,20 +411,37 @@ window.FootprintJH.app = (function () {
         ${stayHtml}
         ${flagHtml}
 
-        <!-- Interactive Map Action Bar -->
-        <div class="pt-4 border-t border-[rgba(47,107,60,0.18)] flex items-center justify-between gap-3 text-xs text-[#6E846F]">
+        <!-- Interactive Map & Action Bar -->
+        <div class="pt-4 border-t border-[rgba(47,107,60,0.18)] flex flex-wrap items-center justify-between gap-3 text-xs text-[#6E846F]">
           <div class="text-[11px] text-[#6E846F]">
             <span>Location: </span><span class="text-[#163B27] font-semibold">${dest.readableLocation || `${dest.district} District, Jharkhand`}</span>
           </div>
-          <button id="modal-explore-map-btn" 
-             class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-2xl bg-[#4C9A45] text-white font-bold hover:bg-[#3B7E48] transition-all duration-200 shadow-lg shadow-[#4C9A45]/25 cursor-pointer">
-            <span>Explore on Map</span>
-            <span>🗺️</span>
-          </button>
+          <div class="flex items-center space-x-2.5 flex-wrap gap-2">
+            <button id="modal-add-scheduler-btn"
+               data-destination-id="${dest.id}"
+               class="inline-flex items-center space-x-1.5 px-4 py-2.5 rounded-2xl bg-white hover:bg-[#E7F1E3] text-[#163B27] hover:text-[#2F6B3C] border border-[rgba(47,107,60,0.3)] font-bold transition-all duration-200 shadow-sm cursor-pointer">
+              <span>+</span>
+              <span>Add to Scheduler</span>
+            </button>
+            <button id="modal-explore-map-btn" 
+               class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-2xl bg-[#4C9A45] text-white font-bold hover:bg-[#3B7E48] transition-all duration-200 shadow-lg shadow-[#4C9A45]/25 cursor-pointer">
+              <span>Explore on Map</span>
+              <span>🗺️</span>
+            </button>
+          </div>
         </div>
 
       </div>
     `;
+
+    // Attach click handler to the Add to Scheduler button
+    const schedulerBtn = document.getElementById("modal-add-scheduler-btn");
+    if (schedulerBtn) {
+      schedulerBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        showToast("Scheduler will be available after trip-planner integration.");
+      });
+    }
 
     // Attach click handler to the in-page map button
     const mapBtn = document.getElementById("modal-explore-map-btn");
@@ -715,11 +732,30 @@ window.FootprintJH.app = (function () {
     document.body.style.overflow = "";
   }
 
+  function showToast(message) {
+    let toast = document.getElementById("jh-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "jh-toast";
+      toast.className = "fixed bottom-6 right-6 z-[9999] px-4 py-3 rounded-2xl bg-[#163B27] text-[#F7F1E5] text-xs font-semibold shadow-2xl border border-[rgba(76,154,69,0.4)] transition-all duration-300 transform translate-y-10 opacity-0 flex items-center space-x-2 pointer-events-none";
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<span>🌿</span><span>${message}</span>`;
+    toast.classList.remove("translate-y-10", "opacity-0");
+    toast.classList.add("translate-y-0", "opacity-100");
+    
+    setTimeout(() => {
+      toast.classList.remove("translate-y-0", "opacity-100");
+      toast.classList.add("translate-y-10", "opacity-0");
+    }, 2800);
+  }
+
   return {
     init,
     openModal,
     closeModal,
     openMapModal,
-    closeMapModal
+    closeMapModal,
+    showToast
   };
 })();
