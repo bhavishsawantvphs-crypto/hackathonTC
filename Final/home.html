@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#F2F7ED] scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FootprintJH — Discover Jharkhand Differently</title>
+  
+  <!-- Google Fonts for Editorial Luxury Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Tailwind Configuration for Light Sage & Deep Forest Luxury Palette -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pageBg: '#F2F7ED',
+            sageSecondary: '#E7F1E3',
+            lightSurface: '#F8FAF4',
+            darkBox: '#173D2A',
+            deepForest: '#163B27',
+            mediumForest: '#2F6B3C',
+            leafGreen: '#4C9A45',
+            leafGreenDark: '#2C6337',
+            leafGreenHover: '#3B7E48',
+            mutedGreen: '#6E846F',
+            bodyText: '#344C3A',
+            warmCream: '#F7F1E5',
+            softBorder: 'rgba(47, 107, 60, 0.18)'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #F2F7ED;
+      color: #163B27;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(47, 107, 60, 0.05);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(47, 107, 60, 0.28);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(47, 107, 60, 0.5);
+    }
+
+    /* Soft Animated Falling Leaves (Atmospheric & Calming) */
+    .falling-leaves-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .leaf-particle {
+      position: absolute;
+      top: -50px;
+      will-change: transform, opacity;
+      animation: fallDown linear infinite, swaySwing ease-in-out infinite alternate;
+    }
+
+    @keyframes fallDown {
+      0% {
+        top: -50px;
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.65;
+      }
+      85% {
+        opacity: 0.65;
+      }
+      100% {
+        top: 105vh;
+        opacity: 0;
+      }
+    }
+
+    @keyframes swaySwing {
+      0% {
+        transform: translateX(-25px) rotate(-25deg) rotateY(0deg);
+      }
+      50% {
+        transform: translateX(25px) rotate(35deg) rotateY(180deg);
+      }
+      100% {
+        transform: translateX(-20px) rotate(-15deg) rotateY(360deg);
+      }
+    }
+
+    /* ============================================================
+       VERTICAL WAVY FILM STRIP & ZERO-REFLOW CARDS STACK
+       ============================================================ */
+    .vertical-film-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 540px;
+    }
+
+    .v-feature-card {
+      width: 100%;
+      height: 84px;
+      transition: transform 0.35s ease, background-color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+      will-change: transform, background-color, box-shadow;
+      transform-origin: left center;
+      cursor: pointer;
+    }
+
+    /* Active Card State (Deep Forest Green, High Contrast, Subtle GPU Transform Only) */
+    .v-feature-card.is-active {
+      background-color: #163B27 !important;
+      color: #F7F1E5 !important;
+      border-color: #4C9A45 !important;
+      box-shadow: 0 14px 30px rgba(22, 59, 39, 0.22), 0 0 20px rgba(76, 154, 69, 0.18) !important;
+      transform: scale(1.03) translateX(6px) !important;
+      z-index: 20;
+    }
+
+    .v-feature-card.is-active .v-card-num {
+      background-color: #4C9A45 !important;
+      color: #FFFFFF !important;
+    }
+
+    .v-feature-card.is-active .v-card-title {
+      color: #F7F1E5 !important;
+    }
+
+    .v-feature-card.is-active .v-card-sub {
+      color: #C8D8C9 !important;
+    }
+
+    .v-feature-card.is-active .v-card-icon {
+      color: #4C9A45 !important;
+    }
+
+    /* Inactive Card State (Light Surface, Dark Forest Text, Fixed Size) */
+    .v-feature-card:not(.is-active) {
+      background-color: #F8FAF4 !important;
+      color: #163B27 !important;
+      border-color: rgba(47, 107, 60, 0.18) !important;
+      box-shadow: 0 4px 14px rgba(22, 59, 39, 0.05);
+      transform: scale(1) translateX(0);
+      z-index: 10;
+    }
+
+    .v-feature-card:not(.is-active):hover {
+      background-color: #FFFFFF !important;
+      border-color: #4C9A45 !important;
+      transform: scale(1.02) translateX(3px);
+      box-shadow: 0 8px 20px rgba(22, 59, 39, 0.1);
+    }
+
+    .v-feature-card:not(.is-active) .v-card-num {
+      background-color: #E7F1E3 !important;
+      color: #163B27 !important;
+    }
+
+    .v-feature-card:not(.is-active) .v-card-title {
+      color: #163B27 !important;
+    }
+
+    .v-feature-card:not(.is-active) .v-card-sub {
+      color: #6E846F !important;
+    }
+
+    .v-feature-card:not(.is-active) .v-card-icon {
+      color: #2F6B3C !important;
+    }
+
+    /* Vertical Film Reel Drop Shadow */
+    .vertical-film-svg {
+      filter: drop-shadow(0 6px 16px rgba(22, 59, 39, 0.12));
+    }
+
+    /* ============================================================
+       SUBTLE SCROLL-REVEAL ANIMATIONS
+       ============================================================ */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen selection:bg-leafGreen selection:text-white relative">
+
+  <!-- Falling Leaves Background Animation Layer -->
+  <div class="falling-leaves-container">
+    <svg class="leaf-particle w-6 h-6 text-[#4C9A45]" style="left: 5%; animation-duration: 12s, 3.6s; animation-delay: 0s, 0.2s;" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+    <svg class="leaf-particle w-5 h-5 text-[#6E9E68]" style="left: 18%; animation-duration: 15s, 4.2s; animation-delay: 3s, 1s;" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+    <svg class="leaf-particle w-7 h-7 text-[#7EB877]" style="left: 35%; animation-duration: 11s, 3.4s; animation-delay: 1.5s, 0.5s;" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+    <svg class="leaf-particle w-5 h-5 text-[#4C9A45]" style="left: 55%; animation-duration: 14s, 4.6s; animation-delay: 5s, 1.2s;" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+    <svg class="leaf-particle w-6 h-6 text-[#6E9E68]" style="left: 72%; animation-duration: 13s, 3.9s; animation-delay: 2s, 0.8s;" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+    <svg class="leaf-particle w-5 h-5 text-[#9BC894]" style="left: 88%; animation-duration: 16s, 4.4s; animation-delay: 4s, 1.5s;" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+  </div>
+
+  <!-- Subtle Botanical Side Vines -->
+  <div class="fixed top-0 bottom-0 left-0 w-8 sm:w-12 pointer-events-none z-10 opacity-20 flex flex-col justify-around py-8">
+    <svg viewBox="0 0 40 400" fill="none" stroke="#2F6B3C" stroke-width="1.5" class="w-full h-full text-leafGreen">
+      <path d="M10,0 Q30,50 10,100 T10,200 T10,300 T10,400" />
+      <path d="M15,40 Q28,30 30,45 Q20,55 15,40" fill="#4C9A45" fill-opacity="0.35"/>
+      <path d="M8,130 Q-2,120 0,135 Q10,145 8,130" fill="#4C9A45" fill-opacity="0.35"/>
+      <path d="M16,230 Q29,220 31,235 Q21,245 16,230" fill="#4C9A45" fill-opacity="0.35"/>
+      <path d="M9,330 Q-1,320 1,335 Q11,345 9,330" fill="#4C9A45" fill-opacity="0.35"/>
+    </svg>
+  </div>
+  <div class="fixed top-0 bottom-0 right-0 w-8 sm:w-12 pointer-events-none z-10 opacity-20 flex flex-col justify-around py-8 scale-x-[-1]">
+    <svg viewBox="0 0 40 400" fill="none" stroke="#2F6B3C" stroke-width="1.5" class="w-full h-full text-leafGreen">
+      <path d="M10,0 Q30,50 10,100 T10,200 T10,300 T10,400" />
+      <path d="M15,40 Q28,30 30,45 Q20,55 15,40" fill="#4C9A45" fill-opacity="0.35"/>
+      <path d="M8,130 Q-2,120 0,135 Q10,145 8,130" fill="#4C9A45" fill-opacity="0.35"/>
+      <path d="M16,230 Q29,220 31,235 Q21,245 16,230" fill="#4C9A45" fill-opacity="0.35"/>
+      <path d="M9,330 Q-1,320 1,335 Q11,345 9,330" fill="#4C9A45" fill-opacity="0.35"/>
+    </svg>
+  </div>
+
+  <!-- Soft Ambient Glows (Gentle Sage & Pale Cream) -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-[#4C9A45]/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-[#E7F1E3] rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-[#2F6B3C]/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- ============================================================
+       TOP NAVIGATION BAR
+       ============================================================ -->
+  <header class="relative z-40 border-b border-[rgba(47,107,60,0.18)] bg-[#F8FAF4]/90 backdrop-blur-md sticky top-0 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- Brand / Logo Area -->
+      <a href="home.html" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#4C9A45] to-[#2F6B3C] border border-[rgba(47,107,60,0.2)] flex items-center justify-center text-white text-xl shadow-md group-hover:scale-105 transition-transform duration-300">
+          🌿
+        </div>
+        <div>
+          <span class="text-xs uppercase font-bold tracking-widest text-leafGreen block leading-none">Discover</span>
+          <span class="text-lg font-serif font-bold text-deepForest tracking-tight">FootprintJH</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-7 lg:space-x-8 text-sm font-semibold text-mutedGreen">
+        <a href="home.html" class="text-leafGreen font-bold transition-colors">Home</a>
+        
+        <!-- Explore with Dropdown (Famous Places + Underrated Places) -->
+        <div class="relative group py-2">
+          <a href="index.html" class="hover:text-deepForest transition-colors inline-flex items-center space-x-1 cursor-pointer">
+            <span>Explore</span>
+            <svg class="w-3.5 h-3.5 opacity-70 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute left-0 top-full hidden group-hover:block pt-1 z-50">
+            <div class="w-56 bg-[#F8FAF4] border border-[rgba(47,107,60,0.18)] rounded-2xl shadow-xl p-2 flex flex-col gap-1 backdrop-blur-md">
+              <a href="Bhavish_Underrated_test/antigravity/scratch/jharkhand-tourism/index.html" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-deepForest hover:bg-white hover:text-leafGreen transition-colors flex items-center justify-between">
+                <span>Famous Places</span>
+                <span class="text-[10px] text-mutedGreen">Top 5</span>
+              </a>
+              <a href="index.html" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-deepForest hover:bg-white hover:text-leafGreen transition-colors flex items-center justify-between">
+                <span>Underrated Places</span>
+                <span class="text-[10px] text-leafGreen font-bold">Proximity</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="mining.html" class="hover:text-deepForest transition-colors">Mining</a>
+        <a href="hidden-waterfalls-jharkhand/dist/index.html#/" class="hover:text-deepForest transition-colors">Waterfalls</a>
+        <a href="jhar.html" class="hover:text-deepForest transition-colors">Festivals</a>
+        <a href="scheduler.html" class="hover:text-deepForest transition-colors">My Trip Plan</a>
+        <a href="feedback.html" class="hover:text-deepForest transition-colors">Feedback</a>
+      </nav>
+
+      <!-- Indicator / Portal Badge & Auth Container -->
+      <div class="flex items-center space-x-3" id="nav-auth-container">
+        <span class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-[rgba(47,107,60,0.18)] text-xs font-bold text-deepForest shadow-sm">
+          <span>🌲</span>
+          <span>Eco Tourism Portal</span>
+        </span>
+        <a
+          href="auth.html"
+          class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-full bg-leafGreen text-white text-xs font-bold hover:bg-leafGreenHover transition-all shadow-sm cursor-pointer"
+        >
+          <span>Log In / Sign Up</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN HERO SECTION WITH CINEMATIC TITLE & LAYERED CARDS
+       ============================================================ -->
+  <main class="relative z-20 flex-1 flex flex-col justify-center max-w-7xl mx-auto w-full px-6 lg:px-8 py-10 lg:py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      
+      <!-- LEFT SIDE: Dominant Hero Title & Minimal Narrative -->
+      <div class="lg:col-span-5 flex flex-col justify-center text-center lg:text-left z-30">
+        
+        <!-- Subtle Secondary Tagline -->
+        <div class="inline-flex items-center justify-center lg:justify-start space-x-2 text-xs font-bold uppercase tracking-widest text-leafGreen mb-3">
+          <span>The Land of Forests &amp; Living Heritage</span>
+          <span class="w-8 h-[1.5px] bg-leafGreen/60 hidden sm:inline-block"></span>
+        </div>
+
+        <!-- Large Dominant Title: JHARKHAND -->
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-serif font-black text-deepForest tracking-tight leading-none">
+          JHARKHAND
+        </h1>
+
+        <!-- Short Tourism-Focused Supporting Line -->
+        <p class="text-base sm:text-lg text-bodyText mt-4 font-normal leading-relaxed max-w-md mx-auto lg:mx-0">
+          Discover hidden waterfalls, sacred terracotta temples, ancient geo-parks, and vibrant living tribal heritage.
+        </p>
+
+        <!-- Primary Dynamic CTA Container -->
+        <div class="mt-8 flex items-center justify-center lg:justify-start space-x-4" id="hero-cta-container">
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+            <a href="auth.html" class="inline-flex items-center space-x-2 px-6 py-3.5 rounded-2xl bg-leafGreen text-white font-bold hover:bg-leafGreenHover transition-all duration-300 shadow-lg shadow-leafGreen/25 text-sm group cursor-pointer">
+              <span>Log In / Sign Up</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+            <a href="index.html" class="inline-flex items-center space-x-2 px-5 py-3.5 rounded-2xl bg-white border border-[rgba(47,107,60,0.25)] text-deepForest font-bold hover:bg-[#E7F1E3] transition-all text-sm cursor-pointer shadow-sm">
+              <span>Explore as Guest</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mini Feature Quick-Nav Indicators -->
+        <div class="mt-10 pt-6 border-t border-[rgba(47,107,60,0.15)] flex flex-wrap items-center justify-center lg:justify-start gap-2 text-[11px] text-mutedGreen">
+          <span class="px-2.5 py-1 rounded-full bg-white border border-[rgba(47,107,60,0.15)] font-semibold text-deepForest">5 Curated Pillars</span>
+          <span>•</span>
+          <span>Hover cards to preview each feature</span>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE: Vertical Wavy Film Strip with 5 Feature Cards -->
+      <div id="showcase" class="lg:col-span-7 relative w-full flex items-center justify-center lg:justify-end py-4">
+        
+        <div class="vertical-film-wrapper relative flex items-center justify-center lg:justify-end gap-4 sm:gap-6 w-full">
+          
+          <!-- Continuous Vertical Wavy Film Strip SVG with Sprocket Perforations -->
+          <div class="relative flex-shrink-0 w-16 sm:w-20 h-[460px] hidden sm:flex items-center justify-center">
+            <svg class="vertical-film-svg w-full h-full" viewBox="0 0 80 480" fill="none" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="vFilmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#C5DBC1" stop-opacity="0.85" />
+                  <stop offset="50%" stop-color="#DCEAD8" stop-opacity="0.95" />
+                  <stop offset="100%" stop-color="#C2D8BF" stop-opacity="0.85" />
+                </linearGradient>
+              </defs>
+              
+              <!-- Vertical Wavy Ribbon Path -->
+              <path d="M 22,0 Q 55,120 18,240 T 32,480 L 62,480 Q 48,360 78,240 T 52,0 Z" fill="url(#vFilmGrad)" stroke="rgba(47,107,60,0.25)" stroke-width="1.5" />
+              
+              <!-- Left Sprocket Perforations -->
+              <g fill="#F2F7ED" stroke="rgba(47,107,60,0.28)" stroke-width="1">
+                <rect x="25" y="14" width="8" height="12" rx="2" transform="rotate(-3 29 20)" />
+                <rect x="32" y="50" width="8" height="12" rx="2" transform="rotate(-5 36 56)" />
+                <rect x="36" y="86" width="8" height="12" rx="2" transform="rotate(-4 40 92)" />
+                <rect x="36" y="122" width="8" height="12" rx="2" transform="rotate(-1 40 128)" />
+                <rect x="32" y="158" width="8" height="12" rx="2" transform="rotate(3 36 164)" />
+                <rect x="26" y="194" width="8" height="12" rx="2" transform="rotate(6 30 200)" />
+                <rect x="21" y="230" width="8" height="12" rx="2" transform="rotate(5 25 236)" />
+                <rect x="19" y="266" width="8" height="12" rx="2" transform="rotate(2 23 272)" />
+                <rect x="21" y="302" width="8" height="12" rx="2" transform="rotate(-2 25 308)" />
+                <rect x="25" y="338" width="8" height="12" rx="2" transform="rotate(-5 29 344)" />
+                <rect x="30" y="374" width="8" height="12" rx="2" transform="rotate(-4 34 380)" />
+                <rect x="32" y="410" width="8" height="12" rx="2" transform="rotate(-1 36 416)" />
+                <rect x="30" y="446" width="8" height="12" rx="2" transform="rotate(2 34 452)" />
+              </g>
+
+              <!-- Right Sprocket Perforations -->
+              <g fill="#F2F7ED" stroke="rgba(47,107,60,0.28)" stroke-width="1">
+                <rect x="44" y="14" width="8" height="12" rx="2" transform="rotate(-3 48 20)" />
+                <rect x="51" y="50" width="8" height="12" rx="2" transform="rotate(-5 55 56)" />
+                <rect x="55" y="86" width="8" height="12" rx="2" transform="rotate(-4 59 92)" />
+                <rect x="55" y="122" width="8" height="12" rx="2" transform="rotate(-1 59 128)" />
+                <rect x="51" y="158" width="8" height="12" rx="2" transform="rotate(3 55 164)" />
+                <rect x="45" y="194" width="8" height="12" rx="2" transform="rotate(6 49 200)" />
+                <rect x="40" y="230" width="8" height="12" rx="2" transform="rotate(5 44 236)" />
+                <rect x="38" y="266" width="8" height="12" rx="2" transform="rotate(2 42 272)" />
+                <rect x="40" y="302" width="8" height="12" rx="2" transform="rotate(-2 44 308)" />
+                <rect x="44" y="338" width="8" height="12" rx="2" transform="rotate(-5 48 344)" />
+                <rect x="49" y="374" width="8" height="12" rx="2" transform="rotate(-4 53 380)" />
+                <rect x="51" y="410" width="8" height="12" rx="2" transform="rotate(-1 55 416)" />
+                <rect x="49" y="446" width="8" height="12" rx="2" transform="rotate(2 53 452)" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- 5 Vertically Stacked Feature Cards (Fixed Dimensions, Zero Reflow) -->
+          <div class="flex-1 flex flex-col gap-2.5 sm:gap-3 w-full max-w-[420px]">
+            
+            <!-- CARD 01: Unexplored Jharkhand (Default Active) -->
+            <div class="v-feature-card is-active rounded-2xl p-3.5 flex items-center justify-between border"
+                 data-card-idx="0">
+              <div class="flex items-center space-x-3 min-w-0">
+                <span class="v-card-num text-xs font-serif font-bold w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">#01</span>
+                <div class="min-w-0">
+                  <h4 class="v-card-title font-serif font-bold text-sm sm:text-base leading-tight truncate">Unexplored Jharkhand</h4>
+                  <p class="v-card-sub text-xs mt-0.5 truncate font-normal">Underrated Places + Proximity Travel</p>
+                </div>
+              </div>
+              <div class="v-card-icon text-lg flex-shrink-0 ml-3">🌿</div>
+            </div>
+
+            <!-- CARD 02: Hidden Waterfalls -->
+            <div class="v-feature-card rounded-2xl p-3.5 flex items-center justify-between border"
+                 data-card-idx="1">
+              <div class="flex items-center space-x-3 min-w-0">
+                <span class="v-card-num text-xs font-serif font-bold w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0">#02</span>
+                <div class="min-w-0">
+                  <h4 class="v-card-title font-serif font-bold text-sm sm:text-base leading-tight truncate">Hidden Waterfalls</h4>
+                  <p class="v-card-sub text-xs mt-0.5 truncate font-normal">Discover lesser-known waterfalls and natural escapes.</p>
+                </div>
+              </div>
+              <div class="v-card-icon flex-shrink-0 ml-3">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M4 4v16M8 4v16M12 4c0 4-2 6-2 8s2 4 2 8M16 4c0 3-2 5-2 7s2 3 2 9M20 4v16" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- CARD 03: Mining Heritage -->
+            <div class="v-feature-card rounded-2xl p-3.5 flex items-center justify-between border"
+                 data-card-idx="2">
+              <div class="flex items-center space-x-3 min-w-0">
+                <span class="v-card-num text-xs font-serif font-bold w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0">#03</span>
+                <div class="min-w-0">
+                  <h4 class="v-card-title font-serif font-bold text-sm sm:text-base leading-tight truncate">Mining Heritage</h4>
+                  <p class="v-card-sub text-xs mt-0.5 truncate font-normal">Explore Jharkhand's mining history through heritage experiences.</p>
+                </div>
+              </div>
+              <div class="v-card-icon flex-shrink-0 ml-3">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M4 7l2 10h12l2-10H4zM6 20a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM18 20a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM2 17h20" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- CARD 04: Festival Calendar -->
+            <div class="v-feature-card rounded-2xl p-3.5 flex items-center justify-between border"
+                 data-card-idx="3">
+              <div class="flex items-center space-x-3 min-w-0">
+                <span class="v-card-num text-xs font-serif font-bold w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0">#04</span>
+                <div class="min-w-0">
+                  <h4 class="v-card-title font-serif font-bold text-sm sm:text-base leading-tight truncate">Festival Calendar</h4>
+                  <p class="v-card-sub text-xs mt-0.5 truncate font-normal">Discover tribal festivals and cultural celebrations year-round.</p>
+                </div>
+              </div>
+              <div class="v-card-icon flex-shrink-0 ml-3">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="4" width="18" height="18" rx="3" stroke-linecap="round"/>
+                  <path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- CARD 05: AI Travel Assistant -->
+            <div class="v-feature-card rounded-2xl p-3.5 flex items-center justify-between border"
+                 data-card-idx="4">
+              <div class="flex items-center space-x-3 min-w-0">
+                <span class="v-card-num text-xs font-serif font-bold w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0">#05</span>
+                <div class="min-w-0">
+                  <h4 class="v-card-title font-serif font-bold text-sm sm:text-base leading-tight truncate">AI Travel Assistant</h4>
+                  <p class="v-card-sub text-xs mt-0.5 truncate font-normal">A multilingual travel companion to make exploration easier.</p>
+                </div>
+              </div>
+              <div class="v-card-icon flex-shrink-0 ml-3">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="4" y="8" width="16" height="12" rx="3" stroke-linecap="round"/>
+                  <path d="M12 2v6M8 13h.01M16 13h.01M9 17h6M2 14h2M20 14h2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       SECTION 1 — FIVE WAYS TO EXPLORE (Horizontal Visual Journey)
+       ============================================================ -->
+  <section id="features" class="relative z-20 py-20 sm:py-24 border-t border-[rgba(47,107,60,0.18)] bg-[#F2F7ED]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+        <div class="inline-flex items-center space-x-2 text-[11px] font-bold uppercase tracking-widest text-leafGreen mb-3 px-3.5 py-1.5 rounded-full bg-white border border-[rgba(47,107,60,0.18)] shadow-sm">
+          <span>One Platform. Five Experiences.</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-deepForest tracking-tight leading-tight">
+          Explore Jharkhand Beyond the Usual.
+        </h2>
+        <p class="text-sm sm:text-base text-mutedGreen mt-4 leading-relaxed font-normal">
+          From lesser-known destinations and hidden waterfalls to mining heritage, cultural festivals and intelligent travel assistance — discover Jharkhand through five connected experiences.
+        </p>
+      </div>
+
+      <!-- Horizontal Travel-Path Visual Journey -->
+      <div class="relative mt-8">
+        
+        <!-- Subtle Connecting Track (Desktop) -->
+        <div class="hidden lg:block absolute top-1/2 left-8 right-8 h-[2px] border-t-2 border-dashed border-[rgba(47,107,60,0.25)] -translate-y-6 z-0"></div>
+
+        <!-- 5 Journey Waypoints Grid / Horizontal Flow -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 sm:gap-6 relative z-10">
+          
+          <!-- Waypoint 01 -->
+          <div class="reveal-on-scroll bg-[#F8FAF4] hover:bg-white border border-[rgba(47,107,60,0.18)] hover:border-leafGreen rounded-3xl p-6 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between group cursor-default" style="transition-delay: 50ms;">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-serif font-bold text-white bg-leafGreen px-2.5 py-1 rounded-xl shadow-sm">01</span>
+                <span class="text-xl group-hover:scale-110 transition-transform">📍</span>
+              </div>
+              <h3 class="text-base font-serif font-bold text-deepForest group-hover:text-leafGreen transition-colors leading-snug">
+                Unexplored Jharkhand
+              </h3>
+              <p class="text-xs text-mutedGreen font-semibold mt-1">Underrated Places + Proximity Travel</p>
+            </div>
+            <p class="text-xs text-bodyText mt-3 pt-3 border-t border-[rgba(47,107,60,0.1)] leading-relaxed font-light">
+              Discover lesser-known destinations with verified proximity clusters.
+            </p>
+          </div>
+
+          <!-- Waypoint 02 -->
+          <div class="reveal-on-scroll bg-[#F8FAF4] hover:bg-white border border-[rgba(47,107,60,0.18)] hover:border-leafGreen rounded-3xl p-6 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between group cursor-default" style="transition-delay: 100ms;">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-serif font-bold text-white bg-[#2F6B3C] px-2.5 py-1 rounded-xl shadow-sm">02</span>
+                <span class="text-xl group-hover:scale-110 transition-transform">💧</span>
+              </div>
+              <h3 class="text-base font-serif font-bold text-deepForest group-hover:text-leafGreen transition-colors leading-snug">
+                Hidden Waterfalls
+              </h3>
+              <p class="text-xs text-mutedGreen font-semibold mt-1">Lesser-known natural escapes</p>
+            </div>
+            <p class="text-xs text-bodyText mt-3 pt-3 border-t border-[rgba(47,107,60,0.1)] leading-relaxed font-light">
+              Explore scenic forest cascades, treks and tranquil eco-escapes.
+            </p>
+          </div>
+
+          <!-- Waypoint 03 -->
+          <div class="reveal-on-scroll bg-[#F8FAF4] hover:bg-white border border-[rgba(47,107,60,0.18)] hover:border-leafGreen rounded-3xl p-6 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between group cursor-default" style="transition-delay: 150ms;">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-serif font-bold text-white bg-leafGreen px-2.5 py-1 rounded-xl shadow-sm">03</span>
+                <span class="text-xl group-hover:scale-110 transition-transform">⛏️</span>
+              </div>
+              <h3 class="text-base font-serif font-bold text-deepForest group-hover:text-leafGreen transition-colors leading-snug">
+                Mining Heritage
+              </h3>
+              <p class="text-xs text-mutedGreen font-semibold mt-1">Industrial &amp; Geo experiences</p>
+            </div>
+            <p class="text-xs text-bodyText mt-3 pt-3 border-t border-[rgba(47,107,60,0.1)] leading-relaxed font-light">
+              Discover historical mines, geology trails and industrial origins.
+            </p>
+          </div>
+
+          <!-- Waypoint 04 -->
+          <div class="reveal-on-scroll bg-[#F8FAF4] hover:bg-white border border-[rgba(47,107,60,0.18)] hover:border-leafGreen rounded-3xl p-6 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between group cursor-default" style="transition-delay: 200ms;">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-serif font-bold text-white bg-[#2F6B3C] px-2.5 py-1 rounded-xl shadow-sm">04</span>
+                <span class="text-xl group-hover:scale-110 transition-transform">🥁</span>
+              </div>
+              <h3 class="text-base font-serif font-bold text-deepForest group-hover:text-leafGreen transition-colors leading-snug">
+                Festival Calendar
+              </h3>
+              <p class="text-xs text-mutedGreen font-semibold mt-1">Cultural &amp; tribal celebrations</p>
+            </div>
+            <p class="text-xs text-bodyText mt-3 pt-3 border-t border-[rgba(47,107,60,0.1)] leading-relaxed font-light">
+              Experience Sarhul, Karma, Tusu Parab and seasonal tribal folk fairs.
+            </p>
+          </div>
+
+          <!-- Waypoint 05 -->
+          <div class="reveal-on-scroll bg-[#F8FAF4] hover:bg-white border border-[rgba(47,107,60,0.18)] hover:border-leafGreen rounded-3xl p-6 transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between group cursor-default" style="transition-delay: 250ms;">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-serif font-bold text-white bg-leafGreen px-2.5 py-1 rounded-xl shadow-sm">05</span>
+                <span class="text-xl group-hover:scale-110 transition-transform">🤖</span>
+              </div>
+              <h3 class="text-base font-serif font-bold text-deepForest group-hover:text-leafGreen transition-colors leading-snug">
+                AI Travel Assistant
+              </h3>
+              <p class="text-xs text-mutedGreen font-semibold mt-1">Multilingual travel assistance</p>
+            </div>
+            <p class="text-xs text-bodyText mt-3 pt-3 border-t border-[rgba(47,107,60,0.1)] leading-relaxed font-light">
+              Get instant multilingual recommendations and practical trip guidance.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — FROM DISCOVERY TO JOURNEY (How Platform Works)
+       ============================================================ -->
+  <section id="journey" class="relative z-20 py-20 sm:py-24 border-t border-[rgba(47,107,60,0.18)] bg-[#E7F1E3]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-14 reveal-on-scroll">
+        <div class="inline-flex items-center space-x-2 text-[11px] font-bold uppercase tracking-widest text-leafGreen mb-3 px-3.5 py-1.5 rounded-full bg-white border border-[rgba(47,107,60,0.18)] shadow-sm">
+          <span>From Discovery To Journey</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-deepForest tracking-tight leading-tight">
+          Discover. Understand. Plan. Experience.
+        </h2>
+      </div>
+
+      <!-- Clean Visual Step Flow -->
+      <div class="reveal-on-scroll mb-16 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-semibold text-deepForest">
+        <span class="px-4 py-2 rounded-full bg-white border border-[rgba(47,107,60,0.18)] shadow-sm">Discover</span>
+        <span class="text-leafGreen font-bold text-sm">→</span>
+        <span class="px-4 py-2 rounded-full bg-white border border-[rgba(47,107,60,0.18)] shadow-sm">Explore</span>
+        <span class="text-leafGreen font-bold text-sm">→</span>
+        <span class="px-4 py-2 rounded-full bg-white border border-[rgba(47,107,60,0.18)] shadow-sm">Check Nearby</span>
+        <span class="text-leafGreen font-bold text-sm">→</span>
+        <span class="px-4 py-2 rounded-full bg-white border border-[rgba(47,107,60,0.18)] shadow-sm">Plan</span>
+        <span class="text-leafGreen font-bold text-sm">→</span>
+        <span class="px-4 py-2 rounded-full bg-leafGreen text-white font-bold shadow-md shadow-leafGreen/25">Experience Jharkhand</span>
+      </div>
+
+      <!-- Three Minimal Information Blocks -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        
+        <!-- Block 1: DISCOVER DIFFERENTLY -->
+        <div class="reveal-on-scroll bg-[#F8FAF4] border border-[rgba(47,107,60,0.18)] rounded-3xl p-7 shadow-sm flex flex-col justify-between" style="transition-delay: 50ms;">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-leafGreen/15 text-leafGreen flex items-center justify-center text-2xl mb-5 shadow-sm">
+              🧭
+            </div>
+            <h3 class="text-lg font-serif font-bold text-deepForest tracking-tight mb-2">
+              DISCOVER DIFFERENTLY
+            </h3>
+            <p class="text-xs sm:text-sm text-bodyText leading-relaxed font-light">
+              Go beyond commonly promoted tourist destinations and discover lesser-known experiences.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[rgba(47,107,60,0.12)] text-[11px] font-semibold text-leafGreen flex items-center space-x-1">
+            <span>Verified Eco Sites</span>
+            <span>•</span>
+            <span>Uncrowded Trails</span>
+          </div>
+        </div>
+
+        <!-- Block 2: PLAN SMARTER -->
+        <div class="reveal-on-scroll bg-[#F8FAF4] border border-[rgba(47,107,60,0.18)] rounded-3xl p-7 shadow-sm flex flex-col justify-between" style="transition-delay: 150ms;">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-leafGreen/15 text-leafGreen flex items-center justify-center text-2xl mb-5 shadow-sm">
+              🗺️
+            </div>
+            <h3 class="text-lg font-serif font-bold text-deepForest tracking-tight mb-2">
+              PLAN SMARTER
+            </h3>
+            <p class="text-xs sm:text-sm text-bodyText leading-relaxed font-light">
+              Use proximity information, maps, weather and practical travel information before visiting.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[rgba(47,107,60,0.12)] text-[11px] font-semibold text-leafGreen flex items-center space-x-1">
+            <span>Fixed GPS Points</span>
+            <span>•</span>
+            <span>Live Weather</span>
+          </div>
+        </div>
+
+        <!-- Block 3: EXPERIENCE LOCAL CULTURE -->
+        <div class="reveal-on-scroll bg-[#F8FAF4] border border-[rgba(47,107,60,0.18)] rounded-3xl p-7 shadow-sm flex flex-col justify-between" style="transition-delay: 250ms;">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-leafGreen/15 text-leafGreen flex items-center justify-center text-2xl mb-5 shadow-sm">
+              🌾
+            </div>
+            <h3 class="text-lg font-serif font-bold text-deepForest tracking-tight mb-2">
+              EXPERIENCE LOCAL CULTURE
+            </h3>
+            <p class="text-xs sm:text-sm text-bodyText leading-relaxed font-light">
+              Explore festivals, heritage, local communities and distinctive experiences across Jharkhand.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[rgba(47,107,60,0.12)] text-[11px] font-semibold text-leafGreen flex items-center space-x-1">
+            <span>Living Traditions</span>
+            <span>•</span>
+            <span>Tribal Art Forms</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — FINAL CTA (Nature-Inspired Organic Call to Action)
+       ============================================================ -->
+  <section id="cta" class="relative z-20 py-20 sm:py-28 bg-[#F2F7ED] border-t border-[rgba(47,107,60,0.18)]">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8">
+      
+      <!-- CTA Container Card -->
+      <div class="reveal-on-scroll relative overflow-hidden rounded-[36px] bg-gradient-to-br from-[#E7F1E3] via-[#F8FAF4] to-[#E7F1E3] border border-[rgba(47,107,60,0.22)] p-10 sm:p-14 lg:p-16 text-center shadow-xl">
+        
+        <!-- Subtle Leaf Background Accents -->
+        <div class="absolute -top-16 -left-16 w-48 h-48 bg-leafGreen/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -right-16 w-48 h-48 bg-[#2F6B3C]/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-2xl mx-auto">
+          
+          <span class="text-xs uppercase font-bold tracking-widest text-leafGreen block mb-3">Begin The Journey</span>
+          
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-deepForest tracking-tight leading-tight">
+            "Jharkhand is more than a destination.<br>
+            <span class="italic text-leafGreen">It's a journey waiting to be discovered."</span>
+          </h2>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= STANDARDIZED COMPACT FOOTER ================= -->
+  <footer class="bg-[#102D20] text-[#D4EDDA] pt-10 pb-6 border-t border-[rgba(76,154,69,0.3)] mt-auto text-xs">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        
+        <!-- Brand Narrative -->
+        <div>
+          <a href="home.html" class="inline-flex items-center space-x-2 text-white font-serif text-lg font-bold mb-2">
+            <span class="w-6 h-6 rounded-lg bg-leafGreen flex items-center justify-center text-xs">🌿</span>
+            <span>FootprintJH</span>
+          </a>
+          <p class="text-[#A3DB9F] italic mb-2 text-xs">"Explore beyond the ordinary."</p>
+          <p class="text-[#A3B8B0] text-[11px] leading-relaxed">
+            Discovering hidden waterfalls, living tribal heritage, sacred mountain sanctums, and sustainable eco-tourism.
+          </p>
+        </div>
+
+        <!-- Experience Portals -->
+        <div>
+          <h4 class="text-white font-serif font-bold text-sm mb-3">Experience Portals</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li><a href="home.html" class="hover:text-white transition-colors">Home Portal</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Underrated Places</a></li>
+            <li><a href="Bhavish_Underrated_test/antigravity/scratch/jharkhand-tourism/index.html" class="hover:text-white transition-colors">Top 5 Famous Places</a></li>
+            <li><a href="hidden-waterfalls-jharkhand/dist/index.html#/" class="hover:text-white transition-colors">Hidden Waterfalls</a></li>
+            <li><a href="mining.html" class="hover:text-white transition-colors">Mining Heritage</a></li>
+            <li><a href="jhar.html" class="hover:text-white transition-colors">Festivals Calendar</a></li>
+          </ul>
+        </div>
+
+        <!-- Key Districts -->
+        <div>
+          <h4 class="text-white font-serif font-bold text-sm mb-3">Districts &amp; Circuits</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li><a href="index.html" class="hover:text-white transition-colors">Ranchi (Capital &amp; Cascades)</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Ramgarh (Patratu Valley)</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Latehar (Netarhat Hills &amp; Betla)</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Deoghar (Sacred Sanctums)</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Dumka (Maluti Terracotta)</a></li>
+            <li><a href="feedback.html" class="hover:text-white transition-colors">Explorer Feedback &amp; Reviews</a></li>
+          </ul>
+        </div>
+
+        <!-- Visitor Helpline -->
+        <div>
+          <h4 class="text-white font-serif font-bold text-sm mb-3">Visitor Helpline</h4>
+          <p class="text-[#A3B8B0] text-[11px] mb-1.5">Jharkhand Tourism Development Corporation (JTDC)</p>
+          <p class="text-[#E8C9A3] font-bold text-xs mb-1">Toll-Free: 1800-345-6571</p>
+          <p class="text-[#A3B8B0] text-[11px] leading-relaxed">
+            Birsa Munda Airport &amp; Ranchi Railway Station Tourist Info Desks.
+          </p>
+          <div class="mt-3">
+            <a href="feedback.html" class="inline-flex items-center space-x-1 text-[#E8C9A3] hover:underline font-semibold text-xs">
+              <span>★ Leave Feedback / Suggestions</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-6 border-t border-[rgba(255,255,255,0.1)] flex flex-col sm:flex-row items-center justify-between text-[#A3B8B0] text-[11px] gap-2">
+        <p>&copy; 2026 Jharkhand Tourism • FootprintJH. All rights reserved.</p>
+        <p class="text-[#A3DB9F] italic">"Made for explorers."</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       HOMEPAGE CONTROLLER SCRIPT (Deck Hover + Scroll Reveal)
+       ============================================================ -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Hero Vertical Feature Cards Hover & Click Interaction (Zero Reflow)
+      const vCards = document.querySelectorAll(".v-feature-card");
+      if (vCards.length) {
+        function activateVCard(targetIndex) {
+          vCards.forEach((card, idx) => {
+            if (idx === targetIndex) {
+              card.classList.add("is-active");
+            } else {
+              card.classList.remove("is-active");
+            }
+          });
+        }
+
+        vCards.forEach((card, index) => {
+          card.addEventListener("mouseenter", () => activateVCard(index));
+          card.addEventListener("click", () => activateVCard(index));
+        });
+      }
+
+      // 2. Subtle Scroll-Reveal Observer
+      const reveals = document.querySelectorAll(".reveal-on-scroll");
+      if ("IntersectionObserver" in window && reveals.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: "0px 0px -40px 0px"
+        });
+
+        reveals.forEach((el) => observer.observe(el));
+      }
+    });
+  </script>
+  <!-- Supabase JS Client & Universal Auth -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <!-- Sohrai AI Bot Widget -->
+  <script src="src/bot-widget.js" defer></script>
+</body>
+</html>

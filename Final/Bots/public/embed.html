@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sohrai — Jharkhand Tourism Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #F2F7ED;
+    --bg-secondary: #E7F1E3;
+    --surface-card: #F8FAF4;
+    --forest-deep: #163B27;
+    --forest: #2F6B3C;
+    --leaf-green: #4C9A45;
+    --leaf-green-hover: #3D8537;
+    --text-muted: #6E846F;
+    --warm-cream: #F7F1E5;
+    --border-soft: rgba(47, 107, 60, 0.18);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    background: var(--bg-main);
+    color: var(--forest-deep);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.5;
+  }
+
+  #chat-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-card);
+  }
+
+  .widget-header {
+    background: var(--forest-deep);
+    color: var(--warm-cream);
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .widget-header #widget-name {
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  .widget-header .subtitle {
+    font-weight: 400;
+    font-size: 12px;
+    color: #C5D8C3;
+    margin-top: 2px;
+  }
+
+  #new-chat-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--warm-cream);
+    border-radius: 8px;
+    padding: 4px 9px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s ease;
+  }
+
+  #new-chat-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  #lang-select {
+    padding: 4px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  #lang-select option {
+    color: var(--forest-deep);
+    background: var(--surface-card);
+  }
+
+  #chat-log {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg-main);
+    scroll-behavior: auto;
+  }
+
+  .msg {
+    max-width: 86%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+
+  .msg.bot {
+    background: var(--surface-card);
+    color: var(--forest-deep);
+    border: 1px solid var(--border-soft);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 6px rgba(22, 59, 39, 0.04);
+  }
+
+  .msg.user {
+    background: var(--leaf-green);
+    color: #FFFFFF;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 8px rgba(76, 154, 69, 0.2);
+  }
+
+  .msg.bot.thinking {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .msg.bot ul {
+    margin: 4px 0;
+    padding-left: 18px;
+    white-space: normal;
+  }
+
+  .msg.bot li {
+    margin: 3px 0;
+  }
+
+  .msg.bot p {
+    margin: 4px 0;
+    white-space: normal;
+  }
+
+  .msg.bot strong {
+    color: var(--forest-deep);
+    font-weight: 600;
+  }
+
+  #chat-form {
+    display: flex;
+    gap: 8px;
+    padding: 12px 14px;
+    border-top: 1px solid var(--border-soft);
+    background: var(--surface-card);
+    flex-shrink: 0;
+  }
+
+  #chat-input {
+    flex: 1;
+    padding: 10px 13px;
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #FFFFFF;
+    color: var(--forest-deep);
+    min-width: 0;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  #chat-input:focus {
+    outline: none;
+    border-color: var(--leaf-green);
+    box-shadow: 0 0 0 3px rgba(76, 154, 69, 0.15);
+  }
+
+  #chat-form button {
+    background: var(--leaf-green);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 0 18px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+
+  #chat-form button:hover {
+    background: var(--leaf-green-hover);
+  }
+
+  #chat-form button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 14px 10px;
+    background: var(--bg-main);
+    flex-shrink: 0;
+  }
+
+  .suggestions button {
+    background: var(--surface-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--forest);
+    transition: all 0.15s ease;
+  }
+
+  .suggestions button:hover {
+    background: var(--bg-secondary);
+    border-color: var(--leaf-green);
+    color: var(--forest-deep);
+  }
+</style>
+</head>
+<body>
+
+<div id="chat-card">
+  <div class="widget-header">
+    <div>
+      <div id="widget-name">Sohrai</div>
+      <div class="subtitle" id="widget-tagline">Jharkhand Tourism guide</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <button id="new-chat-btn" type="button" title="Start a new chat (clears saved history)" aria-label="New Chat" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:7px;padding:4px 8px;font-size:12px;cursor:pointer;font-family:inherit;">
+        ＋ New
+      </button>
+      <select id="lang-select">
+        <option value="en">EN</option>
+        <option value="hi">हिं</option>
+        <option value="mr">मरा</option>
+      </select>
+    </div>
+  </div>
+  <div id="chat-log"></div>
+  <div class="suggestions" id="suggestions">
+    <button type="button"></button>
+    <button type="button"></button>
+    <button type="button"></button>
+  </div>
+  <form id="chat-form">
+    <input id="chat-input" type="text" autocomplete="off" />
+    <button type="submit" id="send-btn">Send</button>
+  </form>
+</div>
+
+<script src="i18n.js"></script>
+<script src="chat-widget.js"></script>
+
+</body>
+</html>

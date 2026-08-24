@@ -1,0 +1,3591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jharkhand Utsav Panchang — Jharkhand Tourism</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   JHARKHAND ECO-TOURISM UNIFIED THEME
+   Palette:
+   Main background: #F2F7ED (Soft Pale Sage)
+   Secondary background: #E7F1E3 (Pale Sage Green)
+   Light cards / surfaces: #F8FAF4
+   Deep Forest Green: #163B27 (Main headings & key text)
+   Forest Green: #2F6B3C (Secondary accents)
+   Leaf Green: #4C9A45 (CTA, buttons, active states)
+   Muted Green: #6E846F (Secondary / supporting text)
+   Warm Cream: #F7F1E5 (Text on dark surfaces)
+   Soft borders: rgba(47, 107, 60, 0.18)
+========================================================= */
+:root {
+  --bg-main: #F2F7ED;
+  --bg-secondary: #E7F1E3;
+  --bg-card: #F8FAF4;
+  --bg-surface: #FFFFFF;
+  --deep-forest: #163B27;
+  --forest-green: #2F6B3C;
+  --leaf-green: #4C9A45;
+  --leaf-green-hover: #265B33;
+  --muted-green: #6E846F;
+  --warm-cream: #F7F1E5;
+  --soft-border: rgba(47, 107, 60, 0.18);
+  --soft-border-subtle: rgba(47, 107, 60, 0.10);
+  --card-shadow: 0 10px 32px rgba(22, 59, 39, 0.05);
+  --card-shadow-hover: 0 16px 40px rgba(22, 59, 39, 0.10);
+  --status-confirmed: #2E7D32;
+  --status-expected: #C58B24;
+  --status-awaiting: #B54745;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', 'Roboto Slab', Georgia, serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--deep-forest);
+  background-color: var(--bg-main);
+  background-image: 
+    radial-gradient(circle at 10% 12%, rgba(231, 241, 227, 0.8) 0%, transparent 40%),
+    radial-gradient(circle at 90% 18%, rgba(220, 237, 214, 0.7) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(231, 241, 227, 0.6) 0%, transparent 50%),
+    linear-gradient(180deg, #F2F7ED 0%, #EBF4E7 50%, #F2F7ED 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   LIVE LEAVES & VINES DECORATION (LEFT AND RIGHT ONLY)
+========================================================= */
+/* Static Climbing Vines pinned strictly to left and right edges */
+.vine-border {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 78px;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0.88;
+}
+
+.vine-left {
+  left: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 800' preserveAspectRatio='none'%3E%3Cpath d='M8,0 Q35,100 12,200 T30,400 T10,600 T24,800' fill='none' stroke='%234C9A45' stroke-width='2.2' stroke-opacity='0.45'/%3E%3Cpath d='M12,50 Q45,40 54,62 Q30,70 12,50 Z' fill='%236E846F' fill-opacity='0.55'/%3E%3Cpath d='M22,140 Q60,125 68,150 Q40,165 22,140 Z' fill='%234C9A45' fill-opacity='0.6'/%3E%3Cpath d='M16,250 Q52,240 58,265 Q32,275 16,250 Z' fill='%232F6B3C' fill-opacity='0.55'/%3E%3Cpath d='M28,340 Q70,325 76,355 Q45,370 28,340 Z' fill='%234C9A45' fill-opacity='0.62'/%3E%3Cpath d='M14,460 Q55,445 62,475 Q35,488 14,460 Z' fill='%236E846F' fill-opacity='0.52'/%3E%3Cpath d='M25,560 Q65,545 72,575 Q42,590 25,560 Z' fill='%234C9A45' fill-opacity='0.6'/%3E%3Cpath d='M12,670 Q52,655 58,685 Q30,700 12,670 Z' fill='%232F6B3C' fill-opacity='0.55'/%3E%3Cpath d='M20,760 Q62,745 68,775 Q38,790 20,760 Z' fill='%234C9A45' fill-opacity='0.6'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-size: 78px 800px;
+}
+
+.vine-right {
+  right: 0;
+  transform: scaleX(-1);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 800' preserveAspectRatio='none'%3E%3Cpath d='M8,0 Q35,100 12,200 T30,400 T10,600 T24,800' fill='none' stroke='%234C9A45' stroke-width='2.2' stroke-opacity='0.45'/%3E%3Cpath d='M12,50 Q45,40 54,62 Q30,70 12,50 Z' fill='%236E846F' fill-opacity='0.55'/%3E%3Cpath d='M22,140 Q60,125 68,150 Q40,165 22,140 Z' fill='%234C9A45' fill-opacity='0.6'/%3E%3Cpath d='M16,250 Q52,240 58,265 Q32,275 16,250 Z' fill='%232F6B3C' fill-opacity='0.55'/%3E%3Cpath d='M28,340 Q70,325 76,355 Q45,370 28,340 Z' fill='%234C9A45' fill-opacity='0.62'/%3E%3Cpath d='M14,460 Q55,445 62,475 Q35,488 14,460 Z' fill='%236E846F' fill-opacity='0.52'/%3E%3Cpath d='M25,560 Q65,545 72,575 Q42,590 25,560 Z' fill='%234C9A45' fill-opacity='0.6'/%3E%3Cpath d='M12,670 Q52,655 58,685 Q30,700 12,670 Z' fill='%232F6B3C' fill-opacity='0.55'/%3E%3Cpath d='M20,760 Q62,745 68,775 Q38,790 20,760 Z' fill='%234C9A45' fill-opacity='0.6'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-size: 78px 800px;
+}
+
+/* Falling Live Leaves Canvas */
+#leavesCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 80;
+}
+
+@media (max-width: 900px) {
+  .vine-border {
+    width: 48px;
+    opacity: 0.65;
+  }
+}
+
+/* =========================================================
+   GLOBAL NAVIGATION (MASTER UNIFIED HEADER)
+========================================================= */
+header.global-header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: rgba(248, 250, 244, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(47, 107, 60, 0.18);
+  box-shadow: 0 1px 3px rgba(22, 59, 39, 0.04);
+}
+.global-header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.global-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.global-brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #4C9A45, #2F6B3C);
+  border: 1px solid rgba(47, 107, 60, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #FFF;
+  box-shadow: 0 4px 10px rgba(47, 107, 60, 0.18);
+  transition: transform 0.3s;
+}
+.global-brand:hover .global-brand-icon {
+  transform: scale(1.05);
+}
+.global-brand-sub {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #4C9A45;
+  line-height: 1;
+  display: block;
+}
+.global-brand-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #163B27;
+  line-height: 1.2;
+}
+.global-navlinks {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6E846F;
+}
+.global-navlinks a {
+  color: #6E846F;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+.global-navlinks a:hover {
+  color: #163B27;
+}
+.global-navlinks a.active {
+  color: #4C9A45;
+  font-weight: 700;
+  background: none;
+}
+.global-dropdown {
+  position: relative;
+  padding: 8px 0;
+}
+.global-dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  color: #6E846F;
+  transition: color 0.2s;
+}
+.global-dropdown:hover .global-dropdown-btn {
+  color: #163B27;
+}
+.global-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 224px;
+  background: #F8FAF4;
+  border: 1px solid rgba(47, 107, 60, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(22, 59, 39, 0.12);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: all 0.2s ease;
+  z-index: 1000;
+}
+.global-dropdown:hover .global-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.global-dropdown-item {
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #163B27;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.global-dropdown-item:hover {
+  background: #FFFFFF;
+  color: #4C9A45;
+}
+.global-dropdown-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #6E846F;
+}
+.global-portal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  border: 1px solid rgba(47, 107, 60, 0.18);
+  font-size: 12px;
+  font-weight: 700;
+  color: #163B27;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 860px) {
+  .global-navlinks {
+    gap: 14px;
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   HERO / HEADER
+========================================================= */
+header.calendar-hero {
+  text-align: center;
+  padding: 36px 20px 30px;
+  background: linear-gradient(135deg, #133321 0%, #163B27 45%, #1C452F 100%);
+  color: var(--warm-cream);
+  position: relative;
+  z-index: 5;
+  border-bottom: 2px solid rgba(76, 154, 69, 0.35);
+  box-shadow: 0 10px 30px rgba(10, 32, 20, 0.18);
+}
+
+.header-symbol {
+  font-size: 15px;
+  letter-spacing: 10px;
+  color: #A3D99F;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+
+header.calendar-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4.2vw, 44px);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+header.calendar-hero h2 {
+  margin-top: 8px;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: #D6E7D2;
+}
+
+header.calendar-hero p {
+  margin-top: 10px;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  color: #A8C9A4;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.header-controls {
+  max-width: 1200px;
+  margin: 18px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #E2ECE0;
+  font-weight: 500;
+}
+
+.control-select, .calendar-select {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  border-radius: 999px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.control-select:hover, .calendar-select:hover,
+.control-select:focus, .calendar-select:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #A3D99F;
+}
+
+.control-select option, .calendar-select option {
+  background: #163B27;
+  color: #FFFFFF;
+}
+
+.top-border {
+  height: 6px;
+  background: linear-gradient(90deg, #163B27 0%, #2F6B3C 25%, #4C9A45 50%, #2F6B3C 75%, #163B27 100%);
+  border: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.date-trust-legend {
+  position: relative;
+  z-index: 5;
+  max-width: 860px;
+  margin: 16px auto 6px;
+  padding: 10px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  background: var(--bg-card);
+  border: 1px solid var(--soft-border);
+  border-radius: 999px;
+  box-shadow: var(--card-shadow);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--deep-forest);
+}
+
+.trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.trust-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
+.trust-confirmed .trust-dot { background: var(--status-confirmed); }
+.trust-expected .trust-dot { background: var(--status-expected); }
+.trust-awaiting .trust-dot { background: var(--status-awaiting); }
+
+.trust-note {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--muted-green);
+}
+
+.booking-banner {
+  max-width: 1200px;
+  margin: 10px auto 0;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 12.5px;
+  letter-spacing: 0.2px;
+  background: #EBF4E7;
+  border: 1px dashed rgba(47, 107, 60, 0.35);
+  color: var(--forest-green);
+  border-radius: 12px;
+  font-weight: 500;
+  position: relative;
+  z-index: 5;
+}
+
+.booking-banner.active {
+  background: #E2EFE0;
+  border: 1px solid #4C9A45;
+  color: var(--deep-forest);
+  font-weight: 600;
+}
+
+.calendar-selectors {
+  max-width: 1200px;
+  margin: 14px auto 4px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 5;
+}
+
+.selector-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selector-group label {
+  color: var(--deep-forest);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.navigation {
+  max-width: 1200px;
+  margin: 18px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 140px 1fr 140px;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 5;
+}
+
+.nav-btn {
+  border: 1px solid rgba(47, 107, 60, 0.25);
+  background: #FFFFFF;
+  color: var(--deep-forest);
+  padding: 11px 18px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(22, 59, 39, 0.05);
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: var(--leaf-green);
+  color: #FFFFFF;
+  border-color: var(--leaf-green);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(76, 154, 69, 0.25);
+}
+
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.month-title {
+  text-align: center;
+}
+
+.month-title h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--deep-forest);
+}
+
+.month-title p {
+  margin-top: 3px;
+  color: var(--muted-green);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.main {
+  max-width: 1240px;
+  margin: auto;
+  padding: 0 20px 40px;
+  display: grid;
+  grid-template-columns: minmax(640px, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+  position: relative;
+  z-index: 5;
+}
+
+.calendar-box {
+  background: var(--bg-card);
+  border: 1px solid var(--soft-border);
+  padding: 14px;
+  box-shadow: var(--card-shadow);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.featured-place {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, #EBF4E7, #F5FAF1);
+  border: 1px solid rgba(76, 154, 69, 0.2);
+  border-radius: 12px;
+}
+
+.featured-icon {
+  font-size: 24px;
+}
+
+.featured-place strong {
+  font-size: 13px;
+  color: var(--deep-forest);
+  display: block;
+}
+
+.featured-place small {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--muted-green);
+  font-weight: 500;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--deep-forest);
+  color: var(--warm-cream);
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.weekdays div {
+  text-align: center;
+  padding: 10px 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.weekdays div:last-child {
+  border-right: none;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-left: 1px solid rgba(47, 107, 60, 0.12);
+  border-top: 1px solid rgba(47, 107, 60, 0.12);
+  background: #FFFFFF;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+
+.day {
+  position: relative;
+  min-height: 128px;
+  padding: 6px;
+  background: #FFFFFF;
+  border-right: 1px solid rgba(47, 107, 60, 0.12);
+  border-bottom: 1px solid rgba(47, 107, 60, 0.12);
+  overflow: hidden;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day:hover {
+  background: #F4FAF0;
+  z-index: 2;
+}
+
+.day.empty {
+  background: #FAFCF8;
+  opacity: 0.6;
+}
+
+.date-number {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  z-index: 10;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--deep-forest);
+}
+
+.explore-hint {
+  margin-top: 22px;
+  font-size: 8.5px;
+  color: #9FB69C;
+  font-style: italic;
+  cursor: default;
+}
+
+.festival-card {
+  margin-top: 18px;
+  background: #FFFFFF;
+  border: 1px solid rgba(76, 154, 69, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(22, 59, 39, 0.06);
+  transition: all 0.2s ease;
+}
+
+.festival-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--leaf-green);
+  box-shadow: 0 6px 14px rgba(22, 59, 39, 0.12);
+}
+
+.festival-card.status-confirmed {
+  border-left: 3px solid var(--status-confirmed) !important;
+}
+
+.festival-card.status-expected {
+  border-left: 3px solid var(--status-expected) !important;
+}
+
+.festival-card.status-awaiting {
+  border-left: 3px solid var(--status-awaiting) !important;
+}
+
+.festival-card img {
+  display: block;
+  width: 100%;
+  height: 60px;
+  object-fit: cover;
+  background: #E5EDE1;
+  transition: transform 0.3s ease;
+}
+
+.festival-card:hover img {
+  transform: scale(1.05);
+}
+
+.image-loading, .festival-photo-placeholder {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #EBF4E7, #E0ECE0);
+  color: var(--muted-green);
+  font-size: 8.5px;
+  text-align: center;
+  padding: 4px;
+}
+
+.festival-text {
+  padding: 5px 6px;
+}
+
+.festival-name {
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--deep-forest);
+}
+
+.festival-place {
+  margin-top: 2px;
+  font-size: 8px;
+  color: var(--muted-green);
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.section-label.festival-label {
+  background: rgba(76, 154, 69, 0.14);
+  color: var(--forest-green);
+}
+
+.day-badge {
+  display: inline-block;
+  margin-top: 3px;
+  padding: 1px 5px;
+  background: #EBF4E7;
+  border: 1px solid rgba(76, 154, 69, 0.2);
+  border-radius: 999px;
+  font-size: 7px;
+  color: var(--forest-green);
+  font-weight: 600;
+}
+
+.date-status {
+  margin-top: 3px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  font-size: 6.5px;
+  font-weight: 700;
+  border: 1px solid var(--soft-border);
+  background: #FAFCF8;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.date-status.confirmed { color: var(--status-confirmed); }
+.date-status.expected { color: var(--status-expected); }
+.date-status.awaiting { color: var(--status-awaiting); }
+
+.trip-card {
+  margin-top: 18px;
+  background: #F4F9F2;
+  border: 1px solid rgba(47, 107, 60, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(22, 59, 39, 0.05);
+  transition: all 0.2s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(22, 59, 39, 0.10);
+  border-color: var(--leaf-green);
+}
+
+.trip-card-header {
+  background: var(--forest-green);
+  color: #FFFFFF;
+  padding: 3px 6px;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.trip-card-body {
+  padding: 5px;
+}
+
+.trip-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--deep-forest);
+}
+
+.trip-desc {
+  margin-top: 2px;
+  font-size: 8px;
+  color: var(--muted-green);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.trip-count-badge {
+  display: inline-block;
+  margin-top: 3px;
+  padding: 1px 5px;
+  background: #E2EFE0;
+  border: 1px solid rgba(76, 154, 69, 0.3);
+  border-radius: 999px;
+  font-size: 7px;
+  color: var(--forest-green);
+  font-weight: 600;
+}
+
+.date-add-btn {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  z-index: 20;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(76, 154, 69, 0.3);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--forest-green);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.date-add-btn:hover {
+  background: var(--leaf-green);
+  color: #FFFFFF;
+  border-color: var(--leaf-green);
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(76, 154, 69, 0.3);
+}
+
+.date-note, .date-journal-memory {
+  margin-top: 26px;
+  margin-bottom: 22px;
+  padding: 6px;
+  background: #F5FAF2;
+  border: 1px dashed rgba(76, 154, 69, 0.35);
+  border-radius: 6px;
+  font-size: 8.5px;
+  line-height: 1.35;
+  color: var(--deep-forest);
+  cursor: pointer;
+}
+
+.date-journal-memory {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.date-journal-memory img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+}
+
+.date-journal-memory .journal-caption {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  padding: 3px 4px;
+  border-radius: 3px;
+  background: rgba(22, 59, 39, 0.82);
+  color: #FFFFFF;
+  font-size: 7px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date-note-editor {
+  margin-top: 26px;
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.date-note-editor textarea {
+  width: 100%;
+  min-height: 46px;
+  resize: none;
+  padding: 6px;
+  border: 1px solid var(--leaf-green);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--deep-forest);
+  font-family: inherit;
+  font-size: 8.5px;
+  outline: none;
+}
+
+.date-note-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.date-note-actions button {
+  flex: 1;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 7.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.date-note-save {
+  background: var(--leaf-green);
+  color: #FFFFFF;
+}
+.date-note-save:hover {
+  background: var(--leaf-green-hover);
+}
+
+.date-note-cancel {
+  background: #E5EDE2;
+  color: var(--deep-forest);
+}
+
+.journal-photo-tools {
+  display: flex;
+  gap: 4px;
+}
+
+.journal-photo-label, .journal-photo-remove {
+  flex: 1;
+  border: 1px solid var(--soft-border);
+  border-radius: 4px;
+  padding: 4px;
+  background: #F4F9F2;
+  color: var(--deep-forest);
+  font-size: 7.5px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+}
+
+.journal-photo-label input { display: none; }
+.journal-photo-remove { background: #FDE8E8; color: #B54745; border-color: rgba(181, 71, 69, 0.2); }
+
+.journal-photo-preview {
+  display: none;
+  width: 72px;
+  height: 72px;
+  aspect-ratio: 1 / 1;
+  align-self: center;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 6px;
+  border: 1px solid var(--soft-border);
+}
+.journal-photo-preview.has-photo { display: block; }
+.journal-photo-status { font-size: 7.5px; color: var(--muted-green); text-align: center; }
+
+.side-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--soft-border);
+  box-shadow: var(--card-shadow);
+  border-radius: 20px;
+  position: sticky;
+  top: 80px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.side-heading {
+  background: linear-gradient(135deg, #133321, #163B27);
+  color: var(--warm-cream);
+  padding: 14px 18px;
+  text-align: center;
+  border-bottom: 2px solid rgba(76, 154, 69, 0.3);
+}
+
+.side-heading h2 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #FFFFFF;
+}
+
+.side-content {
+  padding: 18px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+.place-image, .detail-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid var(--soft-border);
+  background: #E5EDE1;
+  box-shadow: 0 4px 12px rgba(22, 59, 39, 0.06);
+}
+
+.place-title, .detail-title {
+  margin-top: 14px;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--deep-forest);
+  line-height: 1.2;
+}
+
+.place-region, .detail-location {
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: var(--muted-green);
+  font-weight: 600;
+}
+
+.info-box {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--soft-border-subtle);
+}
+
+.info-box h3 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--forest-green);
+  margin-bottom: 4px;
+}
+
+.info-box p {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: #38523F;
+}
+
+.month-events {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--soft-border-subtle);
+}
+
+.month-events h3 {
+  color: var(--forest-green);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.event-mini, .itinerary-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  background: #FFFFFF;
+  border: 1px solid var(--soft-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.event-mini:hover, .itinerary-mini:hover {
+  background: #F4FAF0;
+  border-color: var(--leaf-green);
+  transform: translateX(3px);
+  box-shadow: 0 4px 10px rgba(22, 59, 39, 0.06);
+}
+
+.event-mini strong, .itinerary-mini strong {
+  display: block;
+  font-size: 11px;
+  color: var(--deep-forest);
+  font-weight: 700;
+}
+
+.event-mini span, .itinerary-mini span {
+  display: block;
+  margin-top: 2px;
+  font-size: 9px;
+  color: var(--muted-green);
+}
+
+.itinerary-mini .mini-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #EBF4E7;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.photo-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.photo-thumb {
+  height: 56px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.photo-thumb:hover {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.photo-thumb.active {
+  opacity: 1;
+  border-color: var(--leaf-green);
+  box-shadow: 0 2px 6px rgba(76, 154, 69, 0.3);
+}
+
+.photo-day {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--muted-green);
+  font-weight: 600;
+}
+
+.back-button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  border: none;
+  background: var(--leaf-green);
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(76, 154, 69, 0.25);
+}
+
+.back-button:hover {
+  background: var(--leaf-green-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(76, 154, 69, 0.35);
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(19, 51, 33, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--soft-border);
+  max-width: 500px;
+  width: 100%;
+  max-height: 85vh;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+  background: var(--deep-forest);
+  color: var(--warm-cream);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.modal-close {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.modal-body {
+  padding: 18px;
+  overflow-y: auto;
+  max-height: calc(85vh - 70px);
+}
+
+.trip-detail-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #FFFFFF;
+  border: 1px solid var(--soft-border);
+  border-radius: 10px;
+}
+
+.trip-detail-item .time {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: var(--forest-green);
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+
+.trip-detail-item h4 {
+  font-size: 13px;
+  color: var(--deep-forest);
+}
+
+.trip-detail-item .place-line {
+  font-size: 10.5px;
+  color: var(--leaf-green);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.trip-detail-item p {
+  margin-top: 6px;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: #38523F;
+}
+
+footer.sitefoot {
+  padding: 32px 20px;
+  background: var(--deep-forest);
+  color: #E2ECE0;
+  border-top: 1px solid rgba(76, 154, 69, 0.25);
+  margin-top: 40px;
+  position: relative;
+  z-index: 5;
+}
+
+footer.sitefoot a {
+  color: #E2ECE0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+footer.sitefoot a:hover {
+  color: #A3D99F;
+}
+
+@media (max-width: 1100px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+  .side-panel {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .navigation {
+    grid-template-columns: 85px 1fr 85px;
+    padding: 0 10px;
+  }
+  .nav-btn {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+  .month-title h2 {
+    font-size: 20px;
+  }
+  .main {
+    padding: 0 10px 30px;
+  }
+  .calendar-box {
+    padding: 8px;
+    border-radius: 14px;
+  }
+  .day {
+    min-height: 98px;
+    padding: 4px;
+  }
+  .festival-card img {
+    height: 44px;
+  }
+  .festival-name {
+    font-size: 8px;
+  }
+  .festival-place, .day-badge {
+    display: none;
+  }
+  .trip-desc {
+    display: none;
+  }
+  .header-controls {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Left & Right Vines -->
+<div class="vine-border vine-left" aria-hidden="true"></div>
+<div class="vine-border vine-right" aria-hidden="true"></div>
+
+<!-- Live Falling Leaves Canvas -->
+<canvas id="leavesCanvas" aria-hidden="true"></canvas>
+
+<!-- Global Master Navigation -->
+<header class="global-header">
+  <div class="global-header-inner">
+    
+    <!-- Brand / Logo Area -->
+    <a href="home.html" class="global-brand">
+      <div class="global-brand-icon">🌿</div>
+      <div>
+        <span class="global-brand-sub">Discover</span>
+        <span class="global-brand-title">FootprintJH</span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <nav class="global-navlinks">
+      <a href="home.html">Home</a>
+      
+      <!-- Explore with Dropdown (Famous Places + Underrated Places) -->
+      <div class="global-dropdown">
+        <a href="index.html" class="global-dropdown-btn">
+          <span>Explore</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+        </a>
+        <div class="global-dropdown-menu">
+          <a href="Bhavish_Underrated_test/antigravity/scratch/jharkhand-tourism/index.html" class="global-dropdown-item">
+            <span>Famous Places</span>
+            <span class="global-dropdown-badge">Top 5</span>
+          </a>
+          <a href="index.html" class="global-dropdown-item">
+            <span>Underrated Places</span>
+            <span class="global-dropdown-badge" style="color:#4C9A45;font-weight:700;">Proximity</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="mining.html">Mining</a>
+      <a href="hidden-waterfalls-jharkhand/dist/index.html#/">Waterfalls</a>
+      <a href="jhar.html" class="active">Festivals</a>
+      <a href="scheduler.html">My Trip Plan</a>
+      <a href="feedback.html">Feedback</a>
+    </nav>
+
+    <!-- Indicator / Portal Badge -->
+    <div class="global-portal-badge">
+      <span>🌲</span>
+      <span>Eco Tourism Portal</span>
+    </div>
+
+  </div>
+</header>
+
+<!-- Header / Hero -->
+<header class="calendar-hero">
+<div class="header-symbol">
+❖ ❖ ❖ ❖ ❖
+</div>
+<h1>
+JHARKHAND UTSAV PANCHANG
+</h1>
+<h2>
+झारखंड लोक एवं जनजातीय उत्सव पंचांग
+</h2>
+<p>
+पर्व • स्थान • भोजन • नृत्य • संगीत • लोकसंस्कृति
+</p>
+
+<!-- Language Selector -->
+<div class="header-controls">
+<div class="control-group">
+<label id="languageLabel" for="languageSelect"></label>
+<select
+id="languageSelect"
+class="control-select"
+onchange="changeLanguage(this.value)"
+>
+<option value="en">English</option>
+<option value="hi">हिन्दी</option>
+<option value="nag">Nagpuri</option>
+</select>
+</div>
+</div>
+</header>
+<div class="top-border"></div>
+
+<div class="date-trust-legend" aria-label="Festival date verification legend">
+<span class="trust-item trust-confirmed"><i class="trust-dot"></i> Confirmed date</span>
+<span class="trust-item trust-expected"><i class="trust-dot"></i> Expected date</span>
+<span class="trust-item trust-awaiting"><i class="trust-dot"></i> Awaiting confirmation</span>
+<small class="trust-note">Green means the calendar date is cross-checked; tourists should still verify local venue timings before travel.</small>
+</div>
+
+<!-- Booking Status Banner -->
+<div
+class="booking-banner"
+id="bookingBanner"
+></div>
+
+<!-- Year & Month Selectors -->
+<div class="calendar-selectors">
+<div class="selector-group">
+<label id="yearSelectorLabel" for="yearSelect"></label>
+<select
+id="yearSelect"
+class="calendar-select"
+onchange="changeYear(this.value)"
+>
+<option value="2026">2026</option>
+<option value="2027">2027</option>
+</select>
+</div>
+<div class="selector-group">
+<label id="monthSelectorLabel" for="monthSelect"></label>
+<select
+id="monthSelect"
+class="calendar-select"
+onchange="changeMonth(this.value)"
+></select>
+</div>
+</div>
+
+<!-- Month Navigation -->
+<div class="navigation">
+<button
+class="nav-btn"
+id="prevBtn"
+onclick="previousMonth()"
+></button>
+<div class="month-title">
+<h2 id="monthName"></h2>
+<p id="monthHindi"></p>
+</div>
+<button
+class="nav-btn"
+id="nextBtn"
+onclick="nextMonth()"
+></button>
+</div>
+
+<!-- Main (Calendar + Side Panel) -->
+<div class="main">
+<!-- Calendar -->
+<section class="calendar-box">
+<div
+class="featured-place"
+id="featuredPlace"
+></div>
+<div class="weekdays" id="weekdaysRow"></div>
+<div
+class="calendar"
+id="calendar"
+></div>
+</section>
+
+<!-- Right Side Panel -->
+<aside class="side-panel">
+<div class="side-heading">
+<h2 id="sideHeading">
+</h2>
+</div>
+<div
+class="side-content"
+id="sideContent"
+></div>
+</aside>
+</div>
+
+<!-- ================= STANDARDIZED COMPACT FOOTER ================= -->
+<footer style="background:#102D20;color:#D4EDDA;padding:40px 24px 24px;border-top:1px solid rgba(76,154,69,0.3);margin-top:auto;font-size:12px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:32px;margin-bottom:32px;">
+      
+      <!-- Brand Narrative -->
+      <div>
+        <a href="home.html" style="display:inline-flex;align-items:center;gap:8px;color:#FFFFFF;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;text-decoration:none;margin-bottom:8px;">
+          <span style="width:24px;height:24px;border-radius:6px;background:#4C9A45;display:flex;align-items:center;justify-content:center;font-size:12px;">🌿</span>
+          <span>FootprintJH</span>
+        </a>
+        <p style="color:#A3DB9F;font-style:italic;margin-bottom:8px;font-size:12px;">"Explore beyond the ordinary."</p>
+        <p style="color:#A3B8B0;font-size:11px;line-height:1.6;">
+          Discovering hidden waterfalls, living tribal heritage, sacred mountain sanctums, and sustainable eco-tourism.
+        </p>
+      </div>
+
+      <!-- Experience Portals -->
+      <div>
+        <h4 style="color:#FFFFFF;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;margin-bottom:12px;">Experience Portals</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;font-size:12px;">
+          <li><a href="home.html" style="color:#D4EDDA;text-decoration:none;">Home Portal</a></li>
+          <li><a href="index.html" style="color:#D4EDDA;text-decoration:none;">Underrated Places</a></li>
+          <li><a href="Bhavish_Underrated_test/antigravity/scratch/jharkhand-tourism/index.html" style="color:#D4EDDA;text-decoration:none;">Top 5 Famous Places</a></li>
+          <li><a href="hidden-waterfalls-jharkhand/dist/index.html#/" style="color:#D4EDDA;text-decoration:none;">Hidden Waterfalls</a></li>
+          <li><a href="mining.html" style="color:#D4EDDA;text-decoration:none;">Mining Heritage</a></li>
+          <li><a href="jhar.html" style="color:#D4EDDA;text-decoration:none;">Festivals Calendar</a></li>
+        </ul>
+      </div>
+
+      <!-- Key Districts -->
+      <div>
+        <h4 style="color:#FFFFFF;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;margin-bottom:12px;">Districts &amp; Circuits</h4>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;font-size:12px;">
+          <li><a href="index.html" style="color:#D4EDDA;text-decoration:none;">Ranchi (Capital &amp; Cascades)</a></li>
+          <li><a href="index.html" style="color:#D4EDDA;text-decoration:none;">Ramgarh (Patratu Valley)</a></li>
+          <li><a href="index.html" style="color:#D4EDDA;text-decoration:none;">Latehar (Netarhat Hills &amp; Betla)</a></li>
+          <li><a href="index.html" style="color:#D4EDDA;text-decoration:none;">Deoghar (Sacred Sanctums)</a></li>
+          <li><a href="index.html" style="color:#D4EDDA;text-decoration:none;">Dumka (Maluti Terracotta)</a></li>
+          <li><a href="feedback.html" style="color:#D4EDDA;text-decoration:none;">Explorer Feedback &amp; Reviews</a></li>
+        </ul>
+      </div>
+
+      <!-- Visitor Helpline -->
+      <div>
+        <h4 style="color:#FFFFFF;font-family:'Playfair Display',serif;font-weight:700;font-size:14px;margin-bottom:12px;">Visitor Helpline</h4>
+        <p style="color:#A3B8B0;font-size:11px;margin-bottom:6px;">Jharkhand Tourism Development Corporation (JTDC)</p>
+        <p style="color:#E8C9A3;font-weight:700;font-size:12px;margin-bottom:4px;">Toll-Free: 1800-345-6571</p>
+        <p style="color:#A3B8B0;font-size:11px;line-height:1.6;">
+          Birsa Munda Airport &amp; Ranchi Railway Station Tourist Info Desks.
+        </p>
+        <div style="margin-top:12px;">
+          <a href="feedback.html" style="color:#E8C9A3;text-decoration:underline;font-weight:600;font-size:12px;">
+            ★ Leave Feedback / Suggestions →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div style="padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;color:#A3B8B0;font-size:11px;gap:8px;">
+      <p style="margin:0;">&copy; 2026 Jharkhand Tourism • FootprintJH. All rights reserved.</p>
+      <p style="margin:0;color:#A3DB9F;font-style:italic;">"Made for explorers."</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Itinerary Modal -->
+<div class="modal-overlay" id="modalOverlay">
+<div class="modal-box">
+<div class="modal-header">
+<h3 id="modalTitle"></h3>
+<button class="modal-close" onclick="closeModal()">✕</button>
+</div>
+<div class="modal-body" id="modalBody"></div>
+</div>
+</div>
+
+<script>
+/* =========================================================
+   LIVE FALLING LEAVES ANIMATION (Left & Right Sides Only)
+   Minimal & Slow Drift
+========================================================= */
+(function initLiveLeavesCanvas() {
+  const canvas = document.getElementById("leavesCanvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener("resize", () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  const leafColors = [
+    { fill: "rgba(76, 154, 69, 0.68)", vein: "rgba(47, 107, 60, 0.45)" },
+    { fill: "rgba(62, 131, 55, 0.62)", vein: "rgba(29, 78, 36, 0.40)" },
+    { fill: "rgba(93, 179, 81, 0.58)", vein: "rgba(50, 112, 43, 0.35)" },
+    { fill: "rgba(110, 132, 111, 0.58)", vein: "rgba(73, 91, 74, 0.35)" },
+    { fill: "rgba(47, 107, 60, 0.62)", vein: "rgba(22, 59, 39, 0.45)" },
+    { fill: "rgba(123, 184, 116, 0.52)", vein: "rgba(65, 115, 59, 0.35)" }
+  ];
+
+  class Leaf {
+    constructor(initialRandomY = false) {
+      this.reset(initialRandomY);
+    }
+
+    reset(initialRandomY = false) {
+      // 50% left side (1% to 14%), 50% right side (86% to 99%)
+      this.isLeft = Math.random() < 0.5;
+
+      if (this.isLeft) {
+        this.baseX = Math.random() * (width * 0.12) + (width * 0.015);
+      } else {
+        this.baseX = width - (Math.random() * (width * 0.12) + (width * 0.015));
+      }
+
+      this.x = this.baseX;
+      this.y = initialRandomY ? Math.random() * (height + 60) - 30 : -25 - Math.random() * 60;
+
+      // Minimal, delicate size (10px - 16px)
+      this.size = Math.random() * 6 + 10;
+      
+      // Slower, graceful floating speed (0.28 - 0.60 px/frame)
+      this.speedY = Math.random() * 0.32 + 0.28;
+      this.swaySpeed = Math.random() * 0.012 + 0.008; // gentle sway frequency
+      this.swayAmount = Math.random() * 14 + 8; // subtle horizontal sway
+      this.swayOffset = Math.random() * Math.PI * 2;
+
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.012; // slow peaceful rotation
+
+      this.flip = Math.random() * Math.PI * 2;
+      this.flipSpeed = Math.random() * 0.016 + 0.008; // gentle 3D fluttering
+
+      this.color = leafColors[Math.floor(Math.random() * leafColors.length)];
+      this.shape = Math.floor(Math.random() * 3);
+      this.opacity = Math.random() * 0.25 + 0.55; // soft minimal transparency
+    }
+
+    update() {
+      this.y += this.speedY;
+      this.swayOffset += this.swaySpeed;
+      this.x = this.baseX + Math.sin(this.swayOffset) * this.swayAmount;
+
+      this.rotation += this.rotSpeed;
+      this.flip += this.flipSpeed;
+
+      // Keep leaf strictly within outer margins
+      if (this.isLeft && this.x > width * 0.15) {
+        this.x = width * 0.15;
+      } else if (!this.isLeft && this.x < width * 0.85) {
+        this.x = width * 0.85;
+      }
+
+      // Reset when below screen
+      if (this.y > height + 35) {
+        this.reset(false);
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+
+      // 3D flutter scaling
+      const flipScale = Math.cos(this.flip);
+      ctx.scale(1, flipScale);
+      ctx.globalAlpha = this.opacity;
+
+      const s = this.size;
+
+      ctx.fillStyle = this.color.fill;
+      ctx.strokeStyle = this.color.vein;
+      ctx.lineWidth = 0.8;
+
+      ctx.beginPath();
+      if (this.shape === 0) {
+        // Pointed oval minimal leaf
+        ctx.moveTo(0, -s);
+        ctx.bezierCurveTo(s * 0.55, -s * 0.35, s * 0.55, s * 0.45, 0, s);
+        ctx.bezierCurveTo(-s * 0.55, s * 0.45, -s * 0.55, -s * 0.35, 0, -s);
+      } else if (this.shape === 1) {
+        // Slender Sal leaf
+        ctx.moveTo(0, -s * 1.15);
+        ctx.bezierCurveTo(s * 0.4, -s * 0.45, s * 0.35, s * 0.55, 0, s * 1.05);
+        ctx.bezierCurveTo(-s * 0.35, s * 0.55, -s * 0.4, -s * 0.45, 0, -s * 1.15);
+      } else {
+        // Soft rounded leaf
+        ctx.moveTo(0, -s * 0.75);
+        ctx.bezierCurveTo(s * 0.6, -s * 0.45, s * 0.6, s * 0.35, 0, s * 0.75);
+        ctx.bezierCurveTo(-s * 0.6, s * 0.35, -s * 0.6, -s * 0.45, 0, -s * 0.75);
+      }
+      ctx.fill();
+
+      // Minimal central vein
+      ctx.beginPath();
+      ctx.moveTo(0, -s * 0.8);
+      ctx.quadraticCurveTo(s * 0.03, 0, 0, s * 0.8);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+  }
+
+  // Minimal leaf count (16 leaves total — 8 on left, 8 on right)
+  const leaves = [];
+  const leafCount = 16;
+  for (let i = 0; i < leafCount; i++) {
+    leaves.push(new Leaf(true));
+  }
+
+  function animateLeaves() {
+    ctx.clearRect(0, 0, width, height);
+    for (let i = 0; i < leaves.length; i++) {
+      leaves[i].update();
+      leaves[i].draw();
+    }
+    requestAnimationFrame(animateLeaves);
+  }
+
+  animateLeaves();
+})();
+</script>
+
+<script>
+/* =========================================================
+WIKIMEDIA API & IMAGE SYSTEM
+========================================================= */
+const WIKI_API = "https://commons.wikimedia.org/w/api.php";
+const imageCache = {};
+
+async function getWikiImage(fileName){
+  if(!fileName) return "";
+  if(imageCache[fileName]) return imageCache[fileName];
+  try{
+    const url = WIKI_API + "?action=query&format=json&origin=*&titles=" +
+      encodeURIComponent("File:" + fileName) +
+      "&prop=imageinfo&iiprop=url|mime&iiurlwidth=1200";
+    const data = await (await fetch(url)).json();
+    const page = Object.values(data.query?.pages || {})[0];
+    const info = page?.imageinfo?.[0];
+    if(!info || page.missing !== undefined || !/^image\/(jpeg|png|webp)$/i.test(info.mime || "")) return "";
+    const image = info.thumburl || info.url || "";
+    if(image) imageCache[fileName] = image;
+    return image;
+  }catch(error){
+    return "";
+  }
+}
+
+async function searchWikiImages(searchText){
+  try{
+    const url = WIKI_API +
+      "?action=query" +
+      "&format=json" +
+      "&origin=*" +
+      "&generator=search" +
+      "&gsrnamespace=6" +
+      "&gsrlimit=10" +
+      "&gsrsearch=" + encodeURIComponent(searchText) +
+      "&prop=imageinfo" +
+      "&iiprop=url|mime|size|extmetadata" +
+      "&iiurlwidth=1000";
+    const response = await fetch(url);
+    const data = await response.json();
+    if(!data.query || !data.query.pages) return [];
+    const pages = Object.values(data.query.pages);
+    return pages.filter(page => {
+      const info = page.imageinfo && page.imageinfo[0];
+      if(!info || !/^image\/(jpeg|png|webp)$/i.test(info.mime || "")) return false;
+      const meta = info.extmetadata || {};
+      const description = [page.title,meta.ImageDescription?.value,meta.ObjectName?.value,meta.Categories?.value].join(" ");
+      const bad = /newspaper|news\s*paper|समाचार|पत्रिका|document|scan|poster|logo|banner|pamphlet|book|magazine|advertisement|screenshot|map of|location map/i;
+      return !bad.test(description);
+    }).map(page => page.imageinfo[0].thumburl || page.imageinfo[0].url);
+  }catch(error){
+    console.log("Search error:", error);
+    return [];
+  }
+}
+
+/* =========================================================
+TRANSLATION SYSTEM
+========================================================= */
+const TRANSLATIONS = {
+  en:{
+    languageLabel:"Language:",
+    yearLabel:"Year:",
+    monthLabel:"Month:",
+    prev:"← Previous",
+    next:"Next →",
+    yourTrip:"Your Trip",
+    festival:"Festival",
+    exploreNearby:"Explore nearby",
+    nothingPlanned:"Nothing planned",
+    viewMore:"View more",
+    activitiesCount:"activities",
+    dayOf:"Day",
+    of:"of",
+    close:"Close",
+    back:"Back to",
+    thisMonth:"🎉 This Month",
+    aboutFestival:"📜 About the Festival",
+    datePeriod:"📅 Date / Period",
+    dance:"💃 Dance",
+    music:"🎵 Music",
+    food:"🍚 Food",
+    aboutPlace:"🏛 About the Place",
+    placesToExplore:"🗺 Places to Explore",
+    culturalIdentity:"🎭 Cultural Identity",
+    localFood:"🍚 Local Food",
+    sideHeadingPlace:"📍 This Month's Destination",
+    sideHeadingFestival:"🎉 Festival Details",
+    sideHeadingTrip:"🧳 Your Itinerary",
+    tripDetailsTitle:"Trip details for",
+    monthFeatured:"This month's featured destination:",
+    bookingActiveBanner:"✅ You have a booked trip. Your itinerary now appears on the calendar alongside festivals.",
+    bookingInactiveBanner:"No trip is currently booked. The calendar is showing festivals.",
+    yourTripPlural:"Your Trip",
+    loadingCityPhoto:"Loading destination photo…",
+    loadingFestivalPhoto:"Loading festival photo…",
+    photoUnavailable:"Photo unavailable",
+    cityPhotoUnavailable:"Destination photograph unavailable"
+  },
+  hi:{
+    languageLabel:"भाषा:",
+    yearLabel:"वर्ष:",
+    monthLabel:"महीना:",
+    prev:"← पिछला",
+    next:"आगे →",
+    yourTrip:"आपकी यात्रा",
+    festival:"त्योहार",
+    exploreNearby:"आस-पास देखें",
+    nothingPlanned:"कुछ भी निर्धारित नहीं",
+    viewMore:"और देखें",
+    activitiesCount:"गतिविधियाँ",
+    dayOf:"दिन",
+    of:"में से",
+    close:"बंद करें",
+    back:"वापस",
+    thisMonth:"🎉 इस महीने",
+    aboutFestival:"📜 त्योहार के बारे में",
+    datePeriod:"📅 तिथि / अवधि",
+    dance:"💃 नृत्य",
+    music:"🎵 संगीत",
+    food:"🍚 भोजन",
+    aboutPlace:"🏛 स्थान के बारे में",
+    placesToExplore:"🗺 घूमने की जगहें",
+    culturalIdentity:"🎭 सांस्कृतिक पहचान",
+    localFood:"🍚 स्थानीय भोजन",
+    sideHeadingPlace:"📍 इस महीने का स्थान",
+    sideHeadingFestival:"🎉 त्योहार का विवरण",
+    sideHeadingTrip:"🧳 आपकी यात्रा योजना",
+    tripDetailsTitle:"यात्रा विवरण —",
+    monthFeatured:"इस महीने का प्रमुख स्थान:",
+    bookingActiveBanner:"✅ आपकी यात्रा बुक हो चुकी है। अब कैलेंडर पर त्योहारों के साथ आपकी यात्रा योजना भी दिखेगी।",
+    bookingInactiveBanner:"अभी कोई यात्रा बुक नहीं है। कैलेंडर में त्योहार दिखाए जा रहे हैं।",
+    yourTripPlural:"आपकी यात्रा",
+    loadingCityPhoto:"शहर की तस्वीर लोड हो रही है…",
+    loadingFestivalPhoto:"त्योहार की तस्वीर लोड हो रही है…",
+    photoUnavailable:"तस्वीर उपलब्ध नहीं है",
+    cityPhotoUnavailable:"शहर की तस्वीर उपलब्ध नहीं है"
+  },
+  nag:{
+    languageLabel:"भाषा:",
+    yearLabel:"साल:",
+    monthLabel:"महीना:",
+    prev:"← पाछू",
+    next:"आगू →",
+    yourTrip:"तोहर यात्रा",
+    festival:"परब",
+    exploreNearby:"लगे-पास देखा",
+    nothingPlanned:"कुछ ठीक नाइ भइल",
+    viewMore:"आउर देखा",
+    activitiesCount:"काम",
+    dayOf:"दिन",
+    of:"में से",
+    close:"बंद करा",
+    back:"वापिस",
+    thisMonth:"🎉 ई महीना",
+    aboutFestival:"📜 परब के बारे में",
+    datePeriod:"📅 तारीख / समय",
+    dance:"💃 नाच",
+    music:"🎵 गीत-बाजा",
+    food:"🍚 खाना",
+    aboutPlace:"🏛 जगह के बारे में",
+    placesToExplore:"🗺 घूमे लायक जगह",
+    culturalIdentity:"🎭 संस्कृति पहचान",
+    localFood:"🍚 स्थानीय खाना",
+    sideHeadingPlace:"📍 ई महीना के जगह",
+    sideHeadingFestival:"🎉 परब के जानकारी",
+    sideHeadingTrip:"🧳 तोहर यात्रा योजना",
+    tripDetailsTitle:"यात्रा जानकारी —",
+    monthFeatured:"ई महीना के मुख्य जगह:",
+    bookingActiveBanner:"✅ तोहर यात्रा बुक हो गेल हे। अब कैलेंडर में परब के संगे तोहर यात्रा भी देखाई।",
+    bookingInactiveBanner:"अभी कोनो यात्रा बुक नाइ हे। कैलेंडर में परब देखाई पड़त हे।",
+    yourTripPlural:"तोहर यात्रा",
+    loadingCityPhoto:"शहर के फोटो लोड हो रहल हे…",
+    loadingFestivalPhoto:"परब के फोटो लोड हो रहल हे…",
+    photoUnavailable:"फोटो नाइ मिलल",
+    cityPhotoUnavailable:"शहर के फोटो नाइ मिलल"
+  }
+};
+
+const MONTH_NAMES = {
+  en:["January","February","March","April","May","June","July","August","September","October","November","December"],
+  hi:["जनवरी","फ़रवरी","मार्च","अप्रैल","मई","जून","जुलाई","अगस्त","सितंबर","अक्टूबर","नवंबर","दिसंबर"],
+  nag:["जनवरी","फरवरी","मार्च","अप्रैल","मई","जून","जुलाई","अगस्त","सितंबर","अक्टूबर","नवंबर","दिसंबर"]
+};
+
+const MONTH_HINDI_SEASON = [
+  "पौष • माघ","माघ • फाल्गुन","फाल्गुन • चैत्र","चैत्र • वैशाख",
+  "वैशाख • ज्येष्ठ","ज्येष्ठ • आषाढ़","आषाढ़ • श्रावण","श्रावण • भाद्रपद",
+  "भाद्रपद • आश्विन","आश्विन • कार्तिक","कार्तिक • अग्रहायण","अग्रहायण • पौष"
+];
+
+const WEEKDAY_NAMES = {
+  en:["SUN","MON","TUE","WED","THU","FRI","SAT"],
+  hi:["रवि","सोम","मंगल","बुध","गुरु","शुक्र","शनि"],
+  nag:["इत","सोम","मंगल","बुध","बियफे","सुकर","सनि"]
+};
+
+let currentLanguage = "en";
+let currentYear = 2026;
+let currentMonth = 0;
+const SUPPORTED_YEARS = [2026, 2027];
+const DEFAULT_YEAR = 2026;
+
+function tr(key){
+  return (
+    (TRANSLATIONS[currentLanguage] && TRANSLATIONS[currentLanguage][key]) ||
+    TRANSLATIONS.hi[key] ||
+    TRANSLATIONS.en[key] ||
+    ""
+  );
+}
+
+function loc(field){
+  if(!field) return "";
+  if(typeof field === "string") return field;
+  if(field[currentLanguage]) return field[currentLanguage];
+  if(currentLanguage === "nag" && field.hi) return field.hi;
+  return field.en || "";
+}
+
+function extraFestival(id,month,start,end,name,hi,city,location,type,search,about,food){
+  return {
+    id,month,start,end,
+    name:{en:name,hi,nag:hi},
+    city,location,
+    type:{en:type,hi:type,nag:type},
+    search,files:[],
+    about:{en:about,hi:about,nag:about},
+    dance:{en:"Traditional community dance and cultural performances.",hi:"पारंपरिक सामुदायिक नृत्य और सांस्कृतिक प्रस्तुति।"},
+    music:{en:"Folk songs, mandar and regional instruments.",hi:"लोकगीत, मांदर और क्षेत्रीय वाद्य।"},
+    food:{en:food,hi:food,nag:food},
+    note:{en:"Expected period for trip planning; verify locally before travel.",hi:"यात्रा से पहले स्थानीय स्तर पर तिथि की पुष्टि करें।"}
+  };
+}
+
+const FESTIVAL_CATEGORIES = {
+  "tusu-parab":"Tusu festival", "baha-parab":"Baha parab", "sarhul":"Sarhul",
+  "seraikela-chhau":"Chhau dance", "sohrai-khovar-hazaribagh":"Sohrai and Khovar painting",
+  "rohini":"Agriculture in Jharkhand", "shravan-pilgrimage":"Baidyanath Temple",
+  "karam-parab":"Karam (festival)", "kolhan-heritage":"Tribal dances of Jharkhand",
+  "autumn-folk-bokaro":"Folk dances of Jharkhand", "sohrai-latehar":"Sohrai",
+  "winter-folk-mela":"Fairs in India", "makar-sankranti":"Makar Sankranti",
+  "maghe-parab":"Ho people", "maha-shivratri":"Maha Shivaratri", "holi":"Holi",
+  "ram-navami":"Rama Navami", "mandā-parab":"Festivals of Jharkhand",
+  "buddha-purnima":"Buddha's Birthday in India", "rath-yatra":"Ratha Yatra",
+  "guru-purnima":"Guru Purnima", "independence-day":"Independence Day (India)",
+  "vishwakarma-puja":"Vishwakarma Puja", "jitиа":"Jivitputrika",
+  "durga-puja":"Durga Puja", "diwali":"Diwali", "chhath":"Chhath",
+  "christmas":"Christmas in India",
+  "new-year":"New Year celebrations","republic-day":"Republic Day (India)","vasant-panchami":"Vasant Panchami",
+  "eid-ul-fitr":"Eid al-Fitr in India","mahavir-jayanti":"Mahavir Jayanti","good-friday":"Good Friday",
+  "ambedkar-jayanti":"B. R. Ambedkar","easter":"Easter in India","may-day":"International Workers' Day",
+  "bakrid":"Eid al-Adha in India","hul-diwas":"Santhal rebellion","muharram":"Muharram in India",
+  "world-tribal-day":"Indigenous peoples of India","raksha-bandhan":"Raksha Bandhan","janmashtami":"Krishna Janmashtami",
+  "ganesh-chaturthi":"Ganesh Chaturthi","gandhi-jayanti":"Mahatma Gandhi","dussehra":"Vijayadashami",
+  "govardhan-puja":"Govardhan Puja","bhai-dooj":"Bhai Dooj","childrens-day":"Children's Day (India)",
+  "jharkhand-foundation-day":"Jharkhand","eid-milad":"Mawlid in India",
+  "mage-porob-feb":"Ho people","hizla-mela":"Fairs in Jharkhand","itkhori-mahotsav":"Itkhori",
+  "baidyanath-mahotsav":"Baidyanath Temple","maithon-mela":"Maithon Dam",
+  "jharkhand-bird-festival":"Birds of Jharkhand","handloom-saras-mela":"Handicrafts of Jharkhand",
+  "satuani":"Sattu","ashadhi-puja":"Agriculture in Jharkhand","adivasi-mahotsav":"Tribal dances of Jharkhand",
+  "johar-monsoon-fest":"Waterfalls in Jharkhand","nawakhani":"Rice harvest in India",
+  "luguburu-fair":"Santhal people","sharad-mahotsav":"Netarhat"
+};
+
+async function getCuratedFestivalImages(festival){
+  const category = FESTIVAL_CATEGORIES[festival.id];
+  if(!category) return [];
+  try{
+    const url = WIKI_API + "?action=query&format=json&origin=*&generator=categorymembers" +
+      "&gcmtitle=" + encodeURIComponent("Category:" + category) +
+      "&gcmtype=file&gcmnamespace=6&gcmlimit=24&prop=imageinfo" +
+      "&iiprop=url|size|mime|extmetadata&iiurlwidth=1000";
+    const response = await fetch(url);
+    const data = await response.json();
+    if(!data.query || !data.query.pages) return [];
+    const reject = /newspaper|news\s*paper|समाचार|पत्रिका|document|scan|poster|logo|banner|pamphlet|book|magazine|advertisement|screenshot|pdf|svg|webm|ogv/i;
+    return Object.values(data.query.pages).filter(page => {
+      const info = page.imageinfo && page.imageinfo[0];
+      if(!info || !/^image\/(jpeg|png|webp)$/i.test(info.mime || "")) return false;
+      const meta = info.extmetadata || {};
+      const description = [page.title,meta.ImageDescription?.value,meta.ObjectName?.value,meta.Categories?.value].join(" ");
+      return !reject.test(description);
+    }).map(page => page.imageinfo[0].thumburl || page.imageinfo[0].url).slice(0,4);
+  }catch(error){ return []; }
+}
+
+const FESTIVALS_BASE = [
+  {
+    id:"tusu-parab",
+    month:0,
+    start:11,
+    end:14,
+    name:{ en:"Tusu Parab", hi:"टुसू परब", nag:"टुसू परब" },
+    city:"Ranchi",
+    location:"Bundu • Tamar • Ranchi",
+    type:{ en:"Harvest Festival", hi:"फसल उत्सव", nag:null },
+    search:"Tusu festival Jharkhand",
+    files:[
+      "Tusu Festival in Chandil, Jharkhand.jpg",
+      "Chowdal in Tusu Festival.jpg",
+      "Crowd in Tusu Festival Chandil.jpg",
+      "Tusu Mela.jpg"
+    ],
+    about:{
+      en:"Tusu Parab is a winter harvest festival associated with the rural communities of Jharkhand. Decorated Choudals, songs, fairs and community gatherings are important features of the celebration.",
+      hi:"टुसू परब झारखंड के ग्रामीण समुदायों से जुड़ा एक शीतकालीन फसल उत्सव है। सजे हुए चौडाल, गीत, मेले और सामुदायिक जमावड़े इस उत्सव की मुख्य विशेषताएँ हैं।",
+      nag:null
+    },
+    dance:{ en:"Traditional Tusu folk performances and community dancing.", hi:"पारंपरिक टुसू लोक प्रदर्शन और सामुदायिक नृत्य।", nag:null },
+    music:{ en:"Tusu Geet and traditional drum rhythms.", hi:"टुसू गीत और पारंपरिक ढोल की थाप।", nag:null },
+    food:{ en:"Pitha, sesame preparations and traditional rice-based food.", hi:"पीठा, तिल के व्यंजन और पारंपरिक चावल आधारित भोजन।", nag:null },
+    note:{ en:"The festival is associated with the Paush/Makar Sankranti period. Exact dates vary by traditional calendar.", hi:"यह उत्सव पौष/मकर संक्रांति के समय से जुड़ा है। सटीक तिथि पारंपरिक पंचांग के अनुसार बदलती है।", nag:null }
+  },
+  {
+    id:"baha-parab",
+    month:1,
+    start:10,
+    end:13,
+    name:{ en:"Baha Parab", hi:"बाहा परब", nag:"बाहा परब" },
+    city:"Dumka",
+    location:"Dumka • Santhal Pargana",
+    type:{ en:"Santhal Spring Festival", hi:"संथाल वसंत उत्सव", nag:null },
+    search:"Baha festival Santhal Jharkhand",
+    files:[
+      "Baha Parab in Hazaribag, Jharkhand.jpg",
+      "Baha Porob dance , festival of prosperity, colour and new year . Santhal Tribes of Jharkhand.jpg",
+      "Baha parab 2.jpg",
+      "Baha parab 3.jpg"
+    ],
+    about:{
+      en:"Baha is a Santhal spring festival. Baha means flower and the celebration is closely connected with nature, flowers, community rituals, dance and music.",
+      hi:"बाहा एक संथाल वसंत उत्सव है। बाहा का अर्थ है फूल, और यह उत्सव प्रकृति, फूलों, सामुदायिक रीति-रिवाजों, नृत्य और संगीत से गहराई से जुड़ा है।",
+      nag:null
+    },
+    dance:{ en:"Santhal group dance in traditional dress.", hi:"पारंपरिक वेशभूषा में संथाल सामूहिक नृत्य।", nag:null },
+    music:{ en:"Traditional Santhal songs with Madal and Tamak.", hi:"मादल और तमक के साथ पारंपरिक संथाल गीत।", nag:null },
+    food:{ en:"Community meals and traditional rice preparations.", hi:"सामुदायिक भोज और पारंपरिक चावल के व्यंजन।", nag:null },
+    note:{ en:"Baha is generally associated with the spring period; the exact date varies by community and traditional calendar.", hi:"बाहा सामान्यतः वसंत ऋतु से जुड़ा है; सटीक तिथि समुदाय और पारंपरिक पंचांग के अनुसार बदलती है।", nag:null }
+  },
+  {
+    id:"sarhul",
+    month:2,
+    start:18,
+    end:21,
+    name:{ en:"Sarhul", hi:"सरहुल", nag:"सरहुल" },
+    city:"Khunti",
+    location:"Khunti • Ranchi • Gumla",
+    type:{ en:"Spring & Nature Festival", hi:"वसंत एवं प्रकृति उत्सव", nag:null },
+    search:"Sarhul festival Ranchi Jharkhand",
+    files:[
+      "Sarhul Festival Celebration In Central University Of Jharkhand ,Brambe Campus, Ranchi.jpg",
+      "Sarhul Festival Celebration In Central University Of Jharkhand ,Brambe Campus, Ranchi , sample 1.jpg",
+      "Sarhul Festival Celebration In Central University Of Jharkhand ,Brambe Campus , Ranchi , sample 2.jpg",
+      "Sarhul.jpg"
+    ],
+    about:{
+      en:"Sarhul is one of Jharkhand's best-known tribal spring festivals. It celebrates nature, the Sal tree and the beginning of a new agricultural and seasonal cycle.",
+      hi:"सरहुल झारखंड के सबसे प्रसिद्ध आदिवासी वसंत उत्सवों में से एक है। यह प्रकृति, साल वृक्ष और नए कृषि व मौसमी चक्र की शुरुआत का उत्सव है।",
+      nag:null
+    },
+    dance:{ en:"Traditional Sarhul group dance.", hi:"पारंपरिक सरहुल सामूहिक नृत्य।", nag:null },
+    music:{ en:"Mandar, Nagara and traditional community songs.", hi:"मांदर, नगाड़ा और पारंपरिक सामुदायिक गीत।", nag:null },
+    food:{ en:"Rice-based preparations and seasonal community food.", hi:"चावल आधारित व्यंजन और मौसमी सामुदायिक भोजन।", nag:null },
+    note:{ en:"Sarhul follows a traditional lunar/seasonal calendar, so the Gregorian date changes each year.", hi:"सरहुल पारंपरिक चंद्र/मौसमी पंचांग का पालन करता है, इसलिए ग्रेगोरियन तिथि हर वर्ष बदलती है।", nag:null }
+  },
+  {
+    id:"seraikela-chhau",
+    month:3,
+    start:1,
+    end:4,
+    name:{ en:"Seraikela Chhau", hi:"सरायकेला छऊ", nag:"सरायकेला छऊ" },
+    city:"Saraikela-Kharsawan",
+    location:"Seraikela • Saraikela-Kharsawan",
+    type:{ en:"Traditional Dance Festival", hi:"पारंपरिक नृत्य उत्सव", nag:null },
+    search:"Seraikela Chhau Jharkhand",
+    files:["A Visual Folk Epic Chhau Dance 25.jpg", "A Visual Folk Epic Chhau Dance 01.jpg", "A Cultural Revelation Chhau Dance 46.jpg", "A Visual Folk Epic Chhau Dance 19.jpg"],
+    about:{
+      en:"Seraikela is one of the important centres of Chhau dance. The performance combines stylised movement, music, costumes and storytelling.",
+      hi:"सरायकेला छऊ नृत्य के प्रमुख केंद्रों में से एक है। इस प्रदर्शन में शैलीबद्ध गतियाँ, संगीत, वेशभूषा और कथावाचन शामिल होते हैं।",
+      nag:null
+    },
+    dance:{ en:"Seraikela Chhau.", hi:"सरायकेला छऊ।", nag:null },
+    music:{ en:"Traditional Chhau percussion and musical accompaniment.", hi:"पारंपरिक छऊ वाद्य और संगीत संगत।", nag:null },
+    food:{ en:"Regional Jharkhand cuisine.", hi:"क्षेत्रीय झारखंडी भोजन।", nag:null },
+    note:{ en:"Performance dates vary. The calendar uses this as a cultural showcase period.", hi:"प्रदर्शन की तिथियाँ बदलती रहती हैं। कैलेंडर में इसे सांस्कृतिक प्रदर्शन अवधि के रूप में दिखाया गया है।", nag:null }
+  },
+  {
+    id:"sohrai-khovar-hazaribagh",
+    month:4,
+    start:10,
+    end:13,
+    name:{ en:"Sohrai & Khovar Art", hi:"सोहराय व खोवर कला", nag:"सोहराय-खोवर कला" },
+    city:"Hazaribagh",
+    location:"Hazaribagh • North-Central Jharkhand",
+    type:{ en:"Folk Art & Harvest Tradition", hi:"लोक कला एवं फसल परंपरा", nag:null },
+    search:"Sohrai Hazaribagh Jharkhand",
+    files:[
+      "Sohrai painting, Jharkhand.jpg",
+      "Sohrai and Kohbar Paintings 01.jpg",
+      "Sohrai and Kohbar Paintings 02.jpg",
+      "Sohrai wall painting jharkhand India.jpg"
+    ],
+    about:{
+      en:"Hazaribagh is famous for Sohrai and Khovar painting traditions. These forms of rural wall art are strongly connected with community life, nature, animals and seasonal traditions.",
+      hi:"हज़ारीबाग सोहराय और खोवर चित्रकला परंपराओं के लिए प्रसिद्ध है। यह ग्रामीण भित्ति-कला सामुदायिक जीवन, प्रकृति, पशुओं और मौसमी परंपराओं से गहराई से जुड़ी है।",
+      nag:null
+    },
+    dance:{ en:"Village songs and traditional community performances.", hi:"गाँव के गीत और पारंपरिक सामुदायिक प्रदर्शन।", nag:null },
+    music:{ en:"Folk music and traditional rhythms.", hi:"लोक संगीत और पारंपरिक ताल।", nag:null },
+    food:{ en:"Traditional rural and rice-based foods.", hi:"पारंपरिक ग्रामीण एवं चावल आधारित भोजन।", nag:null },
+    note:{ en:"The photographs represent the regional Sohrai/Khovar tradition. The main Sohrai festival occurs in the agricultural calendar around the post-harvest period.", hi:"ये तस्वीरें क्षेत्रीय सोहराय/खोवर परंपरा को दर्शाती हैं। मुख्य सोहराय उत्सव कृषि पंचांग में फसल कटाई के बाद की अवधि में आता है।", nag:null }
+  },
+  {
+    id:"rohini",
+    month:5,
+    start:15,
+    end:18,
+    name:{ en:"Rohini", hi:"रोहिणी", nag:"रोहिणी" },
+    city:"Lohardaga",
+    location:"Lohardaga • Central-West Jharkhand",
+    type:{ en:"Agricultural Festival", hi:"कृषि उत्सव", nag:null },
+    search:"Rohini festival Jharkhand agriculture",
+    files:["Tribal bull cart.jpg", "Santhal's village.jpg", "Santal people Jharkhand India.jpg", "Gur Pitha-Sarjamda, Jamshedpur, East Singhbhum-Jharkhand-1.jpg"],
+    about:{
+      en:"Rohini is associated with agricultural activity and the beginning of the sowing cycle in traditional Jharkhand rural life.",
+      hi:"रोहिणी झारखंड के पारंपरिक ग्रामीण जीवन में कृषि गतिविधि और बुवाई चक्र की शुरुआत से जुड़ा है।",
+      nag:null
+    },
+    dance:{ en:"Regional folk performances.", hi:"क्षेत्रीय लोक प्रदर्शन।", nag:null },
+    music:{ en:"Traditional community songs.", hi:"पारंपरिक सामुदायिक गीत।", nag:null },
+    food:{ en:"Seasonal agricultural food.", hi:"मौसमी कृषि भोजन।", nag:null },
+    note:{ en:"The exact agricultural timing varies by local tradition.", hi:"सटीक कृषि समय स्थानीय परंपरा के अनुसार बदलता है।", nag:null }
+  },
+  {
+    id:"shravan-pilgrimage",
+    month:6,
+    start:15,
+    end:18,
+    name:{ en:"Shravan Pilgrimage", hi:"श्रावण तीर्थयात्रा", nag:"सरावन जात्रा" },
+    city:"Deoghar",
+    location:"Baidyanath Dham • Deoghar",
+    type:{ en:"Pilgrimage Season", hi:"तीर्थयात्रा काल", nag:null },
+    search:"Baidyanath Dham Shravan Deoghar Jharkhand",
+    files:["PM Narendra Modi performing pooja at Baba Baidyanath Jyotirlinga in Deoghar, Jharkhand 03.jpg", "Prime Minister Narendra Modi at Baba Baidyanath Temple in Deoghar, Jharkhand 01.jpg", "Baidyanath temple and temple complex, Deoghar 01.jpg", "Baidyanath temple and temple complex, Deoghar 04.jpg"],
+    about:{
+      en:"Deoghar becomes an important pilgrimage centre during Shravan, with large numbers of devotees visiting Baidyanath Dham.",
+      hi:"श्रावण के दौरान देवघर एक महत्वपूर्ण तीर्थ केंद्र बन जाता है, जहाँ बड़ी संख्या में श्रद्धालु बैद्यनाथ धाम आते हैं।",
+      nag:null
+    },
+    dance:{ en:"Devotional cultural performances.", hi:"भक्ति सांस्कृतिक प्रदर्शन।", nag:null },
+    music:{ en:"Bhajans and devotional music.", hi:"भजन और भक्ति संगीत।", nag:null },
+    food:{ en:"Deoghar peda and traditional pilgrimage food.", hi:"देवघर का पेड़ा और पारंपरिक तीर्थ भोजन।", nag:null },
+    note:{ en:"Shravan follows the lunar calendar and therefore changes in the Gregorian calendar.", hi:"श्रावण चंद्र पंचांग का पालन करता है, इसलिए ग्रेगोरियन कैलेंडर में यह बदलता रहता है।", nag:null }
+  },
+  {
+    id:"karam-parab",
+    month:7,
+    start:8,
+    end:11,
+    name:{ en:"Karam Parab", hi:"करम परब", nag:"करम परब" },
+    city:"Gumla",
+    location:"Gumla • Ranchi • Jharkhand",
+    type:{ en:"Tribal Harvest Festival", hi:"आदिवासी फसल उत्सव", nag:null },
+    search:"Karam festival Jharkhand",
+    files:[
+      "KARAM FESTIVAL.jpg",
+      "Karma festival celebration in Jharkhand.jpg",
+      "Karam puja in jharkhand.jpg",
+      "Karamnach.jpg"
+    ],
+    about:{
+      en:"Karam Parab is an important tribal festival associated with agriculture, community life, youth and Karam Devta.",
+      hi:"करम परब एक महत्वपूर्ण आदिवासी उत्सव है जो कृषि, सामुदायिक जीवन, युवाओं और करम देवता से जुड़ा है।",
+      nag:null
+    },
+    dance:{ en:"Karma Naach.", hi:"करमा नाच।", nag:null },
+    music:{ en:"Mandar and traditional folk music.", hi:"मांदर और पारंपरिक लोक संगीत।", nag:null },
+    food:{ en:"Seasonal agricultural food.", hi:"मौसमी कृषि भोजन।", nag:null },
+    note:{ en:"Karam is associated with the 11th lunar day of Bhadra; the Gregorian date changes every year.", hi:"करम भाद्रपद की एकादशी तिथि से जुड़ा है; ग्रेगोरियन तिथि हर वर्ष बदलती है।", nag:null }
+  },
+  {
+    id:"kolhan-heritage",
+    month:8,
+    start:15,
+    end:18,
+    name:{ en:"Kolhan Tribal Heritage", hi:"कोल्हान आदिवासी विरासत", nag:"कोल्हान आदिवासी विरासत" },
+    city:"Jamshedpur",
+    location:"Jamshedpur • East Singhbhum • Kolhan",
+    type:{ en:"Tribal Cultural Celebration", hi:"आदिवासी सांस्कृतिक उत्सव", nag:null },
+    search:"Kolhan tribal festival Jamshedpur Jharkhand",
+    files:[
+      "Tusu festival Jamshedpur Jharkhand 04.jpg",
+      "Tusu Mela.jpg",
+      "Indian Tribal Baha Festival.jpg",
+      "Tribal Baha Festival.jpg"
+    ],
+    about:{
+      en:"The Kolhan region has strong Ho, Santhal and other tribal cultural traditions expressed through music, dance, fairs and seasonal celebrations.",
+      hi:"कोल्हान क्षेत्र में हो, संथाल और अन्य आदिवासी समुदायों की मजबूत सांस्कृतिक परंपराएँ संगीत, नृत्य, मेलों और मौसमी उत्सवों के माध्यम से व्यक्त होती हैं।",
+      nag:null
+    },
+    dance:{ en:"Regional tribal group dances.", hi:"क्षेत्रीय आदिवासी सामूहिक नृत्य।", nag:null },
+    music:{ en:"Traditional drums and folk songs.", hi:"पारंपरिक ढोल और लोक गीत।", nag:null },
+    food:{ en:"Regional rice-based cuisine.", hi:"क्षेत्रीय चावल आधारित भोजन।", nag:null },
+    note:{ en:"This prototype entry represents the region's cultural calendar rather than a single fixed-date festival.", hi:"यह प्रारूप प्रविष्टि किसी एक निश्चित तिथि के उत्सव के बजाय क्षेत्र के सांस्कृतिक कैलेंडर को दर्शाती है।", nag:null }
+  },
+  {
+    id:"autumn-folk-bokaro",
+    month:9,
+    start:5,
+    end:8,
+    name:{ en:"Autumn Folk Celebration", hi:"शरद लोक उत्सव", nag:"सरद लोक उत्सव" },
+    city:"Bokaro",
+    location:"Bokaro • Eastern Jharkhand",
+    type:{ en:"Seasonal Cultural Celebration", hi:"मौसमी सांस्कृतिक उत्सव", nag:null },
+    search:"Jharkhand tribal folk festival autumn",
+    files:["Durga Puja NRJ.jpg"],
+    about:{
+      en:"Autumn is an active period for village gatherings, seasonal rituals, fairs and folk performances across Jharkhand.",
+      hi:"शरद ऋतु झारखंड भर में गाँव के जमावड़ों, मौसमी रीति-रिवाजों, मेलों और लोक प्रदर्शनों की सक्रिय अवधि होती है।",
+      nag:null
+    },
+    dance:{ en:"Regional folk dance.", hi:"क्षेत्रीय लोक नृत्य।", nag:null },
+    music:{ en:"Traditional drums and songs.", hi:"पारंपरिक ढोल और गीत।", nag:null },
+    food:{ en:"Seasonal Jharkhand dishes.", hi:"मौसमी झारखंडी व्यंजन।", nag:null },
+    note:{ en:"Prototype seasonal cultural entry.", hi:"प्रारूप मौसमी सांस्कृतिक प्रविष्टि।", nag:null }
+  },
+  {
+    id:"sohrai-latehar",
+    month:10,
+    start:5,
+    end:8,
+    name:{ en:"Sohrai", hi:"सोहराय", nag:"सोहराय" },
+    city:"Latehar",
+    location:"Latehar • Rural Jharkhand",
+    type:{ en:"Harvest & Cattle Festival", hi:"फसल एवं पशुधन उत्सव", nag:null },
+    search:"Sohrai festival Jharkhand",
+    files:[
+      "Sohrai painting, Jharkhand.jpg",
+      "Sohrai and Kohbar Paintings 01.jpg",
+      "Sohrai and Kohbar Paintings 02.jpg",
+      "Sohrai wall painting jharkhand India.jpg"
+    ],
+    about:{
+      en:"Sohrai is associated with harvest, cattle and rural agricultural life. The tradition is also closely linked with Jharkhand's distinctive Sohrai wall paintings.",
+      hi:"सोहराय फसल, पशुधन और ग्रामीण कृषि जीवन से जुड़ा है। यह परंपरा झारखंड की विशिष्ट सोहराय भित्ति-चित्रकला से भी गहराई से जुड़ी है।",
+      nag:null
+    },
+    dance:{ en:"Village songs and community dances.", hi:"गाँव के गीत और सामुदायिक नृत्य।", nag:null },
+    music:{ en:"Traditional folk music.", hi:"पारंपरिक लोक संगीत।", nag:null },
+    food:{ en:"Harvest foods and rice-based preparations.", hi:"फसल कटाई के भोजन और चावल आधारित व्यंजन।", nag:null },
+    note:{ en:"Sohrai is generally associated with the post-Diwali agricultural period; exact dates vary.", hi:"सोहराय सामान्यतः दीपावली के बाद की कृषि अवधि से जुड़ा है; सटीक तिथियाँ बदलती रहती हैं।", nag:null }
+  },
+  {
+    id:"winter-folk-mela",
+    month:11,
+    start:15,
+    end:18,
+    name:{ en:"Winter Folk Mela", hi:"शीतकालीन लोक मेला", nag:"जाड़ा लोक मेला" },
+    city:"Chatra",
+    location:"Chatra • Northern Jharkhand",
+    type:{ en:"Traditional Folk Fair", hi:"पारंपरिक लोक मेला", nag:null },
+    search:"Jharkhand tribal folk fair Chatra",
+    files:[],
+    about:{
+      en:"Winter fairs and cultural gatherings bring together traditional crafts, food, music, dance and community life.",
+      hi:"शीतकालीन मेले और सांस्कृतिक जमावड़े पारंपरिक शिल्प, भोजन, संगीत, नृत्य और सामुदायिक जीवन को एक साथ लाते हैं।",
+      nag:null
+    },
+    dance:{ en:"Regional folk performances.", hi:"क्षेत्रीय लोक प्रदर्शन।", nag:null },
+    music:{ en:"Traditional instruments and folk songs.", hi:"पारंपरिक वाद्य यंत्र और लोक गीत।", nag:null },
+    food:{ en:"Local fair foods and traditional dishes.", hi:"स्थानीय मेले के भोजन और पारंपरिक व्यंजन।", nag:null },
+    note:{ en:"Prototype cultural calendar entry.", hi:"प्रारूप सांस्कृतिक कैलेंडर प्रविष्टि।", nag:null }
+  }
+];
+
+function addExtraFestivals(){
+  FESTIVALS_BASE.push(
+    extraFestival("makar-sankranti",0,15,15,"Makar Sankranti","मकर संक्रांति","Across Jharkhand","Across Jharkhand","Harvest Festival","Makar Sankranti India festival","A harvest and seasonal celebration closely connected with Jharkhand's Tusu traditions.","Tilkut, pitha, chuda and khichdi."),
+    extraFestival("maghe-parab",0,27,29,"Maghe Parab","माघे परब","West Singhbhum","Kolhan • West Singhbhum","Ho Tribal Festival","Maghe Parab Ho tribe Jharkhand","A major Ho community festival celebrating ancestors, renewal, fellowship and the agricultural cycle.","Rice dishes, meat preparations and community meals."),
+    extraFestival("maha-shivratri",1,15,15,"Maha Shivratri","महाशिवरात्रि","Deoghar","Baidyanath Dham • Deoghar","Religious Festival","Maha Shivratri Baidyanath Dham Deoghar","Devotees gather at Shiva temples, especially Baidyanath Dham, for worship and night-long observances.","Fruits, milk offerings and vrat foods."),
+    extraFestival("holi",2,4,4,"Holi","होली","Across Jharkhand","Across Jharkhand","Festival of Colours","Holi Jharkhand tribal dance","Communities welcome spring with colours, music and joyful gatherings, with strong regional folk traditions.","Malpua, dahi vada and festive sweets."),
+    extraFestival("ram-navami",2,26,27,"Ram Navami","राम नवमी","Hazaribagh","Hazaribagh • Ranchi","Religious Procession","Ram Navami Hazaribagh Jharkhand","Jharkhand's towns host vibrant processions with flags, devotional music and akhara displays.","Prasad, sweets and seasonal food."),
+    extraFestival("mandā-parab",3,13,15,"Manda Parab","मंडा परब","Ranchi","Ranchi • Khunti • Gumla","Tribal Faith Festival","Manda festival Jharkhand","A local spring observance featuring village rituals, devotional acts, fairs and community participation.","Traditional rice foods and village meals."),
+    extraFestival("buddha-purnima",4,22,22,"Buddha Purnima","बुद्ध पूर्णिमा","Itkhori","Itkhori • Chatra","Buddhist Observance","Itkhori Chatra Buddhist temple Jharkhand","A peaceful heritage-focused observance suited to exploring Itkhori's Buddhist, Hindu and Jain connections.","Simple vegetarian meals and offerings."),
+    extraFestival("rath-yatra",5,25,26,"Jagannath Rath Yatra","जगन्नाथ रथ यात्रा","Ranchi","Jagannathpur • Ranchi","Chariot Festival","Jagannathpur Rath Yatra Ranchi","A colourful chariot procession and fair centred on Ranchi's historic Jagannath Temple.","Khaja, sweets and fair snacks."),
+    extraFestival("guru-purnima",6,29,29,"Guru Purnima","गुरु पूर्णिमा","Parasnath","Parasnath • Giridih","Spiritual Observance","Parasnath Jharkhand pilgrimage","A day of gratitude to teachers and spiritual guides, paired here with Jharkhand's important pilgrimage landscape.","Satvik meals and temple prasad."),
+    extraFestival("independence-day",7,15,15,"Independence Day Cultural Fair","स्वतंत्रता दिवस सांस्कृतिक मेला","Ranchi","Morabadi • Ranchi","National Celebration","Jharkhand tribal cultural dance Ranchi","Public programmes showcase Jharkhand's folk dance, music, crafts and regional identity.","Regional snacks and festival stalls."),
+    extraFestival("vishwakarma-puja",8,17,17,"Vishwakarma Puja","विश्वकर्मा पूजा","Jamshedpur","Jamshedpur • Bokaro • Dhanbad","Craft & Industry Festival","Vishwakarma Puja Jamshedpur","Factories, workshops, vehicles and tools are decorated in Jharkhand's industrial cities to honour Vishwakarma.","Khichdi, fruits and community prasad."),
+    extraFestival("jitиа",8,25,25,"Jitiya","जितिया","Palamu","Palamu • Garhwa","Family Folk Festival","Jitiya festival India","Mothers observe traditional rituals for their children's well-being, accompanied by regional stories and songs.","Noon and evening ritual foods after the fast."),
+    extraFestival("durga-puja",9,18,22,"Durga Puja","दुर्गा पूजा","Ranchi","Ranchi • Jamshedpur • Bokaro","Autumn Festival","Durga Puja Ranchi Jharkhand","Decorated pandals, cultural programmes and community celebrations transform Jharkhand's cities during Navratri.","Bhog khichdi, sweets and street food."),
+    extraFestival("diwali",10,8,9,"Diwali & Kali Puja","दीवाली और काली पूजा","Jamshedpur","Across Jharkhand","Festival of Lights","Diwali Jharkhand festival","Homes, markets and temples glow with lamps while many communities also hold Kali Puja observances.","Thekua, anarsa, sweets and savouries."),
+    extraFestival("chhath",10,14,17,"Chhath Puja","छठ पूजा","Dhanbad","Riverbanks & ponds across Jharkhand","Sun Worship Festival","Chhath Puja Jharkhand","Devotees offer arghya to the setting and rising sun at carefully prepared riverbanks and ponds.","Thekua, fruits and sugarcane offerings."),
+    extraFestival("christmas",11,25,25,"Christmas","क्रिसमस","Ranchi","Ranchi • Simdega • Gumla","Community Celebration","Christmas Ranchi church Jharkhand","Churches and neighbourhoods celebrate with prayer, music, decorations and community gatherings.","Cakes, festive breads and family meals.")
+  );
+}
+
+function addIndianFestivals(){
+  FESTIVALS_BASE.push(
+    extraFestival("new-year",0,1,1,"New Year's Day","नव वर्ष","Across Jharkhand","Across India","National Celebration","New Year celebration India","The first day of the Gregorian year is welcomed with community gatherings, travel and cultural programmes.","Festive meals, sweets and regional food."),
+    extraFestival("republic-day",0,26,26,"Republic Day","गणतंत्र दिवस","Ranchi","Morabadi • Ranchi","National Festival","Republic Day parade India","India's Constitution is honoured through flag ceremonies, parades and cultural programmes.","Community refreshments and regional snacks."),
+    extraFestival("vasant-panchami",0,23,23,"Vasant Panchami","वसंत पंचमी","Across Jharkhand","Schools • Temples • Cultural centres","Spring Festival","Vasant Panchami Saraswati Puja India","A spring celebration dedicated to Saraswati, with schools and cultural institutions holding prayers and programmes.","Yellow sweets, boondi and seasonal dishes."),
+    extraFestival("eid-ul-fitr",2,21,21,"Eid-ul-Fitr","ईद-उल-फितर","Across Jharkhand","Ranchi • Jamshedpur • Dhanbad","Islamic Festival","Eid ul Fitr India mosque","The festival marks the end of Ramadan with prayers, charity, family visits and community meals.","Sewai, biryani and festive sweets."),
+    extraFestival("mahavir-jayanti",2,31,31,"Mahavir Jayanti","महावीर जयंती","Across Jharkhand","Jain temples • Jharkhand","Jain Festival","Mahavir Jayanti India","Jain communities commemorate Lord Mahavira through prayer, processions and service activities.","Satvik vegetarian food and sweets."),
+    extraFestival("good-friday",3,3,3,"Good Friday","गुड फ्राइडे","Across Jharkhand","Ranchi • Gumla • Simdega","Christian Observance","Good Friday India church","Churches hold solemn services remembering the crucifixion of Jesus Christ.","Simple community meals."),
+    extraFestival("ambedkar-jayanti",3,14,14,"Ambedkar Jayanti","अंबेडकर जयंती","Across Jharkhand","Ranchi • District centres","National Observance","Ambedkar Jayanti India","Public programmes honour Dr B. R. Ambedkar's contribution to India's Constitution and social justice.","Community refreshments."),
+    extraFestival("easter",3,5,5,"Easter","ईस्टर","Across Jharkhand","Churches across Jharkhand","Christian Festival","Easter India church","Christian communities celebrate the resurrection of Jesus with worship, music and family gatherings.","Cakes, breads and festive family meals."),
+    extraFestival("may-day",4,1,1,"May Day","मजदूर दिवस","Across Jharkhand","Industrial and mining towns","Public Observance","May Day India workers","Workers and labour organisations mark International Workers' Day with public programmes.","Community meals and refreshments."),
+    extraFestival("bakrid",4,27,27,"Eid al-Adha / Bakrid","बकरीद","Across Jharkhand","Ranchi • Jamshedpur • Dhanbad","Islamic Festival","Eid al Adha India","The festival honours devotion and charity through prayer, sharing and community support.","Biryani, sewai and shared festive meals."),
+    extraFestival("hul-diwas",5,30,30,"Hul Diwas","हूल दिवस","Dumka","Bhognadih • Santhal Pargana","Jharkhand Heritage Day","Hul Diwas Jharkhand","Jharkhand remembers the 1855 Santhal Hul led by Sidho and Kanho through tributes and cultural programmes.","Santhal regional food and community meals."),
+    extraFestival("muharram",5,26,26,"Muharram","मुहर्रम","Across Jharkhand","Ranchi • Jamshedpur • District towns","Islamic Observance","Muharram India procession","Muharram is observed through remembrance, prayer and community processions.","Community food and drinks distributed in service."),
+    extraFestival("world-tribal-day",7,9,9,"World Tribal Day","विश्व आदिवासी दिवस","Ranchi","Ranchi • Tribal regions","Cultural Celebration","World Tribal Day India","Cultural programmes celebrate Indigenous identity, languages, crafts, dance and community rights.","Traditional rice dishes and regional food."),
+    extraFestival("raksha-bandhan",7,28,28,"Raksha Bandhan","रक्षा बंधन","Across Jharkhand","Across India","Family Festival","Raksha Bandhan India","Families celebrate the bond between siblings through rakhi, gifts and shared meals.","Sweets and festive snacks."),
+    extraFestival("eid-milad",7,26,26,"Eid-e-Milad","ईद-ए-मिलाद","Across Jharkhand","Ranchi • Jamshedpur • Dhanbad","Islamic Observance","Mawlid India","Communities commemorate the birth of Prophet Muhammad through prayer, charity and gatherings.","Community meals and sweets."),
+    extraFestival("janmashtami",8,4,4,"Krishna Janmashtami","कृष्ण जन्माष्टमी","Across Jharkhand","Temples across Jharkhand","Hindu Festival","Krishna Janmashtami India","Temples celebrate the birth of Krishna with midnight worship, devotional music and tableaux.","Makhan-mishri, panjiri and sweets."),
+    extraFestival("ganesh-chaturthi",8,14,14,"Ganesh Chaturthi","गणेश चतुर्थी","Across Jharkhand","Ranchi • Jamshedpur • Bokaro","Hindu Festival","Ganesh Chaturthi India","Homes and community pandals welcome Ganesha with worship, music and cultural events.","Modak and festive sweets."),
+    extraFestival("gandhi-jayanti",9,2,2,"Gandhi Jayanti","गांधी जयंती","Across Jharkhand","Public institutions across Jharkhand","National Festival","Gandhi Jayanti India","India honours Mahatma Gandhi through prayer meetings, cleanliness drives and peace programmes.","Simple community refreshments."),
+    extraFestival("dussehra",9,20,20,"Dussehra / Vijayadashami","दशहरा / विजयादशमी","Across Jharkhand","Ranchi • Jamshedpur • Hazaribagh","National Festival","Dussehra India","The victory of good over evil is celebrated through processions, fairs and Ravana Dahan.","Jalebi, festive snacks and regional food."),
+    extraFestival("govardhan-puja",10,9,9,"Govardhan Puja","गोवर्धन पूजा","Across Jharkhand","Homes and temples","Hindu Festival","Govardhan Puja India","The day after Diwali honours Krishna and nature through Annakut offerings.","Annakut and vegetarian festive dishes."),
+    extraFestival("bhai-dooj",10,11,11,"Bhai Dooj","भाई दूज","Across Jharkhand","Across India","Family Festival","Bhai Dooj India","Sisters and brothers celebrate their bond with tilak, blessings, gifts and family meals.","Sweets and traditional family food."),
+    extraFestival("childrens-day",10,14,14,"Children's Day","बाल दिवस","Across Jharkhand","Schools and cultural centres","National Observance","Children's Day India","Schools organise cultural, educational and recreational programmes for children.","School treats and refreshments."),
+    extraFestival("jharkhand-foundation-day",10,15,15,"Jharkhand Foundation Day & Birsa Munda Jayanti","झारखंड स्थापना दिवस एवं बिरसा मुंडा जयंती","Ranchi","Ranchi • Ulihatu • Across Jharkhand","State Festival","Jharkhand Foundation Day Birsa Munda","The state celebrates its formation and honours Dharti Aaba Birsa Munda through official and cultural programmes.","Jharkhand cuisine, tribal foods and festival stalls.")
+  );
+}
+
+function addFebruaryJharkhandFestivals(){
+  FESTIVALS_BASE.push(
+    extraFestival("mage-porob-feb",1,8,8,"Mage Porob","मागे पोरोब","Jamshedpur","Nandup • Sundernagar • Jamshedpur","Ho Tribal Festival","Mage Porob Ho Jharkhand","A documented 2026 Ho community celebration honouring ancestors, renewal and the agricultural cycle.","Rice dishes, meat preparations and community meals."),
+    extraFestival("hizla-mela",1,13,20,"State Tribal Hizla Mela","राजकीय जनजातीय हिजला मेला","Dumka","Hizla • Dumka","State Tribal Fair","Hizla Mela Dumka Jharkhand","A historic state tribal fair showcasing Santhal culture, village institutions, crafts, dance, music and regional food.","Santhal dishes, rice foods and mela snacks."),
+    extraFestival("itkhori-mahotsav",1,19,21,"Itkhori Mahotsav","इटखोरी महोत्सव","Chatra","Itkhori • Chatra","State Heritage Festival","Itkhori Mahotsav Chatra Jharkhand","A state-supported cultural and religious festival highlighting Itkhori's Hindu, Buddhist and Jain heritage.","Regional Jharkhand food and festival stalls."),
+    extraFestival("baidyanath-mahotsav",1,25,27,"State Baidyanath Mahotsav","राजकीय बैद्यनाथ महोत्सव","Deoghar","K.K.N. Stadium • Deoghar","State Cultural Festival","Baidyanath Mahotsav Deoghar","A state cultural festival in Deoghar featuring music, dance, local performers and the heritage of Baidyanath Dham.","Deoghar peda, regional meals and festival food."),
+    extraFestival("maithon-mela",1,27,28,"Maithon Mela","मैथन मेला","Dhanbad","Helipad Ground • Maithon","Culture & Craft Fair","Maithon Mela Dhanbad Jharkhand","A culture, craft and community fair beside Maithon, featuring performances, terracotta, stalls and family activities.","Local snacks, sweets and fair food.")
+  );
+}
+
+function addMoreJharkhandFestivals(){
+  FESTIVALS_BASE.push(
+    extraFestival("jharkhand-bird-festival",2,9,11,"Jharkhand Bird Festival","झारखंड पक्षी महोत्सव","Jamshedpur","Dalma Wildlife Sanctuary","Nature & Wildlife Festival","Dalma bird festival Jharkhand","A forest-department festival with guided birdwatching, conservation learning and nature activities in Dalma.","Local seasonal food and refreshments."),
+    extraFestival("handloom-saras-mela",2,9,20,"State Handloom & Saras Mela","राज्य हथकरघा एवं सरस मेला","Ranchi","Morabadi Ground • Ranchi","Craft & Rural Livelihood Fair","Jharkhand handloom handicraft mela","Hundreds of artisan and self-help-group stalls bring together handloom, lac, bamboo, pottery, silk, food and live craft demonstrations.","Jharkhand delicacies and regional food stalls."),
+    extraFestival("satuani",3,14,14,"Satuani / Satuaan","सतुआनी / सतुआन","Across Jharkhand","Villages and homes across Jharkhand","Harvest & Solar New Year Festival","Satuani Jharkhand festival","A summer harvest observance marking Mesha Sankranti through bathing, charity, seasonal food and gratitude for the new crop.","Sweet or savoury sattu, raw mango and cooling drinks."),
+    extraFestival("ashadhi-puja",5,15,15,"Ashadhi Puja","आषाढ़ी पूजा","Rural Jharkhand","Farming villages across Jharkhand","Agricultural Festival","Ashadhi Puja Jharkhand","Village communities pray for rain, fertile fields and a successful sowing season as the monsoon agricultural cycle begins.","Rice dishes, seasonal greens and community meals."),
+    extraFestival("adivasi-mahotsav",7,9,10,"Jharkhand Adivasi Mahotsav","झारखंड आदिवासी महोत्सव","Ranchi","Morabadi Ground • Ranchi","State Tribal Festival","Jharkhand Adivasi Mahotsav Ranchi","A major celebration of Jharkhand's Indigenous art, languages, music, dance, literature, food and living heritage.","Tribal cuisine, millet dishes and regional food."),
+    extraFestival("johar-monsoon-fest",8,8,10,"Johar Monsoon Rain Fest","जोहार मॉनसून रेन फेस्ट","Ranchi","Morabadi • Ranchi","Tourism & Culture Festival","Jharkhand monsoon festival Ranchi","A colourful tourism event celebrating Jharkhand's rainy-season landscapes, folk culture, music, food and crafts.","Monsoon snacks and Jharkhand cuisine."),
+    extraFestival("nawakhani",9,2,2,"Nawakhani","नवाखानी","Santhal Pargana","Tribal villages across Jharkhand","New Harvest Festival","Nawakhani Jharkhand harvest","Families honour the first rice harvest, ancestors and village deities before sharing the season's new grain.","Freshly harvested rice and community dishes."),
+    extraFestival("luguburu-fair",10,24,24,"Luguburu Ghantabari Fair","लुगुबुरु घंटाबाड़ी मेला","Bokaro","Lalpania • Gomia • Bokaro","Santhal Pilgrimage & Fair","Luguburu Ghantabari fair Jharkhand","Santhal pilgrims gather at the sacred Lugu hills on Kartik Purnima for prayer, cultural programmes and community dialogue.","Santhal foods, rice dishes and mela snacks."),
+    extraFestival("sharad-mahotsav",11,15,17,"Sharad Mahotsav, Netarhat","शरद महोत्सव, नेतरहाट","Latehar","Netarhat • Latehar","Winter Tourism Festival","Netarhat Sharad Mahotsav Jharkhand","A winter celebration of Netarhat's sunrise, forests and hill-station atmosphere through cultural and tourism activities.","Local winter dishes and festival stalls.")
+  );
+}
+
+addExtraFestivals();
+addIndianFestivals();
+addFebruaryJharkhandFestivals();
+addMoreJharkhandFestivals();
+
+const DATE_STATUS={
+  confirmed:{label:"Confirmed date",dot:"🟢"},
+  expected:{label:"Expected date",dot:"🟡"},
+  awaiting:{label:"Awaiting confirmation",dot:"🔴"}
+};
+
+const FESTIVAL_SCHEDULES={
+  2026:{
+    "tusu-parab":{month:0,start:14,end:15,status:"confirmed"},"baha-parab":{month:2,start:8,end:8,status:"confirmed"},
+    "sarhul":{month:2,start:21,end:21,status:"confirmed"},"seraikela-chhau":{month:3,start:11,end:13,status:"confirmed"},
+    "sohrai-khovar-hazaribagh":{status:"expected"},"rohini":{status:"expected"},
+    "shravan-pilgrimage":{month:6,start:30,end:31,status:"confirmed"},"karam-parab":{month:8,start:22,end:22,status:"confirmed"},
+    "kolhan-heritage":{status:"awaiting"},"autumn-folk-bokaro":{status:"awaiting"},"sohrai-latehar":{month:10,start:9,end:12,status:"expected"},"winter-folk-mela":{status:"awaiting"},
+    "makar-sankranti":{month:0,start:14,end:14,status:"confirmed"},"maghe-parab":{status:"expected"},
+    "maha-shivratri":{month:1,start:15,end:15,status:"confirmed"},"holi":{month:2,start:4,end:4,status:"confirmed"},
+    "ram-navami":{month:2,start:26,end:26,status:"confirmed"},"mandā-parab":{month:3,start:13,end:14,status:"confirmed"},
+    "buddha-purnima":{month:4,start:1,end:1,status:"confirmed"},"rath-yatra":{month:6,start:16,end:16,status:"confirmed"},
+    "guru-purnima":{month:6,start:29,end:29,status:"confirmed"},"independence-day":{month:7,start:15,end:15,status:"confirmed"},
+    "vishwakarma-puja":{month:8,start:17,end:17,status:"confirmed"},"jitиа":{month:9,start:3,end:3,status:"expected"},
+    "durga-puja":{month:9,start:16,end:21,status:"confirmed"},"diwali":{month:10,start:8,end:8,status:"confirmed"},
+    "chhath":{month:10,start:13,end:16,status:"confirmed"},"christmas":{month:11,start:25,end:25,status:"confirmed"},
+    "new-year":{status:"confirmed"},"republic-day":{status:"confirmed"},"vasant-panchami":{status:"confirmed"},
+    "eid-ul-fitr":{status:"confirmed"},"mahavir-jayanti":{status:"confirmed"},"good-friday":{status:"confirmed"},
+    "ambedkar-jayanti":{status:"confirmed"},"easter":{status:"confirmed"},"may-day":{status:"confirmed"},
+    "bakrid":{status:"confirmed"},"hul-diwas":{status:"confirmed"},"muharram":{status:"confirmed"},
+    "world-tribal-day":{status:"confirmed"},"raksha-bandhan":{status:"confirmed"},"eid-milad":{status:"confirmed"},
+    "janmashtami":{status:"confirmed"},"ganesh-chaturthi":{status:"confirmed"},"gandhi-jayanti":{status:"confirmed"},
+    "dussehra":{status:"confirmed"},"govardhan-puja":{status:"confirmed"},"bhai-dooj":{status:"confirmed"},
+    "childrens-day":{status:"confirmed"},"jharkhand-foundation-day":{status:"confirmed"},
+    "mage-porob-feb":{status:"confirmed"},"hizla-mela":{status:"confirmed"},"itkhori-mahotsav":{status:"confirmed"},
+    "baidyanath-mahotsav":{status:"confirmed"},"maithon-mela":{status:"confirmed"},
+    "jharkhand-bird-festival":{status:"confirmed"},"handloom-saras-mela":{status:"confirmed"},
+    "satuani":{status:"confirmed"},"ashadhi-puja":{status:"expected"},"adivasi-mahotsav":{status:"confirmed"},
+    "johar-monsoon-fest":{status:"confirmed"},"nawakhani":{status:"expected"},
+    "luguburu-fair":{status:"confirmed"},"sharad-mahotsav":{status:"expected"}
+  },
+  2027:{
+    "tusu-parab":{month:0,start:14,end:15,status:"expected"},"baha-parab":{status:"expected"},
+    "sarhul":{month:3,start:9,end:9,status:"confirmed"},"seraikela-chhau":{status:"awaiting"},
+    "sohrai-khovar-hazaribagh":{status:"expected"},"rohini":{status:"expected"},"shravan-pilgrimage":{status:"expected"},
+    "karam-parab":{month:7,start:25,end:25,status:"confirmed"},"kolhan-heritage":{status:"awaiting"},"autumn-folk-bokaro":{status:"awaiting"},
+    "sohrai-latehar":{status:"expected"},"winter-folk-mela":{status:"awaiting"},"makar-sankranti":{month:0,start:15,end:15,status:"confirmed"},
+    "maghe-parab":{status:"expected"},"maha-shivratri":{month:2,start:6,end:6,status:"confirmed"},"holi":{month:2,start:22,end:22,status:"confirmed"},
+    "ram-navami":{month:3,start:15,end:15,status:"confirmed"},"mandā-parab":{status:"expected"},"buddha-purnima":{month:4,start:20,end:20,status:"confirmed"},
+    "rath-yatra":{month:6,start:5,end:5,status:"confirmed"},"guru-purnima":{month:6,start:18,end:18,status:"confirmed"},
+    "independence-day":{month:7,start:15,end:15,status:"confirmed"},"vishwakarma-puja":{month:8,start:17,end:17,status:"confirmed"},
+    "jitиа":{month:8,start:23,end:23,status:"confirmed"},"durga-puja":{month:9,start:5,end:9,status:"confirmed"},"diwali":{month:9,start:29,end:29,status:"confirmed"},
+    "chhath":{month:10,start:2,end:5,status:"confirmed"},"christmas":{month:11,start:25,end:25,status:"confirmed"},
+    "new-year":{status:"confirmed"},"republic-day":{status:"confirmed"},"vasant-panchami":{month:1,start:11,end:11,status:"confirmed"},
+    "eid-ul-fitr":{month:2,start:10,end:10,status:"expected"},"mahavir-jayanti":{month:3,start:19,end:19,status:"confirmed"},
+    "good-friday":{month:2,start:26,end:26,status:"confirmed"},"ambedkar-jayanti":{status:"confirmed"},
+    "easter":{month:2,start:28,end:28,status:"confirmed"},"may-day":{status:"confirmed"},
+    "bakrid":{month:4,start:17,end:17,status:"expected"},"hul-diwas":{status:"confirmed"},
+    "muharram":{month:5,start:15,end:15,status:"expected"},"world-tribal-day":{status:"confirmed"},
+    "raksha-bandhan":{month:7,start:17,end:17,status:"confirmed"},"eid-milad":{month:7,start:15,end:15,status:"expected"},
+    "janmashtami":{month:7,start:25,end:25,status:"confirmed"},"ganesh-chaturthi":{month:8,start:4,end:4,status:"confirmed"},
+    "gandhi-jayanti":{status:"confirmed"},"dussehra":{month:9,start:9,end:9,status:"confirmed"},
+    "govardhan-puja":{month:9,start:30,end:30,status:"confirmed"},"bhai-dooj":{month:9,start:31,end:31,status:"confirmed"},
+    "childrens-day":{status:"confirmed"},"jharkhand-foundation-day":{status:"confirmed"},
+    "mage-porob-feb":{status:"expected"},"hizla-mela":{status:"expected"},"itkhori-mahotsav":{status:"expected"},
+    "baidyanath-mahotsav":{status:"expected"},"maithon-mela":{status:"expected"},
+    "jharkhand-bird-festival":{status:"expected"},"handloom-saras-mela":{status:"expected"},
+    "satuani":{month:3,start:14,end:14,status:"expected"},"ashadhi-puja":{status:"expected"},
+    "adivasi-mahotsav":{status:"expected"},"johar-monsoon-fest":{status:"expected"},
+    "nawakhani":{status:"expected"},"luguburu-fair":{month:10,start:14,end:14,status:"confirmed"},
+    "sharad-mahotsav":{status:"expected"}
+  }
+};
+
+function buildFestivalYear(year){
+  return FESTIVALS_BASE.map(festival=>({...festival,...(FESTIVAL_SCHEDULES[year][festival.id]||{status:"awaiting"})}));
+}
+
+const FESTIVALS_BY_YEAR = {
+  2026: buildFestivalYear(2026),
+  2027: buildFestivalYear(2027)
+};
+
+function getFestivalsForYear(year){
+  return FESTIVALS_BY_YEAR[year] || FESTIVALS_BY_YEAR[DEFAULT_YEAR];
+}
+
+function festivalById(id){
+  return getFestivalsForYear(currentYear).find(festival => festival.id === id);
+}
+
+const PLACES = {
+  Ranchi:{
+    region:"Central Jharkhand",
+    search:"Ranchi Jharkhand city",
+    imageFile:"Sarhul.jpg",
+    about:"Ranchi is the capital of Jharkhand and an important cultural centre surrounded by forests, waterfalls and diverse communities.",
+    attractions:"Hundru Falls • Dassam Falls • Rock Garden • Jagannath Temple",
+    culture:"Munda and Oraon traditions • Sarhul • folk music • tribal dance",
+    food:"Dhuska • Rugra • Chilka Roti • rice preparations"
+  },
+  Dumka:{
+    region:"Santhal Pargana",
+    search:"Maluti temples Dumka Jharkhand",
+    imageFile:"Temples in Maluti village in Jharkhand 03.jpg",
+    about:"Dumka is an important cultural centre of Santhal Pargana with strong tribal traditions, hills and fairs.",
+    attractions:"Hizla Pahar • Mayurakshi region • Maluti",
+    culture:"Santhal traditions • Baha • folk music • community fairs",
+    food:"Traditional rice dishes • seasonal foods"
+  },
+  Khunti:{
+    region:"South Central Jharkhand",
+    search:"Panchghagh falls Khunti Jharkhand",
+    imageFile:"Panchghagh falls.jpg",
+    about:"Khunti has strong Munda cultural connections and is an important part of the cultural heartland of southern Jharkhand.",
+    attractions:"Panch Gagh Falls • Ulihatu • forest landscapes",
+    culture:"Munda culture • Sarhul • Karam traditions",
+    food:"Dhuska • rice dishes • seasonal food"
+  },
+  "Saraikela-Kharsawan":{
+    region:"Kolhan Region",
+    search:"Seraikela Chhau dance Jharkhand",
+    imageFile:"A Cultural Crescendo Chhau Dance 01.jpg",
+    about:"Saraikela-Kharsawan is particularly famous for Seraikela Chhau and its rich cultural traditions.",
+    attractions:"Seraikela • Chandil • Kharsawan",
+    culture:"Seraikela Chhau • tribal traditions • folk theatre",
+    food:"Regional rice dishes • village cuisine"
+  },
+  Hazaribagh:{
+    region:"North-Central Jharkhand",
+    search:"Hazaribagh Jharkhand",
+    imageFile:"Sohrai painting, Jharkhand.jpg",
+    about:"Hazaribagh is famous for Sohrai and Khovar painting traditions and its forest landscape.",
+    attractions:"Canary Hill • Hazaribagh National Park • Surajkund",
+    culture:"Sohrai • Khovar • folk art • harvest traditions",
+    food:"Dhuska • local rice dishes • seasonal food"
+  },
+  Lohardaga:{
+    region:"Central-West Jharkhand",
+    search:"Lawapani Waterfall Lohardaga Jharkhand",
+    imageFile:"Lawapani Waterfall, Lohardaga.jpg",
+    about:"Lohardaga has strong Oraon traditions and beautiful forested landscapes.",
+    attractions:"Kuru • Kisko • forest landscapes",
+    culture:"Oraon traditions • Sarhul • Karam",
+    food:"Traditional rice dishes • seasonal vegetables"
+  },
+  Deoghar:{
+    region:"Santhal Pargana",
+    search:"Deoghar Baidyanath Dham Jharkhand",
+    imageFile:"Baidyanath temple and temple complex, Deoghar 01.jpg",
+    about:"Deoghar is one of Jharkhand's major pilgrimage destinations and home to Baidyanath Dham.",
+    attractions:"Baidyanath Dham • Trikut • Nandan Pahar",
+    culture:"Pilgrimage • Shravan traditions • temple culture",
+    food:"Peda • traditional sweets • pilgrimage food"
+  },
+  Gumla:{
+    region:"South-West Jharkhand",
+    search:"Navratangarh Gumla Jharkhand",
+    imageFile:"Nawratan gadh.jpg",
+    about:"Gumla is a forested region with strong Oraon and other tribal cultural traditions.",
+    attractions:"Anjan Dham • Palkot • waterfalls",
+    culture:"Oraon traditions • Karam • Sarhul",
+    food:"Dhuska • rice dishes • seasonal forest food"
+  },
+  Jamshedpur:{
+    region:"East Singhbhum • Kolhan",
+    search:"Jubilee Park Jamshedpur Jharkhand",
+    imageFile:"Jubilee Park Jamshedpur.jpg",
+    about:"Jamshedpur combines industrial heritage with the rich Ho, Santhal and regional cultural traditions of Kolhan.",
+    attractions:"Jubilee Park • Dalma Hills • Dimna Lake",
+    culture:"Ho culture • Santhal traditions • folk music",
+    food:"Regional rice dishes • local cuisine"
+  },
+  Bokaro:{
+    region:"Eastern Jharkhand",
+    search:"City Park Bokaro Steel City Jharkhand",
+    imageFile:"City Park - Bokaro Steel City.jpg",
+    about:"Bokaro is one of Jharkhand's major industrial cities and is surrounded by rural cultural landscapes.",
+    attractions:"Bokaro Steel City • Garga Dam",
+    culture:"Industrial heritage • folk traditions",
+    food:"Regional Jharkhand cuisine"
+  },
+  Latehar:{
+    region:"Western Jharkhand",
+    search:"Lodh Falls Latehar Jharkhand",
+    imageFile:"Lodh falls.jpg",
+    about:"Latehar is known for forests, waterfalls and the beautiful Netarhat region.",
+    attractions:"Netarhat • Betla • Lodh Falls",
+    culture:"Tribal traditions • forest culture • folk performances",
+    food:"Traditional village cuisine"
+  },
+  Chatra:{
+    region:"Northern Jharkhand",
+    search:"Bhadrakali Itkhori Chatra Jharkhand",
+    imageFile:"Ma Bhadrakali Temple 3.jpg",
+    about:"Chatra has historic temples, forests, fairs and strong rural traditions.",
+    attractions:"Itkhori • Lawalong • Bhadli",
+    culture:"Fairs • folk traditions • rural culture",
+    food:"Traditional fair foods • rice dishes"
+  }
+};
+
+const MONTHS = [
+  { place:"Ranchi" },
+  { place:"Dumka" },
+  { place:"Khunti" },
+  { place:"Saraikela-Kharsawan" },
+  { place:"Hazaribagh" },
+  { place:"Lohardaga" },
+  { place:"Deoghar" },
+  { place:"Gumla" },
+  { place:"Jamshedpur" },
+  { place:"Bokaro" },
+  { place:"Latehar" },
+  { place:"Chatra" }
+];
+
+const DEMO_USER_ID = "demo-tourist";
+const BOOKED_ITINERARY = [
+  {
+    id:"trip-1",
+    userId:DEMO_USER_ID,
+    date:"2027-03-17",
+    time:"09:00",
+    title:{ en:"Ranchi Sightseeing", hi:"रांची भ्रमण", nag:null },
+    place:{ en:"Ranchi", hi:"रांची", nag:"रांची" },
+    description:{ en:"Explore major attractions in Ranchi, including the Rock Garden and Jagannath Temple.", hi:"रांची के प्रमुख आकर्षणों की सैर, जिसमें रॉक गार्डन और जगन्नाथ मंदिर शामिल हैं।", nag:null },
+    type:"trip"
+  },
+  {
+    id:"trip-2",
+    userId:DEMO_USER_ID,
+    date:"2027-03-18",
+    time:"08:00",
+    title:{ en:"Hundru Falls", hi:"हुंडरू जलप्रपात", nag:null },
+    place:{ en:"Hundru Falls", hi:"हुंडरू जलप्रपात", nag:"हुंडरू जलप्रपात" },
+    description:{ en:"Visit Hundru Falls and the surrounding scenic viewpoints.", hi:"हुंडरू जलप्रपात और आसपास के दर्शनीय स्थलों की यात्रा।", nag:null },
+    type:"trip"
+  },
+  {
+    id:"trip-3",
+    userId:DEMO_USER_ID,
+    date:"2027-03-18",
+    time:"14:00",
+    title:{ en:"Local Lunch Stop", hi:"स्थानीय भोजन विराम", nag:null },
+    place:{ en:"Near Hundru Falls", hi:"हुंडरू जलप्रपात के निकट", nag:null },
+    description:{ en:"Traditional Jharkhand thali at a local eatery.", hi:"स्थानीय भोजनालय में पारंपरिक झारखंडी थाली।", nag:null },
+    type:"trip"
+  },
+  {
+    id:"trip-4",
+    userId:DEMO_USER_ID,
+    date:"2027-03-19",
+    time:"10:00",
+    title:{ en:"Tribal Village Experience", hi:"आदिवासी गाँव अनुभव", nag:null },
+    place:{ en:"Khunti district villages", hi:"खूंटी जिले के गाँव", nag:null },
+    description:{ en:"A guided visit to a Munda village to learn about daily life, crafts and traditions.", hi:"मुंडा गाँव की मार्गदर्शित यात्रा, जहाँ दैनिक जीवन, शिल्प और परंपराओं को जाना जा सकता है।", nag:null },
+    type:"trip"
+  },
+  {
+    id:"trip-5",
+    userId:DEMO_USER_ID,
+    date:"2027-03-20",
+    time:"11:00",
+    title:{ en:"Sarhul Festival Experience", hi:"सरहुल उत्सव अनुभव", nag:null },
+    place:{ en:"Khunti", hi:"खूंटी", nag:"खूंटी" },
+    description:{ en:"Join the local community's Sarhul celebrations — a rare chance to see the festival firsthand.", hi:"स्थानीय समुदाय के सरहुल उत्सव में शामिल हों — त्योहार को प्रत्यक्ष देखने का दुर्लभ अवसर।", nag:null },
+    type:"trip"
+  },
+  {
+    id:"trip-6",
+    userId:DEMO_USER_ID,
+    date:"2027-03-21",
+    time:"07:30",
+    title:{ en:"Netarhat Exploration", hi:"नेतरहाट भ्रमण", nag:null },
+    place:{ en:"Netarhat", hi:"नेतरहाट", nag:"नेतरहाट" },
+    description:{ en:"Sunrise point visit and a walk through the Netarhat hill station.", hi:"सूर्योदय बिंदु की यात्रा और नेतरहाट हिल स्टेशन में सैर।", nag:null },
+    type:"trip"
+  }
+];
+
+let hasBookedTrip = true;
+
+function formatIsoDate(year,month,day){
+  const mm = String(month + 1).padStart(2,"0");
+  const dd = String(day).padStart(2,"0");
+  return year + "-" + mm + "-" + dd;
+}
+
+function getItineraryForDate(year,month,day){
+  if(!hasBookedTrip) return [];
+  const iso = formatIsoDate(year,month,day);
+  return BOOKED_ITINERARY.filter(item => item.userId === DEMO_USER_ID && item.date === iso);
+}
+
+function getItineraryById(id){
+  return BOOKED_ITINERARY.find(item => item.id === id);
+}
+
+function festivalsOnDate(year,month,day){
+  return getFestivalsForYear(year).filter(
+    festival => festival.month === month && day >= festival.start && day <= festival.end
+  );
+}
+
+function festivalsInMonth(year,month){
+  return getFestivalsForYear(year).filter(festival => festival.month === month);
+}
+
+function daysInMonth(year,month){
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function firstWeekdayOfMonth(year,month){
+  return new Date(year, month, 1).getDay();
+}
+
+const festivalImages = {};
+const commonsPhoto = fileName =>
+  `https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(fileName)}?width=1200`;
+
+const FIXED_APRIL_MAY_PHOTOS = {
+  "good-friday":["Church in India Chennai.jpg","St. James Church Agashi.jpg"],
+  "easter":["St. James Church Agashi.jpg","Happy Easter (2351702233).jpg"],
+  "seraikela-chhau":["Traditional chhau dancer.jpg","A Cultural Revelation Chhau Dance at Barisha Club 28.jpg","A Cultural Crescendo Chhau Dance 01.jpg"],
+  "mandā-parab":["Sarhul.jpg","Traditional chhau dancer.jpg"],
+  "satuani":["Litti Chokha.jpg","Des iLitti Chokha.jpg","Pilgrims preparing Litti while taking a break on the road IMG 0147.jpg"],
+  "ambedkar-jayanti":["Dr. Bhimrao Ambedkar.jpg","Ambedkar Barrister.jpg","Dr. AMBEDKAR OIL COLOR PAINTING.jpg"],
+  "ram-navami":["Rama Navami 31.jpg","Rama Navami 26.jpg","Rama Navami 27.jpg","Rama Navami 33.jpg"],
+  "buddha-purnima":["Mahabodhitemple.jpg","Mahabodhi Temple - Bodh Gaya.jpg","Worshipper at Mahabodhi Temple Bodh Gaya India.jpg"],
+  "may-day":["Mumbaimaydayrally0645.JPG","CITU and AITUC 131st May Day Rally in Chennai 03.jpg"],
+  "sohrai-khovar-hazaribagh":["Sohrai painting, Jharkhand.jpg","Sohrai and Kohbar Paintings 01.jpg","Sohrai wall painting jharkhand India.jpg","A house with Sohrai paintings at Isko Village, Hazaribagh, Jharkhand, India.jpg"]
+};
+
+const FESTIVAL_PHOTO_FALLBACKS = {
+  "hizla-mela":["Santhal dance Jharkhand","Santhal people traditional festival"],
+  "handloom-saras-mela":["Indian handloom artisan weaving","Jharkhand handicrafts lac bamboo"],
+  "itkhori-mahotsav":["Itkhori temple Jharkhand","Bhadrakali temple Itkhori"],
+  "baidyanath-mahotsav":["Baidyanath Temple Deoghar","Jharkhand folk dance"],
+  "maithon-mela":["Maithon Dam Jharkhand","Indian handicraft fair"],
+  "jharkhand-bird-festival":["Dalma Wildlife Sanctuary birds","birds of Jharkhand"],
+  "ashadhi-puja":["rice sowing India farmers","agriculture Jharkhand"],
+  "adivasi-mahotsav":["Jharkhand tribal dance","Adivasi culture Jharkhand"],
+  "johar-monsoon-fest":["Jharkhand waterfall monsoon","Jharkhand folk dance"],
+  "nawakhani":["rice harvest festival India","Santhal harvest dance"],
+  "luguburu-fair":["Santhal people Jharkhand","Santhal traditional dance"],
+  "sharad-mahotsav":["Netarhat Jharkhand","Netarhat sunrise"],
+  "mage-porob-feb":["Ho people traditional dance","Ho tribe Jharkhand"],
+  "maghe-parab":["Ho people traditional dance","Ho tribe Jharkhand"],
+  "kolhan-heritage":["Ho people Jharkhand dance","tribal dance Jharkhand"],
+  "winter-folk-mela":["Jharkhand folk dance","Indian rural fair"]
+};
+
+async function loadFestivalImages(festival){
+  if(festivalImages[festival.id]){
+    return festivalImages[festival.id];
+  }
+  let images = (FIXED_APRIL_MAY_PHOTOS[festival.id] || []).map(commonsPhoto);
+
+  if(festival.files && festival.files.length){
+    for(const file of festival.files){
+      const image = await getWikiImage(file);
+      if(image) images.push(image);
+    }
+  }
+
+  images.push(...await getCuratedFestivalImages(festival));
+
+  const festivalName = festival.name?.en || festival.id.replaceAll("-"," ");
+  const festivalType = festival.type?.en || "festival";
+  const verifiedQueries = [
+    festival.search,
+    `${festivalName} ${festival.location || festival.city || "Jharkhand"}`,
+    `${festivalType} ${festival.city || "Jharkhand"} India`,
+    ...(FESTIVAL_PHOTO_FALLBACKS[festival.id] || []),
+    `${festivalType} India festival`,
+    `${festival.city || "Jharkhand"} Jharkhand culture`
+  ].filter(Boolean);
+
+  for(const query of [...new Set(verifiedQueries)]){
+    if(images.length >= 4) break;
+    const found = await searchWikiImages(query);
+    images.push(...found);
+    images = [...new Set(images)];
+  }
+
+  if(images.length < 4){
+    const place = PLACES[festival.city] || PLACES[MONTHS[festival.month]?.place];
+    if(place?.imageFile){
+      const placePhoto = await getWikiImage(place.imageFile);
+      if(placePhoto) images.push(placePhoto);
+    }
+    if(images.length < 4 && place?.search){
+      images.push(...await searchWikiImages(place.search));
+    }
+  }
+
+  images = [...new Set(images)].slice(0,4);
+  festivalImages[festival.id] = images;
+  return images;
+}
+
+async function getFestivalImage(festival, day){
+  const images = await loadFestivalImages(festival);
+  if(!images.length) return "";
+  let index = day - festival.start;
+  if(index < 0) index = 0;
+  if(index >= images.length) index = index % images.length;
+  return images[index];
+}
+
+/* =========================================================
+PERSONAL DATE NOTES & PHOTOS
+========================================================= */
+function getCalendarUserKey(baseKey) {
+  const uid = typeof getUserId === 'function' ? getUserId() : null;
+  return uid ? `${baseKey}_${uid}` : null;
+}
+
+function promptCalendarLoginModal() {
+  let modal = document.getElementById("calendar-auth-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "calendar-auth-modal";
+    modal.style.cssText = "position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(15,36,26,0.75);backdrop-filter:blur(8px);";
+    document.body.appendChild(modal);
+  }
+  modal.innerHTML = `
+    <div style="max-width:420px;width:100%;background:#183325;border:1px solid rgba(232,201,163,0.3);border-radius:24px;padding:28px;text-align:center;color:#F3EDE2;box-shadow:0 20px 50px rgba(0,0,0,0.5);">
+      <div style="width:48px;height:48px;margin:0 auto 16px;border-radius:16px;background:#2D5A40;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(232,201,163,0.4);">
+        🔒
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;color:#F3EDE2;">Account Required</h3>
+      <p style="font-size:13px;color:#A3B8AC;line-height:1.6;margin-bottom:20px;">
+        Please log in or create an account to save personal date notes, journal thoughts, and photo memories to your festival calendar.
+      </p>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <a
+          href="auth.html?redirect=jhar.html"
+          style="flex:1;background:#E8C9A3;color:#0F241A;font-weight:700;padding:12px 18px;border-radius:12px;text-decoration:none;font-size:13px;display:inline-block;"
+        >
+          Log In / Sign Up →
+        </a>
+        <button
+          type="button"
+          onclick="document.getElementById('calendar-auth-modal').remove()"
+          style="padding:12px 18px;border-radius:12px;border:1px solid rgba(232,201,163,0.3);background:transparent;color:#A3B8AC;font-weight:600;font-size:13px;cursor:pointer;"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function getDateNoteKey(year, month, day){
+  return `${year}-${String(month + 1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+}
+
+function getSavedDateNotes(){
+  const key = getCalendarUserKey("jharkhandUtsavDateNotes");
+  if (!key) return {}; // GUEST USER: cleared / empty!
+  try{
+    return JSON.parse(localStorage.getItem(key)) || {};
+  }catch(error){
+    return {};
+  }
+}
+
+function saveDateNote(year, month, day, text){
+  const key = getCalendarUserKey("jharkhandUtsavDateNotes");
+  if (!key) {
+    promptCalendarLoginModal();
+    return;
+  }
+  const notes = getSavedDateNotes();
+  const dateKey = getDateNoteKey(year, month, day);
+  const cleanText = text.trim();
+  if(cleanText) notes[dateKey] = cleanText; else delete notes[dateKey];
+  try{ localStorage.setItem(key, JSON.stringify(notes)); } catch(e){}
+}
+
+function getDateNote(year, month, day){
+  return getSavedDateNotes()[getDateNoteKey(year, month, day)] || "";
+}
+
+function getSavedDateImages(){
+  const key = getCalendarUserKey("jharkhandUtsavDateImages");
+  if (!key) return {}; // GUEST USER: cleared / empty!
+  try{ return JSON.parse(localStorage.getItem(key)) || {}; }
+  catch(e){ return {}; }
+}
+
+function getDateImage(year, month, day){
+  return getSavedDateImages()[getDateNoteKey(year, month, day)] || "";
+}
+
+function saveDateImage(year, month, day, imageData){
+  const key = getCalendarUserKey("jharkhandUtsavDateImages");
+  if (!key) {
+    promptCalendarLoginModal();
+    return;
+  }
+  const images = getSavedDateImages();
+  const dateKey = getDateNoteKey(year, month, day);
+  if(imageData) images[dateKey] = imageData; else delete images[dateKey];
+  try{ localStorage.setItem(key, JSON.stringify(images)); } catch(e){}
+}
+
+function resizeJournalImage(file){
+  return new Promise((resolve, reject) => {
+    if(!file || !file.type.startsWith("image/")){ reject(new Error("Please choose an image file.")); return; }
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("This photo could not be opened."));
+    reader.onload = () => {
+      const image = new Image();
+      image.onerror = () => reject(new Error("This photo format is not supported."));
+      image.onload = () => {
+        const side = Math.min(image.width, image.height);
+        const sourceX = (image.width - side) / 2;
+        const sourceY = (image.height - side) / 2;
+        const canvas = document.createElement("canvas");
+        canvas.width = 420;
+        canvas.height = 420;
+        const context = canvas.getContext("2d");
+        context.fillStyle = "#F8FAF4";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(
+          image,
+          sourceX, sourceY, side, side,
+          0, 0, canvas.width, canvas.height
+        );
+        resolve(canvas.toDataURL("image/jpeg", 0.74));
+      };
+      image.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderDateNote(cell, year, month, day){
+  cell.querySelectorAll(".date-note, .date-note-editor, .date-journal-memory").forEach(item => item.remove());
+  const note = getDateNote(year, month, day);
+  const imageData = getDateImage(year, month, day);
+
+  if(imageData){
+    const memory = document.createElement("div");
+    memory.className = "date-journal-memory";
+    memory.title = "Click to edit this journal memory";
+    const image = document.createElement("img");
+    image.src = imageData;
+    image.alt = `Journal memory for ${day} ${MONTHS[month].name} ${year}`;
+    memory.appendChild(image);
+    if(note){
+      const caption = document.createElement("div");
+      caption.className = "journal-caption";
+      caption.innerText = note;
+      memory.appendChild(caption);
+    }
+    memory.onclick = (event) => { event.stopPropagation(); openDateNoteEditor(cell, year, month, day); };
+    cell.appendChild(memory);
+    return;
+  }
+
+  if(note){
+    const noteBox = document.createElement("div");
+    noteBox.className = "date-note";
+    noteBox.title = "Click to edit this note";
+    noteBox.innerText = note;
+    noteBox.onclick = (event) => {
+      event.stopPropagation();
+      openDateNoteEditor(cell, year, month, day);
+    };
+    cell.appendChild(noteBox);
+  }
+}
+
+function openDateNoteEditor(cell, year, month, day){
+  const uid = typeof getUserId === 'function' ? getUserId() : null;
+  if (!uid) {
+    promptCalendarLoginModal();
+    return;
+  }
+  const oldEditor = cell.querySelector(".date-note-editor");
+  if(oldEditor) return;
+  cell.querySelectorAll(".date-note, .date-journal-memory").forEach(item => item.remove());
+
+  const editor = document.createElement("div");
+  editor.className = "date-note-editor";
+  const textarea = document.createElement("textarea");
+  textarea.placeholder = "Write something for this date...";
+  textarea.value = getDateNote(year, month, day);
+
+  let pendingImage = getDateImage(year, month, day);
+  const preview = document.createElement("img");
+  preview.className = `journal-photo-preview${pendingImage ? " has-photo" : ""}`;
+  preview.alt = "Selected journal photo preview";
+  if(pendingImage) preview.src = pendingImage;
+
+  const photoTools = document.createElement("div");
+  photoTools.className = "journal-photo-tools";
+  const photoLabel = document.createElement("label");
+  photoLabel.className = "journal-photo-label";
+  photoLabel.appendChild(document.createTextNode(pendingImage ? "Change photo" : "Add photo"));
+
+  const photoInput = document.createElement("input");
+  photoInput.type = "file";
+  photoInput.accept = "image/*";
+  photoLabel.appendChild(photoInput);
+
+  const removePhotoBtn = document.createElement("button");
+  removePhotoBtn.type = "button";
+  removePhotoBtn.className = "journal-photo-remove";
+  removePhotoBtn.innerText = "Remove photo";
+  removePhotoBtn.style.display = pendingImage ? "block" : "none";
+
+  const photoStatus = document.createElement("div");
+  photoStatus.className = "journal-photo-status";
+
+  photoInput.onchange = async (event) => {
+    event.stopPropagation();
+    const file = photoInput.files[0];
+    if(!file) return;
+    photoStatus.innerText = "Preparing photo…";
+    try{
+      pendingImage = await resizeJournalImage(file);
+      preview.src = pendingImage;
+      preview.classList.add("has-photo");
+      photoLabel.firstChild.nodeValue = "Change photo";
+      removePhotoBtn.style.display = "block";
+      photoStatus.innerText = "Photo fitted to date";
+    }catch(error){
+      photoStatus.innerText = error.message;
+    }
+  };
+
+  removePhotoBtn.onclick = (event) => {
+    event.stopPropagation();
+    pendingImage = "";
+    preview.removeAttribute("src");
+    preview.classList.remove("has-photo");
+    photoLabel.firstChild.nodeValue = "Add photo";
+    removePhotoBtn.style.display = "none";
+    photoStatus.innerText = "Photo removed";
+  };
+
+  photoTools.appendChild(photoLabel);
+  photoTools.appendChild(removePhotoBtn);
+
+  const actions = document.createElement("div");
+  actions.className = "date-note-actions";
+  const saveBtn = document.createElement("button");
+  saveBtn.className = "date-note-save";
+  saveBtn.innerText = "Save";
+  const cancelBtn = document.createElement("button");
+  cancelBtn.className = "date-note-cancel";
+  cancelBtn.innerText = "Cancel";
+
+  saveBtn.onclick = (event) => {
+    event.stopPropagation();
+    try{
+      saveDateNote(year, month, day, textarea.value);
+      saveDateImage(year, month, day, pendingImage);
+      renderDateNote(cell, year, month, day);
+    }catch(error){
+      photoStatus.innerText = "Storage is full. Try a smaller photo.";
+    }
+  };
+
+  cancelBtn.onclick = (event) => {
+    event.stopPropagation();
+    renderDateNote(cell, year, month, day);
+  };
+
+  textarea.onclick = (event) => event.stopPropagation();
+  textarea.onkeydown = (event) => {
+    if(event.key === "Escape"){
+      renderDateNote(cell, year, month, day);
+    }
+  };
+
+  actions.appendChild(saveBtn);
+  actions.appendChild(cancelBtn);
+  editor.appendChild(textarea);
+  editor.appendChild(preview);
+  editor.appendChild(photoTools);
+  editor.appendChild(photoStatus);
+  editor.appendChild(actions);
+  cell.appendChild(editor);
+  textarea.focus();
+}
+
+function addDateNoteControls(cell, year, month, day){
+  const plusButton = document.createElement("button");
+  plusButton.className = "date-add-btn";
+  plusButton.type = "button";
+  plusButton.innerText = "+";
+  plusButton.title = "Add note or photo";
+  plusButton.onclick = (event) => {
+    event.stopPropagation();
+    openDateNoteEditor(cell, year, month, day);
+  };
+  cell.appendChild(plusButton);
+  renderDateNote(cell, year, month, day);
+}
+
+/* =========================================================
+RENDER CALENDAR
+========================================================= */
+async function renderCalendar(){
+  const month = MONTHS[currentMonth];
+  const place = PLACES[month.place];
+
+  document.getElementById("languageLabel").innerText = tr("languageLabel");
+  document.getElementById("yearSelectorLabel").innerText = tr("yearLabel");
+  document.getElementById("monthSelectorLabel").innerText = tr("monthLabel");
+  document.getElementById("prevBtn").innerText = tr("prev");
+  document.getElementById("nextBtn").innerText = tr("next");
+  document.getElementById("yearSelect").value = String(currentYear);
+  document.getElementById("languageSelect").value = currentLanguage;
+  updateMonthSelector();
+
+  const bookingBanner = document.getElementById("bookingBanner");
+  bookingBanner.innerText = hasBookedTrip ? tr("bookingActiveBanner") : tr("bookingInactiveBanner");
+  bookingBanner.classList.toggle("active", hasBookedTrip);
+
+  const weekdaysRow = document.getElementById("weekdaysRow");
+  weekdaysRow.innerHTML = "";
+  WEEKDAY_NAMES[currentLanguage].forEach(dayName => {
+    const cell = document.createElement("div");
+    cell.innerText = dayName;
+    weekdaysRow.appendChild(cell);
+  });
+
+  document.getElementById("monthName").innerText = MONTH_NAMES[currentLanguage][currentMonth] + " " + currentYear;
+  document.getElementById("monthHindi").innerText = MONTH_HINDI_SEASON[currentMonth];
+  document.getElementById("prevBtn").disabled = currentYear === SUPPORTED_YEARS[0] && currentMonth === 0;
+  document.getElementById("nextBtn").disabled = currentYear === SUPPORTED_YEARS[SUPPORTED_YEARS.length - 1] && currentMonth === 11;
+
+  document.getElementById("featuredPlace").innerHTML = `
+    <div class="featured-icon">📍</div>
+    <div>
+      <strong>${tr("monthFeatured")} ${month.place}</strong>
+      <small>${place.region}</small>
+    </div>
+  `;
+
+  const calendar = document.getElementById("calendar");
+  calendar.innerHTML = "";
+  const firstDay = firstWeekdayOfMonth(currentYear, currentMonth);
+  const totalDays = daysInMonth(currentYear, currentMonth);
+
+  for(let i=0; i<firstDay; i++){
+    const empty = document.createElement("div");
+    empty.className = "day empty";
+    calendar.appendChild(empty);
+  }
+
+  for(let day=1; day<=totalDays; day++){
+    const cell = document.createElement("div");
+    cell.className = "day";
+    cell.innerHTML = `<div class="date-number">${day}</div>`;
+
+    addDateNoteControls(cell, currentYear, currentMonth, day);
+
+    const events = festivalsOnDate(currentYear, currentMonth, day);
+    const itineraryItems = getItineraryForDate(currentYear, currentMonth, day);
+
+    if(itineraryItems.length){
+      renderItinerary(cell, itineraryItems, day);
+    }
+
+    events.forEach(festival => {
+      renderFestivalCard(cell, festival, day);
+    });
+
+    if(!itineraryItems.length && !events.length){
+      const hint = document.createElement("div");
+      hint.className = "explore-hint";
+      hint.innerText = "· " + tr("exploreNearby");
+      cell.appendChild(hint);
+    }
+
+    calendar.appendChild(cell);
+  }
+
+  showPlace(month.place);
+}
+
+async function festivalPhotoFallback(imageElement, festivalId){
+  const festival = festivalById(festivalId);
+  const label = festival ? loc(festival.name) : tr("festival");
+  if(festival){
+    const candidates = await loadFestivalImages(festival);
+    const attempt = Number(imageElement.dataset.photoAttempt || 0);
+    const alternatives = candidates.filter(url => url && url !== imageElement.src);
+    if(attempt < alternatives.length){
+      imageElement.dataset.photoAttempt = String(attempt + 1);
+      imageElement.src = alternatives[attempt];
+      return;
+    }
+    if(imageElement.dataset.placeAttempt !== "1"){
+      imageElement.dataset.placeAttempt = "1";
+      const place = PLACES[festival.city] || PLACES[MONTHS[festival.month]?.place];
+      let placePhoto = place?.imageFile ? await getWikiImage(place.imageFile) : "";
+      if(!placePhoto && place?.search){
+        placePhoto = (await searchWikiImages(place.search))[0] || "";
+      }
+      if(placePhoto && placePhoto !== imageElement.src){
+        imageElement.src = placePhoto;
+        return;
+      }
+    }
+  }
+  imageElement.parentElement.className = "festival-photo-placeholder";
+  imageElement.parentElement.innerHTML = `<small>${label}<br><em>Photo unavailable</em></small>`;
+}
+
+function renderFestivalCard(cell, festival, day){
+  const card = document.createElement("div");
+  card.className = `festival-card status-${festival.status || "awaiting"}`;
+  
+  const imageContainer = document.createElement("div");
+  imageContainer.className = "image-loading";
+  imageContainer.innerText = tr("loadingFestivalPhoto");
+  card.appendChild(imageContainer);
+
+  const text = document.createElement("div");
+  text.className = "festival-text";
+  const dayNumber = day - festival.start + 1;
+  text.innerHTML = `
+    <span class="section-label festival-label">${tr("festival")}</span>
+    <div class="festival-name">${loc(festival.name)}</div>
+    <div class="festival-place">📍 ${festival.city}</div>
+    <span class="day-badge">${tr("dayOf")} ${dayNumber} ${tr("of")} ${festival.end - festival.start + 1}</span>
+    <span class="date-status ${festival.status || "awaiting"}" title="Verify local details before travel">
+      ${DATE_STATUS[festival.status || "awaiting"].dot} ${DATE_STATUS[festival.status || "awaiting"].label}
+    </span>
+  `;
+  card.appendChild(text);
+
+  card.onclick = function(){
+    showFestival(festival.id, day);
+  };
+  cell.appendChild(card);
+
+  getFestivalImage(festival, day).then(image => {
+    if(image){
+      imageContainer.innerHTML = `
+        <img
+          src="${image}"
+          alt="${loc(festival.name)}"
+          loading="lazy"
+          decoding="async"
+          onerror="festivalPhotoFallback(this,'${festival.id}')"
+        >
+      `;
+    }else{
+      imageContainer.innerHTML = `<small>${loc(festival.name)}<br><em>Photo unavailable</em></small>`;
+      imageContainer.className = "festival-photo-placeholder";
+    }
+  });
+}
+
+function renderItinerary(cell, items, day){
+  const card = document.createElement("div");
+  card.className = "trip-card";
+  if(items.length <= 2){
+    let bodyHtml = `<div class="trip-card-header">🧳 ${tr("yourTrip")}</div>`;
+    items.forEach(item => {
+      bodyHtml += `
+        <div class="trip-card-body">
+          <div class="trip-title">📍 ${loc(item.title)}</div>
+          <div class="trip-desc">${loc(item.description)}</div>
+        </div>
+      `;
+    });
+    card.innerHTML = bodyHtml;
+  }else{
+    card.innerHTML = `
+      <div class="trip-card-header">🧳 ${tr("yourTrip")}</div>
+      <div class="trip-card-body">
+        <div class="trip-title">📍 ${loc(items[0].title)}</div>
+        <span class="trip-count-badge">${items.length} ${tr("activitiesCount")}</span>
+      </div>
+    `;
+  }
+  card.onclick = function(){
+    openItineraryModal(items, day);
+  };
+  cell.appendChild(card);
+}
+
+function openItineraryModal(items, day){
+  const overlay = document.getElementById("modalOverlay");
+  const title = document.getElementById("modalTitle");
+  const body = document.getElementById("modalBody");
+  title.innerText = tr("yourTripPlural") + " — " + MONTH_NAMES[currentLanguage][currentMonth] + " " + day + ", " + currentYear;
+
+  let html = "";
+  items.forEach(item => {
+    html += `
+      <div class="trip-detail-item">
+        ${item.time ? `<span class="time">${item.time}</span>` : ""}
+        <h4>📍 ${loc(item.title)}</h4>
+        <div class="place-line">${loc(item.place)}</div>
+        <p>${loc(item.description)}</p>
+      </div>
+    `;
+  });
+  body.innerHTML = html;
+  overlay.classList.add("open");
+}
+
+function closeModal(){
+  document.getElementById("modalOverlay").classList.remove("open");
+}
+
+async function repairPlaceImage(img, placeName){
+  const place = PLACES[placeName];
+  if(!place) return;
+  if(img.dataset.retry !== "1"){
+    img.dataset.retry = "1";
+    const results = await searchWikiImages(place.search + " tourism landscape");
+    const alternate = results.find(url => url !== img.src);
+    if(alternate){ img.src = alternate; return; }
+  }
+  const fallback = document.createElement("div");
+  fallback.className = "place-photo-fallback";
+  fallback.style.cssText = "height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#EBF4E7;color:#2F6B3C;border-radius:12px;text-align:center;padding:12px;";
+  fallback.innerHTML = `<span style="font-size:32px;">🌿</span><strong>${placeName}</strong><small style="color:#6E846F;font-size:11px;margin-top:4px;">${place.attractions}</small>`;
+  img.replaceWith(fallback);
+}
+
+async function showPlace(name){
+  const place = PLACES[name];
+  document.getElementById("sideHeading").innerText = tr("sideHeadingPlace");
+  const side = document.getElementById("sideContent");
+  side.innerHTML = `<div class="image-loading" style="height:200px;border-radius:12px;">${tr("loadingCityPhoto")}</div>`;
+
+  let placeImage = "";
+  if(place.imageFile){
+    placeImage = await getWikiImage(place.imageFile);
+  }
+  if(!placeImage && place.search){
+    const results = await searchWikiImages(place.search);
+    if(results.length) placeImage = results[0];
+  }
+
+  const monthEvents = festivalsInMonth(currentYear, currentMonth);
+  const monthItinerary = hasBookedTrip
+    ? BOOKED_ITINERARY.filter(item =>
+        item.userId === DEMO_USER_ID &&
+        item.date.startsWith(currentYear + "-" + String(currentMonth + 1).padStart(2,"0"))
+      )
+    : [];
+
+  const eventCards = await Promise.all(
+    monthEvents.map(async festival => {
+      const festivalImage = await getFestivalImage(festival, festival.start);
+      return `
+        <div class="event-mini" onclick="showFestival('${festival.id}', ${festival.start})">
+          ${festivalImage
+            ? `<div style="width:70px;height:52px;flex-shrink:0;overflow:hidden;border-radius:6px;border:1px solid rgba(47,107,60,0.18);"><img src="${festivalImage}" alt="${loc(festival.name)}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="festivalPhotoFallback(this,'${festival.id}')"></div>`
+            : `<div class="festival-photo-placeholder" style="width:70px;height:52px;flex-shrink:0;"><small>${loc(festival.name)}</small></div>`}
+          <div>
+            <strong>${loc(festival.name)}</strong>
+            <span>${festival.location}</span>
+            <span class="date-status ${festival.status || "awaiting"}">
+              ${festival.start}${festival.end!==festival.start?"–"+festival.end:""} · ${DATE_STATUS[festival.status || "awaiting"].dot} ${DATE_STATUS[festival.status || "awaiting"].label}
+            </span>
+          </div>
+        </div>
+      `;
+    })
+  );
+  const eventHTML = eventCards.join("");
+
+  let itineraryHTML = "";
+  monthItinerary.forEach(item => {
+    const day = parseInt(item.date.split("-")[2],10);
+    itineraryHTML += `
+      <div class="itinerary-mini" onclick="openItineraryModal(getItineraryForDate(${currentYear}, ${currentMonth}, ${day}), ${day})">
+        <div class="mini-icon">🧳</div>
+        <div>
+          <strong>${loc(item.title)}</strong>
+          <span>${loc(item.place)}</span>
+        </div>
+      </div>
+    `;
+  });
+
+  side.innerHTML = `
+    ${placeImage
+      ? `<img class="place-image" src="${placeImage}" alt="${name}" onerror="repairPlaceImage(this,'${name}')">`
+      : `<div class="place-photo-fallback" style="height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#EBF4E7;color:#2F6B3C;border-radius:12px;text-align:center;padding:12px;"><span style="font-size:32px;">🌿</span><strong>${name}</strong><small style="color:#6E846F;font-size:11px;margin-top:4px;">${place.attractions}</small></div>`}
+    <h2 class="place-title">${name}</h2>
+    <p class="place-region">${place.region}</p>
+    <div class="info-box">
+      <h3>${tr("aboutPlace")}</h3>
+      <p>${place.about}</p>
+    </div>
+    <div class="info-box">
+      <h3>${tr("placesToExplore")}</h3>
+      <p>${place.attractions}</p>
+    </div>
+    <div class="info-box">
+      <h3>${tr("culturalIdentity")}</h3>
+      <p>${place.culture}</p>
+    </div>
+    <div class="info-box">
+      <h3>${tr("localFood")}</h3>
+      <p>${place.food}</p>
+    </div>
+    ${itineraryHTML ? `
+      <div class="month-events">
+        <h3>🧳 ${tr("yourTripPlural")}</h3>
+        ${itineraryHTML}
+      </div>
+    ` : ""}
+    <div class="month-events">
+      <h3>${tr("thisMonth")}</h3>
+      ${eventHTML || `<p style="font-size:11px;color:var(--muted-green);">${tr("nothingPlanned")}</p>`}
+    </div>
+  `;
+}
+
+async function showFestival(festivalId, clickedDay){
+  const festival = festivalById(festivalId);
+  if(!festival) return;
+
+  const side = document.getElementById("sideContent");
+  document.getElementById("sideHeading").innerText = tr("sideHeadingFestival");
+  side.innerHTML = `<div class="image-loading" style="height:200px;border-radius:12px;">${tr("loadingFestivalPhoto")}</div>`;
+
+  const images = await loadFestivalImages(festival);
+  let imageIndex = clickedDay - festival.start;
+  if(imageIndex < 0) imageIndex = 0;
+  if(imageIndex >= images.length) imageIndex = 0;
+  const currentImage = images[imageIndex];
+
+  let photoStrip = "";
+  images.forEach((image, index) => {
+    const actualDay = festival.start + index;
+    photoStrip += `
+      <img
+        class="photo-thumb ${index === imageIndex ? "active" : ""}"
+        src="${image}"
+        alt="${loc(festival.name)}"
+        onclick="showFestival('${festival.id}', ${actualDay})"
+      >
+    `;
+  });
+
+  side.innerHTML = `
+    <img class="detail-image" src="${currentImage}" alt="${loc(festival.name)}">
+    <div class="photo-day">📷 ${tr("dayOf")} ${imageIndex + 1} ${tr("of")} ${images.length}</div>
+    <div class="photo-strip">${photoStrip}</div>
+    <h2 class="detail-title">${loc(festival.name)}</h2>
+    <p class="detail-location">${loc(festival.type)}<br>📍 ${festival.location}</p>
+    <div class="info-box">
+      <h3>${tr("aboutFestival")}</h3>
+      <p>${loc(festival.about)}</p>
+    </div>
+    <div class="info-box">
+      <h3>${tr("datePeriod")}</h3>
+      <p>
+        <span class="date-status ${festival.status || "awaiting"}">${DATE_STATUS[festival.status || "awaiting"].dot} ${DATE_STATUS[festival.status || "awaiting"].label}</span><br>
+        <strong>${festival.start}${festival.end!==festival.start?"–"+festival.end:""} ${MONTH_NAMES[currentLanguage][festival.month]} ${currentYear}</strong><br>
+        ${loc(festival.note)}
+      </p>
+    </div>
+    <div class="info-box">
+      <h3>${tr("dance")}</h3>
+      <p>${loc(festival.dance)}</p>
+    </div>
+    <div class="info-box">
+      <h3>${tr("music")}</h3>
+      <p>${loc(festival.music)}</p>
+    </div>
+    <div class="info-box">
+      <h3>${tr("food")}</h3>
+      <p>${loc(festival.food)}</p>
+    </div>
+    <button class="back-button" onclick="showPlace('${festival.city}')">
+      ${tr("back")} ${festival.city}
+    </button>
+  `;
+}
+
+function nextMonth(){
+  currentMonth++;
+  if(currentMonth > 11){
+    currentMonth = 0;
+    currentYear = Math.min(currentYear + 1, SUPPORTED_YEARS[SUPPORTED_YEARS.length - 1]);
+  }
+  renderCalendar();
+}
+
+function previousMonth(){
+  currentMonth--;
+  if(currentMonth < 0){
+    currentMonth = 11;
+    currentYear = Math.max(currentYear - 1, SUPPORTED_YEARS[0]);
+  }
+  renderCalendar();
+}
+
+function updateMonthSelector(){
+  const select = document.getElementById("monthSelect");
+  if(!select) return;
+  select.innerHTML = "";
+  MONTH_NAMES[currentLanguage].forEach((name,index) => {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = name;
+    select.appendChild(option);
+  });
+  select.value = String(currentMonth);
+}
+
+function changeMonth(month){
+  currentMonth = parseInt(month,10);
+  renderCalendar();
+}
+
+function changeYear(year){
+  currentYear = parseInt(year,10);
+  renderCalendar();
+}
+
+function changeLanguage(lang){
+  currentLanguage = lang;
+  renderCalendar();
+}
+
+document.getElementById("modalOverlay").addEventListener("click", function(event){
+  if(event.target === this) closeModal();
+});
+
+document.addEventListener("keydown", function(event){
+  if(event.key === "ArrowRight") nextMonth();
+  if(event.key === "ArrowLeft") previousMonth();
+  if(event.key === "Escape") closeModal();
+});
+
+document.addEventListener("footprintjh-auth-change", function(){
+  renderCalendar();
+});
+
+renderCalendar();
+</script>
+<!-- Supabase JS Client & Universal Auth -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-client.js"></script>
+<!-- Sohrai AI Bot Widget -->
+<script src="src/bot-widget.js" defer></script>
+</body>
+</html>

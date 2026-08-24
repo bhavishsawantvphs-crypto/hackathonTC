@@ -1,0 +1,9 @@
+{
+  "name": "jharkhand-tourism-underrated-page",
+  "version": "1.0.0",
+  "description": "Jharkhand Tourism — Unexplored Destinations and Smart AI Assistant",
+  "scripts": {
+    "start": "node Bots/server.js",
+    "bot": "node Bots/server.js"
+  }
+}

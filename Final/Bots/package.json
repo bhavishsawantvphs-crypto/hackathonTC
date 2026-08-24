@@ -1,0 +1,19 @@
+{
+  "name": "jharkhand-ai-demo",
+  "version": "1.0.0",
+  "description": "Hackathon starter: a website with an AI chat guide, grounded in a small facts file.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

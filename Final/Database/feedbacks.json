@@ -1,0 +1,92 @@
+[
+  {
+    "id": "fb_1787545560872",
+    "name": "Nipun",
+    "email": "garbageacc.2007@gmail.com",
+    "rating": 5,
+    "category": "General Experience",
+    "description": "Bhadiya website he",
+    "date": "2026-08-24T04:26:00.872Z",
+    "userId": "887a5662-fe8b-4b8c-9ceb-d0874cb9ed5d",
+    "isVerified": true,
+    "likes": 1
+  },
+  {
+    "id": "fb_1787545291118",
+    "name": "Tanya Sen",
+    "email": "tanya.sen@example.com",
+    "rating": 5,
+    "category": "Hidden Waterfalls",
+    "description": "Automated test review: Loved the safety indices and road distance calculations!",
+    "date": "2026-08-24T04:21:31.119Z",
+    "userId": "test-user-123",
+    "isVerified": true,
+    "likes": 1
+  },
+  {
+    "id": "fb_1",
+    "name": "Dr. Priya Verma",
+    "email": "priya.verma@example.com",
+    "rating": 5,
+    "category": "Hidden Waterfalls",
+    "description": "The safety clarity and real terrain accessibility details for Perwaghagh and Lodh falls were exceptionally accurate. Exploring the pristine falls while knowing nearby CHC medical support gave our family huge peace of mind!",
+    "date": "2026-08-20T10:15:00Z",
+    "isVerified": true,
+    "likes": 24
+  },
+  {
+    "id": "fb_2",
+    "name": "Aarav Mukherjee",
+    "email": "aarav.m@example.com",
+    "rating": 5,
+    "category": "Festivals & Culture",
+    "description": "The Jharkhand Utsav Panchang festival calendar with personal journal notes and photo memories is incredible. I documented our entire Sarhul experience in Ranchi right inside the date notes!",
+    "date": "2026-08-18T14:30:00Z",
+    "isVerified": true,
+    "likes": 19
+  },
+  {
+    "id": "fb_3",
+    "name": "Vikram Soren",
+    "email": "vikram.soren@example.com",
+    "rating": 5,
+    "category": "Mining Tourism",
+    "description": "Mining tourism circuits in Noamundi and Jharia are presented with remarkable historical depth and safety guidance. The scheduler helped us plan a responsible, guided educational visit.",
+    "date": "2026-08-15T09:45:00Z",
+    "isVerified": true,
+    "likes": 31
+  },
+  {
+    "id": "fb_4",
+    "name": "Ananya Banerjee",
+    "email": "ananya.b@example.com",
+    "rating": 5,
+    "category": "Underrated Places",
+    "description": "Maluti Terracotta Temples and Netarhat's Magnolia Point were gems we never knew existed in Jharkhand. The proximity-based routing and offline-friendly itinerary builder are pure gold.",
+    "date": "2026-08-12T16:20:00Z",
+    "isVerified": true,
+    "likes": 15
+  },
+  {
+    "id": "fb_5",
+    "name": "Rohit Sinha",
+    "email": "rohit.sinha@example.com",
+    "rating": 4,
+    "category": "Trip Planner",
+    "description": "Love the unified scheduler cart across all modules. It seamlessly grouped my waterfall treks, temple visits, and mining exploration into one clean itinerary. Suggestion: add export as PDF!",
+    "date": "2026-08-10T11:05:00Z",
+    "isVerified": true,
+    "likes": 12
+  },
+  {
+    "id": "fb_6",
+    "name": "Sanya Kapoor",
+    "email": "sanya.k@example.com",
+    "rating": 5,
+    "category": "Sohrai AI Bot",
+    "description": "Sohrai AI bot answered all my tribal art and road route questions in Hindi and English instantly. The multilingual suggestions and local folklore knowledge are stunning!",
+    "date": "2026-08-08T18:40:00Z",
+    "isVerified": true,
+    "likes": 28
+  }
+]

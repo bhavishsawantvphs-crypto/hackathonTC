@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#F2F7ED] scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Trip Plan | FootprintJH — Jharkhand Tourism</title>
+  
+  <!-- Google Fonts for Editorial Luxury Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Tailwind Configuration for Light Sage & Deep Forest Luxury Palette -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pageBg: '#F2F7ED',
+            sageSecondary: '#E7F1E3',
+            lightSurface: '#F8FAF4',
+            darkBox: '#173D2A',
+            deepForest: '#163B27',
+            mediumForest: '#2F6B3C',
+            leafGreen: '#4C9A45',
+            leafGreenDark: '#2C6337',
+            leafGreenHover: '#3B7E48',
+            mutedGreen: '#6E846F',
+            warmCream: '#F7F1E5',
+            sandText: '#556E56',
+            dangerRed: '#B91C1C'
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F2F7ED; }
+    ::-webkit-scrollbar-thumb { background: #2F6B3C; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #163B27; }
+
+    /* Botanical Side Vines */
+    .vine-border {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: clamp(24px, 3vw, 48px);
+      pointer-events: none;
+      z-index: 30;
+      opacity: 0.75;
+      background-repeat: repeat-y;
+      background-size: 100% auto;
+    }
+    .vine-left {
+      left: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 200' fill='none'%3E%3Cpath d='M10 0 C 25 50, 5 100, 15 150 C 25 200, 10 250, 15 300' stroke='%232F6B3C' stroke-width='2' stroke-linecap='round' stroke-opacity='0.4'/%3E%3Cpath d='M12 25 C 25 15, 38 25, 45 18 C 38 32, 22 35, 12 25 Z' fill='%234C9A45' fill-opacity='0.75'/%3E%3Cpath d='M9 60 C 2 45, 18 38, 28 46 C 22 58, 14 65, 9 60 Z' fill='%232F6B3C' fill-opacity='0.65'/%3E%3Cpath d='M10 95 C 28 85, 42 98, 50 90 C 42 105, 24 108, 10 95 Z' fill='%234C9A45' fill-opacity='0.8'/%3E%3Cpath d='M12 135 C 4 120, 20 115, 30 122 C 24 135, 16 142, 12 135 Z' fill='%236E846F' fill-opacity='0.7'/%3E%3Cpath d='M14 175 C 32 165, 46 178, 54 170 C 46 185, 28 188, 14 175 Z' fill='%234C9A45' fill-opacity='0.75'/%3E%3C/svg%3E");
+    }
+    .vine-right {
+      right: 0;
+      transform: scaleX(-1);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 200' fill='none'%3E%3Cpath d='M10 0 C 25 50, 5 100, 15 150 C 25 200, 10 250, 15 300' stroke='%232F6B3C' stroke-width='2' stroke-linecap='round' stroke-opacity='0.4'/%3E%3Cpath d='M12 25 C 25 15, 38 25, 45 18 C 38 32, 22 35, 12 25 Z' fill='%234C9A45' fill-opacity='0.75'/%3E%3Cpath d='M9 60 C 2 45, 18 38, 28 46 C 22 58, 14 65, 9 60 Z' fill='%232F6B3C' fill-opacity='0.65'/%3E%3Cpath d='M10 95 C 28 85, 42 98, 50 90 C 42 105, 24 108, 10 95 Z' fill='%234C9A45' fill-opacity='0.8'/%3E%3Cpath d='M12 135 C 4 120, 20 115, 30 122 C 24 135, 16 142, 12 135 Z' fill='%236E846F' fill-opacity='0.7'/%3E%3Cpath d='M14 175 C 32 165, 46 178, 54 170 C 46 185, 28 188, 14 175 Z' fill='%234C9A45' fill-opacity='0.75'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body class="font-sans text-deepForest bg-[#F2F7ED] antialiased min-h-full flex flex-col selection:bg-leafGreen/30 selection:text-deepForest">
+
+  <!-- Left & Right Botanical Vine Frames -->
+  <div class="vine-border vine-left" aria-hidden="true"></div>
+  <div class="vine-border vine-right" aria-hidden="true"></div>
+
+  <!-- ================= MASTER GLOBAL NAVIGATION ================= -->
+  <header class="relative z-40 border-b border-[rgba(47,107,60,0.18)] bg-[#F8FAF4]/90 backdrop-blur-md sticky top-0 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- Brand / Logo Area -->
+      <a href="home.html" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#4C9A45] to-[#2F6B3C] border border-[rgba(47,107,60,0.2)] flex items-center justify-center text-white text-xl shadow-md group-hover:scale-105 transition-transform duration-300">
+          🌿
+        </div>
+        <div>
+          <span class="text-xs uppercase font-bold tracking-widest text-leafGreen block leading-none">Discover</span>
+          <span class="text-lg font-serif font-bold text-deepForest tracking-tight">FootprintJH</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-7 lg:space-x-8 text-sm font-semibold text-mutedGreen">
+        <a href="home.html" class="hover:text-deepForest transition-colors">Home</a>
+        
+        <!-- Explore with Dropdown (Famous Places + Underrated Places) -->
+        <div class="relative group py-2">
+          <a href="index.html" class="hover:text-deepForest transition-colors inline-flex items-center space-x-1 cursor-pointer">
+            <span>Explore</span>
+            <svg class="w-3.5 h-3.5 opacity-70 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <div class="absolute left-0 top-full hidden group-hover:block pt-1 z-50">
+            <div class="w-56 bg-[#F8FAF4] border border-[rgba(47,107,60,0.18)] rounded-2xl shadow-xl p-2 flex flex-col gap-1 backdrop-blur-md">
+              <a href="Bhavish_Underrated_test/antigravity/scratch/jharkhand-tourism/index.html" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-deepForest hover:bg-white hover:text-leafGreen transition-colors flex items-center justify-between">
+                <span>Famous Places</span>
+                <span class="text-[10px] text-mutedGreen">Top 5</span>
+              </a>
+              <a href="index.html" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-deepForest hover:bg-white hover:text-leafGreen transition-colors flex items-center justify-between">
+                <span>Underrated Places</span>
+                <span class="text-[10px] text-leafGreen font-bold">Proximity</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="mining.html" class="hover:text-deepForest transition-colors">Mining</a>
+        <a href="hidden-waterfalls-jharkhand/dist/index.html#/" class="hover:text-deepForest transition-colors">Waterfalls</a>
+        <a href="jhar.html" class="hover:text-deepForest transition-colors">Festivals</a>
+        <a href="scheduler.html" class="text-leafGreen font-bold transition-colors">My Trip Plan</a>
+        <a href="feedback.html" class="hover:text-deepForest transition-colors">Feedback</a>
+      </nav>
+
+      <!-- Indicator / Portal Badge & Auth Container -->
+      <div class="flex items-center space-x-3" id="nav-auth-container">
+        <span class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white border border-[rgba(47,107,60,0.18)] text-xs font-bold text-deepForest shadow-sm">
+          <span>🌲</span>
+          <span>Eco Tourism Portal</span>
+        </span>
+        <a
+          href="auth.html"
+          class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-full bg-leafGreen text-white text-xs font-bold hover:bg-leafGreenHover transition-all shadow-sm cursor-pointer"
+        >
+          <span>Log In / Sign Up</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= HERO HEADER ================= -->
+  <section class="py-12 px-6 border-b border-[rgba(47,107,60,0.12)] bg-gradient-to-b from-[#E7F1E3]/50 to-transparent">
+    <div class="max-w-6xl mx-auto text-center">
+      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white border border-[rgba(47,107,60,0.2)] text-xs font-bold tracking-widest uppercase text-leafGreen mb-4 shadow-sm">
+        <span>✦</span>
+        <span>MY TRIP PLAN</span>
+        <span>✦</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-deepForest tracking-tight">
+        My Trip Plan
+      </h1>
+      <p class="mt-3 text-base sm:text-lg text-mutedGreen max-w-2xl mx-auto">
+        Organize the places and experiences you want to explore across Jharkhand.
+      </p>
+
+      <!-- Important Notice Banner -->
+      <div class="mt-6 inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-white border border-[rgba(47,107,60,0.2)] text-xs font-semibold text-deepForest shadow-sm">
+        <span>ℹ️</span>
+        <span class="font-bold">Trip Planning — Not a Booking System:</span>
+        <span class="text-mutedGreen font-normal">Informational itinerary builder to curate your expedition before travel.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="flex-grow max-w-6xl mx-auto px-6 py-10 w-full space-y-10">
+
+    <!-- 1. SUMMARY STRIP -->
+    <section id="summary-section" class="p-6 rounded-2xl bg-white border border-[rgba(47,107,60,0.18)] shadow-sm">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="text-xs uppercase font-bold tracking-wider text-leafGreen block">Trip Plan Overview</span>
+          <h3 class="text-2xl font-serif font-bold text-deepForest" id="total-count-display">Total Experiences: 0</h3>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 text-xs font-semibold">
+          <span class="px-3.5 py-1.5 rounded-full bg-[#E7F1E3] text-deepForest" id="summary-underrated">Underrated: 0</span>
+          <span class="px-3.5 py-1.5 rounded-full bg-[#E7F1E3] text-deepForest" id="summary-famous">Famous: 0</span>
+          <span class="px-3.5 py-1.5 rounded-full bg-[#E7F1E3] text-deepForest" id="summary-mining">Mining: 0</span>
+          <span class="px-3.5 py-1.5 rounded-full bg-[#E7F1E3] text-deepForest" id="summary-waterfalls">Waterfalls: 0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. GROUPED MODULE EXPERIENCES -->
+    <div id="grouped-container" class="space-y-10">
+      
+      <!-- Group 1: Underrated Places -->
+      <section id="group-underrated-section" class="space-y-4">
+        <div class="flex items-center space-x-3 border-b border-[rgba(47,107,60,0.18)] pb-2">
+          <span class="text-xl">🌿</span>
+          <h2 class="text-xl font-serif font-bold text-deepForest">Underrated Places & Proximity Travel</h2>
+          <span id="badge-count-underrated" class="text-xs px-2.5 py-0.5 rounded-full bg-[#E7F1E3] font-bold text-leafGreen">0</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="list-underrated"></div>
+      </section>
+
+      <!-- Group 2: Famous Places -->
+      <section id="group-famous-section" class="space-y-4">
+        <div class="flex items-center space-x-3 border-b border-[rgba(47,107,60,0.18)] pb-2">
+          <span class="text-xl">🏛️</span>
+          <h2 class="text-xl font-serif font-bold text-deepForest">Top Famous Places</h2>
+          <span id="badge-count-famous" class="text-xs px-2.5 py-0.5 rounded-full bg-[#E7F1E3] font-bold text-leafGreen">0</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="list-famous"></div>
+      </section>
+
+      <!-- Group 3: Mining Heritage -->
+      <section id="group-mining-section" class="space-y-4">
+        <div class="flex items-center space-x-3 border-b border-[rgba(47,107,60,0.18)] pb-2">
+          <span class="text-xl">⛏️</span>
+          <h2 class="text-xl font-serif font-bold text-deepForest">Mining Heritage Tourism</h2>
+          <span id="badge-count-mining" class="text-xs px-2.5 py-0.5 rounded-full bg-[#E7F1E3] font-bold text-leafGreen">0</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="list-mining"></div>
+      </section>
+
+      <!-- Group 4: Hidden Waterfalls -->
+      <section id="group-waterfalls-section" class="space-y-4">
+        <div class="flex items-center space-x-3 border-b border-[rgba(47,107,60,0.18)] pb-2">
+          <span class="text-xl">💧</span>
+          <h2 class="text-xl font-serif font-bold text-deepForest">Hidden & Lesser-Known Waterfalls</h2>
+          <span id="badge-count-waterfalls" class="text-xs px-2.5 py-0.5 rounded-full bg-[#E7F1E3] font-bold text-leafGreen">0</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="list-waterfalls"></div>
+      </section>
+
+    </div>
+
+    <!-- 4. EMPTY STATE (Hidden when items exist) -->
+    <section id="empty-state-section" class="hidden text-center py-16 px-6 rounded-3xl bg-[#F8FAF4] border border-dashed border-[rgba(47,107,60,0.25)] space-y-4">
+      <div class="w-16 h-16 mx-auto rounded-full bg-[#E7F1E3] flex items-center justify-center text-3xl">
+        🗺️
+      </div>
+      <h3 class="text-2xl font-serif font-bold text-deepForest">Your trip plan is empty.</h3>
+      <p class="text-sm text-mutedGreen max-w-md mx-auto leading-relaxed">
+        Start exploring Jharkhand and add places or experiences you want to visit across our curated modules.
+      </p>
+      <div class="pt-4 flex flex-wrap justify-center gap-3">
+        <a href="index.html" class="inline-flex items-center space-x-2 px-6 py-3 rounded-2xl bg-leafGreen text-white font-bold text-sm shadow-md hover:bg-leafGreenHover transition-all">
+          <span>Explore Destinations</span>
+          <span>→</span>
+        </a>
+        <a href="home.html" class="inline-flex items-center space-x-2 px-6 py-3 rounded-2xl bg-white border border-[rgba(47,107,60,0.25)] text-deepForest font-bold text-sm hover:bg-[#E7F1E3] transition-all">
+          <span>Return Home</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= STANDARDIZED COMPACT FOOTER ================= -->
+  <footer class="bg-[#102D20] text-[#D4EDDA] pt-10 pb-6 border-t border-[rgba(76,154,69,0.3)] mt-auto text-xs">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        
+        <!-- Brand Narrative -->
+        <div>
+          <a href="home.html" class="inline-flex items-center space-x-2 text-white font-serif text-lg font-bold mb-2">
+            <span class="w-6 h-6 rounded-lg bg-leafGreen flex items-center justify-center text-xs">🌿</span>
+            <span>FootprintJH</span>
+          </a>
+          <p class="text-[#A3DB9F] italic mb-2 text-xs">"Explore beyond the ordinary."</p>
+          <p class="text-[#A3B8B0] text-[11px] leading-relaxed">
+            Discovering hidden waterfalls, living tribal heritage, sacred mountain sanctums, and sustainable eco-tourism.
+          </p>
+        </div>
+
+        <!-- Experience Portals -->
+        <div>
+          <h4 class="text-white font-serif font-bold text-sm mb-3">Experience Portals</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li><a href="home.html" class="hover:text-white transition-colors">Home Portal</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Underrated Places</a></li>
+            <li><a href="Bhavish_Underrated_test/antigravity/scratch/jharkhand-tourism/index.html" class="hover:text-white transition-colors">Top 5 Famous Places</a></li>
+            <li><a href="hidden-waterfalls-jharkhand/dist/index.html#/" class="hover:text-white transition-colors">Hidden Waterfalls</a></li>
+            <li><a href="mining.html" class="hover:text-white transition-colors">Mining Heritage</a></li>
+            <li><a href="jhar.html" class="hover:text-white transition-colors">Festivals Calendar</a></li>
+          </ul>
+        </div>
+
+        <!-- Key Districts -->
+        <div>
+          <h4 class="text-white font-serif font-bold text-sm mb-3">Districts &amp; Circuits</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li><a href="index.html" class="hover:text-white transition-colors">Ranchi (Capital &amp; Cascades)</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Ramgarh (Patratu Valley)</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Latehar (Netarhat Hills &amp; Betla)</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Deoghar (Sacred Sanctums)</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors">Dumka (Maluti Terracotta)</a></li>
+            <li><a href="feedback.html" class="hover:text-white transition-colors">Explorer Feedback &amp; Reviews</a></li>
+          </ul>
+        </div>
+
+        <!-- Visitor Helpline -->
+        <div>
+          <h4 class="text-white font-serif font-bold text-sm mb-3">Visitor Helpline</h4>
+          <p class="text-[#A3B8B0] text-[11px] mb-1.5">Jharkhand Tourism Development Corporation (JTDC)</p>
+          <p class="text-[#E8C9A3] font-bold text-xs mb-1">Toll-Free: 1800-345-6571</p>
+          <p class="text-[#A3B8B0] text-[11px] leading-relaxed">
+            Birsa Munda Airport &amp; Ranchi Railway Station Tourist Info Desks.
+          </p>
+          <div class="mt-3">
+            <a href="feedback.html" class="inline-flex items-center space-x-1 text-[#E8C9A3] hover:underline font-semibold text-xs">
+              <span>★ Leave Feedback / Suggestions</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-6 border-t border-[rgba(255,255,255,0.1)] flex flex-col sm:flex-row items-center justify-between text-[#A3B8B0] text-[11px] gap-2">
+        <p>&copy; 2026 Jharkhand Tourism • FootprintJH. All rights reserved.</p>
+        <p class="text-[#A3DB9F] italic">"Made for explorers."</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Stack -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ================= CONTROLLER SCRIPT ================= -->
+  <script>
+    const STORAGE_KEY = 'jharkhandTripPlan';
+
+    const state = {
+      items: []
+    };
+
+    function getTripPlanStorageKey() {
+      const uid = typeof getUserId === 'function' ? getUserId() : null;
+      return uid ? `jharkhandTripPlan_${uid}` : null;
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStorage();
+      renderAll();
+    });
+
+    document.addEventListener('footprintjh-auth-change', () => {
+      loadStorage();
+      renderAll();
+    });
+
+    // Load Plan from localStorage
+    function loadStorage() {
+      const uid = typeof getUserId === 'function' ? getUserId() : null;
+      if (!uid) {
+        state.items = [];
+        return;
+      }
+      try {
+        const userKey = `jharkhandTripPlan_${uid}`;
+        let raw = localStorage.getItem(userKey);
+        if (!raw) {
+          raw = localStorage.getItem(STORAGE_KEY);
+        }
+        state.items = raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        state.items = [];
+      }
+    }
+
+    // Save Plan to localStorage
+    function saveStorage() {
+      const uid = typeof getUserId === 'function' ? getUserId() : null;
+      if (!uid) return;
+      try {
+        const userKey = `jharkhandTripPlan_${uid}`;
+        localStorage.setItem(userKey, JSON.stringify(state.items));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
+        window.dispatchEvent(new Event('storage'));
+      } catch (e) {}
+    }
+
+    // Remove Item
+    function removeItem(id) {
+      const it = state.items.find(i => i.id === id);
+      const name = it ? it.name : 'Item';
+      state.items = state.items.filter(i => i.id !== id);
+      saveStorage();
+      renderAll();
+      showToast(`✓ Removed from My Trip Plan: ${name}`);
+    }
+
+    // Render Full Page
+    function renderAll() {
+      renderSummary();
+      renderGroupedItems();
+    }
+
+    // Render Summary Bar
+    function renderSummary() {
+      const total = state.items.length;
+      const isGuest = typeof getUserId === 'function' ? !getUserId() : true;
+      document.getElementById('total-count-display').textContent = `Total Experiences: ${total}`;
+
+      const counts = {
+        underrated: 0,
+        famous: 0,
+        mining: 0,
+        waterfalls: 0
+      };
+
+      state.items.forEach(it => {
+        const mod = (it.module || '').toLowerCase();
+        if (counts[mod] !== undefined) counts[mod]++;
+      });
+
+      document.getElementById('summary-underrated').textContent = `Underrated: ${counts.underrated}`;
+      document.getElementById('summary-famous').textContent = `Famous: ${counts.famous}`;
+      document.getElementById('summary-mining').textContent = `Mining: ${counts.mining}`;
+      document.getElementById('summary-waterfalls').textContent = `Waterfalls: ${counts.waterfalls}`;
+
+      document.getElementById('badge-count-underrated').textContent = counts.underrated;
+      document.getElementById('badge-count-famous').textContent = counts.famous;
+      document.getElementById('badge-count-mining').textContent = counts.mining;
+      document.getElementById('badge-count-waterfalls').textContent = counts.waterfalls;
+
+      const emptyEl = document.getElementById('empty-state-section');
+      const groupContainer = document.getElementById('grouped-container');
+      const summarySection = document.getElementById('summary-section');
+
+      if (total === 0) {
+        emptyEl.classList.remove('hidden');
+        groupContainer.classList.add('hidden');
+        summarySection.classList.add('hidden');
+
+        if (isGuest) {
+          emptyEl.innerHTML = `
+            <div class="w-16 h-16 mx-auto rounded-full bg-[#E7F1E3] flex items-center justify-center text-3xl">
+              🔒
+            </div>
+            <h3 class="text-2xl font-serif font-bold text-deepForest">Guest Mode: Trip Plan is Empty</h3>
+            <p class="text-sm text-mutedGreen max-w-md mx-auto leading-relaxed">
+              Log in or create an account to save destinations, curate itineraries, and preserve your customized trip plan across sessions.
+            </p>
+            <div class="pt-4 flex flex-wrap justify-center gap-3">
+              <a href="auth.html?redirect=scheduler.html" class="inline-flex items-center space-x-2 px-6 py-3 rounded-2xl bg-leafGreen text-white font-bold text-sm shadow-md hover:bg-leafGreenHover transition-all cursor-pointer">
+                <span>Log In / Sign Up</span>
+                <span>→</span>
+              </a>
+              <a href="index.html" class="inline-flex items-center space-x-2 px-6 py-3 rounded-2xl bg-white border border-[rgba(47,107,60,0.25)] text-deepForest font-bold text-sm hover:bg-[#E7F1E3] transition-all cursor-pointer">
+                <span>Explore Destinations</span>
+              </a>
+            </div>
+          `;
+        } else {
+          emptyEl.innerHTML = `
+            <div class="w-16 h-16 mx-auto rounded-full bg-[#E7F1E3] flex items-center justify-center text-3xl">
+              🗺️
+            </div>
+            <h3 class="text-2xl font-serif font-bold text-deepForest">Your trip plan is empty.</h3>
+            <p class="text-sm text-mutedGreen max-w-md mx-auto leading-relaxed">
+              Start exploring Jharkhand and add places or experiences you want to visit across our curated modules.
+            </p>
+            <div class="pt-4 flex flex-wrap justify-center gap-3">
+              <a href="index.html" class="inline-flex items-center space-x-2 px-6 py-3 rounded-2xl bg-leafGreen text-white font-bold text-sm shadow-md hover:bg-leafGreenHover transition-all">
+                <span>Explore Destinations</span>
+                <span>→</span>
+              </a>
+              <a href="home.html" class="inline-flex items-center space-x-2 px-6 py-3 rounded-2xl bg-white border border-[rgba(47,107,60,0.25)] text-deepForest font-bold text-sm hover:bg-[#E7F1E3] transition-all">
+                <span>Return Home</span>
+              </a>
+            </div>
+          `;
+        }
+      } else {
+        emptyEl.classList.add('hidden');
+        groupContainer.classList.remove('hidden');
+        summarySection.classList.remove('hidden');
+      }
+    }
+
+    // Render Grouped Cards
+    function renderGroupedItems() {
+      const groups = {
+        underrated: { el: document.getElementById('list-underrated'), section: document.getElementById('group-underrated-section'), items: [] },
+        famous: { el: document.getElementById('list-famous'), section: document.getElementById('group-famous-section'), items: [] },
+        mining: { el: document.getElementById('list-mining'), section: document.getElementById('group-mining-section'), items: [] },
+        waterfalls: { el: document.getElementById('list-waterfalls'), section: document.getElementById('group-waterfalls-section'), items: [] }
+      };
+
+      state.items.forEach(it => {
+        const mod = (it.module || '').toLowerCase();
+        if (groups[mod]) {
+          groups[mod].items.push(it);
+        } else {
+          // fallback to underrated
+          groups.underrated.items.push(it);
+        }
+      });
+
+      Object.keys(groups).forEach(key => {
+        const g = groups[key];
+        if (g.items.length === 0) {
+          g.section.classList.add('hidden');
+          g.el.innerHTML = '';
+        } else {
+          g.section.classList.remove('hidden');
+          g.el.innerHTML = g.items.map(it => createCardHTML(it)).join('');
+        }
+      });
+    }
+
+    // Card Component HTML
+    function createCardHTML(it) {
+      const imageSrc = it.image || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&auto=format&fit=crop&q=80';
+      const detailLink = it.link || 'index.html';
+      const category = it.category || 'Experience';
+      const location = it.location || 'Jharkhand';
+      const description = it.description || 'Verified Jharkhand tourism experience.';
+
+      return `
+        <div class="flex flex-col sm:flex-row rounded-2xl bg-[#F8FAF4] border border-[rgba(47,107,60,0.18)] overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+          <div class="sm:w-48 h-40 sm:h-auto relative flex-shrink-0">
+            <img src="${imageSrc}" alt="${it.name}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&auto=format&fit=crop&q=80'" />
+            <span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-sm text-[10px] font-bold text-deepForest uppercase tracking-wider">
+              ${category}
+            </span>
+          </div>
+          <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center text-xs text-mutedGreen font-semibold space-x-1">
+                <span>📍</span>
+                <span>${location}</span>
+              </div>
+              <h4 class="text-lg font-serif font-bold text-deepForest mt-0.5 leading-tight">
+                ${it.name}
+              </h4>
+              <p class="text-xs text-mutedGreen mt-1.5 line-clamp-2 leading-relaxed font-normal">
+                ${description}
+              </p>
+            </div>
+            <div class="pt-2 border-t border-[rgba(47,107,60,0.12)] flex items-center justify-between gap-2">
+              <a href="${detailLink}" class="inline-flex items-center space-x-1 text-xs font-bold text-leafGreen hover:text-deepForest transition-colors">
+                <span>View Details</span>
+                <span>↗</span>
+              </a>
+              <button onclick="removeItem('${it.id}')" class="inline-flex items-center space-x-1 px-3 py-1 rounded-xl border border-red-200 text-red-700 hover:bg-red-50 text-xs font-semibold transition-colors cursor-pointer">
+                <span>✕</span>
+                <span>Remove</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Toast UI
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = 'px-4 py-3 rounded-2xl bg-[#163B27] text-[#F7F1E5] text-xs font-semibold shadow-2xl border border-[rgba(76,154,69,0.4)] flex items-center space-x-2 pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300';
+      toast.innerHTML = `<span>🌿</span><span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+  </script>
+  <!-- Supabase JS Client & Universal Auth -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <!-- Sohrai AI Bot Widget -->
+  <script src="src/bot-widget.js" defer></script>
+</body>
+</html>

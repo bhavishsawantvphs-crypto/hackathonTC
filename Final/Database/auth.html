@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#0F241A]">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account | FootprintJH — Jharkhand Tourism</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Supabase JS Client Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forestDark: '#0F241A',
+            forestMoss: '#1B3B2B',
+            forestCard: '#183325',
+            forestBorder: '#2D5A40',
+            sandGold: '#E8C9A3',
+            sandGoldDark: '#DFB283',
+            warmEcru: '#F3EDE2',
+            mutedSage: '#A3B8AC',
+            leafGreen: '#4C9A45'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-effect {
+      background: rgba(24, 51, 37, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(232, 201, 163, 0.25);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #E8C9A3 !important;
+      box-shadow: 0 0 12px rgba(232, 201, 163, 0.25);
+    }
+
+    .hidden-form {
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-warmEcru min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+
+  <!-- Background Decorative Imagery & Tint -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat filter blur-[3px] scale-[1.03] opacity-40"
+      style="background-image: url('assets/leaves-bg.jpg');">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0F241A] via-[#0F241A]/95 to-[#0B1A13]"></div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="relative z-10 w-full max-w-md my-auto">
+    
+    <!-- Brand Logo -->
+    <div class="text-center mb-6">
+      <a href="home.html" class="inline-flex flex-col items-center group">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#2D5A40] to-[#E8C9A3]/60 border border-[#E8C9A3]/40 flex items-center justify-center text-2xl mb-2.5 shadow-lg group-hover:scale-105 transition-transform duration-300">
+          🌿
+        </div>
+        <span class="text-[11px] uppercase font-bold tracking-[0.3em] text-sandGold leading-none">
+          Discover
+        </span>
+        <span class="text-2xl font-serif font-bold text-warmEcru">
+          FootprintJH
+        </span>
+      </a>
+    </div>
+
+    <!-- Auth Card -->
+    <div class="glass-effect rounded-[2.2rem] p-7 sm:p-9 shadow-2xl">
+
+      <!-- Status Notification Message -->
+      <div id="statusMsg" class="hidden text-xs text-center p-3.5 mb-5 rounded-xl border leading-relaxed"></div>
+
+      <!-- Logged-in Banner (Shown when user already has an active session) -->
+      <div id="alreadyLoggedInBox" class="hidden text-center py-4 space-y-4">
+        <div class="w-12 h-12 mx-auto rounded-full bg-[#2D5A40] flex items-center justify-center text-xl">
+          ✓
+        </div>
+        <div>
+          <h3 class="text-xl font-serif font-bold text-warmEcru">You are Signed In</h3>
+          <p class="text-xs text-mutedSage mt-1" id="loggedInUserEmail"></p>
+        </div>
+        <div class="pt-2 flex flex-col gap-2.5">
+          <a
+            id="continueHomeBtn"
+            href="home.html"
+            class="w-full bg-sandGold text-forestDark font-bold py-3.5 rounded-xl hover:bg-sandGoldDark transition-all text-center text-sm shadow-md"
+          >
+            Continue to Website →
+          </a>
+          <a
+            href="profile.html"
+            class="w-full bg-[#163B27] border border-sandGold/40 text-sandGold hover:text-white font-bold py-2.5 rounded-xl transition-all text-center text-xs"
+          >
+            👤 View My Profile
+          </a>
+          <button
+            type="button"
+            onclick="handleSignOut()"
+            class="w-full bg-transparent border border-forestBorder text-mutedSage hover:text-white hover:border-sandGold font-semibold py-2.5 rounded-xl transition-all text-xs"
+          >
+            Sign Out / Switch Account
+          </button>
+        </div>
+      </div>
+
+      <!-- ========================================= -->
+      <!-- LOGIN FORM -->
+      <!-- ========================================= -->
+      <div id="login-form">
+        <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-1.5">Welcome Back</h2>
+        <p class="text-mutedSage text-xs sm:text-sm mb-6 font-light">
+          Sign in to access your saved itineraries, personalized bot, and travel notes.
+        </p>
+
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest text-sandGold mb-1.5 px-1">
+              Email Address
+            </label>
+            <input
+              id="loginEmail"
+              type="email"
+              placeholder="explorer@example.com"
+              class="w-full bg-[#0F241A]/60 border border-forestBorder rounded-xl px-4 py-3 text-sm text-warmEcru transition-all focus:bg-forestDark"
+              required
+            >
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1.5 px-1">
+              <label class="text-[10px] uppercase font-bold tracking-widest text-sandGold">
+                Password
+              </label>
+              <a href="#" onclick="alert('Please check your registered email or contact support to reset password.'); return false;" class="text-[10px] text-mutedSage hover:text-sandGold transition-colors">
+                Forgot?
+              </a>
+            </div>
+            <input
+              id="loginPassword"
+              type="password"
+              placeholder="••••••••"
+              class="w-full bg-[#0F241A]/60 border border-forestBorder rounded-xl px-4 py-3 text-sm text-warmEcru transition-all focus:bg-forestDark"
+              required
+            >
+          </div>
+
+          <button
+            id="loginSubmitBtn"
+            type="submit"
+            class="w-full bg-sandGold text-forestDark font-bold py-3.5 rounded-xl hover:bg-sandGoldDark transition-all shadow-lg shadow-sandGold/10 mt-2 active:scale-[0.98] text-sm"
+          >
+            Sign In
+          </button>
+        </form>
+
+        <div class="mt-6 pt-5 border-t border-forestBorder text-center">
+          <p class="text-mutedSage text-xs">
+            New to FootprintJH?
+            <button
+              type="button"
+              onclick="toggleAuth()"
+              class="text-sandGold font-bold hover:underline ml-1 cursor-pointer"
+            >
+              Create an Account
+            </button>
+          </p>
+        </div>
+      </div>
+
+      <!-- ========================================= -->
+      <!-- SIGNUP FORM -->
+      <!-- ========================================= -->
+      <div id="signup-form" class="hidden-form">
+        <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-1.5">Join the Journey</h2>
+        <p class="text-mutedSage text-xs sm:text-sm mb-6 font-light">
+          Create an account to curate your custom travel plan across Jharkhand.
+        </p>
+
+        <form id="signupForm" class="space-y-4">
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest text-sandGold mb-1.5 px-1">
+              Full Name
+            </label>
+            <input
+              id="signupFullName"
+              type="text"
+              placeholder="e.g. Birsa Kumar"
+              class="w-full bg-[#0F241A]/60 border border-forestBorder rounded-xl px-4 py-3 text-sm text-warmEcru transition-all focus:bg-forestDark"
+              required
+            >
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest text-sandGold mb-1.5 px-1">
+              Email Address
+            </label>
+            <input
+              id="signupEmail"
+              type="email"
+              placeholder="traveler@example.com"
+              class="w-full bg-[#0F241A]/60 border border-forestBorder rounded-xl px-4 py-3 text-sm text-warmEcru transition-all focus:bg-forestDark"
+              required
+            >
+          </div>
+
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest text-sandGold mb-1.5 px-1">
+              Password (min 6 characters)
+            </label>
+            <input
+              id="signupPassword"
+              type="password"
+              placeholder="••••••••"
+              minlength="6"
+              class="w-full bg-[#0F241A]/60 border border-forestBorder rounded-xl px-4 py-3 text-sm text-warmEcru transition-all focus:bg-forestDark"
+              required
+            >
+          </div>
+
+          <button
+            id="signupSubmitBtn"
+            type="submit"
+            class="w-full bg-sandGold text-forestDark font-bold py-3.5 rounded-xl hover:bg-sandGoldDark transition-all shadow-lg shadow-sandGold/10 mt-2 active:scale-[0.98] text-sm"
+          >
+            Create Account &amp; Explore
+          </button>
+        </form>
+
+        <div class="mt-6 pt-5 border-t border-forestBorder text-center">
+          <p class="text-mutedSage text-xs">
+            Already have an account?
+            <button
+              type="button"
+              onclick="toggleAuth()"
+              class="text-sandGold font-bold hover:underline ml-1 cursor-pointer"
+            >
+              Sign In instead
+            </button>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Back To Home -->
+    <a
+      href="home.html"
+      class="flex items-center justify-center space-x-2 mt-6 text-mutedSage hover:text-sandGold transition-colors text-xs font-medium group"
+    >
+      <span class="group-hover:-translate-x-1 transition-transform">←</span>
+      <span>Back to Home</span>
+    </a>
+  </div>
+
+  <!-- Load Supabase Client Script -->
+  <script src="supabase-client.js"></script>
+
+  <script>
+    // Get target redirect parameter if provided (e.g. ?redirect=scheduler.html)
+    function getRedirectTarget() {
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get("redirect");
+      if (redirect && !redirect.startsWith("http") && !redirect.startsWith("//")) {
+        return redirect;
+      }
+      return "home.html";
+    }
+
+    // Toggle view between Login and Signup
+    function toggleAuth() {
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+      const statusMsg = document.getElementById("statusMsg");
+
+      loginForm.classList.toggle("hidden-form");
+      signupForm.classList.toggle("hidden-form");
+      statusMsg.classList.add("hidden");
+    }
+
+    function showStatus(message, isSuccess = true) {
+      const statusMsg = document.getElementById("statusMsg");
+      statusMsg.textContent = message;
+      statusMsg.className = isSuccess 
+        ? "text-xs text-center p-3.5 mb-5 rounded-xl border border-leafGreen bg-forestMoss/90 text-warmEcru block"
+        : "text-xs text-center p-3.5 mb-5 rounded-xl border border-red-500 bg-red-950/90 text-red-200 block";
+    }
+
+    // Check if user is already logged in
+    async function checkCurrentState() {
+      const user = await getCurrentUser();
+      if (user) {
+        document.getElementById("login-form").classList.add("hidden-form");
+        document.getElementById("signup-form").classList.add("hidden-form");
+        const alreadyBox = document.getElementById("alreadyLoggedInBox");
+        alreadyBox.classList.remove("hidden");
+        document.getElementById("loggedInUserEmail").textContent = user.email || "Active User";
+        document.getElementById("continueHomeBtn").setAttribute("href", getRedirectTarget());
+      }
+    }
+
+    async function handleSignOut() {
+      await logoutUser();
+      document.getElementById("alreadyLoggedInBox").classList.add("hidden");
+      document.getElementById("login-form").classList.remove("hidden-form");
+      showStatus("You have been signed out.", true);
+    }
+
+    // Initialize check
+    document.addEventListener("DOMContentLoaded", checkCurrentState);
+
+    // SIGNUP SUBMISSION
+    document.getElementById("signupForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById("signupSubmitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Creating account...";
+
+      const fullName = document.getElementById("signupFullName").value.trim();
+      const email = document.getElementById("signupEmail").value.trim();
+      const password = document.getElementById("signupPassword").value;
+
+      try {
+        const res = await signUpUser(email, password, fullName);
+        if (res.success) {
+          if (res.hasSession) {
+            showStatus("Account created! Redirecting...", true);
+            setTimeout(() => {
+              window.location.href = getRedirectTarget();
+            }, 1000);
+          } else {
+            showStatus(res.message, true);
+            document.getElementById("signupForm").reset();
+            setTimeout(() => {
+              toggleAuth(); // switch to login form
+            }, 2500);
+          }
+        } else {
+          showStatus("Signup error: " + res.message, false);
+        }
+      } catch (err) {
+        showStatus("An unexpected error occurred: " + err.message, false);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Create Account & Explore";
+      }
+    });
+
+    // LOGIN SUBMISSION
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById("loginSubmitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Signing in...";
+
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+
+      try {
+        const res = await loginUser(email, password);
+        if (res.success) {
+          showStatus("Logged in successfully! Redirecting...", true);
+          setTimeout(() => {
+            window.location.href = getRedirectTarget();
+          }, 800);
+        } else {
+          showStatus(res.message, false);
+        }
+      } catch (err) {
+        showStatus("An unexpected error occurred: " + err.message, false);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Sign In";
+      }
+    });
+  </script>
+</body>
+</html>
